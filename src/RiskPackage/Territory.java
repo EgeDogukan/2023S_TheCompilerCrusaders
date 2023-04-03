@@ -5,12 +5,14 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 public class Territory extends Polygon {
+	
 	 private String name;
-	    private int xCoordinate;
-	    private int yCoordinate;
-	    private Color color;
-	    private ArrayList<Territory> neighbors;
-	    private int armies;
+     private int xCoordinate;
+     private int yCoordinate;
+     private Color color;
+     private ArrayList<Territory> neighbors;
+     private int armies;
+     
 	    public Territory(int[] xpoints, int[] ypoints, int npoints, String name, Color color, int initialArmies) {
 	        super(xpoints, ypoints, npoints);
 	        this.name = name;
