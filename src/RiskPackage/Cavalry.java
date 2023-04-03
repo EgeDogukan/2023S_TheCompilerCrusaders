@@ -1,9 +1,9 @@
 package RiskPackage;
 
-public class Cavalry {
+public class Cavalry extends Soldier {
 
-	public Cavalry() {
-		// TODO Auto-generated constructor stub
+	public Cavalry(boolean status) {
+		super(1, status, 5);
 	}
 
 }
