@@ -10,13 +10,12 @@ public class Territory extends Polygon {
 	    private int yCoordinate;
 	    private Color color;
 	    private ArrayList<Territory> neighbors;
-	    private int armies;
-	    public Territory(int[] xpoints, int[] ypoints, int npoints, String name, Color color, int initialArmies) {
+	    private Army army;
+	    public Territory(int[] xpoints, int[] ypoints, int npoints, String name, Color color) {
 	        super(xpoints, ypoints, npoints);
 	        this.name = name;
 	        this.color = color;
 	        this.neighbors = new ArrayList<Territory>();
-	        this.armies = initialArmies;
 	    }
 
 	    public String getName() {
@@ -47,19 +46,16 @@ public class Territory extends Polygon {
 			
 			return color;
 		}
-		 public int getArmies() {
-		        return armies;
-		    }
-
-		 public void setArmies(int armies) {
-			 this.armies = armies;
-		    }
-
-		public void removeArmy() {
-			
-			this.armies--;
+		public Color setColor(Color color) {
+			return this.color = color;
 		}
+		 public Army getArmies() {
+		        return this.army;
+		    }
 
-		
+		 public void setArmies(Army army) {
+			 this.army = army;
+		    }
+
 
 }
