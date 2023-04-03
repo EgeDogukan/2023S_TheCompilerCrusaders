@@ -9,12 +9,22 @@ public class Player {
 	private Color color;
 	private Army army;
 	private LinkedList<Card> cardDeck;
+	private String name;
 	
-	public Player(int id, Color color) {
+	public Player(int id, Color color, String name) {
 		this.id=id;
 		this.color=color;
+		this.name=name;
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public int getId() {
 		return id;
 	}
