@@ -16,6 +16,7 @@ public class Territory extends Polygon {
 	        this.name = name;
 	        this.color = color;
 	        this.neighbors = new ArrayList<Territory>();
+	        this.army=new Army();
 	    }
 
 	    public String getName() {

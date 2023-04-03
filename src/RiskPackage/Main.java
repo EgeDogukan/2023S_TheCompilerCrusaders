@@ -12,29 +12,6 @@ public class Main {
 
         // Add some territories to the board
         
-        ArrayList<Soldier> inf = new ArrayList<Soldier>();
-        ArrayList<Soldier> art = new ArrayList<Soldier>();
-        ArrayList<Soldier> cav = new ArrayList<Soldier>();
-        
-        ArrayList<ArrayList<Soldier>> army = new ArrayList<ArrayList<Soldier>>();
-        
-        army.add(inf);
-        army.add(art);
-        army.add(cav);
-        
-        
-        for (int i=0;i<4;i++) {
-        	inf.add(new Infantry(false));
-        }
-        for (int i=0;i<3;i++) {
-        	art.add(new Artillery(false));
-        }
-        for (int i=0;i<2;i++) {
-        	cav.add(new Cavalry(false));
-        }
-        
-        Army armyAlaska = null;
-        armyAlaska.setArmy(army);
         
         
      // Create some territories
@@ -44,7 +21,6 @@ public class Main {
         Territory centralAmerica = new Territory(new int[] { 140, 160, 180, 180, 160, 160 }, new int[] { 120, 100, 120, 140, 140, 120 }, 6, "Central America", Color.YELLOW);
         Territory venezuela = new Territory(new int[] { 200, 220, 220, 200 }, new int[] { 100, 100, 120, 120 }, 4, "Venezuela", Color.CYAN);
         Territory brazil = new Territory(new int[] { 220, 260, 260, 240 }, new int[] { 60, 60, 100, 100 }, 4, "Brazil", Color.MAGENTA);
-        
         
         
 	     // Add the territories to the game board
