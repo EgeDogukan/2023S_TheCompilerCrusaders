@@ -54,7 +54,7 @@ public class Main {
 
        	JFrame frame = new JFrame("Risk Game");
        	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(log);
+		
        	frame.add(gamePanel);
     	frame.pack();
        	frame.setVisible(true);
