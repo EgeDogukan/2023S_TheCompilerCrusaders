@@ -19,7 +19,7 @@ public class RiskBoard {
         return territories;
     }
     //Handle the attacking
-    public void attack(Territory defender, Territory attacker) {
+    /*public void attack(Territory defender, Territory attacker) {
         int attackerArmies = attacker.getArmies();
         int defenderArmies = defender.getArmies();
         
@@ -41,7 +41,7 @@ public class RiskBoard {
                 attacker.removeArmy();
             }
         }
-    }
+    }*/
 
     private int[] rollDice(int numDice) {
         Random rand = new Random();
