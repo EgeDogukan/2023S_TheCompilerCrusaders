@@ -1,6 +1,7 @@
 package RiskPackage;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -10,6 +11,30 @@ public class Main {
         RiskBoard board = new RiskBoard();
 
         // Add some territories to the board
+        
+        ArrayList<Soldier> inf = new ArrayList<Soldier>();
+        ArrayList<Soldier> art = new ArrayList<Soldier>();
+        ArrayList<Soldier> cav = new ArrayList<Soldier>();
+        
+        ArrayList<ArrayList<Soldier>> army = new ArrayList<ArrayList<Soldier>>();
+        
+        army.add(inf);
+        army.add(art);
+        army.add(cav);
+        
+        
+        for (int i=0;i<4;i++) {
+        	inf.add(new Infantry(false));
+        }
+        for (int i=0;i<3;i++) {
+        	art.add(new Artillery(false));
+        }
+        for (int i=0;i<2;i++) {
+        	cav.add(new Cavalry(false));
+        }
+        
+        Army armyAlaska = null;
+        armyAlaska.setArmy(army);
         
         
      // Create some territories

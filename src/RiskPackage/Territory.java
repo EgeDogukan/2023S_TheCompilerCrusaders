@@ -46,11 +46,11 @@ public class Territory extends Polygon {
 			
 			return color;
 		}
-		 public Army getArmies() {
+		 public Army getArmy() {
 		        return this.army;
 		    }
 
-		 public void setArmies(Army army) {
+		 public void setArmy(Army army) {
 			 this.army = army;
 		    }
 

@@ -8,7 +8,10 @@ public class Army {
 	private ArrayList<ArrayList<Soldier>> army ;
 	
 	public Army() {
-		return;
+		for (ArrayList<Soldier> soldiers : army) {
+			soldiers=null;
+		}
+		this.army=null;
 	}
 
 	public ArrayList<ArrayList<Soldier>> getArmy() {

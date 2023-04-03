@@ -23,8 +23,8 @@ public class GamePanel extends JPanel {
 
             // Draw the territory name
             g.setColor(Color.BLACK);
-            g.drawString(t.getName(), t.getBounds().x + t.getBounds().width / 2, t.getBounds().y + t.getBounds().height / 2);
-            
+            //g.drawString(t.getName(), t.getBounds().x + t.getBounds().width / 2, t.getBounds().y + t.getBounds().height / 2);
+            g.drawString(String.valueOf(t.getArmy().getArtillery().size()), t.getBounds().x + t.getBounds().width / 2, t.getBounds().y + t.getBounds().height / 2);
             
             // Draw lines to neighboring territories
             for (Territory n : t.getNeighbors()) {

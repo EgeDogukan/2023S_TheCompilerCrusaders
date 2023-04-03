@@ -6,4 +6,5 @@ public class Cavalry extends Soldier {
 		super(1, status, 5);
 	}
 
+
 }
