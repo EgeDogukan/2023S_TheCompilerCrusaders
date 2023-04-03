@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import uipackage.login;
+
 public class Main {
     public static void main(String[] args) {
         RiskBoard board = new RiskBoard();
@@ -46,14 +48,16 @@ public class Main {
 	        venezuela.addNeighbor(brazil);
 	        brazil.addNeighbor(venezuela);
 
-	        
-       GamePanel gamePanel = new GamePanel(board);
+	    
+		login log = new login();
+       	GamePanel gamePanel = new GamePanel(board);
 
-       JFrame frame = new JFrame("Risk Game");
-       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       frame.add(gamePanel);
-       frame.pack();
-       frame.setVisible(true);
+       	JFrame frame = new JFrame("Risk Game");
+       	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(log);
+       	frame.add(gamePanel);
+    	frame.pack();
+       	frame.setVisible(true);
 
 	 
     }
