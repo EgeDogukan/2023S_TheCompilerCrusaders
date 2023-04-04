@@ -56,6 +56,7 @@ public class login extends JFrame{
                     JOptionPane.showMessageDialog(null, "Login successful!");
                     // launch main Risk game interface here
                     RiskBoard board = new RiskBoard();
+                    frame.setVisible(false);
 
         // Add some territories to the board
         
