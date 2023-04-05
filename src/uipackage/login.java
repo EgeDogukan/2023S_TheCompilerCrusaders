@@ -44,6 +44,7 @@ public class login extends JFrame{
         contentPane.add(passwordField);
         contentPane.add(new JLabel());
         contentPane.add(loginButton);
+        contentPane.getRootPane().setDefaultButton(loginButton);
         
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
