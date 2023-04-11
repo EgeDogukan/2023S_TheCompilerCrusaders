@@ -19,13 +19,13 @@ public class RiskBoard {
         return territories;
     }
     //Handle the attacking
-    public void attack(Territory defender, Territory attacker) {
+    /*public void attack(Territory defender, Territory attacker) {
         int attackerArmies = attacker.getArmies();
         int defenderArmies = defender.getArmies();
         
         // Roll the dice
-        int[] attackerDice = rollDice(attackerArmies);
-        int[] defenderDice = rollDice(defenderArmies);
+        int[] attackerDice = rollDice(MinDiceRoll(attackerArmies));
+        int[] defenderDice = rollDice(MinDiceRoll(defenderArmies));
         
         // Sort the dice rolls in descending order
         Arrays.sort(attackerDice);
@@ -33,13 +33,15 @@ public class RiskBoard {
         Arrays.sort(defenderDice);
         reverseArray(defenderDice);
         
-        // Compare the highest dice rolls
-        if (attackerDice[0] > defenderDice[0]) {
-            defender.removeArmy();
-        } else {
-            attacker.removeArmy();
+        if(attackerArmies>=2 && defenderArmies>1) {
+        	// Compare the highest dice rolls
+            if (attackerDice[0] > defenderDice[0]) {
+                defender.removeArmy();
+            } else {
+                attacker.removeArmy();
+            }
         }
-    }
+    }*/
 
     private int[] rollDice(int numDice) {
         Random rand = new Random();
@@ -55,6 +57,12 @@ public class RiskBoard {
             array[i] = array[array.length - 1 - i];
             array[array.length - 1 - i] = temp;
         }
+    }
+    private int MinDiceRoll(int armies) {
+    	 if (armies >= 3) {
+    		 armies= 3; 
+    	 }
+    	return armies;
     }
 
 }

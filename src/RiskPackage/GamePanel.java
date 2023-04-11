@@ -25,6 +25,7 @@ public class GamePanel extends JPanel {
             g.setColor(Color.BLACK);
             g.drawString(t.getName(), t.getBounds().x + t.getBounds().width / 2, t.getBounds().y + t.getBounds().height / 2);
             
+            
             // Draw lines to neighboring territories
             for (Territory n : t.getNeighbors()) {
                 g.drawLine(t.getBounds().x + t.getBounds().width / 2, t.getBounds().y + t.getBounds().height / 2,
