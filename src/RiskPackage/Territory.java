@@ -1,7 +1,10 @@
 package RiskPackage;
 
 import java.awt.Polygon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class Territory extends Polygon {
@@ -9,16 +12,22 @@ public class Territory extends Polygon {
 	    private int xCoordinate;
 	    private int yCoordinate;
 	    private Color color;
+	    
 	    private ArrayList<Territory> neighbors;
 	    private Army army;
+	    
 	    public Territory(int[] xpoints, int[] ypoints, int npoints, String name, Color color) {
 	        super(xpoints, ypoints, npoints);
 	        this.name = name;
 	        this.color = color;
 	        this.neighbors = new ArrayList<Territory>();
+	        
+	  
+	        
 	    }
+	  
 
-	    public String getName() {
+		public String getName() {
 	        return name;
 	    }
 

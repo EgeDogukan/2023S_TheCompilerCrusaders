@@ -107,8 +107,9 @@ public class login extends JFrame{
                     
                     frame.add(gamePanel);
                     frame.pack();
-                    frame.setSize(getMaximumSize());
+                    frame.setSize(800,600);
                     frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Login failed. Please try again.");
