@@ -1,14 +1,14 @@
 package RiskPackage;
 
 import java.awt.Polygon;
-<<<<<<< Updated upstream
-=======
+
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.*;
->>>>>>> Stashed changes
+
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -21,15 +21,10 @@ public class Territory extends JPanel implements MouseListener {
 	    private int height;
 	    private Color color;
 	    private ArrayList<Territory> neighbors;
-	    private Army army;
-<<<<<<< Updated upstream
-	    public Territory(int[] xpoints, int[] ypoints, int npoints, String name, Color color) {
-	        super(xpoints, ypoints, npoints);
-	        this.name = name;
-	        this.color = color;
-	        this.neighbors = new ArrayList<Territory>();
-	    }
-=======
+	    //private Army army;
+
+	 
+
 	    
 	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color) {
 	        this.setLayout(null);
@@ -126,7 +121,7 @@ public class Territory extends JPanel implements MouseListener {
 
 
 
->>>>>>> Stashed changes
+
 
 	    public String getName() {
 	        return name;
@@ -159,13 +154,13 @@ public class Territory extends JPanel implements MouseListener {
 		public Color setColor(Color color) {
 			return this.color = color;
 		}
-		 public Army getArmies() {
-		        return this.army;
-		    }
+		// public Army getArmies() {
+		  //      return this.army;
+		    //}
 
-		 public void setArmies(Army army) {
-			 this.army = army;
-		    }
+		 //public void setArmies(Army army) {
+		//	 this.army = army;
+		  //  }
 
 
 
