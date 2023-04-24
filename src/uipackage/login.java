@@ -62,19 +62,31 @@ public class login extends JFrame{
         
         
      // Create some territories
+<<<<<<< Updated upstream
         Territory alaska = new Territory(new int[] { 60, 60, 100, 80, 40 }, new int[] { 20, 60, 20, 10, 10 }, 5, "Alaska", Color.GREEN);
         Territory alberta = new Territory(new int[] { 100, 100, 140, 140, 120, 100 }, new int[] { 20, 60, 60, 80, 100, 100 }, 6, "Alberta", Color.BLUE);
         Territory westernUS = new Territory(new int[] { 140, 140, 180, 200, 200, 160 }, new int[] { 60, 100, 100, 120, 80, 60 }, 6, "Western United States", Color.ORANGE);
         Territory centralAmerica = new Territory(new int[] { 140, 160, 180, 180, 160, 160 }, new int[] { 120, 100, 120, 140, 140, 120 }, 6, "Central America", Color.YELLOW);
         Territory venezuela = new Territory(new int[] { 200, 220, 220, 200 }, new int[] { 100, 100, 120, 120 }, 4, "Venezuela", Color.CYAN);
         Territory brazil = new Territory(new int[] { 220, 260, 260, 240 }, new int[] { 60, 60, 100, 100 }, 4, "Brazil", Color.MAGENTA);
+=======
+        Territory alaska = new Territory(80, 80, 120,120, "Alaska", Color.GREEN);
+       /* Territory alberta = new Territory(new int[] { 100, 100, 140, 140, 120, 100 }, new int[] { 20, 60, 60, 80, 100, 100 }, 6, "Alberta", Color.BLUE);
+        Territory westernUS = new Territory(new int[] { 140, 140, 180, 200, 200, 160 }, new int[] { 60, 100, 100, 120, 80, 60 }, 6, "WesternUS", Color.ORANGE);
+        Territory centralAmerica = new Territory(new int[] { 140, 160, 180, 180, 160, 160 }, new int[] { 120, 100, 120, 140, 140, 120 }, 6, "Central America", Color.YELLOW);
+        Territory venezuela = new Territory(new int[] { 200, 220, 220, 200 }, new int[] { 100, 100, 120, 120 }, 4, "Venezuela", Color.CYAN);
+        Territory brazil = new Territory(new int[] { 220, 260, 260, 240 }, new int[] { 60, 60, 100, 100 }, 4, "Brazil", Color.MAGENTA);
+        Territory greenland = new Territory(new int[] {250, 260, 300, 350}, 
+                							new int[] {120, 150, 200, 200}, 
+                4, "Greenland", Color.decode("#03fc5a"));*/
+>>>>>>> Stashed changes
         
         
         
         
 	     // Add the territories to the game board
 	     board.addTerritory(alaska);
-	     board.addTerritory(alberta);
+	    /* board.addTerritory(alberta);
 	     board.addTerritory(westernUS);
 	     board.addTerritory(centralAmerica);
 	     board.addTerritory(venezuela);
@@ -82,8 +94,8 @@ public class login extends JFrame{
 	
 	     // Add the neighbors to each territory
 	        alaska.addNeighbor(alberta);
-	        alaska.addNeighbor(westernUS);
-	        alberta.addNeighbor(alaska);
+	        alaska.addNeighbor(westernUS);*/
+	       /* alberta.addNeighbor(alaska);
 	        alberta.addNeighbor(westernUS);
 	        alberta.addNeighbor(centralAmerica);
 	        westernUS.addNeighbor(alaska);
@@ -95,15 +107,28 @@ public class login extends JFrame{
 	        venezuela.addNeighbor(centralAmerica);
 	        venezuela.addNeighbor(brazil);
 	        brazil.addNeighbor(venezuela);
+<<<<<<< Updated upstream
+=======
+	        brazil.addNeighbor(greenland);*/
+>>>>>>> Stashed changes
 
                     GamePanel gamePanel = new GamePanel(board);
-
-                    JFrame frame = new JFrame("Risk Game");
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     
+<<<<<<< Updated upstream
                     frame.add(gamePanel);
                     frame.pack();
                     frame.setVisible(true);
+=======
+                    JFrame RiskGameFrame = new JFrame("Risk Game");
+                    RiskGameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    
+                    RiskGameFrame.add(alaska);
+                    RiskGameFrame.pack();
+                    RiskGameFrame.setSize(800,600);
+                    RiskGameFrame.setVisible(true);
+                    RiskGameFrame.setLocationRelativeTo(null);
+                    
+>>>>>>> Stashed changes
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Login failed. Please try again.");
@@ -117,6 +142,7 @@ public class login extends JFrame{
     public static void main(String[] args) {
         login loginPage = new login();
         loginPage.frame.setVisible(true);
+        
         
     }
 
