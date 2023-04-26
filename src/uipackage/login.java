@@ -71,6 +71,7 @@ public class login extends JFrame{
                     RiskGameFrame.add(alaska);
                     RiskGameFrame.getContentPane().setLayout(null);
                     RiskGameFrame.pack();
+                    RiskGameFrame.setLocationRelativeTo(null);
                     RiskGameFrame.setVisible(true);
 
                     
