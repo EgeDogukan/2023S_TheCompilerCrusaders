@@ -70,8 +70,8 @@ public class login extends JFrame{
                     Territory alaska = new Territory(80, 80, 120,120, "Alaska", Color.GREEN);
                     RiskGameFrame.add(alaska);
                     RiskGameFrame.getContentPane().setLayout(null);
-                    RiskGameFrame.pack();
                     RiskGameFrame.setLocationRelativeTo(null);
+                    RiskGameFrame.pack();
                     RiskGameFrame.setVisible(true);
 
                     
