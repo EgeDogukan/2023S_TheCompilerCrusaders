@@ -8,7 +8,7 @@ public class Player {
 	private int id;
 	private Color color;
 	private Army army;
-	private LinkedList<Card> cardDeck;
+	//private LinkedList<Card> cardDeck;
 	private String name;
 	
 	public Player(int id, Color color, String name) {
@@ -49,13 +49,13 @@ public class Player {
 		this.army = army;
 	}
 
-	public LinkedList<Card> getCardDeck() {
-		return cardDeck;
-	}
-
-	public void setCardDeck(LinkedList<Card> cardDeck) {
-		this.cardDeck = cardDeck;
-	}
+//	public LinkedList<Card> getCardDeck() {
+//		return cardDeck;
+//	}
+//
+//	public void setCardDeck(LinkedList<Card> cardDeck) {
+//		this.cardDeck = cardDeck;
+//	}
 	
 	
 
