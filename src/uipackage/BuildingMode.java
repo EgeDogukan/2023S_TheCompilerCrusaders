@@ -15,9 +15,13 @@ import RiskPackage.Territory;
 
 public class BuildingMode extends JFrame {
 
+	public String numberOfPlayer;
+	
 	public BuildingMode() {
+	
 
         super("Building Mode");
+        
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(1200, 800));
@@ -36,6 +40,13 @@ public class BuildingMode extends JFrame {
         this.add(Europe);
         this.pack();
         
+        String[] numberOfPlayers = {"2", "3", "4", "5", "6"};
+        JComboBox<String> myComboBox = new JComboBox<String>(numberOfPlayers);
+        myComboBox.setSize(100,100);
+        myComboBox.setBackground(Color.WHITE);
+        myComboBox.setLocation(550, 650);
+        this.getContentPane().add(myComboBox);
+        
         JButton startButton = new JButton("Start Game!");
         startButton.setSize(100,100);
         startButton.setBackground(Color.GRAY);
@@ -46,16 +57,17 @@ public class BuildingMode extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 // Handle mouse click event
             	JOptionPane.showMessageDialog(null, "Game started!");
+            	numberOfPlayer=String.valueOf(myComboBox.getSelectedItem());
+            	
             }
         });
         
-        String[] numberOfPlayers = {"2", "3", "4", "5", "6"};
-        JComboBox<String> myComboBox = new JComboBox<String>(numberOfPlayers);
-        myComboBox.setSize(100,100);
-        myComboBox.setBackground(Color.WHITE);
-        myComboBox.setLocation(550, 650);
-        this.getContentPane().add(myComboBox);
-        
+	}
+	
+	public int getNumberOfPlayer() {
+		
+		return Integer.parseInt(numberOfPlayer);
+	
 	}
 	
 	public static void main(String[] args) {
