@@ -172,25 +172,25 @@ public class login extends JFrame{
                     RiskBoard board = new RiskBoard();
                     frame.setVisible(false);
                     frame.dispose();
+                    
+//                    JFrame RiskGameFrame = new JFrame("Risk Game");
+//                    RiskGameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                    
+//                    RiskGameFrame.setPreferredSize(new Dimension(1200, 800));
+//                    RiskGameFrame.setLocationRelativeTo(null);
+                    
+                      BuildingMode RiskGameFrame = new BuildingMode();
+                      RiskGameFrame.setVisible(true);
+                    
+//                    Territory alaska = new Territory(80, 80, 400, 400, "Alaska", Color.GREEN);
+//                    Territory alaska2 = new Territory(100, 100, 120, 120, "Alaska2", Color.BLUE);
+
+//                    RiskGameFrame.getContentPane().setLayout(null);
+//                    RiskGameFrame.setLocationRelativeTo(null);
+//                    RiskGameFrame.pack();
+//                    RiskGameFrame.setVisible(true);
 
         
-                    
-
-                    JFrame RiskGameFrame = new JFrame("Risk Game");
-                    RiskGameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    
-                    RiskGameFrame.setPreferredSize(new Dimension(1200, 800));
-                    RiskGameFrame.setLocationRelativeTo(null);
-                    
-                    Territory alaska = new Territory(80, 80, 400,400, "Alaska", Color.GREEN);
-                    Territory alaska2 = new Territory(100, 100, 120,120, "Alaska2", Color.BLUE);
-                    
-                    RiskGameFrame.add(alaska);
-                    RiskGameFrame.add(alaska2);
-                    RiskGameFrame.getContentPane().setLayout(null);
-                    RiskGameFrame.setLocationRelativeTo(null);
-                    RiskGameFrame.pack();
-                    RiskGameFrame.setVisible(true);
 
                    
 

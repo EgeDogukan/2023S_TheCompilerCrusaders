@@ -18,6 +18,7 @@ public class Territory extends JPanel {
 	    private ArrayList<Territory> neighbors;
 	    
 	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color) {
+	    	this.setVisible(true);
 	        this.xCoordinate = xCoordinate;
 	        this.yCoordinate = yCoordinate;
 	        this.width = width;
@@ -54,6 +55,8 @@ public class Territory extends JPanel {
 				}
 			});        
 	    }
+	    
+	    
 		
 		@Override
 	    public void paintComponent(Graphics g) {
