@@ -10,6 +10,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
 
 
 public class login extends JFrame{
@@ -19,6 +23,7 @@ public class login extends JFrame{
     private JButton loginButton;
     public JFrame frame;
     private JButton registerButton;
+    public boolean isSuccesfull = false;
 
     public login() {
         frame = new JFrame();
@@ -26,7 +31,7 @@ public class login extends JFrame{
 		frame.setResizable(false); 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(120, 120, 1207, 728);
-
+		
 
         JPanel contentPane = new JPanel();
         frame.add(contentPane);
@@ -167,37 +172,54 @@ public class login extends JFrame{
                 }     
 
                 if (contFlag == 2) {
+                	
+                	
                     JOptionPane.showMessageDialog(null, "Login successful!");
-                    // launch main Risk game interface here
-                    RiskBoard board = new RiskBoard();
-                    frame.setVisible(false);
-                    frame.dispose();
                     
-//                    JFrame RiskGameFrame = new JFrame("Risk Game");
-//                    RiskGameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                    
-//                    RiskGameFrame.setPreferredSize(new Dimension(1200, 800));
-//                    RiskGameFrame.setLocationRelativeTo(null);
+                    setLoginStatus(true);
                     
-                      BuildingMode RiskGameFrame = new BuildingMode();
-                      RiskGameFrame.setVisible(true);
-                    
-//                    Territory alaska = new Territory(80, 80, 400, 400, "Alaska", Color.GREEN);
-//                    Territory alaska2 = new Territory(100, 100, 120, 120, "Alaska2", Color.BLUE);
-
-//                    RiskGameFrame.getContentPane().setLayout(null);
-//                    RiskGameFrame.setLocationRelativeTo(null);
-//                    RiskGameFrame.pack();
-//                    RiskGameFrame.setVisible(true);
-
-        
-
                    
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Login failed. Please try again.");
+                    setLoginStatus(false);
                 }
             }
         });
     }
+    
+    public boolean getLoginStatus() {
+    	return this.isSuccesfull;
+    }
+    
+    public void setLoginStatus(boolean newStatus) {
+    	this.isSuccesfull=newStatus;
+    }
+    
+    public static void main(String[] args) throws InterruptedException {
+    	login loginPage = new login();
+        loginPage.frame.setVisible(true);
+        
+        
+        AtomicBoolean status = new AtomicBoolean(false);
+        CountDownLatch latch = new CountDownLatch(1);
+        
+        loginPage.frame.addWindowListener((WindowListener) new WindowAdapter() {
+	        @Override
+	        public void windowClosing(WindowEvent e) {
+	        	status.set(loginPage.getLoginStatus());
+	            latch.countDown();
+	        }
+	    });
+        
+        latch.await();
+        
+        System.out.println(status);
+	}
+    
+    
+    
+   
+    
+    
 }
