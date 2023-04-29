@@ -112,7 +112,7 @@ public class login extends JFrame{
                             
                             while ((line = br.readLine()) != null) {
                                 System.out.println(lineCount);
-                                if(password.equals(line)) {
+                                if(password.equals(line.split(" ")[0])) {
                                     JOptionPane.showMessageDialog(null, "This username has already been taken!");
                                     dupFlag = 1;
                                     registerFrame.dispose();
@@ -126,7 +126,8 @@ public class login extends JFrame{
                         if(dupFlag == 0) {
                             try (BufferedWriter br = new BufferedWriter(new FileWriter(absoFileName, true))) {
                                 br.append(password);
-                                br.newLine();
+                                br.append(" ");
+                                //br.newLine();
                                 br.append(username);
                                 br.newLine();
                                 JOptionPane.showMessageDialog(null, "Register successful!");
@@ -156,12 +157,10 @@ public class login extends JFrame{
                     String line;
                     
                     while ((line = br.readLine()) != null) {
-                        if(username.equals(line) && contFlag == 0) {
-                        contFlag = 1;
-                        }
-                        if(contFlag == 1 && password.equals(line)) {
-                        contFlag = 2;
-                        }
+                    	
+                    	if (username.equals(line.split(" ")[0]) && password.equals(line.split(" ")[1])) {
+                    		contFlag=2;
+                    	}
                     }
                 }catch (IOException x) {
                     x.printStackTrace();
@@ -180,17 +179,20 @@ public class login extends JFrame{
                     JFrame RiskGameFrame = new JFrame("Risk Game");
                     RiskGameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     
-                    RiskGameFrame.setPreferredSize(new Dimension(800, 600));
+                    RiskGameFrame.setPreferredSize(new Dimension(1200, 800));
                     RiskGameFrame.setLocationRelativeTo(null);
-                    Territory alaska = new Territory(80, 80, 120,120, "Alaska", Color.GREEN);
+                    
+                    Territory alaska = new Territory(80, 80, 400,400, "Alaska", Color.GREEN);
+                    Territory alaska2 = new Territory(100, 100, 120,120, "Alaska2", Color.BLUE);
+                    
                     RiskGameFrame.add(alaska);
+                    RiskGameFrame.add(alaska2);
                     RiskGameFrame.getContentPane().setLayout(null);
                     RiskGameFrame.setLocationRelativeTo(null);
                     RiskGameFrame.pack();
                     RiskGameFrame.setVisible(true);
 
-                    
-
+                   
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Login failed. Please try again.");
