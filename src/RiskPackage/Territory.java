@@ -2,6 +2,7 @@ package RiskPackage;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -19,13 +20,15 @@ public class Territory extends JPanel {
 	    private ArrayList<Territory> neighbors;
 	    
 	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color) {
+	    	
 	    	this.setVisible(true);
+	    	
 	        this.xCoordinate = xCoordinate;
 	        this.yCoordinate = yCoordinate;
 	        this.width = width;
 	        this.height = height;
 	        
-	        this.setPreferredSize(new Dimension(width,height));
+	        this.setSize(width, height);
 			this.setLocation(xCoordinate, yCoordinate);
 			
 	        this.setBackground(color);
@@ -34,14 +37,16 @@ public class Territory extends JPanel {
 	        this.color = color;
 	        this.neighbors = new ArrayList<Territory>();
 	        
-	        //this.setOpaque(false);
 	        this.setName(name);
+	        this.setOpaque(true);
+	        this.setFocusable(true);
+	        this.setEnabled(true);
 	        
 			this.addMouseListener(new MouseAdapter() {
 				private Color oldColor;
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					
+					System.out.println("Panel clicked!");
 					JOptionPane.showMessageDialog(null, "successfully clicked");
 					
 				}
@@ -58,7 +63,9 @@ public class Territory extends JPanel {
 					setColor(oldColor);
 					repaint();
 				}
-			});        
+			});
+			
+			this.setFocusable(true);
 	    }
 	    
 	    
