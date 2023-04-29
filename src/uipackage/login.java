@@ -27,6 +27,7 @@ public class login extends JFrame{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(120, 120, 1207, 728);
 
+
         JPanel contentPane = new JPanel();
         frame.add(contentPane);
         contentPane.setLayout(new GridLayout(3, 2));
@@ -42,7 +43,19 @@ public class login extends JFrame{
         usernameField = new JTextField();
         passwordField = new JPasswordField();
         loginButton = new JButton("Login");
+
         registerButton = new JButton("Register");
+        //HELP SCREEN DISPLAYING
+        JButton helpScreenButton = new JButton("Click me!");
+        helpScreenButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Code to execute when the button is clicked
+                helpScreen helpScreen = new helpScreen();
+                helpScreen.setVisible(true);
+            }
+        });
+        contentPane.add(helpScreenButton);
+
 
         contentPane.add(usernameLabel);
         contentPane.add(usernameField);
