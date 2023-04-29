@@ -17,7 +17,7 @@ public class login extends JFrame{
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
-    private JFrame frame;
+    public JFrame frame;
     private JButton registerButton;
 
     public login() {
@@ -212,11 +212,4 @@ public class login extends JFrame{
             }
         });
     }
-
-    public static void main(String[] args) {
-        login loginPage = new login();
-        loginPage.frame.setVisible(true);
-        
-    }
-
 }
