@@ -13,11 +13,13 @@ public class RiskBoard {
 
     public void addTerritory(Territory territory) {
         territories.add(territory);
+        
     }
 
     public ArrayList<Territory> getTerritories() {
         return territories;
     }
+    
     //Handle the attacking
     /*public void attack(Territory defender, Territory attacker) {
         int attackerArmies = attacker.getArmies();
