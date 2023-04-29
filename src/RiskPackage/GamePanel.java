@@ -19,7 +19,7 @@ public class GamePanel extends JPanel {
         for (Territory t : board.getTerritories()) {
             // Draw the territory
             g.setColor(t.getColor());
-            g.fillPolygon(t);
+            g.fillOval(50, 50, 100, 100);
 
             // Draw the territory name
             g.setColor(Color.BLACK);
