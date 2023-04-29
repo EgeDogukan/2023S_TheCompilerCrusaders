@@ -16,8 +16,8 @@ public class BuildingMode extends JFrame {
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(1200, 800));
-        //this.setLayout(null);
-        this.setLayout(new BorderLayout());
+        this.setLayout(null);
+        
         
         Territory US = new Territory(30, 50, 40, 40, "US", Color.BLUE);
         Territory Canada = new Territory(130, 150, 40, 40, "Canada", Color.RED);
@@ -32,10 +32,13 @@ public class BuildingMode extends JFrame {
         this.getContentPane().setLayout(null);
         this.setLocationRelativeTo(null);
         this.pack();
+        
+        
 	}
 	
 	public static void main(String[] args) {
 		BuildingMode RiskGameFrame = new BuildingMode();
+		
         RiskGameFrame.setVisible(true);
 	}
 
