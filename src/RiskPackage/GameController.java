@@ -49,6 +49,7 @@ public class GameController {
                 @Override
                 public void windowClosing(WindowEvent e) {
                     numberOfPlayers.set(RiskGameFrame.getNumberOfPlayer());
+                    
                     latch1.countDown();
                 }
             });

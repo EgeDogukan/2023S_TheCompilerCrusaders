@@ -7,6 +7,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
+
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -17,9 +19,10 @@ public class Territory extends JPanel {
 	    private int width;
 	    private int height;
 	    private Color color;
+		private Continents c;
 	    private ArrayList<Territory> neighbors;
 	    
-	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color) {
+	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color, Continents continent) {
 	    	
 	    	this.setVisible(true);
 	    	
@@ -27,17 +30,22 @@ public class Territory extends JPanel {
 	        this.yCoordinate = yCoordinate;
 	        this.width = width;
 	        this.height = height;
-	        
+	        this.c = continent;
 	        this.setSize(width, height);
 			this.setLocation(xCoordinate, yCoordinate);
 			
 	        this.setBackground(color);
 	        this.setColor(color);
+			
 	        this.name = name;
 	        this.color = color;
 	        this.neighbors = new ArrayList<Territory>();
 	        
-	        this.setName(name);
+	        
+			JLabel nameLabel = new JLabel(this.getName());
+			System.out.println(this.getName());
+        	nameLabel.setHorizontalAlignment(JLabel.CENTER);
+        	this.add(nameLabel, BorderLayout.NORTH);
 	        this.setOpaque(true);
 	        this.setFocusable(true);
 	        this.setEnabled(true);
@@ -47,7 +55,8 @@ public class Territory extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					System.out.println("Panel clicked!");
-					JOptionPane.showMessageDialog(null, "successfully clicked");
+					JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+					"y"+Territory.this.yCoordinate);
 					
 				}
 
@@ -95,6 +104,10 @@ public class Territory extends JPanel {
 			this.height = height;
 		}
 
+		public void setName(String name) {
+			this.name = name;
+		}
+
 		public int getxCoordinate() {
 			return this.xCoordinate;
 		}
@@ -131,7 +144,13 @@ public class Territory extends JPanel {
 			return this.color;
 		}
 
-		public Color setColor(Color color) {
-			return this.color = color;
+		public void setColor(Color color) {
+			this.setBackground(color); 
+		}
+
+
+
+		public Continents getContinent() {
+			return this.c;
 		}
 }
