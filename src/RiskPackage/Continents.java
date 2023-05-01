@@ -47,15 +47,24 @@ public class Continents extends JPanel {
         this.setVisible(true);
 
 		this.addMouseListener(new MouseAdapter() {
-				private Color oldColor;
+				private Color oldColor = getColor();
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					System.out.println("continent clicked!");
 					JOptionPane.showMessageDialog(null, "continent"+ Continents.this.getLocation()+"w"+Continents.this.width
 					+"h"+Continents.this.height);
-					Continents.this.setColor(Color.GRAY);
+
+					if(Continents.this.isIncluded == true) {
+						Continents.this.setColor(Color.GRAY);
+						repaint();
+						Continents.this.isIncluded = false;
+						
+					} 
+					else {
+						Continents.this.setColor(oldColor);
+						Continents.this.isIncluded = true;
+					}
 					
-					Continents.this.isIncluded = false;
 					
 				}
 
@@ -91,9 +100,8 @@ public class Continents extends JPanel {
 	   	return territories;
 	}
 
-		public void addTerritory(Territory territory) {
-	    territories.add(territory);
-				
-	 }
+	public void addTerritory(Territory territory) {
+	    territories.add(territory);			
+	}
 
 }

@@ -152,9 +152,9 @@ public class BuildingMode extends JFrame {
                 c.add(t);
                     }
                 }
-                RiskBoard risk = new RiskBoard(continents);
-                GamePanel pnl = new GamePanel(risk);
-                GameManager g = new GameManager(pnl);
+                RiskBoard risk = new RiskBoard(continents); //jpanel
+                GamePanel pnl = new GamePanel(risk);    //jpanel
+                GameManager g = new GameManager(pnl);   //jframe
                 
                 g.setLayout(new BorderLayout());
                 g.setVisible(true);
