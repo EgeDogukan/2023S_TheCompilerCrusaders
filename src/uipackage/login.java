@@ -154,8 +154,6 @@ public class login extends JFrame{
                 char[] passwordChars = passwordField.getPassword();
                 String password = new String(passwordChars);
 
-
-
                 int contFlag = 0;
 
                 try (BufferedReader br = new BufferedReader(new FileReader(absoFileName))) {
@@ -171,15 +169,10 @@ public class login extends JFrame{
                     x.printStackTrace();
                 }     
 
-                if (contFlag == 2) {
-                	
-                	
+                if (contFlag == 2) {    	
                     JOptionPane.showMessageDialog(null, "Login successful!");
-                    
+                    System.out.println("BURADAYIZ");
                     setLoginStatus(true);
-                    
-                   
-
                 } else {
                     JOptionPane.showMessageDialog(null, "Login failed. Please try again.");
                     setLoginStatus(false);
@@ -193,7 +186,11 @@ public class login extends JFrame{
     }
     
     public void setLoginStatus(boolean newStatus) {
-    	this.isSuccesfull=newStatus;
+    	this.isSuccesfull = true;
+    }
+
+    private JFrame getThisFrame() {
+        return (JFrame) SwingUtilities.getRoot(this);
     }
     
     public static void main(String[] args) throws InterruptedException {
@@ -216,10 +213,4 @@ public class login extends JFrame{
         
         System.out.println(status);
 	}
-    
-    
-    
-   
-    
-    
 }
