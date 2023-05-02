@@ -19,6 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import RiskPackage.ComputerPlayer;
 import RiskPackage.Continents;
@@ -151,14 +152,14 @@ public class BuildingMode extends JFrame {
                 t.setColor(p.getColor());
                 c.add(t);
                     }
-                }
+                }                                           //launching game
                 RiskBoard risk = new RiskBoard(continents); //jpanel
-                GamePanel pnl = new GamePanel(risk);    //jpanel
-                GameManager g = new GameManager(pnl);   //jframe
+                GamePanel pnl = new GamePanel(risk);        //jpanel
+                GameManager g = new GameManager(pnl);       //jframe
                 
                 g.setLayout(new BorderLayout());
                 g.setVisible(true);
-
+                getThisFrame().dispose();
             }
         });
         
@@ -179,6 +180,10 @@ public class BuildingMode extends JFrame {
 	public void setNumberOfComp(int number) {
 		this.numberOfComp = number;
 	}
+
+    private JFrame getThisFrame() {
+        return (JFrame) SwingUtilities.getRoot(this);
+    }
 	
 	public static void main(String[] args) throws InterruptedException {
 	    BuildingMode RiskGameFrame = new BuildingMode();
@@ -206,5 +211,4 @@ public class BuildingMode extends JFrame {
 	    // Use the variable after the frame is closed
 	    System.out.println(numberOfPlayers.get());
 	}
-
 }
