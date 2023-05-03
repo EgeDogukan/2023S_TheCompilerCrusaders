@@ -35,12 +35,14 @@ public class BuildingMode extends JFrame {
 	
 	public int numberOfPlayer;
     public int numberOfComp;
+    public ArrayList<Continents> continents;
 	
 	public BuildingMode() {
         super("Building Mode");
         
             this.numberOfPlayer = -1;
             this.numberOfComp = -1;
+            this.continents = new ArrayList<>();
         
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,14 +83,19 @@ public class BuildingMode extends JFrame {
         halilT.add(UK);
         halilT.add(China);
         halilT.add(US1);
-
+        Asia.addTerritory(China);
+        Africa.addTerritory(Canada);
+        America.addTerritory(US1);
+        Europe.addTerritory(Holland);
+        Europe.addTerritory(UK);
+        Africa.addTerritory(India);
         ArrayList<Territory> compT = new ArrayList<>();
         compT.add(Canada);
         compT.add(India);
 
-        HumanPlayer halil= new HumanPlayer(899, Color.PINK, "halil", halilT);
-        ComputerPlayer comp1 = new ComputerPlayer(1, Color.green, "comp1", compT);
-        
+//        HumanPlayer halil= new HumanPlayer(899, Color.PINK, halilT);
+//        ComputerPlayer comp1 = new ComputerPlayer(1, Color.green, compT);
+//        
         
 
         
@@ -101,7 +108,8 @@ public class BuildingMode extends JFrame {
         
         
 
-        ArrayList<Continents> continents = new ArrayList<>();
+        
+        
 
         continents.add(Asia);
         continents.add(America);
@@ -144,17 +152,11 @@ public class BuildingMode extends JFrame {
             public void mouseClicked(MouseEvent e) {
             	
                 setNumberOfPlayer(((int)Integer.valueOf((String) myComboBox.getSelectedItem())));
+                setNumberOfComp(((int)Integer.valueOf((String) compBox.getSelectedItem())));
             	JOptionPane.showMessageDialog(null, "Game started!");
                 ArrayList<Player> players = new ArrayList<>();
-                players.add( halil);
-                players.add(comp1);
-                for(Player p : players){
-                for(Territory t: p.getTerritories()){
-                Continents c = t.getContinent();
-                t.setColor(p.getColor());
-                c.add(t);
-                    }
-                }                                           //launching game
+//               players.add( halil);
+//               players.add(comp1);                          //launching game
                 RiskBoard risk = new RiskBoard(continents); //jpanel
                 GamePanel pnl = new GamePanel(risk);        //jpanel
                 GameManager g = new GameManager(pnl);       //jframe
@@ -174,6 +176,16 @@ public class BuildingMode extends JFrame {
 	public void setNumberOfPlayer(int number) {
 		this.numberOfPlayer = number;
 	}
+	
+	public void initalSharing(ArrayList<Player> players) {
+		for(Player p : players){
+        	for(Territory t: p.getTerritories()){
+        			Continents c = t.getContinent();
+        			t.setColor(p.getColor());
+        			c.add(t);
+            }
+        } 
+	}
 
     public int getNumberOfComp() {
 		return this.numberOfComp;
@@ -185,6 +197,11 @@ public class BuildingMode extends JFrame {
 
     private JFrame getThisFrame() {
         return (JFrame) SwingUtilities.getRoot(this);
+    }
+    
+    public ArrayList<Continents> getContinent() {
+
+    	return this.continents;
     }
 	
 	public static void main(String[] args) throws InterruptedException {
@@ -213,4 +230,6 @@ public class BuildingMode extends JFrame {
 	    // Use the variable after the frame is closed
 	    System.out.println(numberOfPlayers.get());
 	}
+
+	
 }

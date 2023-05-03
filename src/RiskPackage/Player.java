@@ -13,10 +13,9 @@ public class Player {
 	private String name;
 	protected ArrayList<Territory> territories;
 	
-	public Player(int id, Color color, String name, ArrayList<Territory> territories) {
+	public Player(int id, Color color,  ArrayList<Territory> territories) {
 		this.id=id;
 		this.color=color;
-		this.name=name;
 		this.territories = territories;
 		//for(Territory ter : territories)
 			//this.territories.add(ter);
@@ -25,13 +24,7 @@ public class Player {
 	public ArrayList<Territory> getTerritories(){
 		return territories;
 	}
-	public String getName() {
-		return name;
-	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public int getId() {
 		return id;

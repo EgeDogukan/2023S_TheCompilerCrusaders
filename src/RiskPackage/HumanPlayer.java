@@ -8,8 +8,8 @@ import javax.swing.JLabel;
 
 public class HumanPlayer extends Player{
 
-	public HumanPlayer(int id, Color color, String name, ArrayList<Territory> territories) {
-		super(id, color, name, territories);
+	public HumanPlayer(int id, Color color, ArrayList<Territory> territories) {
+		super(id, color, territories);
 		JLabel nameLabel = new JLabel("aaa");
         nameLabel.setHorizontalAlignment(JLabel.CENTER);
 		this.territories = territories;

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class ComputerPlayer extends Player {
 
-	public ComputerPlayer(int id, Color color, String name, ArrayList<Territory> territories) {
-		super(id, color, name, territories);
+	public ComputerPlayer(int id, Color color, ArrayList<Territory> territories) {
+		super(id, color, territories);
 	}
 
 }
