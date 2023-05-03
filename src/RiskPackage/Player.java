@@ -11,6 +11,7 @@ public class Player {
 	private Army army;
 	//private LinkedList<Card> cardDeck;
 	private String name;
+	private boolean takeTurn = false;
 	protected ArrayList<Territory> territories;
 	
 	public Player(int id, Color color,  ArrayList<Territory> territories) {
@@ -32,6 +33,15 @@ public class Player {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	public void takeTurn(int id){
+		if (id == this.id){
+			takeTurn = true;
+
+		}
+		else  {
+			takeTurn = false;
+		}
 	}
 
 	public Color getColor() {
