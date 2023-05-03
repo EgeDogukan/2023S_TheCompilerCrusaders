@@ -18,9 +18,8 @@ public class GameController {
             System.out.println(loginPage.getLoginStatus());
             
         } while (loginPage.getLoginStatus() == false);
-        
-        loginPage.frame.dispose();
-        startBuildingMode();  
+		loginPage.frame.dispose();
+        startBuildingMode();	
     }
     
     static private void startLogin() {

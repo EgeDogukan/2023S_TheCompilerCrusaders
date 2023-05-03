@@ -175,7 +175,6 @@ public class login extends JFrame{
                     setLoginStatus(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Login failed. Please try again.");
-                    setLoginStatus(false);
                 }
             }
         });
