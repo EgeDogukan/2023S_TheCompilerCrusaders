@@ -2,9 +2,12 @@ package RiskPackage;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.management.StringValueExp;
 
 import uipackage.*;;
 
@@ -53,4 +56,16 @@ public class GameController {
 	    // Use the variable after the frame is closed
 	    System.out.println(numberOfPlayers.get());
     }
+
+	static private void initGame(int numberofPlayers, int numberofComp, ArrayList<Territory> territories, 
+		ArrayList<Continents> continents) {
+		
+		ArrayList<Player> playerList;
+		int territoryPerPlayer = Math.floorDiv(territories.size(), (numberofComp + numberofPlayers));
+		for(int i = 0; i < numberofComp + numberofPlayers; i++) {
+			playerList[i] = new Player(0, , null, territories);
+		}
+
+
+	}
 }
