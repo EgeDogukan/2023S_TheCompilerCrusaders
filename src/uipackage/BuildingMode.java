@@ -120,6 +120,7 @@ public class BuildingMode extends JFrame {
         label.setLabelFor(myComboBox);
         this.getContentPane().add(myComboBox);
         this.getContentPane().add(label);
+        label.setBounds(550,580,300,100);
 
         String[] numberOfComp = {"2","1"};
         JComboBox<String> compBox = new JComboBox<String>(numberOfComp);
@@ -127,11 +128,12 @@ public class BuildingMode extends JFrame {
         compBox.setSize(100,100);
         compBox.setBackground(Color.WHITE);
         compBox.setLocation(250, 650);
-        JLabel CompL = new JLabel("Number of Players:");
+        JLabel CompL = new JLabel("Number of AI's:");
         CompL.setLabelFor(myComboBox);
         this.getContentPane().add(compBox);
         this.getContentPane().add(CompL);
-        
+        CompL.setBounds(250,580,300,100);
+
         JButton startButton = new JButton("Start Game!");
         startButton.setSize(100,100);
         startButton.setBackground(Color.GRAY);
