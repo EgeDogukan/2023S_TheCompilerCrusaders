@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class RiskBoard extends JPanel{
@@ -27,6 +28,8 @@ public class RiskBoard extends JPanel{
 			    this.add(cont);
 		}
         this.setLayout(new BorderLayout());
+        
+      
         
 		this.setOpaque(true);
         this.setFocusable(true);
