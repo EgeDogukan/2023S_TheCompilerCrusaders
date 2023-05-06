@@ -246,7 +246,7 @@ public class BuildingMode extends JFrame {
             	
                 setNumberOfPlayer(((int)Integer.valueOf((String) myComboBox.getSelectedItem())));
                 setNumberOfComp(((int)Integer.valueOf((String) compBox.getSelectedItem())));
-            	//JOptionPane.showMessageDialog(null, "Game started!");
+            	JOptionPane.showMessageDialog(null, "Game started!");
             	
             	getThisFrame().dispose();
             }
