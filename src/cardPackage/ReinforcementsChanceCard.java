@@ -7,7 +7,7 @@ public class ReinforcementsChanceCard implements IChanceCard {
 	public int type;
 
 	public ReinforcementsChanceCard() {
-		this.type=2;
+		this.type=1;
 	}
 
 	@Override
@@ -15,6 +15,10 @@ public class ReinforcementsChanceCard implements IChanceCard {
 		
 		System.out.println("Action of Reinforcement Card is applied.");
 	
+	}
+	
+	public int getType() {
+		return this.type;
 	}
 
 }

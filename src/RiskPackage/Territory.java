@@ -2,11 +2,23 @@ package RiskPackage;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
+
+import javax.print.DocFlavor.STRING;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayer;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import RiskPackage.GameController;
 
 public class Territory extends JPanel {
 	 private String name;
@@ -15,28 +27,138 @@ public class Territory extends JPanel {
 	    private int width;
 	    private int height;
 	    private Color color;
+		private Continents c;
 	    private ArrayList<Territory> neighbors;
+		private int playerID;
+		private int Cnumber;
+		private int Anumber;
+		private int Inumber;
+		private Army armyOnTerritory;
 	    
-	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color) {
+	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color, Continents continent, int playerID) {
+	    	
+	    	this.setVisible(true);
+	    	this.playerID = playerID;
+			this.Inumber = 0;
+			this.Cnumber = 0;
+			this.Anumber = 0;
+			this.armyOnTerritory = new Army(Cnumber, Anumber, Inumber);
 	        this.xCoordinate = xCoordinate;
 	        this.yCoordinate = yCoordinate;
 	        this.width = width;
 	        this.height = height;
-			this.setSize(width, height);
+	        this.c = continent;
+	        this.setSize(width, height);
 			this.setLocation(xCoordinate, yCoordinate);
-	        this.setBackground(Color.BLACK);
+			
+	        this.setBackground(color);
 	        this.setColor(color);
+			
 	        this.name = name;
 	        this.color = color;
 	        this.neighbors = new ArrayList<Territory>();
-	        this.setOpaque(false);
-	        this.setName(name);
+	        
+	        
+			JLabel nameLabel = new JLabel(this.getName());
+			System.out.println(this.getName());
+        	nameLabel.setHorizontalAlignment(JLabel.CENTER);
+        	this.add(nameLabel, BorderLayout.NORTH);
+	        this.setOpaque(true);
+	        this.setFocusable(true);
+	        this.setEnabled(true);
+	        
 			this.addMouseListener(new MouseAdapter() {
 				private Color oldColor;
 				@Override
 				public void mouseClicked(MouseEvent e) {
+
+					System.out.println("Panel clicked!");
+
+					JFrame territoryPromptjFrame = new JFrame(Territory.this.getName());
+					territoryPromptjFrame.setLayout(null);
+					territoryPromptjFrame.setVisible(true);
+					territoryPromptjFrame.setPreferredSize(new Dimension(300, 300
+					));
+					territoryPromptjFrame.setLocationRelativeTo(null);
+					JPanel territoryPromptJPanel = new JPanel();
+					territoryPromptJPanel.setBackground(Color.GREEN);
+					territoryPromptJPanel.setSize(500, 500);
 					
-					JOptionPane.showMessageDialog(null, "successfully clicked");
+					//
+					//territoryPromptJPanel.setLayout(null); silllllllllllllll
+					territoryPromptJPanel.setOpaque(true);
+        			territoryPromptJPanel.setFocusable(true);
+        			territoryPromptJPanel.setEnabled(true);
+        			
+					JLabel presentArmyJLabel = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
+					+ Territory.this.Inumber +" Infantry.");
+					JLabel power = new JLabel("Total power: "+ "\n" + Territory.this.armyOnTerritory.calculateStrength());
+					
+					String[] terrToAttack = new String[Territory.this.getNeighbors().size()];
+					//for(Territory t : Territory.this.getNeighbors()){
+					for(int t=0; t< Territory.this.getNeighbors().size();t++){
+
+					JLabel neig = new JLabel(Territory.this.getNeighbors().get(t).getName() + " territory power : " + Territory.this.getNeighbors().get(t).armyOnTerritory.calculateStrength());
+					territoryPromptJPanel.add(neig);
+					terrToAttack[t]=Territory.this.getNeighbors().get(t).getName();
+					System.out.println(terrToAttack[t]);
+
+
+					}
+					presentArmyJLabel.setLocation(500, 500);
+					territoryPromptJPanel.add(presentArmyJLabel);
+					territoryPromptJPanel.add(power);
+
+					territoryPromptjFrame.add(territoryPromptJPanel);
+					territoryPromptjFrame.setContentPane(territoryPromptJPanel);
+					//JComboBox<String> cardComboBox = new JComboBox<String>(CardsOfCurrentPlayer);
+					JComboBox<String> chooseToAttackBox = new JComboBox<String>(terrToAttack);
+					
+					territoryPromptjFrame.pack();
+
+
+					
+
+					if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
+						System.out.println("sahip");
+						JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+					"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
+					JButton attackButton = new JButton("Attack");
+					String name = (String) chooseToAttackBox.getSelectedItem();
+					territoryPromptJPanel.add(attackButton);
+					attackButton.addMouseListener(new MouseAdapter() {
+						public void mouseClicked(MouseEvent e) {
+							Territory destination = null;
+							for(Territory t : Territory.this.getNeighbors()){
+								if(name.equals(t.getName())){
+									destination = t;
+									
+									break;
+								}
+							}
+						
+							if(destination.armyOnTerritory.calculateStrength() >= Territory.this.armyOnTerritory.calculateStrength()){
+								Territory.this.decreaseArmy(destination);
+								
+								JLabel ppp = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
+					+ Territory.this.Inumber +" Infantry.");
+					territoryPromptjFrame.add(ppp);
+							}
+						}
+					});
+					territoryPromptJPanel.add(chooseToAttackBox);
+					territoryPromptJPanel.setVisible(true);
+
+					territoryPromptjFrame.pack();
+						
+						
+					}
+					else {
+						System.out.println("sahip değil");
+						JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+					"y"+Territory.this.yCoordinate);
+					}
+					
 					
 				}
 
@@ -52,8 +174,12 @@ public class Territory extends JPanel {
 					setColor(oldColor);
 					repaint();
 				}
-			});        
+			});
+			
+			this.setFocusable(true);
 	    }
+	    
+	    
 		
 		@Override
 	    public void paintComponent(Graphics g) {
@@ -78,6 +204,10 @@ public class Territory extends JPanel {
 
 		public void setHeight(int height) {
 			this.height = height;
+		}
+
+		public void setName(String name) {
+			this.name = name;
 		}
 
 		public int getxCoordinate() {
@@ -108,6 +238,10 @@ public class Territory extends JPanel {
 	        this.neighbors.add(neighbor);
 	    }
 
+		public String neigName (Territory n){
+			return n.getName();
+		}
+
 		public boolean contains(int x, int y) {
 			return super.contains(x,y);
 		}
@@ -116,7 +250,53 @@ public class Territory extends JPanel {
 			return this.color;
 		}
 
-		public Color setColor(Color color) {
-			return this.color = color;
+		public void setColor(Color color) {
+			this.setBackground(color); 
 		}
+
+		public int getOwnerID() {
+			return playerID;
+		}
+
+		public void setOwnerID(int ID) {
+			this.playerID = ID;
+		}
+
+		public Continents getContinent() {
+			return this.c;
+		}
+
+
+
+		public void setArmy(int A, int C, int I) {
+			this.armyOnTerritory.setArtillery(A);
+			this.Anumber = A;
+			this.armyOnTerritory.setCavalry(C);
+			this.Cnumber = C;
+			this.armyOnTerritory.setInfantry(I);
+			this.Inumber = I;
+
+		}
+
+		public void increaseArmy(int A, int C, int I){
+			this.armyOnTerritory.setArtillery(A + this.Anumber);
+			this.Anumber += A;
+			this.armyOnTerritory.setCavalry(C + this.Cnumber);
+			this.Cnumber += C;
+			this.armyOnTerritory.setInfantry(I + this.Inumber);
+			this.Inumber += I;
+
+		}
+
+		public void decreaseArmy(Territory destination){
+			this.armyOnTerritory.setArtillery(this.Anumber - destination.Anumber);
+			this.Anumber -= destination.Anumber;
+			this.armyOnTerritory.setCavalry( this.Cnumber - destination.Cnumber);
+			this.Cnumber -= destination.Cnumber;
+			this.armyOnTerritory.setInfantry(this.Inumber - destination.Inumber);
+			this.Inumber -= destination.Inumber;
+
+		}
+
+
 }
