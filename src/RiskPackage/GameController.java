@@ -154,6 +154,10 @@ public class GameController {
 	public static int getCurrentTurnPlayerID() {
 		return turnID;
 	}
+
+	public static void setCurrentTurnPlayerID(int ID) {
+		turnID = ID - 1;
+	}
 	
 	
 }

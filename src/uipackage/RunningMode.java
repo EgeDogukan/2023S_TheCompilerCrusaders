@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import RiskPackage.Continents;
+import RiskPackage.GameController;
 import RiskPackage.GameManager;
 import RiskPackage.GamePanel;
 import RiskPackage.Player;
@@ -73,7 +74,8 @@ public class RunningMode extends JFrame{
             		RunningMode.turnCounter++;
             	}
             	turn.setText(Integer.toString(RunningMode.turnCounter));
-    
+				GameController.setCurrentTurnPlayerID(RunningMode.turnCounter);
+				System.out.println("------------------------------" + RunningMode.turnCounter);
             }
         });
 
@@ -115,6 +117,7 @@ public class RunningMode extends JFrame{
         System.out.println("Player with ID"+curId+" has drawn the card with ID"+randomNumber+" and it is added his/her list.");
 	}
 	
+
 	
 
 }
