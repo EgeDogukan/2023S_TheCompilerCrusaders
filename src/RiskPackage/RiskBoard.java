@@ -24,7 +24,7 @@ public class RiskBoard extends JPanel{
         this.setPreferredSize(getPreferredSize());
         this.setSize(1920, 1080);
         for (Continents cont : continents) {
-            if(cont.isIncluded==true)//If continent selected in building mode add this to game otherwise not.
+            if(cont.isIncluded==true && cont.isBuilding==false)//If continent selected in building mode add this to game otherwise not.
 			    this.add(cont);
 		}
         this.setLayout(new BorderLayout());

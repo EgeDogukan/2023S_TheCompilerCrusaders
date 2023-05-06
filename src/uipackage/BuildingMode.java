@@ -467,6 +467,12 @@ public class BuildingMode extends JFrame {
         startButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
             	
+            	for (Continents continent : continents) {
+            		for (Territory territory : continent.getTerritories()) {
+            			territory.setIsBuilding(true);
+            		}
+            	}
+            	
                 setNumberOfPlayer(((int)Integer.valueOf((String) myComboBox.getSelectedItem())));
                 setNumberOfComp(((int)Integer.valueOf((String) compBox.getSelectedItem())));
             	JOptionPane.showMessageDialog(null, "Game started!");
@@ -476,8 +482,6 @@ public class BuildingMode extends JFrame {
         });
 
 	}
-	
-	
 	
 	
 	
