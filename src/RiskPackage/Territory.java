@@ -116,6 +116,7 @@ public class Territory extends JPanel {
 					
 					territoryPromptjFrame.pack();
 
+					
 
 					
 
