@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import javax.sound.sampled.Line;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayer;
@@ -129,7 +130,7 @@ public class Territory extends JPanel {
 	    
 		
 		@Override
-	    public void paintComponent(Graphics g) {
+	    public void paint(Graphics g) {
 	    	Graphics2D g2 = (Graphics2D) g;
 			super.paintComponent(g);
 	        g.setColor(this.getColor());
@@ -139,7 +140,7 @@ public class Territory extends JPanel {
 			g2.setColor(Color.BLACK); // Set the color of the line to black
 			g2.setStroke(new BasicStroke(2)); 	
 			for(Territory n : this.getNeighbors()){
-				g2.draw(new Line2D.Double(n.getBounds().x, n.getBounds().y, this.getBounds().x/2, this.getBounds().y/2));
+				g2.draw(new Line2D.Double(n.getBounds().x, n.getBounds().y, this.getBounds().x/2, this.getBounds().y/2));	
 			}
 			
 			
