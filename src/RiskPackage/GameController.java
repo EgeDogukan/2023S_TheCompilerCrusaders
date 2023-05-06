@@ -79,8 +79,8 @@ public class GameController {
 	    	}
 	    }
 	    
-        
-	    ArrayList<Player> playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent());
+        boolean isBuilding=true;
+	    ArrayList<Player> playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent(), isBuilding);
         ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
 		RunningMode g = new RunningMode(c, playerList, numberOfAIPlayers.get(), numberOfPlayers.get());
                 
@@ -106,7 +106,7 @@ public class GameController {
     }
     
 
-	static private ArrayList<Player> initGame(int numberofPlayers, int numberofComp, ArrayList<Continents> continents) {
+	static private ArrayList<Player> initGame(int numberofPlayers, int numberofComp, ArrayList<Continents> continents, boolean isBuilding) {
 		
 		ArrayList<Territory> territories = new ArrayList<Territory>();
 		for (Continents continent : continents) {
@@ -121,6 +121,7 @@ public class GameController {
 		
 		
 		ArrayList<Player> playerList = new ArrayList<Player>();
+		ArrayList<Player> playerList2 = new ArrayList<Player>();
 		
 		Collections.shuffle(territories);
 		for(int j = 0; j < numberofComp + numberofPlayers; j++) {
@@ -131,11 +132,13 @@ public class GameController {
 			for (int i=0; i<territoryPerPlayer;i++) {
 				currentTerritories.add(territories.get(i+j*territoryPerPlayer));
 			}
+			Player player = new Player(j, randomColorGenerator(), currentTerritories);
+			playerList.add(player);
 			
-			//System.out.println(currentTerritories);
+			int numberOfArmyPerPlayer=BuildingMode.getNumberOfInitialArmy(numberofPlayers+numberofComp);
 			
-				
-			playerList.add(new Player(j, randomColorGenerator(), currentTerritories));
+			Player player2 = new Player(j, randomColorGenerator(), numberOfArmyPerPlayer, 0,0);
+			playerList2.add(player2);
 			
 		
 		
@@ -152,7 +155,12 @@ public class GameController {
 			System.out.println("*****************");
 		}
 		
-		return playerList;
+		if (isBuilding) {
+			return playerList2;
+		}
+		else {
+			return playerList;
+		}
 	}
 	
 

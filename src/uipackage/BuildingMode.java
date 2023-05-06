@@ -42,6 +42,8 @@ public class BuildingMode extends JFrame {
     
     public ArrayList<Continents> continents;
     static int turnCounter=1;
+    
+    int numberOfArmyPerPlayer;
 	
 	public BuildingMode() {
         super("Building Mode");
@@ -550,9 +552,7 @@ public class BuildingMode extends JFrame {
 			}
 		});
 		
-		int numberOfArmyPerPlayer = getNumberOfInitialArmy(this.BnumberOfComp+this.BnumberOfPlayer);
-		
-	
+		this.numberOfArmyPerPlayer = getNumberOfInitialArmy(this.BnumberOfComp+this.BnumberOfPlayer);
 
 	}
 	
@@ -597,7 +597,7 @@ public class BuildingMode extends JFrame {
     	return this.continents;
     }
     
-    public int getNumberOfInitialArmy(int numberOfPlayer) {
+    public static int getNumberOfInitialArmy(int numberOfPlayer) {
     	if (numberOfPlayer==2) {return 40;}
     	else if (numberOfPlayer==3) {return 35;}
     	else if (numberOfPlayer==4) {return 30;}

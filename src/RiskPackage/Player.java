@@ -23,17 +23,26 @@ public class Player {
 	public ArrayList<IChanceCard> chanceCards = new ArrayList<IChanceCard>();
 	public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
 	
+	int ANumber;
+	int CNumber;
+	int INumber;
+	
 	public Player(int id, Color color,  ArrayList<Territory> territories) {
 		this.id=id;
 		this.color=color;
 		this.territories = territories;
 
-
-		this.army = army;
-		//for(Territory ter : territories)
-			//this.territories.add(ter);
-
 	}
+	
+	public Player(int id, Color color, int ANumber, int CNumber, int INumber) {
+		this.id=id;
+		this.color=color;
+		this.ANumber=ANumber;
+		this.CNumber=CNumber;
+		this.INumber=INumber;
+	}
+	
+	
 	
 	public ArrayList<Territory> getTerritories(){
 		return territories;
