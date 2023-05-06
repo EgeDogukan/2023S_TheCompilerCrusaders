@@ -75,12 +75,8 @@ public class GameController {
                 
         g.setLayout(new BorderLayout());
         g.setVisible(true);
-		turnID = g.getTurn();
-                
+		turnID = g.getTurn() - 1;
 
-        
-        
-        
     }
     
     static private void startLogin() {

@@ -72,9 +72,11 @@ public class RunningMode extends JFrame{
             	RunningMode.turnCounter=RunningMode.turnCounter%(numberOfAIPlayer+numberOfHumanPlayer+1);
             	if (RunningMode.turnCounter==0) {
             		RunningMode.turnCounter++;
+					System.out.println("HEYYYYLKJLSDKLFLJKDJFKSKLDJ");
             	}
             	turn.setText(Integer.toString(RunningMode.turnCounter));
 				GameController.setCurrentTurnPlayerID(RunningMode.turnCounter);
+				System.out.println(GameController.getCurrentTurnPlayerID());
 				System.out.println("------------------------------" + RunningMode.turnCounter);
             }
         });
