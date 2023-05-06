@@ -32,6 +32,10 @@ public class Player {
 	public ArrayList<Territory> getTerritories(){
 		return territories;
 	}
+	
+	public void addTerritories(Territory territory) {
+		this.territories.add(territory);
+	}
 
 
 	public int getId() {

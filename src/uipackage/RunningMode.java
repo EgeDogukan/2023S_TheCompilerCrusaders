@@ -84,6 +84,7 @@ public class RunningMode extends JFrame{
 				
 				//nextButton.setBackground(GameController.getCurrentTurnPlayerID());
             	//System.out.println();
+            	printTerritoryCard();
             	RunningMode.turnCounter++;
             	RunningMode.turnCounter=RunningMode.turnCounter%(numberOfAIPlayer+numberOfHumanPlayer+1);
             	if (RunningMode.turnCounter==0) {
@@ -93,6 +94,7 @@ public class RunningMode extends JFrame{
 				GameController.setCurrentTurnPlayerID(RunningMode.turnCounter);
 				System.out.println("------------------------------" + RunningMode.turnCounter);
 				nextButton.setBackground(getPlayer(getTurn()-1));
+				
             }
         });
 
@@ -251,6 +253,7 @@ public class RunningMode extends JFrame{
 				this.territoryCards.add(new TerritoryCard(territory));
 			}
 		}
+		System.out.println(this.territoryCards.size());
 	}
 	
 	public void pickTerritoryCard() {
@@ -259,6 +262,35 @@ public class RunningMode extends JFrame{
 		int index = rand.nextInt(this.territoryCards.size());
 		TerritoryCard currentCard = this.territoryCards.get(index);
 		this.players.get(curId-1).territoryCards.add(currentCard);
+	}
+	
+	
+	public void printTerritoryCard() {
+		int curId=getTurn();
+		System.out.println("Territory Cards of the player are: ");
+		for (TerritoryCard card : this.players.get(curId-1).territoryCards) {
+			System.out.println(card.territory);
+		}
+	}
+	
+	public void useTerritoryCard() {
+		int curId=getTurn();
+		boolean hasAllOfTheTerritories=true;
+		Continents continentToBeConquered = null;
+		
+		for (Continents continent : this.continents) {
+			for (Territory territory : continent.getTerritories()) {
+				for (TerritoryCard territoryCard : this.players.get(curId-1).territoryCards) {
+					if (!(territory.getName().equals(territoryCard.territory.getName()))) {
+						hasAllOfTheTerritories=false;
+					}
+				}
+			}
+			continentToBeConquered=continent;
+		}
+		for (Territory territory : continentToBeConquered.getTerritories()) {
+			this.players.get(curId-1).addTerritories(territory);
+		}
 	}
 	
 
