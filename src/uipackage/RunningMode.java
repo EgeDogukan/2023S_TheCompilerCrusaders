@@ -95,16 +95,27 @@ public class RunningMode extends JFrame{
 			}
 		});
 		
+		//this.players.get(turnCounter).chanceCards.get(0).getClass().getName().split("\\.")[1]
+		String[] CardsOfCurrentPlayer = {"Draft Chance Card", "Reinforcement Card", "Trade Deal Card", "Revolution Card", "Nuclear Strike Card"};
+        JComboBox<String> cardComboBox = new JComboBox<String>(CardsOfCurrentPlayer);
+        cardComboBox.setSize(100, 100);
+        cardComboBox.setLocation(600, 700);
+		
 		JButton useCard = new JButton("Use Card");
 		useCard.setSize(100,100);
 		useCard.setLocation(850,700);
 		
+		useCard.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				int selectedCard = cardComboBox.getSelectedIndex();
+				System.out.println("Selected index: "+selectedCard);
+				players.get(getTurn()-1).useChanceCard(selectedCard);
+			}
+		});
 		
-		//this.players.get(turnCounter).chanceCards.get(0).getClass().getName().split("\\.")[1]
-		String[] CardsOfCurrentPlayer = {"Reinforcement Card", "Nuclear Strike Card"};
-        JComboBox<String> Cards = new JComboBox<String>(CardsOfCurrentPlayer);
-		Cards.setSize(100, 100);
-		Cards.setLocation(600, 700);
+		
+		
+		
 
 		this.getContentPane().add(nextButton);
 		this.getContentPane().add(turn);
@@ -112,7 +123,7 @@ public class RunningMode extends JFrame{
 		this.getContentPane().add(pickChanceCardButton);
 		this.getContentPane().add(helpButton);
 		this.getContentPane().add(useCard);
-		this.getContentPane().add(Cards);
+		this.getContentPane().add(cardComboBox);
 		this.add(panel); 
 
 

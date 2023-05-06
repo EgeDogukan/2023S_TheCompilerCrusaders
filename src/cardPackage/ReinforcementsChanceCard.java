@@ -16,5 +16,9 @@ public class ReinforcementsChanceCard implements IChanceCard {
 		System.out.println("Action of Reinforcement Card is applied.");
 	
 	}
+	
+	public int getType() {
+		return this.type;
+	}
 
 }

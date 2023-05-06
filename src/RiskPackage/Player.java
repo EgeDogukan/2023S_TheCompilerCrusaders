@@ -65,12 +65,28 @@ public class Player {
 		this.armyCards.add(card);
 	}
 	
-	public void useChanceCard(IChanceCard card) {
-		if (card.type==0){   }
-		else if (card.type==1){   }
-		else if (card.type==2){   }
-		else if (card.type==3){   }
-		else if (card.type==4){   }
+	public void useChanceCard(int id) {
+		
+		boolean exist=false;
+		
+		for (IChanceCard chanceCard : chanceCards) {
+			System.out.println("type of chance card : "+chanceCard.type);
+			if (id==chanceCard.type) {
+				exist=true;
+				break;
+			}
+		}
+		
+		if (exist) {
+			if (id==0){ System.out.println("Action of card 1 is applied.");  }
+			else if (id==1){ System.out.println("Action of card 2 is applied.");  }
+			else if (id==2){ System.out.println("Action of card 3 is applied.");  }
+			else if (id==3){ System.out.println("Action of card 4 is applied.");  }
+			else if (id==4){ System.out.println("Action of card 5 is applied.");  }
+		}
+		else {
+			System.out.println("You don't have this card.");
+		}
 	}
 		
 			
