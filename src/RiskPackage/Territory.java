@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -58,18 +59,38 @@ public class Territory extends JPanel {
 				public void mouseClicked(MouseEvent e) {
 
 					System.out.println("Panel clicked!");
+
+					JFrame territoryPromptjFrame = new JFrame(Territory.this.getName());
+					territoryPromptjFrame.setSize(450, 300);
+					//territoryPromptjFrame.setLocation(960, 540);
+					JPanel territoryPromptJPanel = new JPanel();
+					territoryPromptjFrame.setContentPane(territoryPromptJPanel);
+					territoryPromptJPanel.setLayout(null);
+					JLabel presentArmyJLabel = new JLabel("Present Armies: ");
+					
+
+					territoryPromptjFrame.add(territoryPromptJPanel);
+					territoryPromptJPanel.add(presentArmyJLabel);
+
+					territoryPromptjFrame.pack();
+					territoryPromptjFrame.setVisible(true);
+
+
 					
 
 					if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
 						System.out.println("sahip");
 						JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
 					"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
+						
+						
 					}
 					else {
 						System.out.println("sahip değil");
 						JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
 					"y"+Territory.this.yCoordinate);
 					}
+					
 					
 				}
 
