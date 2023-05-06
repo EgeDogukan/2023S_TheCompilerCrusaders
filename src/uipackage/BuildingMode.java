@@ -130,16 +130,6 @@ public class BuildingMode extends JFrame {
         Territory WesternAustralia = new Territory(150, 150, 50, 50, "WesternAustralia", Color.BLUE, Australia, 0);
         Territory EasternAustralia = new Territory(0, 150, 50, 50, "EasternAustralia", Color.BLUE, Australia, 0);
         
-
-        //Territory Holland = new Territory(250, 250, 40, 40, "holland", Color.BLUE, Europe);
-        //Territory US1 = new Territory(75, 150, 40, 40, "US", Color.BLUE, NorthAmerica);
-        //Territory Canada = new Territory(230, 250, 40, 40, "Canada", Color.BLUE, NorthAmerica);
-        //Territory UK = new Territory(250, 150, 40, 40, "UK", Color.BLUE, Europe);
-        //Territory India = new Territory(280, 300, 40, 40, "India", Color.BLUE, Asia);
-        //Territory China = new Territory(250, 100, 40, 40, "China", Color.BLUE, Asia);
-
-
-        
         
         
         NorthAmerica.addTerritory(Alaska);
@@ -206,6 +196,7 @@ public class BuildingMode extends JFrame {
         this.add(SouthAmerica);
         this.add(Africa);
         this.add(Australia);
+        
         Alaska.addNeighbor(Kamchatka);
         Alaska.addNeighbor(NorthWestTerritory);
         Alaska.addNeighbor(Alberta);
@@ -447,6 +438,25 @@ public class BuildingMode extends JFrame {
         this.getContentPane().add(compBox);
         this.getContentPane().add(CompL);
         CompL.setBounds(250,680,300,100);
+        
+        JButton continueButton = new JButton("Continue");
+        continueButton.setSize(150,50);
+        continueButton.setBackground(Color.GRAY);
+        continueButton.setLocation(700, 750);
+        this.getContentPane().add(continueButton);
+        
+        continueButton.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+        		
+        		for (Continents continent : BuildingMode.this.continents) {
+        			for (Territory territory : continent.getTerritories()) {
+        				territory.setColor(Color.pink);
+        				continent.add(territory);
+        			}
+        			
+        		}
+        	}
+        });
 
         JButton startButton = new JButton("Start Game!");
         startButton.setSize(150,50);
@@ -465,7 +475,10 @@ public class BuildingMode extends JFrame {
             }
         });
         
+ 
 	}
+	
+	
 	
 	public int getNumberOfPlayer() {
 		return this.numberOfPlayer;
@@ -503,36 +516,9 @@ public class BuildingMode extends JFrame {
     }
     
     public ArrayList<Continents> getContinent() {
-
     	return this.continents;
     }
-	
-	public static void main(String[] args) throws InterruptedException {
-	    BuildingMode RiskGameFrame = new BuildingMode();
-	    RiskGameFrame.setLayout(null);
-	    RiskGameFrame.setVisible(true);
 
-	    // Declare a variable to store the number of players
-	    AtomicInteger numberOfPlayers = new AtomicInteger(0);
-
-	    // Use a CountDownLatch to synchronize the two threads
-	    CountDownLatch latch = new CountDownLatch(1);
-
-	    // Add the necessary command when the frame is closed.
-	    RiskGameFrame.addWindowListener(new WindowAdapter() {
-	        @Override
-	        public void windowClosing(WindowEvent e) {
-	            numberOfPlayers.set(RiskGameFrame.getNumberOfPlayer());
-	            latch.countDown();
-	        }
-	    });
-
-	    // Wait for the window to be closed before accessing the value of numberOfPlayers
-	    latch.await();
-
-	    // Use the variable after the frame is closed
-	    System.out.println(numberOfPlayers.get());
-	}
 
 	
 }

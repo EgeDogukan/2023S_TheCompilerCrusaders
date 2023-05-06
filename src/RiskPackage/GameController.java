@@ -29,6 +29,7 @@ public class GameController {
         
     	login loginPage = new login();
         loginPage.frame.setVisible(true);
+        int x=0;
 
         do {                                                        //waiting until login phase completed
             System.out.println(loginPage.getLoginStatus());
@@ -45,15 +46,15 @@ public class GameController {
 	    AtomicInteger numberOfAIPlayers = new AtomicInteger(0);
 	    
 	    
-	    do {                                                        //waiting until login phase completed
-            //System.out.println(loginPage.getLoginStatus());
+	    do {                                                       
+            x++;
             
         } while (loginPage.getLoginStatus() == false);
 		loginPage.frame.dispose();
 	    
 		
 		do {                                                        //waiting until login phase completed
-            System.out.println(RiskGameFrame.getNumberOfPlayer());
+            x++;
             
         } while (RiskGameFrame.getNumberOfPlayer() < 0);
 		
@@ -61,7 +62,7 @@ public class GameController {
 		
 		
 		do {                                                        //waiting until login phase completed
-            System.out.println(RiskGameFrame.getNumberOfComp());
+			x++;
             
         } while (RiskGameFrame.getNumberOfComp() < 0);
 

@@ -8,17 +8,12 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import javax.print.DocFlavor.STRING;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayer;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import RiskPackage.GameController;
 
 public class Territory extends JPanel {
 	 private String name;
@@ -139,7 +134,12 @@ public class Territory extends JPanel {
 							}
 						
 							if(destination.armyOnTerritory.calculateStrength() >= Territory.this.armyOnTerritory.calculateStrength()){
-								Territory.this.decreaseArmy(destination);
+								int tempc = Territory.this.Cnumber;
+								int tempi = Territory.this.Inumber;
+								int tempa = Territory.this.Anumber;
+								destination.decreaseArmy(Territory.this);
+								
+								Territory.this.decreaseArmy(tempa, tempc, tempi);
 								
 								JLabel ppp = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
 					+ Territory.this.Inumber +" Infantry.");
@@ -287,6 +287,15 @@ public class Territory extends JPanel {
 			this.armyOnTerritory.setInfantry(I + this.Inumber);
 			this.Inumber += I;
 
+		}
+		
+		public void decreaseArmy(int A, int C, int I) {
+			this.armyOnTerritory.setArtillery(A - this.Anumber);
+			this.Anumber -= A;
+			this.armyOnTerritory.setCavalry(C - this.Cnumber);
+			this.Cnumber -= C;
+			this.armyOnTerritory.setInfantry(I - this.Inumber);
+			this.Inumber -= I;
 		}
 
 		public void decreaseArmy(Territory destination){
