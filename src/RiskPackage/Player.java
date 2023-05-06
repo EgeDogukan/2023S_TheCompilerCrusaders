@@ -8,6 +8,7 @@ import java.util.Random;
 import cardPackage.ArmyCardFactory;
 import cardPackage.IArmyCard;
 import cardPackage.IChanceCard;
+import cardPackage.TerritoryCard;
 
 public class Player {
 	
@@ -20,6 +21,7 @@ public class Player {
 	protected ArrayList<Territory> territories;
 	public ArrayList<IArmyCard> armyCards = new ArrayList<IArmyCard>();
 	public ArrayList<IChanceCard> chanceCards = new ArrayList<IChanceCard>();
+	public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
 	
 	public Player(int id, Color color,  ArrayList<Territory> territories) {
 		this.id=id;

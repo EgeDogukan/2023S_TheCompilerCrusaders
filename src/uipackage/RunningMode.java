@@ -23,13 +23,14 @@ import javax.swing.JTextField;
 
 import RiskPackage.Continents;
 import RiskPackage.GameController;
-import RiskPackage.GameManager;
 import RiskPackage.GamePanel;
 import RiskPackage.Player;
 import RiskPackage.RiskBoard;
+import RiskPackage.Territory;
 import cardPackage.ArmyCardFactory;
 import cardPackage.ChanceCardFactory;
 import cardPackage.IChanceCard;
+import cardPackage.TerritoryCard;
 
 public class RunningMode extends JFrame{
 
@@ -40,8 +41,9 @@ public class RunningMode extends JFrame{
 	ArrayList<Player> players;
 	static int turnCounter=1;
 	public static boolean isContinue = true;
+	public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
 	
-
+	
 	public RunningMode(ArrayList<Continents> continents, ArrayList<Player> players, int numberOfAIPlayer, int numberOfHumanPlayer)  {
 		this.numberOfAIPlayer=numberOfAIPlayer;
 		this.numberOfHumanPlayer=numberOfHumanPlayer;
@@ -186,6 +188,19 @@ public class RunningMode extends JFrame{
 		});
 		
 		
+		
+		JButton pickTerritoryCardButton = new JButton("Pick a Territory Card");
+		pickTerritoryCardButton.setSize(175,175);
+		pickTerritoryCardButton.setLocation(500, 450);
+		
+		pickTerritoryCardButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				pickTerritoryCard();
+				
+			}
+		});
+		
+		
 		this.getContentPane().add(nextButton);
 		this.getContentPane().add(turn);
 		this.getContentPane().add(turnString);
@@ -195,10 +210,11 @@ public class RunningMode extends JFrame{
 		this.getContentPane().add(cardComboBox);
 		this.getContentPane().add(pauseButton);
 		this.getContentPane().add(quitButton);
+		this.getContentPane().add(pickTerritoryCardButton);
 		this.add(panel); 
 
-
 		initializeArmies();
+		initializeTerritoryCards();
 
 
 	}
@@ -212,7 +228,6 @@ public class RunningMode extends JFrame{
 			for (int i=0;i<3;i++) { p.addArmyCard(new ArmyCardFactory().createArmyCard(3));}
 			for (int i=0;i<2;i++) { p.addArmyCard(new ArmyCardFactory().createArmyCard(2));}
 			for (int i=0;i<1;i++) { p.addArmyCard(new ArmyCardFactory().createArmyCard(1));}
-
 		}
 	}
 	
@@ -228,6 +243,22 @@ public class RunningMode extends JFrame{
 	
 	public Color getPlayer(int id){
 		return this.players.get(id).getColor();
+	}
+	
+	public void initializeTerritoryCards() {
+		for (Continents continent : this.continents) {
+			for (Territory territory : continent.getTerritories()) {
+				this.territoryCards.add(new TerritoryCard(territory));
+			}
+		}
+	}
+	
+	public void pickTerritoryCard() {
+		int curId=getTurn();
+		Random rand = new Random();
+		int index = rand.nextInt(this.territoryCards.size());
+		TerritoryCard currentCard = this.territoryCards.get(index);
+		this.players.get(curId-1).territoryCards.add(currentCard);
 	}
 	
 
