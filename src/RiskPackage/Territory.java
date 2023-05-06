@@ -109,18 +109,18 @@ public class Territory extends JPanel {
 							System.out.println(terrToAttack[t]);
 
 
-<<<<<<< Updated upstream
+
 						
 								JLabel ppp = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
 								+ Territory.this.Inumber +" Infantry.");
 								territoryPromptjFrame.add(ppp);
-=======
+
 
 								
 //								JLabel ppp = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
 //								+ Territory.this.Inumber +" Infantry.");
 //								territoryPromptjFrame.add(ppp);
->>>>>>> Stashed changes
+
 								
 
 							}

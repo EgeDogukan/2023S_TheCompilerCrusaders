@@ -36,6 +36,10 @@ public class BuildingMode extends JFrame {
 	
 	public int numberOfPlayer;
     public int numberOfComp;
+    
+    public int BnumberOfPlayer;
+    public int BnumberOfComp;
+    
     public ArrayList<Continents> continents;
     static int turnCounter=1;
 	
@@ -44,6 +48,10 @@ public class BuildingMode extends JFrame {
         
         this.numberOfPlayer = -1;
         this.numberOfComp = -1;
+        
+        this.BnumberOfComp=2;
+        this.BnumberOfPlayer=3;
+        
         this.continents = new ArrayList<>();
         
         
@@ -471,13 +479,9 @@ public class BuildingMode extends JFrame {
         			
         				territory.setColor(Color.pink);
         				continent.add(territory);
-<<<<<<< Updated upstream
-      				}
-        			
-=======
         				territory.setIsBuilding(false);
         			}
->>>>>>> Stashed changes
+
         		}
 
       		setNumberOfPlayer(((int)Integer.valueOf((String) myComboBox.getSelectedItem())));
@@ -546,6 +550,8 @@ public class BuildingMode extends JFrame {
 			}
 		});
 		
+		int numberOfArmyPerPlayer = getNumberOfInitialArmy(this.BnumberOfComp+this.BnumberOfPlayer);
+		
 	
 
 	}
@@ -590,7 +596,15 @@ public class BuildingMode extends JFrame {
     public ArrayList<Continents> getContinent() {
     	return this.continents;
     }
-
+    
+    public int getNumberOfInitialArmy(int numberOfPlayer) {
+    	if (numberOfPlayer==2) {return 40;}
+    	else if (numberOfPlayer==3) {return 35;}
+    	else if (numberOfPlayer==4) {return 30;}
+    	else if (numberOfPlayer==5) {return 25;}
+    	else if (numberOfPlayer==6) {return 20;}
+    	else {return 0;}
+    }
 
 	
 }
