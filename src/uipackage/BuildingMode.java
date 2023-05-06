@@ -247,9 +247,8 @@ public class BuildingMode extends JFrame {
                 setNumberOfPlayer(((int)Integer.valueOf((String) myComboBox.getSelectedItem())));
                 setNumberOfComp(((int)Integer.valueOf((String) compBox.getSelectedItem())));
             	JOptionPane.showMessageDialog(null, "Game started!");
-                RiskBoard risk = new RiskBoard(continents); //jpanel
-                GamePanel pnl = new GamePanel(risk);        //jpanel
-                GameManager g = new GameManager(pnl);       //jframe
+            	
+            	RunningMode g = new RunningMode(continents);
                 
                 g.setLayout(new BorderLayout());
                 g.setVisible(true);

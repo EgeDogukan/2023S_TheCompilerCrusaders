@@ -1,13 +1,8 @@
 package RiskPackage;
 import java.awt.Color;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 //import javax.management.StringValueExp;
@@ -85,9 +80,7 @@ public class GameController {
         loginPage.frame.setVisible(true);
     }
 
-    static public void startBuildingMode() throws InterruptedException {
-        
-    }
+
     
     public static Color randomColorGenerator() {
     	Random random = new Random(); // Create a new Random object
@@ -148,9 +141,7 @@ public class GameController {
 		return playerList;
 	}
 	
-	public void printTerritories(ArrayList<Player> playerList) {
-		return ;
-	}
+
 
 	public static int getCurrentTurnPlayerID() {
 		return turnID;
