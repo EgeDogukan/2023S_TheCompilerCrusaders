@@ -85,9 +85,7 @@ public class GameController {
         loginPage.frame.setVisible(true);
     }
 
-    static public void startBuildingMode() throws InterruptedException {
-        
-    }
+
     
     public static Color randomColorGenerator() {
     	Random random = new Random(); // Create a new Random object
@@ -148,8 +146,6 @@ public class GameController {
 		return playerList;
 	}
 	
-	public void printTerritories(ArrayList<Player> playerList) {
-		return ;
-	}
+	
 	
 }
