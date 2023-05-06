@@ -10,6 +10,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
 
 
 public class login extends JFrame{
@@ -19,6 +23,7 @@ public class login extends JFrame{
     private JButton loginButton;
     public JFrame frame;
     private JButton registerButton;
+    public boolean isSuccesfull = false;
 
     public login() {
         frame = new JFrame();
@@ -26,7 +31,7 @@ public class login extends JFrame{
 		frame.setResizable(false); 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(120, 120, 1207, 728);
-
+		
 
         JPanel contentPane = new JPanel();
         frame.add(contentPane);
@@ -112,7 +117,7 @@ public class login extends JFrame{
                             
                             while ((line = br.readLine()) != null) {
                                 System.out.println(lineCount);
-                                if(password.equals(line)) {
+                                if(password.equals(line.split(" ")[0])) {
                                     JOptionPane.showMessageDialog(null, "This username has already been taken!");
                                     dupFlag = 1;
                                     registerFrame.dispose();
@@ -126,7 +131,8 @@ public class login extends JFrame{
                         if(dupFlag == 0) {
                             try (BufferedWriter br = new BufferedWriter(new FileWriter(absoFileName, true))) {
                                 br.append(password);
-                                br.newLine();
+                                br.append(" ");
+                                //br.newLine();
                                 br.append(username);
                                 br.newLine();
                                 JOptionPane.showMessageDialog(null, "Register successful!");
@@ -148,54 +154,62 @@ public class login extends JFrame{
                 char[] passwordChars = passwordField.getPassword();
                 String password = new String(passwordChars);
 
-
-
                 int contFlag = 0;
 
                 try (BufferedReader br = new BufferedReader(new FileReader(absoFileName))) {
                     String line;
                     
                     while ((line = br.readLine()) != null) {
-                        if(username.equals(line) && contFlag == 0) {
-                        contFlag = 1;
-                        }
-                        if(contFlag == 1 && password.equals(line)) {
-                        contFlag = 2;
-                        }
+                    	
+                    	if (username.equals(line.split(" ")[0]) && password.equals(line.split(" ")[1])) {
+                    		contFlag=2;
+                    	}
                     }
                 }catch (IOException x) {
                     x.printStackTrace();
                 }     
 
-                if (contFlag == 2) {
+                if (contFlag == 2) {    	
                     JOptionPane.showMessageDialog(null, "Login successful!");
-                    // launch main Risk game interface here
-                    RiskBoard board = new RiskBoard();
-                    frame.setVisible(false);
-                    frame.dispose();
-
-        
-                    
-
-                    JFrame RiskGameFrame = new JFrame("Risk Game");
-                    RiskGameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    
-                    RiskGameFrame.setPreferredSize(new Dimension(800, 600));
-                    RiskGameFrame.setLocationRelativeTo(null);
-                    Territory alaska = new Territory(80, 80, 120,120, "Alaska", Color.GREEN);
-                    RiskGameFrame.add(alaska);
-                    RiskGameFrame.getContentPane().setLayout(null);
-                    RiskGameFrame.setLocationRelativeTo(null);
-                    RiskGameFrame.pack();
-                    RiskGameFrame.setVisible(true);
-
-                    
-
-
+                    System.out.println("BURADAYIZ");
+                    setLoginStatus(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Login failed. Please try again.");
                 }
             }
         });
     }
+    
+    public boolean getLoginStatus() {
+    	return this.isSuccesfull;
+    }
+    
+    public void setLoginStatus(boolean newStatus) {
+    	this.isSuccesfull = true;
+    }
+
+    private JFrame getThisFrame() {
+        return (JFrame) SwingUtilities.getRoot(this);
+    }
+    
+    public static void main(String[] args) throws InterruptedException {
+    	login loginPage = new login();
+        loginPage.frame.setVisible(true);
+        
+        
+        AtomicBoolean status = new AtomicBoolean(false);
+        CountDownLatch latch = new CountDownLatch(1);
+        
+        loginPage.frame.addWindowListener((WindowListener) new WindowAdapter() {
+	        @Override
+	        public void windowClosing(WindowEvent e) {
+	        	status.set(loginPage.getLoginStatus());
+	            latch.countDown();
+	        }
+	    });
+        
+        latch.await();
+        
+        System.out.println(status);
+	}
 }

@@ -1,6 +1,7 @@
 package RiskPackage;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Player {
@@ -10,20 +11,21 @@ public class Player {
 	private Army army;
 	//private LinkedList<Card> cardDeck;
 	private String name;
+	private boolean takeTurn = false;
+	protected ArrayList<Territory> territories;
 	
-	public Player(int id, Color color, String name) {
+	public Player(int id, Color color,  ArrayList<Territory> territories) {
 		this.id=id;
 		this.color=color;
-		this.name=name;
+		this.territories = territories;
+		//for(Territory ter : territories)
+			//this.territories.add(ter);
 	}
 	
-	public String getName() {
-		return name;
+	public ArrayList<Territory> getTerritories(){
+		return territories;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public int getId() {
 		return id;
@@ -31,6 +33,11 @@ public class Player {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public void takeTurn(int id){
+		if (id == this.id) { takeTurn = true;}
+		else  {takeTurn = false;}
 	}
 
 	public Color getColor() {
@@ -49,13 +56,7 @@ public class Player {
 		this.army = army;
 	}
 
-//	public LinkedList<Card> getCardDeck() {
-//		return cardDeck;
-//	}
-//
-//	public void setCardDeck(LinkedList<Card> cardDeck) {
-//		this.cardDeck = cardDeck;
-//	}
+
 	
 	
 

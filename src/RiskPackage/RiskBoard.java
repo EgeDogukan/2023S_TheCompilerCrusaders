@@ -1,24 +1,50 @@
 package RiskPackage;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public class RiskBoard {
-    private ArrayList<Territory> territories;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
-    public RiskBoard() {
-        this.territories = new ArrayList<Territory>();
-    }
-
-    public void addTerritory(Territory territory) {
-        territories.add(territory);
+public class RiskBoard extends JPanel{
+    private ArrayList<Continents> continents;
+    private Color color;
+	private String name;
+	public boolean isIncluded;
+	private int width;
+	private int height;
+    
+    public RiskBoard(ArrayList<Continents> continents) {
+        this.continents = continents;
+        this.setBackground(color);
+		this.setLayout(new BorderLayout());
+        this.setPreferredSize(getPreferredSize());
+        this.setSize(1920, 1080);
+        for (Continents cont : continents) {
+            if(cont.isIncluded==true)//If continent selected in building mode add this to game otherwise not.
+			    this.add(cont);
+		}
+        this.setLayout(new BorderLayout());
         
+      
+        
+		this.setOpaque(true);
+        this.setFocusable(true);
+        this.setEnabled(true);
+        this.setVisible(true);
     }
 
-    public ArrayList<Territory> getTerritories() {
-        return territories;
-    }
+    // public void addTerritory(Territory territory) {
+    //     territories.add(territory);
+        
+    // }
+
+    // public ArrayList<Territory> getTerritories() {
+    //     return territories;
+    // }
     
     //Handle the attacking
     /*public void attack(Territory defender, Territory attacker) {
