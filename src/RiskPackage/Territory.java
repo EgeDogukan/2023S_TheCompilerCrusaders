@@ -167,9 +167,15 @@ public class Territory extends JPanel {
 
 								
 								JLabel ppp = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
-					+ Territory.this.Inumber +" Infantry.");
-					territoryPromptjFrame.add(ppp);
+								+ Territory.this.Inumber +" Infantry.");
+								territoryPromptjFrame.add(ppp);
+								setColor(Territory.this.getColor());
+								JOptionPane.showMessageDialog(null, "Attack successful!");
+								territoryPromptjFrame.dispose();
+
 							}
+
+
 						}
 					});
 					territoryPromptJPanel.add(chooseToAttackBox);
