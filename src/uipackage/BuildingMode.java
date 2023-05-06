@@ -430,8 +430,8 @@ public class BuildingMode extends JFrame {
         
 
         
-        String[] numberOfPlayers = {"2", "3", "4", "5", "6"};
-        JComboBox<String> myComboBox = new JComboBox<String>(numberOfPlayers);
+        Integer[] numberOfPlayers = {2, 3, 4, 5, 6};
+        JComboBox<Integer> myComboBox = new JComboBox<Integer>(numberOfPlayers);
         myComboBox.setName("numberOfHuman");
         myComboBox.setSize(100,50);
         myComboBox.setBackground(Color.WHITE);
@@ -442,8 +442,8 @@ public class BuildingMode extends JFrame {
         this.getContentPane().add(label);
         label.setBounds(550,680,300,100);
 
-        String[] numberOfComp = {"2","1"};
-        JComboBox<String> compBox = new JComboBox<String>(numberOfComp);
+        Integer[] numberOfComp = {2,1};
+        JComboBox<Integer> compBox = new JComboBox<Integer>(numberOfComp);
         compBox.setName("numberOfComp");
         compBox.setSize(100,50);
         compBox.setBackground(Color.WHITE);
@@ -474,10 +474,30 @@ public class BuildingMode extends JFrame {
       				}
         			
         		}
+
       		setNumberOfPlayer(((int)Integer.valueOf((String) myComboBox.getSelectedItem())));
                 setNumberOfComp(((int)Integer.valueOf((String) compBox.getSelectedItem())));
+
+//        		setNumberOfPlayer((int) myComboBox.getSelectedItem());
+//                setNumberOfComp((int) compBox.getSelectedItem());
+
         		
-        	};
+        	}
+        });
+        
+        JButton sttButton = new JButton("Stt");
+        sttButton.setSize(150,50);
+        sttButton.setBackground(Color.GRAY);
+        sttButton.setLocation(700, 650);
+        this.getContentPane().add(sttButton);
+        
+        sttButton.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+        		
+        		setNumberOfPlayer((int) myComboBox.getSelectedItem());
+                setNumberOfComp((int) compBox.getSelectedItem());
+        		
+        	}
         });
 
         JButton startButton = new JButton("Start Game!");
@@ -495,8 +515,8 @@ public class BuildingMode extends JFrame {
             		}
             	}
             	
-                setNumberOfPlayer(((int)Integer.valueOf((String) myComboBox.getSelectedItem())));
-                setNumberOfComp(((int)Integer.valueOf((String) compBox.getSelectedItem())));
+            	setNumberOfPlayer((int) myComboBox.getSelectedItem());
+                setNumberOfComp((int) compBox.getSelectedItem());
             	JOptionPane.showMessageDialog(null, "Game started!");
             	
             	getThisFrame().dispose();
