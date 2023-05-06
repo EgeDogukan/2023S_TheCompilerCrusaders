@@ -82,53 +82,53 @@ public class BuildingMode extends JFrame {
         Australia.setLocation(1150, 450);
         
         
-        Territory Alaska = new Territory(0, 200, 50, 50, "Alaska", Color.BLUE, NorthAmerica);
-        Territory Alberta = new Territory(50, 150, 50, 50, "Alberta", Color.BLUE, NorthAmerica);
-        Territory NorthWestTerritory = new Territory(150, 50, 50, 50, "NorthWestTerritory", Color.BLUE, NorthAmerica);
-        Territory Ontario = new Territory(250, 50, 50, 50, "Ontario", Color.BLUE, NorthAmerica);
-        Territory Quebec = new Territory(150, 150, 50, 50, "Quebec", Color.BLUE, NorthAmerica);
-        Territory Greenland = new Territory(250, 250, 50, 50, "Greenland", Color.BLUE, NorthAmerica);
-        Territory WesternUnitedStates = new Territory(100, 100, 50, 50, "WesternUnitedStates", Color.BLUE, NorthAmerica);
-        Territory EasternUnitedStates = new Territory(50, 225, 50, 50, "EasternUnitedStates", Color.BLUE, NorthAmerica);
-        Territory CentralAmerica = new Territory(150, 100, 50, 50, "CentralAmerica", Color.BLUE, NorthAmerica);
+        Territory Alaska = new Territory(0, 200, 50, 50, "Alaska", Color.BLUE, NorthAmerica, 0);
+        Territory Alberta = new Territory(50, 150, 50, 50, "Alberta", Color.BLUE, NorthAmerica, 0);
+        Territory NorthWestTerritory = new Territory(150, 50, 50, 50, "NorthWestTerritory", Color.BLUE, NorthAmerica, 0);
+        Territory Ontario = new Territory(250, 50, 50, 50, "Ontario", Color.BLUE, NorthAmerica, 0);
+        Territory Quebec = new Territory(150, 150, 50, 50, "Quebec", Color.BLUE, NorthAmerica, 0);
+        Territory Greenland = new Territory(250, 250, 50, 50, "Greenland", Color.BLUE, NorthAmerica, 0);
+        Territory WesternUnitedStates = new Territory(100, 100, 50, 50, "WesternUnitedStates", Color.BLUE, NorthAmerica, 0);
+        Territory EasternUnitedStates = new Territory(50, 225, 50, 50, "EasternUnitedStates", Color.BLUE, NorthAmerica, 0);
+        Territory CentralAmerica = new Territory(150, 100, 50, 50, "CentralAmerica", Color.BLUE, NorthAmerica, 0);
         
-        Territory Venezuela = new Territory(50, 150, 50, 50, "Venezuela", Color.BLUE, SouthAmerica);
-        Territory Brazil = new Territory(150, 50, 50, 50, "Brazil", Color.BLUE, SouthAmerica);
-        Territory Peru = new Territory(150, 150, 50, 50, "Peru", Color.BLUE, SouthAmerica);
-        Territory Argentina = new Territory(0, 100, 50, 50, "Argentina", Color.BLUE, SouthAmerica);
+        Territory Venezuela = new Territory(50, 150, 50, 50, "Venezuela", Color.BLUE, SouthAmerica, 0);
+        Territory Brazil = new Territory(150, 50, 50, 50, "Brazil", Color.BLUE, SouthAmerica, 0);
+        Territory Peru = new Territory(150, 150, 50, 50, "Peru", Color.BLUE, SouthAmerica, 0);
+        Territory Argentina = new Territory(0, 100, 50, 50, "Argentina", Color.BLUE, SouthAmerica, 0);
         
-        Territory Iceland = new Territory(0, 200, 50, 50, "Iceland", Color.BLUE, Europe);
-        Territory GreatBritain  = new Territory(50, 250, 50, 50, "GreatBritain ", Color.BLUE, Europe);
-        Territory Scandinavia = new Territory(150, 50, 50, 50, "Scandinavia", Color.BLUE, Europe);
-        Territory Ukraine = new Territory(250, 50, 50, 50, "Ukraine", Color.BLUE, Europe);
-        Territory NorthernEurope = new Territory(150, 150, 50, 50, "NorthernEurope", Color.BLUE, Europe);
-        Territory WesternEurope = new Territory(250, 250, 50, 50, "WesternEurope", Color.BLUE, Europe);
-        Territory SouthernEurope = new Territory(100, 100, 50, 50, "SouthernEurope", Color.BLUE, Europe);
+        Territory Iceland = new Territory(0, 200, 50, 50, "Iceland", Color.BLUE, Europe, 0);
+        Territory GreatBritain  = new Territory(50, 250, 50, 50, "GreatBritain ", Color.BLUE, Europe, 0);
+        Territory Scandinavia = new Territory(150, 50, 50, 50, "Scandinavia", Color.BLUE, Europe, 0);
+        Territory Ukraine = new Territory(250, 50, 50, 50, "Ukraine", Color.BLUE, Europe, 0);
+        Territory NorthernEurope = new Territory(150, 150, 50, 50, "NorthernEurope", Color.BLUE, Europe, 0);
+        Territory WesternEurope = new Territory(250, 250, 50, 50, "WesternEurope", Color.BLUE, Europe, 0);
+        Territory SouthernEurope = new Territory(100, 100, 50, 50, "SouthernEurope", Color.BLUE, Europe, 0);
 
-        Territory NorthAfrica = new Territory(50, 250, 50, 50, "NorthAfrica", Color.BLUE, Africa);
-        Territory Egypt = new Territory(150, 50, 50, 50, "Egypt", Color.BLUE, Africa);
-        Territory EastAfrica = new Territory(100, 50, 50, 50, "EastAfrica", Color.BLUE, Africa);
-        Territory Congo = new Territory(50, 150, 50, 50, "Congo", Color.BLUE, Africa);
-        Territory SouthAfrica = new Territory(150, 150, 50, 50, "SouthAfrica", Color.BLUE, Africa);
-        Territory Madagascar = new Territory(100, 150, 50, 50, "Madagascar", Color.BLUE, Africa);
+        Territory NorthAfrica = new Territory(50, 250, 50, 50, "NorthAfrica", Color.BLUE, Africa, 0);
+        Territory Egypt = new Territory(150, 50, 50, 50, "Egypt", Color.BLUE, Africa, 0);
+        Territory EastAfrica = new Territory(100, 50, 50, 50, "EastAfrica", Color.BLUE, Africa, 0);
+        Territory Congo = new Territory(50, 150, 50, 50, "Congo", Color.BLUE, Africa, 0);
+        Territory SouthAfrica = new Territory(150, 150, 50, 50, "SouthAfrica", Color.BLUE, Africa, 0);
+        Territory Madagascar = new Territory(100, 150, 50, 50, "Madagascar", Color.BLUE, Africa, 0);
         
-        Territory MiddleEast = new Territory(0, 200, 50, 50, "MiddleEast", Color.BLUE, Asia);
-        Territory Afghanistan = new Territory(50, 150, 50, 50, "Afghanistan", Color.BLUE, Asia);
-        Territory Ural = new Territory(150, 50, 50, 50, "Ural", Color.BLUE, Asia);
-        Territory India = new Territory(250, 50, 50, 50, "India", Color.BLUE, Asia);
-        Territory Siberia = new Territory(150, 150, 50, 50, "Siberia", Color.BLUE, Asia);
-        Territory Yakutsk = new Territory(250, 250, 50, 50, "Yakutsk", Color.BLUE, Asia);
-        Territory Irkutsk = new Territory(0, 125, 50, 50, "Irkutsk", Color.BLUE, Asia);
-        Territory Kamchatka = new Territory(50, 225, 50, 50, "Kamchatka", Color.BLUE, Asia);
-        Territory Mongolia = new Territory(150, 100, 50, 50, "Mongolia", Color.BLUE, Asia);
-        Territory China = new Territory(150, 250, 50, 50, "China", Color.BLUE, Asia);
-        Territory Siam = new Territory(150, 200, 50, 50, "Siam", Color.BLUE, Asia);
-        Territory Japan = new Territory(250, 200, 50, 50, "Japan", Color.BLUE, Asia);
+        Territory MiddleEast = new Territory(0, 200, 50, 50, "MiddleEast", Color.BLUE, Asia, 0);
+        Territory Afghanistan = new Territory(50, 150, 50, 50, "Afghanistan", Color.BLUE, Asia, 0);
+        Territory Ural = new Territory(150, 50, 50, 50, "Ural", Color.BLUE, Asia, 0);
+        Territory India = new Territory(250, 50, 50, 50, "India", Color.BLUE, Asia, 0);
+        Territory Siberia = new Territory(150, 150, 50, 50, "Siberia", Color.BLUE, Asia, 0);
+        Territory Yakutsk = new Territory(250, 250, 50, 50, "Yakutsk", Color.BLUE, Asia, 0);
+        Territory Irkutsk = new Territory(0, 125, 50, 50, "Irkutsk", Color.BLUE, Asia, 0);
+        Territory Kamchatka = new Territory(50, 225, 50, 50, "Kamchatka", Color.BLUE, Asia, 0);
+        Territory Mongolia = new Territory(150, 100, 50, 50, "Mongolia", Color.BLUE, Asia, 0);
+        Territory China = new Territory(150, 250, 50, 50, "China", Color.BLUE, Asia, 0);
+        Territory Siam = new Territory(150, 200, 50, 50, "Siam", Color.BLUE, Asia, 0);
+        Territory Japan = new Territory(250, 200, 50, 50, "Japan", Color.BLUE, Asia, 0);
         
-        Territory Indonesia = new Territory(50, 150, 50, 50, "Indonesia", Color.BLUE, Australia);
-        Territory NewGuinea = new Territory(150, 50, 50, 50, "NewGuinea", Color.BLUE, Australia);
-        Territory WesternAustralia = new Territory(150, 150, 50, 50, "WesternAustralia", Color.BLUE, Australia);
-        Territory EasternAustralia = new Territory(0, 150, 50, 50, "EasternAustralia", Color.BLUE, Australia);
+        Territory Indonesia = new Territory(50, 150, 50, 50, "Indonesia", Color.BLUE, Australia, 0);
+        Territory NewGuinea = new Territory(150, 50, 50, 50, "NewGuinea", Color.BLUE, Australia, 0);
+        Territory WesternAustralia = new Territory(150, 150, 50, 50, "WesternAustralia", Color.BLUE, Australia, 0);
+        Territory EasternAustralia = new Territory(0, 150, 50, 50, "EasternAustralia", Color.BLUE, Australia, 0);
         
 
         //Territory Holland = new Territory(250, 250, 40, 40, "holland", Color.BLUE, Europe);

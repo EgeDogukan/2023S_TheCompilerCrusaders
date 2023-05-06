@@ -58,14 +58,17 @@ public class Territory extends JPanel {
 				public void mouseClicked(MouseEvent e) {
 
 					System.out.println("Panel clicked!");
-					JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
-					"y"+Territory.this.yCoordinate);
+					
 
 					if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
 						System.out.println("sahip");
+						JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+					"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
 					}
 					else {
 						System.out.println("sahip değil");
+						JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+					"y"+Territory.this.yCoordinate);
 					}
 					
 				}
@@ -160,6 +163,10 @@ public class Territory extends JPanel {
 
 		public int getOwnerID() {
 			return playerID;
+		}
+
+		public void setOwnerID(int ID) {
+			this.playerID = ID;
 		}
 
 		public Continents getContinent() {
