@@ -10,14 +10,70 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.swing.JLayeredPane;
+
 //import javax.management.StringValueExp;
 
 import uipackage.*;;
 
 public class GameController {
-	
+	static ArrayList<Territory> territories = new ArrayList<Territory>();
 
+	static private ArrayList<Player> initGame(int numberofPlayers, int numberofComp, ArrayList<Continents> continents) {
+		
+		
 	
+		//ArrayList<Territory> territories = new ArrayList<Territory>();
+		for (Continents continent : continents) {
+			
+			for (Territory territory : continent.getTerritories()){
+				territories.add(territory);
+			}
+		}
+		
+		int territoryPerPlayer = Math.floorDiv(territories.size(), (numberofPlayers+numberofComp));
+		System.out.println("Number of territory: "+territories.size());
+		System.out.println("Territory per player is: "+territoryPerPlayer);
+		
+		
+		ArrayList<Player> playerList = new ArrayList<Player>();
+		
+		Collections.shuffle(territories);
+		for(int j = 0; j < numberofComp + numberofPlayers; j++) {
+			
+			ArrayList<Territory> currentTerritories = new ArrayList<Territory>();
+			
+			
+			for (int i=0; i<territoryPerPlayer;i++) {
+				currentTerritories.add(territories.get(i+j*territoryPerPlayer));
+			}
+			
+			//System.out.println(currentTerritories);
+				
+			playerList.add(new Player(j, randomColorGenerator(), currentTerritories));
+			
+		
+		
+		}
+		
+		
+		System.out.println("*****************");
+		for (Player player : playerList) {
+			System.out.println(player.getId());
+			//System.out.println(player.getTerritories().getNames());
+			for (Territory territory : player.getTerritories())
+				System.out.println(territory.getName());
+				
+			System.out.println("*****************");
+		}
+		
+		return playerList;
+	}
+	
+	public void printTerritories(ArrayList<Player> playerList) {
+		return ;
+	}
+
     public static void main(String[] args) throws InterruptedException {
         
     	login loginPage = new login();
@@ -32,6 +88,17 @@ public class GameController {
 		BuildingMode RiskGameFrame = new BuildingMode();
 	    RiskGameFrame.setLayout(null);
 	    RiskGameFrame.setVisible(true);
+	
+		LinesPanel linesPanel = new LinesPanel();
+        RiskGameFrame.add(linesPanel, JLayeredPane.DEFAULT_LAYER + 5); // Adjust the layer to be above the continents
+
+        for (Territory territory : territories) {
+            for (Territory neighbor : territory.getNeighbors()) {
+                linesPanel.addConnection(territory, neighbor);
+            }
+        }
+        linesPanel.revalidate();
+        linesPanel.repaint();
 
 	    // Declare a variable to store the number of players
 	    AtomicInteger numberOfPlayers = new AtomicInteger(0);
@@ -98,58 +165,5 @@ public class GameController {
     }
     
 
-	static private ArrayList<Player> initGame(int numberofPlayers, int numberofComp, ArrayList<Continents> continents) {
 		
-		
-	
-		ArrayList<Territory> territories = new ArrayList<Territory>();
-		for (Continents continent : continents) {
-			for (Territory territory : continent.getTerritories()){
-				territories.add(territory);
-			}
-		}
-		
-		int territoryPerPlayer = Math.floorDiv(territories.size(), (numberofPlayers+numberofComp));
-		System.out.println("Number of territory: "+territories.size());
-		System.out.println("Territory per player is: "+territoryPerPlayer);
-		
-		
-		ArrayList<Player> playerList = new ArrayList<Player>();
-		
-		Collections.shuffle(territories);
-		for(int j = 0; j < numberofComp + numberofPlayers; j++) {
-			
-			ArrayList<Territory> currentTerritories = new ArrayList<Territory>();
-			
-			
-			for (int i=0; i<territoryPerPlayer;i++) {
-				currentTerritories.add(territories.get(i+j*territoryPerPlayer));
-			}
-			
-			//System.out.println(currentTerritories);
-				
-			playerList.add(new Player(j, randomColorGenerator(), currentTerritories));
-			
-		
-		
-		}
-		
-		
-		System.out.println("*****************");
-		for (Player player : playerList) {
-			System.out.println(player.getId());
-			//System.out.println(player.getTerritories().getNames());
-			for (Territory territory : player.getTerritories())
-				System.out.println(territory.getName());
-				
-			System.out.println("*****************");
-		}
-		
-		return playerList;
-	}
-	
-	public void printTerritories(ArrayList<Player> playerList) {
-		return ;
-	}
-	
 }

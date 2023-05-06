@@ -2,10 +2,13 @@ package RiskPackage;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Line2D;
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -21,6 +24,7 @@ public class Territory extends JPanel {
 	    private Color color;
 		private Continents c;
 	    private ArrayList<Territory> neighbors;
+		
 	    
 	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color, Continents continent) {
 	    	
@@ -81,12 +85,21 @@ public class Territory extends JPanel {
 		
 		@Override
 	    public void paintComponent(Graphics g) {
-	    	super.paintComponent(g);
+	    	Graphics2D g2 = (Graphics2D) g;
+			super.paintComponent(g);
 	        g.setColor(this.getColor());
 	        g.fillRect(this.xCoordinate, this.yCoordinate, this.width, this.height);
 	        g.setColor(Color.BLACK);
-	        g.drawString(this.name, this.xCoordinate, this.yCoordinate); 
+	        g.drawString(this.name, this.xCoordinate, this.yCoordinate);
+			g2.setColor(Color.BLACK); // Set the color of the line to black
+			g2.setStroke(new BasicStroke(2)); 	
+			//for(Territory n : this.getNeighbors()){
+			//	g2.draw(new Line2D.Double(n.getBounds().x, n.getBounds().y, this.getBounds().x, this.getBounds().y));
+			//}
+			
+			
 	    }
+		
 	    
 	    public int getWidth() {
 			return this.width;
@@ -134,6 +147,7 @@ public class Territory extends JPanel {
 
 	    public void addNeighbor(Territory neighbor) {
 	        this.neighbors.add(neighbor);
+			
 	    }
 
 		public boolean contains(int x, int y) {
@@ -153,4 +167,5 @@ public class Territory extends JPanel {
 		public Continents getContinent() {
 			return this.c;
 		}
+		
 }

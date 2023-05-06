@@ -3,6 +3,7 @@ package uipackage;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -18,25 +19,30 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import RiskPackage.ComputerPlayer;
 import RiskPackage.Continents;
+
 import RiskPackage.GameManager;
 import RiskPackage.GamePanel;
 import RiskPackage.HumanPlayer;
 import RiskPackage.Player;
 import RiskPackage.RiskBoard;
 import RiskPackage.Territory;
+import RiskPackage.*;
 
 public class BuildingMode extends JFrame {
 
-	
+	private int W = 80;
+    private int H = 80;
 	public int numberOfPlayer;
     public int numberOfComp;
     public ArrayList<Continents> continents;
-	
+    public static ArrayList<Territory> territories = new ArrayList<>();
+    
 	public BuildingMode() {
         super("Building Mode");
         
@@ -49,7 +55,7 @@ public class BuildingMode extends JFrame {
         this.setPreferredSize(new Dimension(1920, 1080));
         this.setLayout(null);
 
-
+        
         ArrayList<Territory> asiaTerritories = new ArrayList<>();
        
         ArrayList<Territory> africaTerritories = new ArrayList<>();
@@ -61,7 +67,7 @@ public class BuildingMode extends JFrame {
         ArrayList<Territory> southAmericaTerritories = new ArrayList<>();
         
         ArrayList<Territory> australiaTerritories = new ArrayList<>();        
-
+        ArrayList<Territory> allTerritories = new ArrayList<>();
         
         Continents Africa = new Continents("Africa", africaTerritories, 200, 300, Color.LIGHT_GRAY);
         Africa.setLocation(750, 330);
@@ -81,7 +87,8 @@ public class BuildingMode extends JFrame {
         Continents Australia = new Continents("Australia",australiaTerritories, 200, 200, Color.LIGHT_GRAY);
         Australia.setLocation(1150, 450);
         
-        
+
+
         Territory Alaska = new Territory(0, 200, 50, 50, "Alaska", Color.BLUE, NorthAmerica);
         Territory Alberta = new Territory(50, 150, 50, 50, "Alberta", Color.BLUE, NorthAmerica);
         Territory NorthWestTerritory = new Territory(150, 50, 50, 50, "NorthWestTerritory", Color.BLUE, NorthAmerica);
@@ -130,6 +137,17 @@ public class BuildingMode extends JFrame {
         Territory WesternAustralia = new Territory(150, 150, 50, 50, "WesternAustralia", Color.BLUE, Australia);
         Territory EasternAustralia = new Territory(0, 150, 50, 50, "EasternAustralia", Color.BLUE, Australia);
         
+        territories.add(Alaska);
+        territories.add(Alberta);
+        territories.add(NorthWestTerritory);
+        territories.add(Ontario);
+        territories.add(Quebec);
+        territories.add(Greenland);
+        territories.add(WesternUnitedStates);
+        territories.add(EasternUnitedStates);
+        territories.add(CentralAmerica);
+
+
 
         //Territory Holland = new Territory(250, 250, 40, 40, "holland", Color.BLUE, Europe);
         //Territory US1 = new Territory(75, 150, 40, 40, "US", Color.BLUE, NorthAmerica);
@@ -138,10 +156,61 @@ public class BuildingMode extends JFrame {
         //Territory India = new Territory(280, 300, 40, 40, "India", Color.BLUE, Asia);
         //Territory China = new Territory(250, 100, 40, 40, "China", Color.BLUE, Asia);
 
+        //Adding neighbors to draw lines
+        Alaska.addNeighbor(Kamchatka);
+        Alaska.addNeighbor(NorthWestTerritory);
+        Alaska.addNeighbor(Alberta);
+        
+        NorthWestTerritory.addNeighbor(Greenland);
+        NorthWestTerritory.addNeighbor(Alberta);
+        NorthWestTerritory.addNeighbor(Alaska);
+        NorthWestTerritory.addNeighbor(Ontario);
+
+        Alberta.addNeighbor(Ontario);
+        Alberta.addNeighbor(WesternUnitedStates);
+        
+        Ontario.addNeighbor(Quebec);
+        Ontario.addNeighbor(Greenland);
+        Ontario.addNeighbor(WesternUnitedStates);
+        Ontario.addNeighbor(EasternAustralia);
+
+        WesternUnitedStates.addNeighbor(EasternUnitedStates);
+        WesternUnitedStates.addNeighbor(CentralAmerica);
+
+        CentralAmerica.addNeighbor(Venezuela);
+
+        Venezuela.addNeighbor(Brazil);
+        Venezuela.addNeighbor(Peru);
+
+        Peru.addNeighbor(Argentina);
+        Peru.addNeighbor(Brazil);
+
+        Brazil.addNeighbor(NorthAfrica);
 
         
+        NorthAfrica.addNeighbor(Egypt);
+        NorthAfrica.addNeighbor(EastAfrica);
+        NorthAfrica.addNeighbor(Congo);
+        NorthAfrica.addNeighbor(SouthernEurope);
+        NorthAfrica.addNeighbor(WesternEurope);
+
+        Egypt.addNeighbor(EastAfrica);
+        Egypt.addNeighbor(SouthernEurope);
+        Egypt.addNeighbor(MiddleEast);
+
+        Congo.addNeighbor(NorthAfrica);
+        Congo.addNeighbor(EastAfrica);
+        Congo.addNeighbor(SouthAfrica);
+
+        SouthAfrica.addNeighbor(Congo);
+        SouthAfrica.addNeighbor(EastAfrica);
+        SouthAfrica.addNeighbor(Madagascar);
+
+        Madagascar.addNeighbor(SouthAfrica);
+        Madagascar.addNeighbor(EastAfrica);
         
-        
+
+
         NorthAmerica.addTerritory(Alaska);
         NorthAmerica.addTerritory(Alberta);
         NorthAmerica.addTerritory(NorthWestTerritory);
@@ -298,7 +367,8 @@ public class BuildingMode extends JFrame {
 	    BuildingMode RiskGameFrame = new BuildingMode();
 	    RiskGameFrame.setLayout(null);
 	    RiskGameFrame.setVisible(true);
-
+        
+        
 	    // Declare a variable to store the number of players
 	    AtomicInteger numberOfPlayers = new AtomicInteger(0);
 
@@ -316,9 +386,10 @@ public class BuildingMode extends JFrame {
 
 	    // Wait for the window to be closed before accessing the value of numberOfPlayers
 	    latch.await();
-
+        
 	    // Use the variable after the frame is closed
 	    System.out.println(numberOfPlayers.get());
+
 	}
 
 	
