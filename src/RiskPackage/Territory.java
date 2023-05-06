@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,6 +15,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import javax.swing.JTextField;
+
+import RiskPackage.GameController;
+import cardPackage.ArmyCardFactory;
+import cardPackage.TerritoryCard;
 
 public class Territory extends JPanel {
 	 private String name;
@@ -140,6 +147,24 @@ public class Territory extends JPanel {
 								destination.decreaseArmy(Territory.this);
 								
 								Territory.this.decreaseArmy(tempa, tempc, tempi);
+								Random rant = new Random();
+								int i = rant.nextInt(3) + 1;
+								int k = rant.nextInt(2);
+								if(k == 0) {	
+									if(i == 1) {
+										Territory.this.increaseArmy(1, 0, 0);
+									}
+									else if(i == 2) {
+										Territory.this.increaseArmy(0, 1, 0);
+									}
+									else if(i == 3) {
+										Territory.this.increaseArmy(0, 0, 1);
+									}
+								}
+								else if( k == 1) {
+									//pick territory card
+								}
+
 								
 								JLabel ppp = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
 					+ Territory.this.Inumber +" Infantry.");

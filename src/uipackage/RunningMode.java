@@ -219,7 +219,7 @@ public class RunningMode extends JFrame{
 		this.getContentPane().add(pickTerritoryCardButton);
 		this.add(panel); 
 
-		initializeArmies();
+		//initializeArmies();
 		initializeTerritoryCards();
 
 	}
@@ -228,13 +228,13 @@ public class RunningMode extends JFrame{
 		return RunningMode.turnCounter;
 	}
 
-	public void initializeArmies() {
+	/*public void initializeArmies() {
 		for (Player p : this.players) {
 			for (int i=0;i<3;i++) { p.addArmyCard(new ArmyCardFactory().createArmyCard(3));}
 			for (int i=0;i<2;i++) { p.addArmyCard(new ArmyCardFactory().createArmyCard(2));}
 			for (int i=0;i<1;i++) { p.addArmyCard(new ArmyCardFactory().createArmyCard(1));}
 		}
-	}
+	}*/
 	
 	public void pickChanceCard() {
 		int curId=getTurn();
