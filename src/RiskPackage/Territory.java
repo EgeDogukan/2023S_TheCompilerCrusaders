@@ -109,21 +109,15 @@ public class Territory extends JPanel {
 						System.out.println(terrToAttack[t]);
 
 
-<<<<<<< HEAD
-=======
+
 								
 								JLabel ppp = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
 								+ Territory.this.Inumber +" Infantry.");
 								territoryPromptjFrame.add(ppp);
-								setColor(Territory.this.getColor());
-								JOptionPane.showMessageDialog(null, "Attack successful!");
-								territoryPromptjFrame.dispose();
+								
 
 							}
 
-
->>>>>>> 728fe66e9f050f03ad4da6a50e7b864840264bb7
-						}
 						presentArmyJLabel.setLocation(500, 500);
 						territoryPromptJPanel.add(presentArmyJLabel);
 						territoryPromptJPanel.add(power);
@@ -189,6 +183,10 @@ public class Territory extends JPanel {
 									JLabel ppp = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
 						+ Territory.this.Inumber +" Infantry.");
 						territoryPromptjFrame.add(ppp);
+						
+						setColor(Territory.this.getColor());
+						JOptionPane.showMessageDialog(null, "Attack successful!");
+						territoryPromptjFrame.dispose();
 								}
 							}
 						});
@@ -196,15 +194,18 @@ public class Territory extends JPanel {
 						territoryPromptJPanel.setVisible(true);
 
 						territoryPromptjFrame.pack();
-							
-							
+
 						}
 						else {
-							System.out.println("sahip değil");
+							System.out.println("sahip degil");
 							JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
 						"y"+Territory.this.yCoordinate);
 						}
-					}
+							
+							
+						}
+						
+					
 					
 					
 				}

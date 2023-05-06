@@ -19,6 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import RiskPackage.ComputerPlayer;
@@ -35,13 +36,23 @@ public class BuildingMode extends JFrame {
 	
 	public int numberOfPlayer;
     public int numberOfComp;
+    
+    public int BnumberOfPlayer;
+    public int BnumberOfComp;
+    
     public ArrayList<Continents> continents;
+    
+    static int turnCounter=1;
 	
 	public BuildingMode() {
         super("Building Mode");
         
             this.numberOfPlayer = -1;
             this.numberOfComp = -1;
+            
+            this.BnumberOfComp=2;
+            this.BnumberOfPlayer=3;
+            
             this.continents = new ArrayList<>();
         
 
@@ -412,9 +423,6 @@ public class BuildingMode extends JFrame {
 
 
         
-        
-
-        
         String[] numberOfPlayers = {"2", "3", "4", "5", "6"};
         JComboBox<String> myComboBox = new JComboBox<String>(numberOfPlayers);
         myComboBox.setName("numberOfHuman");
@@ -480,11 +488,31 @@ public class BuildingMode extends JFrame {
             	getThisFrame().dispose();
             }
         });
-
+        
+        JLabel counterValue = new JLabel(String.valueOf(turnCounter));
+        counterValue.setSize(100,100);
+        counterValue.setLocation(100,500);
+        this.getContentPane().add(counterValue);
+        
+        JButton nextButton = new JButton("Next");
+        nextButton.setSize(150,50);
+        nextButton.setLocation(100, 750);
+        
+        nextButton.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+        		turnCounter++;
+        		turnCounter=turnCounter%(BnumberOfComp+BnumberOfPlayer+1);
+        		if (turnCounter==0) {
+        			turnCounter++;
+        		}
+        		counterValue.setText(String.valueOf(turnCounter));
+        	}
+        });
+        this.getContentPane().add(nextButton);
 	}
 	
 	
-	
+		
 	public int getNumberOfPlayer() {
 		return this.numberOfPlayer;
 	}
@@ -523,7 +551,5 @@ public class BuildingMode extends JFrame {
     public ArrayList<Continents> getContinent() {
     	return this.continents;
     }
-
-
 	
 }

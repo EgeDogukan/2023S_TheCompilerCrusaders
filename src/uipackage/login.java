@@ -188,9 +188,6 @@ public class login extends JFrame{
     	this.isSuccesfull = true;
     }
 
-    private JFrame getThisFrame() {
-        return (JFrame) SwingUtilities.getRoot(this);
-    }
     
     public static void main(String[] args) throws InterruptedException {
     	login loginPage = new login();

@@ -132,9 +132,6 @@ public class GameController {
 				currentTerritories.add(territories.get(i+j*territoryPerPlayer));
 			}
 			
-			//System.out.println(currentTerritories);
-			
-				
 			playerList.add(new Player(j, randomColorGenerator(), currentTerritories));
 			
 		
