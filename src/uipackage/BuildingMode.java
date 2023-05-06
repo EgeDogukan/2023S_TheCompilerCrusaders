@@ -471,13 +471,11 @@ public class BuildingMode extends JFrame {
         			
         				territory.setColor(Color.pink);
         				continent.add(territory);
-<<<<<<< Updated upstream
-      				}
-        			
-=======
+
+        		
         				territory.setIsBuilding(false);
         			}
->>>>>>> Stashed changes
+
         		}
 
       		setNumberOfPlayer(((int)Integer.valueOf((String) myComboBox.getSelectedItem())));
@@ -490,20 +488,7 @@ public class BuildingMode extends JFrame {
         	}
         });
         
-        JButton sttButton = new JButton("Stt");
-        sttButton.setSize(150,50);
-        sttButton.setBackground(Color.GRAY);
-        sttButton.setLocation(700, 650);
-        this.getContentPane().add(sttButton);
-        
-        sttButton.addMouseListener(new MouseAdapter() {
-        	public void mouseClicked(MouseEvent e) {
-        		
-        		setNumberOfPlayer((int) myComboBox.getSelectedItem());
-                setNumberOfComp((int) compBox.getSelectedItem());
-        		
-        	}
-        });
+   
 
         JButton startButton = new JButton("Start Game!");
         startButton.setSize(150,50);
