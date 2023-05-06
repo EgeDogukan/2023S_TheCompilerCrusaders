@@ -73,7 +73,7 @@ public class RunningMode extends JFrame{
             		RunningMode.turnCounter++;
             	}
             	turn.setText(Integer.toString(RunningMode.turnCounter));
-
+    
             }
         });
 
