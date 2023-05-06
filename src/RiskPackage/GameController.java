@@ -73,7 +73,7 @@ public class GameController {
 	    }
 	    
         
-	    ArrayList<Player> playerList = initGame(numberOfPlayers.get(), 1, RiskGameFrame.getContinent());
+	    ArrayList<Player> playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent());
         RiskGameFrame.initalSharing(playerList);
         
         
@@ -109,8 +109,9 @@ public class GameController {
 			}
 		}
 		
-		int territoryPerPlayer = Math.floorDiv(territories.size(), (numberofComp + numberofPlayers));
-		
+		int territoryPerPlayer = Math.floorDiv(territories.size(), (numberofPlayers+numberofComp));
+		System.out.println("Number of territory: "+territories.size());
+		System.out.println("Territory per player is: "+territoryPerPlayer);
 		
 		
 		ArrayList<Player> playerList = new ArrayList<Player>();

@@ -34,14 +34,10 @@ public class Player {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public void takeTurn(int id){
-		if (id == this.id){
-			takeTurn = true;
-
-		}
-		else  {
-			takeTurn = false;
-		}
+		if (id == this.id) { takeTurn = true;}
+		else  {takeTurn = false;}
 	}
 
 	public Color getColor() {
@@ -60,13 +56,7 @@ public class Player {
 		this.army = army;
 	}
 
-//	public LinkedList<Card> getCardDeck() {
-//		return cardDeck;
-//	}
-//
-//	public void setCardDeck(LinkedList<Card> cardDeck) {
-//		this.cardDeck = cardDeck;
-//	}
+
 	
 	
 
