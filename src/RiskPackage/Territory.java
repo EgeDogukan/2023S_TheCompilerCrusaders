@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayer;
@@ -27,11 +28,19 @@ public class Territory extends JPanel {
 		private Continents c;
 	    private ArrayList<Territory> neighbors;
 		private int playerID;
+		private int Cnumber;
+		private int Anumber;
+		private int Inumber;
+		private Army armyOnTerritory;
 	    
 	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color, Continents continent, int playerID) {
 	    	
 	    	this.setVisible(true);
 	    	this.playerID = playerID;
+			this.Inumber = 0;
+			this.Cnumber = 0;
+			this.Anumber = 0;
+			this.armyOnTerritory = new Army(Cnumber, Anumber, Inumber);
 	        this.xCoordinate = xCoordinate;
 	        this.yCoordinate = yCoordinate;
 	        this.width = width;
@@ -66,7 +75,8 @@ public class Territory extends JPanel {
 					JFrame territoryPromptjFrame = new JFrame(Territory.this.getName());
 					territoryPromptjFrame.setLayout(null);
 					territoryPromptjFrame.setVisible(true);
-					territoryPromptjFrame.setPreferredSize(new Dimension(300, 300));
+					territoryPromptjFrame.setPreferredSize(new Dimension(300, 300
+					));
 					territoryPromptjFrame.setLocationRelativeTo(null);
 					JPanel territoryPromptJPanel = new JPanel();
 					territoryPromptJPanel.setBackground(Color.GREEN);
@@ -78,11 +88,26 @@ public class Territory extends JPanel {
         			territoryPromptJPanel.setFocusable(true);
         			territoryPromptJPanel.setEnabled(true);
         			
-					JLabel presentArmyJLabel = new JLabel("Present Armies: ");
+					JLabel presentArmyJLabel = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
+					+ Territory.this.Inumber +" Infantry.");
+					JLabel power = new JLabel("Total power: "+ "\n" + Territory.this.armyOnTerritory.calculateStrength());
+					
+					ArrayList<Territory> terrToAttack = new ArrayList<>();
+					for(Territory t : Territory.this.getNeighbors()){
+					JLabel neig = new JLabel(t.getName() + " territory power : " + t.armyOnTerritory.calculateStrength());
+					territoryPromptJPanel.add(neig);
+					terrToAttack.add(t);
+
+
+					}
 					presentArmyJLabel.setLocation(500, 500);
 					territoryPromptJPanel.add(presentArmyJLabel);
+					territoryPromptJPanel.add(power);
+
 					territoryPromptjFrame.add(territoryPromptJPanel);
 					territoryPromptjFrame.setContentPane(territoryPromptJPanel);
+
+					//JComboBox<ArrayList<Territory>> chooseToAttackBox = new JComboBox<ArrayList<Territory>>(terrToAttack);
 					territoryPromptJPanel.setVisible(true);
 
 					territoryPromptjFrame.pack();
@@ -183,6 +208,10 @@ public class Territory extends JPanel {
 	        this.neighbors.add(neighbor);
 	    }
 
+		public String neigName (Territory n){
+			return n.getName();
+		}
+
 		public boolean contains(int x, int y) {
 			return super.contains(x,y);
 		}
@@ -206,4 +235,28 @@ public class Territory extends JPanel {
 		public Continents getContinent() {
 			return this.c;
 		}
+
+
+
+		public void setArmy(int A, int C, int I) {
+			this.armyOnTerritory.setArtillery(A);
+			this.Anumber = A;
+			this.armyOnTerritory.setCavalry(C);
+			this.Cnumber = C;
+			this.armyOnTerritory.setInfantry(I);
+			this.Inumber = I;
+
+		}
+
+		public void increaseArmy(int A, int C, int I){
+			this.armyOnTerritory.setArtillery(A + this.Anumber);
+			this.Anumber += A;
+			this.armyOnTerritory.setCavalry(C + this.Cnumber);
+			this.Cnumber += C;
+			this.armyOnTerritory.setInfantry(I + this.Inumber);
+			this.Inumber += I;
+
+		}
+
+
 }
