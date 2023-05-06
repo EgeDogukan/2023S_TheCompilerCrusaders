@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import RiskPackage.GameController;
 
 public class Territory extends JPanel {
 	 private String name;
@@ -21,11 +22,12 @@ public class Territory extends JPanel {
 	    private Color color;
 		private Continents c;
 	    private ArrayList<Territory> neighbors;
+		private int playerID;
 	    
-	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color, Continents continent) {
+	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color, Continents continent, int playerID) {
 	    	
 	    	this.setVisible(true);
-	    	
+	    	this.playerID = playerID;
 	        this.xCoordinate = xCoordinate;
 	        this.yCoordinate = yCoordinate;
 	        this.width = width;
@@ -54,9 +56,20 @@ public class Territory extends JPanel {
 				private Color oldColor;
 				@Override
 				public void mouseClicked(MouseEvent e) {
+
 					System.out.println("Panel clicked!");
-					JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+					
+
+					if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
+						System.out.println("sahip");
+						JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+					"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
+					}
+					else {
+						System.out.println("sahip değil");
+						JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
 					"y"+Territory.this.yCoordinate);
+					}
 					
 				}
 
@@ -148,7 +161,13 @@ public class Territory extends JPanel {
 			this.setBackground(color); 
 		}
 
+		public int getOwnerID() {
+			return playerID;
+		}
 
+		public void setOwnerID(int ID) {
+			this.playerID = ID;
+		}
 
 		public Continents getContinent() {
 			return this.c;
