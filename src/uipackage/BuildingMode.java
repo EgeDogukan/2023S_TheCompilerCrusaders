@@ -474,9 +474,10 @@ public class BuildingMode extends JFrame {
             	getThisFrame().dispose();
             }
         });
-        
- 
+
 	}
+	
+	
 	
 	
 	
