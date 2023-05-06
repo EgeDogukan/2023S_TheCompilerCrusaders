@@ -11,6 +11,7 @@ import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import RiskPackage.Continents;
@@ -65,7 +66,6 @@ public class RunningMode extends JFrame{
 		nextButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
 
-            	int turnCounter=Integer.parseInt(turn.getText());
             	//System.out.println(x);
             	RunningMode.turnCounter++;
             	RunningMode.turnCounter=RunningMode.turnCounter%(numberOfAIPlayer+numberOfHumanPlayer+1);
@@ -80,11 +80,24 @@ public class RunningMode extends JFrame{
 		JLabel turnString = new JLabel("Turn: Player ");
 		turnString.setSize(150,150);
 		turnString.setLocation(0, 500);
+		
+		JButton helpButton = new JButton("Help Button");
+		helpButton.setSize(100,100);
+		helpButton.setLocation(0,0);
+		
+		helpButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				helpScreen helpScreen = new helpScreen("BLA BLA");
+				helpScreen.setVisible(true);
+			}
+		});
+		
 
 		this.getContentPane().add(nextButton);
 		this.getContentPane().add(turn);
 		this.getContentPane().add(turnString);
 		this.getContentPane().add(pickChanceCardButton);
+		this.getContentPane().add(helpButton);
 		this.add(panel); 
 
 
