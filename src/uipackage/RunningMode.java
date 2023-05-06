@@ -279,6 +279,7 @@ public class RunningMode extends JFrame{
 		Continents continentToBeConquered = null;
 		
 		for (Continents continent : this.continents) {
+			hasAllOfTheTerritories=true;
 			for (Territory territory : continent.getTerritories()) {
 				for (TerritoryCard territoryCard : this.players.get(curId-1).territoryCards) {
 					if (!(territory.getName().equals(territoryCard.territory.getName()))) {
@@ -286,7 +287,9 @@ public class RunningMode extends JFrame{
 					}
 				}
 			}
-			continentToBeConquered=continent;
+			if (hasAllOfTheTerritories==true) {
+				continentToBeConquered=continent;
+			}
 		}
 		for (Territory territory : continentToBeConquered.getTerritories()) {
 			this.players.get(curId-1).addTerritories(territory);
