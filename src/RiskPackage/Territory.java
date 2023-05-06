@@ -102,17 +102,25 @@ public class Territory extends JPanel {
 						String[] terrToAttack = new String[Territory.this.getNeighbors().size()];
 						//for(Territory t : Territory.this.getNeighbors()){
 						for(int t=0; t< Territory.this.getNeighbors().size();t++){
+	
+							JLabel neig = new JLabel(Territory.this.getNeighbors().get(t).getName() + " territory power : " + Territory.this.getNeighbors().get(t).armyOnTerritory.calculateStrength());
+							territoryPromptJPanel.add(neig);
+							terrToAttack[t]=Territory.this.getNeighbors().get(t).getName();
+							System.out.println(terrToAttack[t]);
 
-						JLabel neig = new JLabel(Territory.this.getNeighbors().get(t).getName() + " territory power : " + Territory.this.getNeighbors().get(t).armyOnTerritory.calculateStrength());
-						territoryPromptJPanel.add(neig);
-						terrToAttack[t]=Territory.this.getNeighbors().get(t).getName();
-						System.out.println(terrToAttack[t]);
 
-
+<<<<<<< Updated upstream
 						
 								JLabel ppp = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
 								+ Territory.this.Inumber +" Infantry.");
 								territoryPromptjFrame.add(ppp);
+=======
+
+								
+//								JLabel ppp = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
+//								+ Territory.this.Inumber +" Infantry.");
+//								territoryPromptjFrame.add(ppp);
+>>>>>>> Stashed changes
 								
 
 							}
@@ -165,15 +173,21 @@ public class Territory extends JPanel {
 									if(k == 0) {	
 										if(i == 1) {
 											Territory.this.increaseArmy(1, 0, 0);
+											System.out.println("****************");
 											System.out.println("Artillary army card drawn.");
+											System.out.println("****************");
 										}
 										else if(i == 2) {
 											Territory.this.increaseArmy(0, 1, 0);
+											System.out.println("****************");
 											System.out.println("Cavalry army card drawn.");
+											System.out.println("****************");
 										}
 										else if(i == 3) {
 											Territory.this.increaseArmy(0, 0, 1);
+											System.out.println("****************");
 											System.out.println("Infantry army card drawn.");
+											System.out.println("****************");
 										}
 									}
 									else if( k == 1) {

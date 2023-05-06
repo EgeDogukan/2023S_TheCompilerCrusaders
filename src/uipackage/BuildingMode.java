@@ -471,8 +471,13 @@ public class BuildingMode extends JFrame {
         			
         				territory.setColor(Color.pink);
         				continent.add(territory);
+<<<<<<< Updated upstream
       				}
         			
+=======
+        				territory.setIsBuilding(false);
+        			}
+>>>>>>> Stashed changes
         		}
 
       		setNumberOfPlayer(((int)Integer.valueOf((String) myComboBox.getSelectedItem())));
