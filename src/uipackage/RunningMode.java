@@ -151,7 +151,7 @@ public class RunningMode extends JFrame{
 	public void pickChanceCard() {
 		int curId=getTurn();
 		Random rand = new Random();
-        int randomNumber = rand.nextInt(5) + 1;
+        int randomNumber = rand.nextInt(5);
         
         IChanceCard chanceCard = new ChanceCardFactory().createCard(randomNumber);
         this.players.get(curId-1).chanceCards.add(chanceCard);

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+
 import cardPackage.IArmyCard;
 import cardPackage.IChanceCard;
 
@@ -69,9 +70,12 @@ public class Player {
 		
 		boolean exist=false;
 		
+		IChanceCard cardToBeRemoved = null;
+		
 		for (IChanceCard chanceCard : chanceCards) {
 			if (id==chanceCard.getType()) {
 				exist=true;
+				cardToBeRemoved = chanceCard;
 				break;
 			}
 		}
@@ -82,6 +86,7 @@ public class Player {
 			else if (id==2){ System.out.println("Trade Deal Card is applied.");  }
 			else if (id==3){ System.out.println("Revolution Card is applied.");  }
 			else if (id==4){ System.out.println("Nuclear Strike Card is applied.");  }
+			this.chanceCards.remove(cardToBeRemoved);
 		}
 		else {
 			System.out.println("You don't have this card.");
