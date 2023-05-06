@@ -251,38 +251,70 @@ public class BuildingMode extends JFrame {
         NorthWestTerritory.addNeighbor(Alaska);
         NorthWestTerritory.addNeighbor(Ontario);
 
+        EasternUnitedStates.addNeighbor(CentralAmerica);
+        EasternUnitedStates.addNeighbor(WesternUnitedStates);
+        EasternUnitedStates.addNeighbor(Quebec);
+        EasternUnitedStates.addNeighbor(Ontario);
+
+        Alberta.addNeighbor(Alaska);
+        Alberta.addNeighbor(NorthWestTerritory);
         Alberta.addNeighbor(Ontario);
         Alberta.addNeighbor(WesternUnitedStates);
         
+        Quebec.addNeighbor(Greenland);
+        Quebec.addNeighbor(EasternUnitedStates);
+        Quebec.addNeighbor(Ontario);
+
         Ontario.addNeighbor(Quebec);
+        Ontario.addNeighbor(Alberta);
         Ontario.addNeighbor(Greenland);
         Ontario.addNeighbor(WesternUnitedStates);
-        Ontario.addNeighbor(EasternAustralia);
+        Ontario.addNeighbor(EasternUnitedStates);
+        Ontario.addNeighbor(NorthWestTerritory);
+
+        Greenland.addNeighbor(Iceland);
+        Greenland.addNeighbor(Quebec);
+        Greenland.addNeighbor(Ontario);
+        Greenland.addNeighbor(NorthWestTerritory);
 
         WesternUnitedStates.addNeighbor(EasternUnitedStates);
+        WesternUnitedStates.addNeighbor(Alberta);
+        WesternUnitedStates.addNeighbor(Ontario);
         WesternUnitedStates.addNeighbor(CentralAmerica);
 
         CentralAmerica.addNeighbor(Venezuela);
+        CentralAmerica.addNeighbor(WesternUnitedStates);
+        CentralAmerica.addNeighbor(EasternUnitedStates);
+
 
         Venezuela.addNeighbor(Brazil);
         Venezuela.addNeighbor(Peru);
+        Venezuela.addNeighbor(CentralAmerica);
+
 
         Peru.addNeighbor(Argentina);
         Peru.addNeighbor(Brazil);
+        Peru.addNeighbor(Venezuela);
 
         Brazil.addNeighbor(NorthAfrica);
+        Brazil.addNeighbor(Peru);
+        Brazil.addNeighbor(Venezuela);
+        Brazil.addNeighbor(Argentina);
 
-        
+        Argentina.addNeighbor(Peru);
+        Argentina.addNeighbor(Brazil);
+
         NorthAfrica.addNeighbor(Egypt);
         NorthAfrica.addNeighbor(EastAfrica);
         NorthAfrica.addNeighbor(Congo);
         NorthAfrica.addNeighbor(SouthernEurope);
         NorthAfrica.addNeighbor(WesternEurope);
-        
+        NorthAfrica.addNeighbor(Brazil);
 
         Egypt.addNeighbor(EastAfrica);
         Egypt.addNeighbor(SouthernEurope);
         Egypt.addNeighbor(MiddleEast);
+        Egypt.addNeighbor(NorthAfrica);
 
         Congo.addNeighbor(NorthAfrica);
         Congo.addNeighbor(EastAfrica);
@@ -291,6 +323,15 @@ public class BuildingMode extends JFrame {
         SouthAfrica.addNeighbor(Congo);
         SouthAfrica.addNeighbor(EastAfrica);
         SouthAfrica.addNeighbor(Madagascar);
+
+        EastAfrica.addNeighbor(Madagascar);
+        EastAfrica.addNeighbor(Congo);
+        EastAfrica.addNeighbor(SouthAfrica);
+        EastAfrica.addNeighbor(NorthAfrica);
+        EastAfrica.addNeighbor(Egypt);
+        EastAfrica.addNeighbor(MiddleEast);
+
+
 
         Madagascar.addNeighbor(SouthAfrica);
         Madagascar.addNeighbor(EastAfrica);
@@ -320,6 +361,19 @@ public class BuildingMode extends JFrame {
         WesternEurope.addNeighbor(GreatBritain);
         WesternEurope.addNeighbor(NorthernEurope);
         WesternEurope.addNeighbor(SouthernEurope);
+
+        NorthernEurope.addNeighbor(GreatBritain);
+        NorthernEurope.addNeighbor(Scandinavia);
+        NorthernEurope.addNeighbor(Ukraine);
+        NorthernEurope.addNeighbor(SouthernEurope);
+        NorthernEurope.addNeighbor(WesternEurope);
+
+        SouthernEurope.addNeighbor(MiddleEast);
+        SouthernEurope.addNeighbor(Egypt);
+        SouthernEurope.addNeighbor(NorthAfrica);
+        SouthernEurope.addNeighbor(WesternEurope);
+        SouthernEurope.addNeighbor(NorthernEurope);
+        SouthernEurope.addNeighbor(Ukraine);
 
         MiddleEast.addNeighbor(SouthernEurope);
         MiddleEast.addNeighbor(Egypt);
@@ -379,6 +433,12 @@ public class BuildingMode extends JFrame {
         Siam.addNeighbor(China);
         Siam.addNeighbor(Indonesia);
 
+        India.addNeighbor(Siam);
+        India.addNeighbor(China);
+        India.addNeighbor(MiddleEast);
+        India.addNeighbor(Afghanistan);
+
+
         Indonesia.addNeighbor(NewGuinea);
         Indonesia.addNeighbor(WesternAustralia);
         Indonesia.addNeighbor(Siam);
@@ -393,7 +453,7 @@ public class BuildingMode extends JFrame {
 
         EasternAustralia.addNeighbor(NewGuinea);
         EasternAustralia.addNeighbor(WesternAustralia);
-        
+
         
         
         this.pack();
