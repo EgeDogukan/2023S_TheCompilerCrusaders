@@ -64,23 +64,26 @@ public class Territory extends JPanel {
 					System.out.println("Panel clicked!");
 
 					JFrame territoryPromptjFrame = new JFrame(Territory.this.getName());
+					territoryPromptjFrame.setLayout(null);
 					territoryPromptjFrame.setVisible(true);
-					territoryPromptjFrame.setSize(450, 300);
-					//territoryPromptjFrame.setLocation(960, 540);
+					territoryPromptjFrame.setPreferredSize(new Dimension(300, 300));
+					territoryPromptjFrame.setLocationRelativeTo(null);
 					JPanel territoryPromptJPanel = new JPanel();
 					territoryPromptJPanel.setBackground(Color.GREEN);
+					territoryPromptJPanel.setSize(500, 500);
+					
 					//
 					//territoryPromptJPanel.setLayout(null); silllllllllllllll
 					territoryPromptJPanel.setOpaque(true);
         			territoryPromptJPanel.setFocusable(true);
         			territoryPromptJPanel.setEnabled(true);
-        			territoryPromptJPanel.setVisible(true);
+        			
 					JLabel presentArmyJLabel = new JLabel("Present Armies: ");
-					presentArmyJLabel.setLocation(0, 0);
+					presentArmyJLabel.setLocation(500, 500);
 					territoryPromptJPanel.add(presentArmyJLabel);
 					territoryPromptjFrame.add(territoryPromptJPanel);
 					territoryPromptjFrame.setContentPane(territoryPromptJPanel);
-					
+					territoryPromptJPanel.setVisible(true);
 
 					territoryPromptjFrame.pack();
 					
