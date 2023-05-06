@@ -11,6 +11,7 @@ public class RiskBoard {
         this.territories = new ArrayList<Territory>();
     }
 
+<<<<<<< Updated upstream
     public void addTerritory(Territory territory) {
         territories.add(territory);
         
@@ -66,5 +67,8 @@ public class RiskBoard {
     	 }
     	return armies;
     }
+=======
+
+>>>>>>> Stashed changes
 
 }
