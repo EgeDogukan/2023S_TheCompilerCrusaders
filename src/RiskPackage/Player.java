@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import cardPackage.IArmyCard;
+import cardPackage.IChanceCard;
 
 public class Player {
 	
@@ -16,6 +17,7 @@ public class Player {
 	private boolean takeTurn = false;
 	protected ArrayList<Territory> territories;
 	public ArrayList<IArmyCard> armyCards = new ArrayList<IArmyCard>();
+	public ArrayList<IChanceCard> chanceCards = new ArrayList<IChanceCard>();
 	
 	public Player(int id, Color color,  ArrayList<Territory> territories) {
 		this.id=id;

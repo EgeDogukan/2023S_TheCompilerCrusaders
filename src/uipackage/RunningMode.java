@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,6 +19,8 @@ import RiskPackage.GamePanel;
 import RiskPackage.Player;
 import RiskPackage.RiskBoard;
 import cardPackage.ArmyCardFactory;
+import cardPackage.ChanceCardFactory;
+import cardPackage.IChanceCard;
 
 public class RunningMode extends JFrame{
 
@@ -41,6 +44,10 @@ public class RunningMode extends JFrame{
 		JButton nextButton = new JButton("next turn");
 		nextButton.setSize(100,100);
 		nextButton.setLocation(100, 650);
+		
+		JButton pickChanceCardButton = new JButton("Pick a Chance Card");
+		pickChanceCardButton.setSize(175,175);
+		pickChanceCardButton.setLocation(300, 650);
 
 		int turnCounter = 1;
 
@@ -53,7 +60,7 @@ public class RunningMode extends JFrame{
 
             	int x=Integer.parseInt(turn.getText());
             	x++;
-            	x=x%(numberOfAIPlayer+numberOfHumanPlayer);
+            	x=x%(numberOfAIPlayer+numberOfHumanPlayer+1);
             	if (x==0) {
             		x++;
             	}
@@ -69,7 +76,8 @@ public class RunningMode extends JFrame{
 		this.getContentPane().add(nextButton);
 		this.getContentPane().add(turn);
 		this.getContentPane().add(turnString);
-    	this.add(panel); 
+		this.getContentPane().add(pickChanceCardButton);
+		this.add(panel); 
 
 
 		initializeArmies();
@@ -89,5 +97,15 @@ public class RunningMode extends JFrame{
 
 		}
 	}
+	
+	public void pickChanceCard() {
+		int curId=getTurn();
+		Random rand = new Random();
+        int randomNumber = rand.nextInt(5) + 1;
+        IChanceCard chaneCard = new ChanceCardFactory().createCard(randomNumber);
+        this.players.get(curId).chanceCards.add(chaneCard);
+	}
+	
+	
 
 }
