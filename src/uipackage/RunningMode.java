@@ -25,10 +25,11 @@ import cardPackage.IChanceCard;
 public class RunningMode extends JFrame{
 
 	public ArrayList<Continents> continents;
-	private JButton turn;
+	private static JButton turn = new JButton();
 	int numberOfAIPlayer;
 	int numberOfHumanPlayer;
 	ArrayList<Player> players;
+	static int turnCounter=1;
 
 	public RunningMode(ArrayList<Continents> continents, ArrayList<Player> players, int numberOfAIPlayer, int numberOfHumanPlayer)  {
 		this.numberOfAIPlayer=numberOfAIPlayer;
@@ -48,8 +49,14 @@ public class RunningMode extends JFrame{
 		JButton pickChanceCardButton = new JButton("Pick a Chance Card");
 		pickChanceCardButton.setSize(175,175);
 		pickChanceCardButton.setLocation(300, 650);
+		
+		pickChanceCardButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				pickChanceCard();
+				
+			}
+		});
 
-		int turnCounter = 1;
 
 		JLabel turn = new JLabel(Integer.toString(turnCounter));
 		turn.setSize(150, 150);
@@ -58,13 +65,14 @@ public class RunningMode extends JFrame{
 		nextButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
 
-            	int x=Integer.parseInt(turn.getText());
-            	x++;
-            	x=x%(numberOfAIPlayer+numberOfHumanPlayer+1);
-            	if (x==0) {
-            		x++;
+            	int turnCounter=Integer.parseInt(turn.getText());
+            	//System.out.println(x);
+            	RunningMode.turnCounter++;
+            	RunningMode.turnCounter=RunningMode.turnCounter%(numberOfAIPlayer+numberOfHumanPlayer+1);
+            	if (RunningMode.turnCounter==0) {
+            		RunningMode.turnCounter++;
             	}
-            	turn.setText(Integer.toString(x));
+            	turn.setText(Integer.toString(RunningMode.turnCounter));
 
             }
         });
@@ -86,7 +94,7 @@ public class RunningMode extends JFrame{
 	}
 
 	public int getTurn() {
-		return Integer.parseInt(this.turn.getText());
+		return RunningMode.turnCounter;
 	}
 
 	public void initializeArmies() {
@@ -104,6 +112,7 @@ public class RunningMode extends JFrame{
         int randomNumber = rand.nextInt(5) + 1;
         IChanceCard chaneCard = new ChanceCardFactory().createCard(randomNumber);
         this.players.get(curId).chanceCards.add(chaneCard);
+        System.out.println("Player with ID"+curId+" has drawn the card with ID"+randomNumber+" and it is added his/her list.");
 	}
 	
 	
