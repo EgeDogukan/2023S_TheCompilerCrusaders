@@ -10,8 +10,11 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayer;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import RiskPackage.GameController;
 
 public class Territory extends JPanel {
@@ -61,19 +64,26 @@ public class Territory extends JPanel {
 					System.out.println("Panel clicked!");
 
 					JFrame territoryPromptjFrame = new JFrame(Territory.this.getName());
+					territoryPromptjFrame.setVisible(true);
 					territoryPromptjFrame.setSize(450, 300);
 					//territoryPromptjFrame.setLocation(960, 540);
 					JPanel territoryPromptJPanel = new JPanel();
-					territoryPromptjFrame.setContentPane(territoryPromptJPanel);
-					territoryPromptJPanel.setLayout(null);
+					territoryPromptJPanel.setBackground(Color.GREEN);
+					//
+					
+					territoryPromptJPanel.setOpaque(true);
+        			territoryPromptJPanel.setFocusable(true);
+        			territoryPromptJPanel.setEnabled(true);
+        			territoryPromptJPanel.setVisible(true);
 					JLabel presentArmyJLabel = new JLabel("Present Armies: ");
+					presentArmyJLabel.setLocation(0, 0);
+					territoryPromptJPanel.add(presentArmyJLabel);
+					territoryPromptjFrame.add(territoryPromptJPanel);
+					territoryPromptjFrame.setContentPane(territoryPromptJPanel);
 					
 
-					territoryPromptjFrame.add(territoryPromptJPanel);
-					territoryPromptJPanel.add(presentArmyJLabel);
-
 					territoryPromptjFrame.pack();
-					territoryPromptjFrame.setVisible(true);
+					
 
 
 					
