@@ -46,7 +46,7 @@ public class GameController {
 	    
 	    
 	    do {                                                        //waiting until login phase completed
-            //System.out.println(loginPage.getLoginStatus());
+            System.out.println(loginPage.getLoginStatus());
             
         } while (loginPage.getLoginStatus() == false);
 		loginPage.frame.dispose();
@@ -81,7 +81,7 @@ public class GameController {
 	    
         
 	    ArrayList<Player> playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent());
-        ArrayList<Continents> c= RiskGameFrame.initalSharing(playerList);
+        ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
 		RunningMode g = new RunningMode(c, playerList, numberOfAIPlayers.get(), numberOfPlayers.get());
                 
         g.setLayout(new BorderLayout());
@@ -108,8 +108,6 @@ public class GameController {
 
 	static private ArrayList<Player> initGame(int numberofPlayers, int numberofComp, ArrayList<Continents> continents) {
 		
-		
-	
 		ArrayList<Territory> territories = new ArrayList<Territory>();
 		for (Continents continent : continents) {
 			for (Territory territory : continent.getTerritories()){

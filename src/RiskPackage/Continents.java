@@ -16,6 +16,7 @@ public class Continents extends JPanel {
 	private Color color;
 	private String name;
 	public boolean isIncluded;
+	public boolean isBuilding;
 	private int width;
 	private int height;
 	private ArrayList<Territory> territories;
@@ -27,6 +28,7 @@ public class Continents extends JPanel {
 		this.width = width;
 		this.height = height;
 		this.isIncluded = true;
+		this.isBuilding = false;
 		this.territories = territories;
 		this.setBackground(color);
 		this.setLayout(new BorderLayout());
@@ -58,11 +60,13 @@ public class Continents extends JPanel {
 						Continents.this.setColor(Color.GRAY);
 						repaint();
 						Continents.this.isIncluded = false;
+						Continents.this.isBuilding = true;
 						
 					} 
 					else {
 						Continents.this.setColor(oldColor);
 						Continents.this.isIncluded = true;
+						Continents.this.isBuilding = false;
 					}
 					
 					

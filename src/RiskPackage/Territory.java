@@ -7,18 +7,21 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Set;
 
-import javax.print.DocFlavor.STRING;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayer;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import javax.swing.JTextField;
 
 import RiskPackage.GameController;
+import cardPackage.ArmyCardFactory;
+import cardPackage.TerritoryCard;
 
 public class Territory extends JPanel {
 	 private String name;
@@ -34,9 +37,10 @@ public class Territory extends JPanel {
 		private int Anumber;
 		private int Inumber;
 		private Army armyOnTerritory;
+		private boolean isBuilding=false;
 	    
 	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color, Continents continent, int playerID) {
-	    	
+	    	this.isBuilding=false;
 	    	this.setVisible(true);
 	    	this.playerID = playerID;
 			this.Inumber = 0;
@@ -71,92 +75,135 @@ public class Territory extends JPanel {
 				private Color oldColor;
 				@Override
 				public void mouseClicked(MouseEvent e) {
-
-					System.out.println("Panel clicked!");
-
-					JFrame territoryPromptjFrame = new JFrame(Territory.this.getName());
-					territoryPromptjFrame.setLayout(null);
-					territoryPromptjFrame.setVisible(true);
-					territoryPromptjFrame.setPreferredSize(new Dimension(300, 300
-					));
-					territoryPromptjFrame.setLocationRelativeTo(null);
-					JPanel territoryPromptJPanel = new JPanel();
-					territoryPromptJPanel.setBackground(Color.GREEN);
-					territoryPromptJPanel.setSize(500, 500);
 					
-					//
-					//territoryPromptJPanel.setLayout(null); silllllllllllllll
-					territoryPromptJPanel.setOpaque(true);
-        			territoryPromptJPanel.setFocusable(true);
-        			territoryPromptJPanel.setEnabled(true);
-        			
-					JLabel presentArmyJLabel = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
-					+ Territory.this.Inumber +" Infantry.");
-					JLabel power = new JLabel("Total power: "+ "\n" + Territory.this.armyOnTerritory.calculateStrength());
-					
-					String[] terrToAttack = new String[Territory.this.getNeighbors().size()];
-					//for(Territory t : Territory.this.getNeighbors()){
-					for(int t=0; t< Territory.this.getNeighbors().size();t++){
+				
+					if (isBuilding) {
+						System.out.println("Panel clicked!");
 
-					JLabel neig = new JLabel(Territory.this.getNeighbors().get(t).getName() + " territory power : " + Territory.this.getNeighbors().get(t).armyOnTerritory.calculateStrength());
-					territoryPromptJPanel.add(neig);
-					terrToAttack[t]=Territory.this.getNeighbors().get(t).getName();
-					System.out.println(terrToAttack[t]);
-
-
-					}
-					presentArmyJLabel.setLocation(500, 500);
-					territoryPromptJPanel.add(presentArmyJLabel);
-					territoryPromptJPanel.add(power);
-
-					territoryPromptjFrame.add(territoryPromptJPanel);
-					territoryPromptjFrame.setContentPane(territoryPromptJPanel);
-					//JComboBox<String> cardComboBox = new JComboBox<String>(CardsOfCurrentPlayer);
-					JComboBox<String> chooseToAttackBox = new JComboBox<String>(terrToAttack);
-					
-					territoryPromptjFrame.pack();
-
-
-					
-
-					if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
-						System.out.println("sahip");
-						JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
-					"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
-					JButton attackButton = new JButton("Attack");
-					String name = (String) chooseToAttackBox.getSelectedItem();
-					territoryPromptJPanel.add(attackButton);
-					attackButton.addMouseListener(new MouseAdapter() {
-						public void mouseClicked(MouseEvent e) {
-							Territory destination = null;
-							for(Territory t : Territory.this.getNeighbors()){
-								if(name.equals(t.getName())){
-									destination = t;
-									
-									break;
-								}
-							}
+						JFrame territoryPromptjFrame = new JFrame(Territory.this.getName());
+						territoryPromptjFrame.setLayout(null);
+						territoryPromptjFrame.setVisible(true);
+						territoryPromptjFrame.setPreferredSize(new Dimension(300, 300
+						));
+						territoryPromptjFrame.setLocationRelativeTo(null);
+						JPanel territoryPromptJPanel = new JPanel();
+						territoryPromptJPanel.setBackground(Color.GREEN);
+						territoryPromptJPanel.setSize(500, 500);
 						
-							if(destination.armyOnTerritory.calculateStrength() >= Territory.this.armyOnTerritory.calculateStrength()){
-								Territory.this.decreaseArmy(destination);
+						//
+						territoryPromptJPanel.setOpaque(true);
+	        			territoryPromptJPanel.setFocusable(true);
+	        			territoryPromptJPanel.setEnabled(true);
+	        			
+						JLabel presentArmyJLabel = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
+						+ Territory.this.Inumber +" Infantry.");
+						JLabel power = new JLabel("Total power: "+ "\n" + Territory.this.armyOnTerritory.calculateStrength());
+						
+						String[] terrToAttack = new String[Territory.this.getNeighbors().size()];
+						//for(Territory t : Territory.this.getNeighbors()){
+						for(int t=0; t< Territory.this.getNeighbors().size();t++){
+
+						JLabel neig = new JLabel(Territory.this.getNeighbors().get(t).getName() + " territory power : " + Territory.this.getNeighbors().get(t).armyOnTerritory.calculateStrength());
+						territoryPromptJPanel.add(neig);
+						terrToAttack[t]=Territory.this.getNeighbors().get(t).getName();
+						System.out.println(terrToAttack[t]);
+
+
+<<<<<<< HEAD
+=======
 								
 								JLabel ppp = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
-					+ Territory.this.Inumber +" Infantry.");
-					territoryPromptjFrame.add(ppp);
-							}
-						}
-					});
-					territoryPromptJPanel.add(chooseToAttackBox);
-					territoryPromptJPanel.setVisible(true);
+								+ Territory.this.Inumber +" Infantry.");
+								territoryPromptjFrame.add(ppp);
+								setColor(Territory.this.getColor());
+								JOptionPane.showMessageDialog(null, "Attack successful!");
+								territoryPromptjFrame.dispose();
 
-					territoryPromptjFrame.pack();
+							}
+
+
+>>>>>>> 728fe66e9f050f03ad4da6a50e7b864840264bb7
+						}
+						presentArmyJLabel.setLocation(500, 500);
+						territoryPromptJPanel.add(presentArmyJLabel);
+						territoryPromptJPanel.add(power);
+
+						territoryPromptjFrame.add(territoryPromptJPanel);
+						territoryPromptjFrame.setContentPane(territoryPromptJPanel);
+						//JComboBox<String> cardComboBox = new JComboBox<String>(CardsOfCurrentPlayer);
+						JComboBox<String> chooseToAttackBox = new JComboBox<String>(terrToAttack);
 						
+						territoryPromptjFrame.pack();
+
 						
-					}
-					else {
-						System.out.println("sahip değil");
-						JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
-					"y"+Territory.this.yCoordinate);
+
+						
+
+						if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
+							System.out.println("sahip");
+							JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+						"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
+						JButton attackButton = new JButton("Attack");
+						String name = (String) chooseToAttackBox.getSelectedItem();
+						territoryPromptJPanel.add(attackButton);
+						attackButton.addMouseListener(new MouseAdapter() {
+							public void mouseClicked(MouseEvent e) {
+								Territory destination = null;
+								for(Territory t : Territory.this.getNeighbors()){
+									if(name.equals(t.getName())){
+										destination = t;
+										
+										break;
+									}
+								}
+							
+								if(destination.armyOnTerritory.calculateStrength() >= Territory.this.armyOnTerritory.calculateStrength()){
+									int tempc = Territory.this.Cnumber;
+									int tempi = Territory.this.Inumber;
+									int tempa = Territory.this.Anumber;
+									destination.decreaseArmy(Territory.this);
+									
+									Territory.this.decreaseArmy(tempa, tempc, tempi);
+									Random rant = new Random();
+									int i = rant.nextInt(3) + 1;
+									int k = rant.nextInt(2);
+									if(k == 0) {	
+										if(i == 1) {
+											Territory.this.increaseArmy(1, 0, 0);
+											System.out.println("Artillary army card drawn.");
+										}
+										else if(i == 2) {
+											Territory.this.increaseArmy(0, 1, 0);
+											System.out.println("Cavalry army card drawn.");
+										}
+										else if(i == 3) {
+											Territory.this.increaseArmy(0, 0, 1);
+											System.out.println("Infantry army card drawn.");
+										}
+									}
+									else if( k == 1) {
+										//pick territory card
+									}
+
+									
+									JLabel ppp = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
+						+ Territory.this.Inumber +" Infantry.");
+						territoryPromptjFrame.add(ppp);
+								}
+							}
+						});
+						territoryPromptJPanel.add(chooseToAttackBox);
+						territoryPromptJPanel.setVisible(true);
+
+						territoryPromptjFrame.pack();
+							
+							
+						}
+						else {
+							System.out.println("sahip değil");
+							JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+						"y"+Territory.this.yCoordinate);
+						}
 					}
 					
 					
@@ -164,15 +211,21 @@ public class Territory extends JPanel {
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					oldColor = getColor();
-					setColor(Color.RED);
-					repaint();
+					if (isBuilding){
+						oldColor = getColor();
+						setColor(Color.RED);
+						repaint();
+					}
+					
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					setColor(oldColor);
-					repaint();
+					if (isBuilding) {
+						setColor(oldColor);
+						repaint();
+					}
+					
 				}
 			});
 			
@@ -265,6 +318,10 @@ public class Territory extends JPanel {
 		public Continents getContinent() {
 			return this.c;
 		}
+		
+		public void setIsBuilding(boolean status) {
+			this.isBuilding=status;
+		}
 
 
 
@@ -286,6 +343,15 @@ public class Territory extends JPanel {
 			this.armyOnTerritory.setInfantry(I + this.Inumber);
 			this.Inumber += I;
 
+		}
+		
+		public void decreaseArmy(int A, int C, int I) {
+			this.armyOnTerritory.setArtillery(A - this.Anumber);
+			this.Anumber -= A;
+			this.armyOnTerritory.setCavalry(C - this.Cnumber);
+			this.Cnumber -= C;
+			this.armyOnTerritory.setInfantry(I - this.Inumber);
+			this.Inumber -= I;
 		}
 
 		public void decreaseArmy(Territory destination){
