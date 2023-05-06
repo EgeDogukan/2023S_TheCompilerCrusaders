@@ -3,8 +3,9 @@ package RiskPackage;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
-
+import cardPackage.ArmyCardFactory;
 import cardPackage.IArmyCard;
 import cardPackage.IChanceCard;
 
@@ -24,8 +25,6 @@ public class Player {
 		this.id=id;
 		this.color=color;
 		this.territories = territories;
-		//for(Territory ter : territories)
-			//this.territories.add(ter);
 	}
 	
 	public ArrayList<Territory> getTerritories(){
@@ -81,7 +80,7 @@ public class Player {
 		}
 		
 		if (exist) {
-			if (id==0){ System.out.println("Draft chance Card is applied.");  }
+			if (id==0){ System.out.println("Draft chance Card is applied."); usageOfDraftChanceCard(); }
 			else if (id==1){ System.out.println("Reinforcement Card is applied.");  }
 			else if (id==2){ System.out.println("Trade Deal Card is applied.");  }
 			else if (id==3){ System.out.println("Revolution Card is applied.");  }
@@ -91,6 +90,15 @@ public class Player {
 		else {
 			System.out.println("You don't have this card.");
 		}
+	}
+	
+	public void usageOfDraftChanceCard() {
+		Random rand = new Random();
+		for (int i=0;i<2;i++) {
+	        int randomNumber = rand.nextInt(3) + 1;
+			addArmyCard(new ArmyCardFactory().createArmyCard(randomNumber));
+		}
+        
 	}
 		
 			
