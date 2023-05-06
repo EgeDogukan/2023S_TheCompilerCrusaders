@@ -19,6 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import RiskPackage.ComputerPlayer;
@@ -36,13 +37,16 @@ public class BuildingMode extends JFrame {
 	public int numberOfPlayer;
     public int numberOfComp;
     public ArrayList<Continents> continents;
+    static int turnCounter=1;
 	
 	public BuildingMode() {
         super("Building Mode");
         
-            this.numberOfPlayer = -1;
-            this.numberOfComp = -1;
-            this.continents = new ArrayList<>();
+        this.numberOfPlayer = -1;
+        this.numberOfComp = -1;
+        this.continents = new ArrayList<>();
+        
+        
         
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -411,7 +415,18 @@ public class BuildingMode extends JFrame {
         this.pack();
 
 
-        
+//        
+//        JTextField numberOfAITextField = new JTextField("");
+//        JTextField numberOfHumanTextField = new JTextField("");
+//        
+//        numberOfAITextField.setSize(100,50);
+//        numberOfAITextField.setLocation(550,750);
+//        this.getContentPane().add(numberOfAITextField);
+//
+//        numberOfHumanTextField.setSize(100,50);
+//        numberOfHumanTextField.setLocation(250,750);
+//        this.getContentPane().add(numberOfHumanTextField);
+//        
         
 
         
@@ -448,14 +463,21 @@ public class BuildingMode extends JFrame {
         continueButton.addMouseListener(new MouseAdapter() {
         	public void mouseClicked(MouseEvent e) {
         		
+        		
+        		
         		for (Continents continent : BuildingMode.this.continents) {
         			for (Territory territory : continent.getTerritories()) {
+        			    
+        			
         				territory.setColor(Color.pink);
         				continent.add(territory);
-        			}
+      				}
         			
         		}
-        	}
+//        		setNumberOfPlayer(((int)Integer.valueOf((String) myComboBox.getSelectedItem())));
+//                setNumberOfComp(((int)Integer.valueOf((String) compBox.getSelectedItem())));
+        		
+        	};
         });
 
         JButton startButton = new JButton("Start Game!");
@@ -480,6 +502,26 @@ public class BuildingMode extends JFrame {
             	getThisFrame().dispose();
             }
         });
+        
+        JButton nextButton = new JButton("next turn");
+		nextButton.setSize(100,100);
+		nextButton.setLocation(100, 650);
+		this.getContentPane().add(nextButton);
+		
+		JLabel turnLabel = new JLabel(Integer.toString(turnCounter));
+		turnLabel.setSize(100,100);
+		turnLabel.setLocation(100, 450);
+		this.getContentPane().add(turnLabel);
+		
+		nextButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				turnCounter++;
+				turnCounter=turnCounter%(getNumberOfPlayer()+getNumberOfComp());
+				turnLabel.setText(Integer.toString(turnCounter));
+			}
+		});
+		
+	
 
 	}
 	
