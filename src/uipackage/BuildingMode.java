@@ -246,13 +246,9 @@ public class BuildingMode extends JFrame {
             	
                 setNumberOfPlayer(((int)Integer.valueOf((String) myComboBox.getSelectedItem())));
                 setNumberOfComp(((int)Integer.valueOf((String) compBox.getSelectedItem())));
-            	JOptionPane.showMessageDialog(null, "Game started!");
+            	//JOptionPane.showMessageDialog(null, "Game started!");
             	
-            	RunningMode g = new RunningMode(continents);
-                
-                g.setLayout(new BorderLayout());
-                g.setVisible(true);
-                getThisFrame().dispose();
+            	getThisFrame().dispose();
             }
         });
         
@@ -266,15 +262,18 @@ public class BuildingMode extends JFrame {
 		this.numberOfPlayer = number;
 	}
 	
-	public void initalSharing(ArrayList<Player> players) {
+	public ArrayList<Continents> initalSharing(ArrayList<Player> players) {
+        
 		for(Player p : players){
         	for(Territory t: p.getTerritories()){
         			Continents c = t.getContinent();
+                    
         			t.setColor(p.getColor());
         			c.add(t);
                     t.setOwnerID(p.getId());
             }
         } 
+        return this.getContinent();
 	}
 
     public int getNumberOfComp() {

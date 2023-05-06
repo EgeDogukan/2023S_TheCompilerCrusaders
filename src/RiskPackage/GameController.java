@@ -1,4 +1,5 @@
 package RiskPackage;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,7 +70,13 @@ public class GameController {
 	    
         
 	    ArrayList<Player> playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent());
-        RiskGameFrame.initalSharing(playerList);
+        ArrayList<Continents> c= RiskGameFrame.initalSharing(playerList);
+		RunningMode g = new RunningMode(c);
+                
+        g.setLayout(new BorderLayout());
+        g.setVisible(true);
+                
+
         
         
         

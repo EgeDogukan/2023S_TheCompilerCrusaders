@@ -70,7 +70,7 @@ public class Territory extends JPanel {
 					JPanel territoryPromptJPanel = new JPanel();
 					territoryPromptJPanel.setBackground(Color.GREEN);
 					//
-					
+					//territoryPromptJPanel.setLayout(null); silllllllllllllll
 					territoryPromptJPanel.setOpaque(true);
         			territoryPromptJPanel.setFocusable(true);
         			territoryPromptJPanel.setEnabled(true);
