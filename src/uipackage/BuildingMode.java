@@ -206,7 +206,160 @@ public class BuildingMode extends JFrame {
         this.add(SouthAmerica);
         this.add(Africa);
         this.add(Australia);
+        Alaska.addNeighbor(Kamchatka);
+        Alaska.addNeighbor(NorthWestTerritory);
+        Alaska.addNeighbor(Alberta);
+        
+        NorthWestTerritory.addNeighbor(Greenland);
+        NorthWestTerritory.addNeighbor(Alberta);
+        NorthWestTerritory.addNeighbor(Alaska);
+        NorthWestTerritory.addNeighbor(Ontario);
+
+        Alberta.addNeighbor(Ontario);
+        Alberta.addNeighbor(WesternUnitedStates);
+        
+        Ontario.addNeighbor(Quebec);
+        Ontario.addNeighbor(Greenland);
+        Ontario.addNeighbor(WesternUnitedStates);
+        Ontario.addNeighbor(EasternAustralia);
+
+        WesternUnitedStates.addNeighbor(EasternUnitedStates);
+        WesternUnitedStates.addNeighbor(CentralAmerica);
+
+        CentralAmerica.addNeighbor(Venezuela);
+
+        Venezuela.addNeighbor(Brazil);
+        Venezuela.addNeighbor(Peru);
+
+        Peru.addNeighbor(Argentina);
+        Peru.addNeighbor(Brazil);
+
+        Brazil.addNeighbor(NorthAfrica);
+
+        
+        NorthAfrica.addNeighbor(Egypt);
+        NorthAfrica.addNeighbor(EastAfrica);
+        NorthAfrica.addNeighbor(Congo);
+        NorthAfrica.addNeighbor(SouthernEurope);
+        NorthAfrica.addNeighbor(WesternEurope);
+        
+
+        Egypt.addNeighbor(EastAfrica);
+        Egypt.addNeighbor(SouthernEurope);
+        Egypt.addNeighbor(MiddleEast);
+
+        Congo.addNeighbor(NorthAfrica);
+        Congo.addNeighbor(EastAfrica);
+        Congo.addNeighbor(SouthAfrica);
+
+        SouthAfrica.addNeighbor(Congo);
+        SouthAfrica.addNeighbor(EastAfrica);
+        SouthAfrica.addNeighbor(Madagascar);
+
+        Madagascar.addNeighbor(SouthAfrica);
+        Madagascar.addNeighbor(EastAfrica);
+        
+        Iceland.addNeighbor(GreatBritain);
+        Iceland.addNeighbor(Greenland);
+        Iceland.addNeighbor(Scandinavia);
+
+        Scandinavia.addNeighbor(Iceland);
+        Scandinavia.addNeighbor(GreatBritain);
+        Scandinavia.addNeighbor(NorthernEurope);
+        Scandinavia.addNeighbor(Ukraine);
+
+        GreatBritain.addNeighbor(Iceland);
+        GreatBritain.addNeighbor(Scandinavia);
+        GreatBritain.addNeighbor(NorthernEurope);
+        GreatBritain.addNeighbor(WesternEurope);
+
+        Ukraine.addNeighbor(Scandinavia);
+        Ukraine.addNeighbor(NorthernEurope);
+        Ukraine.addNeighbor(SouthernEurope);
+        Ukraine.addNeighbor(Ural);
+        Ukraine.addNeighbor(Afghanistan);
+        Ukraine.addNeighbor(MiddleEast);
+
+        WesternEurope.addNeighbor(NorthAfrica);
+        WesternEurope.addNeighbor(GreatBritain);
+        WesternEurope.addNeighbor(NorthernEurope);
+        WesternEurope.addNeighbor(SouthernEurope);
+
+        MiddleEast.addNeighbor(SouthernEurope);
+        MiddleEast.addNeighbor(Egypt);
+        MiddleEast.addNeighbor(Ukraine);
+        MiddleEast.addNeighbor(Afghanistan);
+        MiddleEast.addNeighbor(India);
+
+        Ural.addNeighbor(Afghanistan);
+        Ural.addNeighbor(Ukraine);
+        Ural.addNeighbor(Siberia);
+        Ural.addNeighbor(China);
+
+        Afghanistan.addNeighbor(Ukraine);
+        Afghanistan.addNeighbor(Ural);
+        Afghanistan.addNeighbor(MiddleEast);
+        Afghanistan.addNeighbor(India);
+        Afghanistan.addNeighbor(China);
+
+        Siberia.addNeighbor(Ural);
+        Siberia.addNeighbor(Yakutsk);
+        Siberia.addNeighbor(Irkutsk);
+        Siberia.addNeighbor(Mongolia);
+        Siberia.addNeighbor(China);
+        
+        Yakutsk.addNeighbor(Irkutsk);
+        Yakutsk.addNeighbor(Siberia);
+        Yakutsk.addNeighbor(Kamchatka);
+        
+        Irkutsk.addNeighbor(Yakutsk);
+        Irkutsk.addNeighbor(Kamchatka);
+        Irkutsk.addNeighbor(Mongolia);
+        Irkutsk.addNeighbor(Siberia);
+
+        Mongolia.addNeighbor(Japan);
+        Mongolia.addNeighbor(Kamchatka);
+        Mongolia.addNeighbor(China);
+        Mongolia.addNeighbor(Siberia);
+        Mongolia.addNeighbor(Irkutsk);
+
+        Kamchatka.addNeighbor(Alaska);
+        Kamchatka.addNeighbor(Japan);
+        Kamchatka.addNeighbor(Yakutsk);
+        Kamchatka.addNeighbor(Irkutsk);
+        Kamchatka.addNeighbor(Mongolia);
+
+        Japan.addNeighbor(Kamchatka);
+        Japan.addNeighbor(Mongolia);
+
+        China.addNeighbor(Mongolia);
+        China.addNeighbor(Siberia);
+        China.addNeighbor(Ural);
+        China.addNeighbor(Afghanistan);
+        China.addNeighbor(India);
+        China.addNeighbor(Siam);
+
+        Siam.addNeighbor(India);
+        Siam.addNeighbor(China);
+        Siam.addNeighbor(Indonesia);
+
+        Indonesia.addNeighbor(NewGuinea);
+        Indonesia.addNeighbor(WesternAustralia);
+        Indonesia.addNeighbor(Siam);
+
+        NewGuinea.addNeighbor(Indonesia);
+        NewGuinea.addNeighbor(EasternAustralia);
+        NewGuinea.addNeighbor(WesternAustralia);
+
+        WesternAustralia.addNeighbor(EasternAustralia);
+        WesternAustralia.addNeighbor(Indonesia);
+        WesternAustralia.addNeighbor(NewGuinea);
+
+        EasternAustralia.addNeighbor(NewGuinea);
+        EasternAustralia.addNeighbor(WesternAustralia);
         this.pack();
+
+
         
         
 
@@ -271,6 +424,7 @@ public class BuildingMode extends JFrame {
         			t.setColor(p.getColor());
         			c.add(t);
                     t.setOwnerID(p.getId());
+                    t.setArmy(1,2,3);
             }
         } 
         return this.getContinent();

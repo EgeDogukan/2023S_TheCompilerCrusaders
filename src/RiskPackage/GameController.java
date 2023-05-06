@@ -135,6 +135,7 @@ public class GameController {
 			}
 			
 			//System.out.println(currentTerritories);
+			
 				
 			playerList.add(new Player(j, randomColorGenerator(), currentTerritories));
 			

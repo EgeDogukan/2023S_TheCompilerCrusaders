@@ -27,6 +27,12 @@ public class Player {
 		this.id=id;
 		this.color=color;
 		this.territories = territories;
+
+
+		this.army = army;
+		//for(Territory ter : territories)
+			//this.territories.add(ter);
+
 	}
 	
 	public ArrayList<Territory> getTerritories(){
@@ -96,6 +102,8 @@ public class Player {
 		else {
 			System.out.println("You don't have this card.");
 		}
+
+		
 	}
 	
 	public void usageOfDraftChanceCard() {
@@ -107,7 +115,7 @@ public class Player {
         
 	}
 		
-			
+	
 	
 
 	
