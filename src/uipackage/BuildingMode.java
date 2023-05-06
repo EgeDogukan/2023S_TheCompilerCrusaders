@@ -273,6 +273,7 @@ public class BuildingMode extends JFrame {
         			Continents c = t.getContinent();
         			t.setColor(p.getColor());
         			c.add(t);
+                    t.setOwnerID(p.getId());
             }
         } 
 	}

@@ -16,7 +16,7 @@ import uipackage.*;;
 
 public class GameController {
 	
-
+	private static int turnID = 0;
 	
     public static void main(String[] args) throws InterruptedException {
         
@@ -150,6 +150,10 @@ public class GameController {
 	
 	public void printTerritories(ArrayList<Player> playerList) {
 		return ;
+	}
+
+	public static int getCurrentTurnPlayerID() {
+		return turnID;
 	}
 	
 }
