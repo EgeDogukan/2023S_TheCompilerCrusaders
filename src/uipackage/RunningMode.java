@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -75,11 +76,9 @@ public class RunningMode extends JFrame{
             	RunningMode.turnCounter=RunningMode.turnCounter%(numberOfAIPlayer+numberOfHumanPlayer+1);
             	if (RunningMode.turnCounter==0) {
             		RunningMode.turnCounter++;
-					System.out.println("HEYYYYLKJLSDKLFLJKDJFKSKLDJ");
             	}
             	turn.setText(Integer.toString(RunningMode.turnCounter));
 				GameController.setCurrentTurnPlayerID(RunningMode.turnCounter);
-				System.out.println(GameController.getCurrentTurnPlayerID());
 				System.out.println("------------------------------" + RunningMode.turnCounter);
 				nextButton.setBackground(getPlayer(getTurn()-1));
             }
@@ -100,12 +99,24 @@ public class RunningMode extends JFrame{
 			}
 		});
 		
+		JButton useCard = new JButton("Use Card");
+		useCard.setSize(100,100);
+		useCard.setLocation(850,700);
+		
+		
+		//this.players.get(turnCounter).chanceCards.get(0).getClass().getName().split("\\.")[1]
+		String[] CardsOfCurrentPlayer = {"Reinforcement Card", "Nuclear Strike Card"};
+        JComboBox<String> Cards = new JComboBox<String>(CardsOfCurrentPlayer);
+		Cards.setSize(100, 100);
+		Cards.setLocation(600, 700);
 
 		this.getContentPane().add(nextButton);
 		this.getContentPane().add(turn);
 		this.getContentPane().add(turnString);
 		this.getContentPane().add(pickChanceCardButton);
 		this.getContentPane().add(helpButton);
+		this.getContentPane().add(useCard);
+		this.getContentPane().add(Cards);
 		this.add(panel); 
 
 
@@ -133,7 +144,7 @@ public class RunningMode extends JFrame{
         int randomNumber = rand.nextInt(5) + 1;
         
         IChanceCard chanceCard = new ChanceCardFactory().createCard(randomNumber);
-        this.players.get(curId).chanceCards.add(chanceCard);
+        this.players.get(curId-1).chanceCards.add(chanceCard);
         System.out.println("Player with ID"+curId+" has drawn the "+chanceCard.getClass().getName().split("\\.")[1]+" and it is added his/her list.");
 	}
 	

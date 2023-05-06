@@ -64,7 +64,17 @@ public class Player {
 	public void addArmyCard(IArmyCard card) {
 		this.armyCards.add(card);
 	}
-
+	
+	public void useChanceCard(IChanceCard card) {
+		if (card.type==0){   }
+		else if (card.type==1){   }
+		else if (card.type==2){   }
+		else if (card.type==3){   }
+		else if (card.type==4){   }
+	}
+		
+			
+	
 
 	
 	
