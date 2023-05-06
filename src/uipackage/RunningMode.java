@@ -10,12 +10,15 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
 
 import RiskPackage.Continents;
 import RiskPackage.GameManager;
 import RiskPackage.GamePanel;
+import RiskPackage.LinesPanel;
 import RiskPackage.RiskBoard;
+import RiskPackage.Territory;
 
 public class RunningMode extends JFrame{
 
@@ -29,7 +32,18 @@ public class RunningMode extends JFrame{
 		
 		RiskBoard board = new RiskBoard(this.continents);
 		GamePanel panel = new GamePanel(board);
+		//Trying to add lines as panel
+		//LinesPanel linesPanel = new LinesPanel();
+		//JLayeredPane layeredPane = new JLayeredPane();
+        //layeredPane.add(panel, JLayeredPane.DEFAULT_LAYER);
+        //layeredPane.add(linesPanel, JLayeredPane.PALETTE_LAYER);
 		panel.setBackground(Color.pink);
+		
+		//this.add(layeredPane);
+		this.setTitle("Running Mode");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+
 		
 		JButton nextButton = new JButton("next turn");
 		nextButton.setSize(100,100);
@@ -60,7 +74,11 @@ public class RunningMode extends JFrame{
 		turnString.setLocation(0, 500);
 		
 		
-		
+		//for (Territory territory : BuildingMode.territories) {
+		//	for (Territory neighbor : territory.getNeighbors()) {
+		//		linesPanel.addConnection(territory, neighbor);
+		//	}
+		//}
 		
 		
 		this.getContentPane().add(nextButton);

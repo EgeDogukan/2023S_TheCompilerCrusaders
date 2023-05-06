@@ -14,7 +14,7 @@ import javax.swing.JLayeredPane;
 
 //import javax.management.StringValueExp;
 
-import uipackage.*;;
+import uipackage.*;
 
 public class GameController {
 	static ArrayList<Territory> territories = new ArrayList<Territory>();

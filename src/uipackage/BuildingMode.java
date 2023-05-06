@@ -4,11 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -149,6 +151,20 @@ public class BuildingMode extends JFrame {
         territories.add(CentralAmerica);
 
 
+        territories.add(Venezuela);
+        territories.add(Brazil);
+        territories.add(Peru);
+        territories.add(Argentina);
+        
+        
+        territories.add(Iceland);
+        territories.add(GreatBritain);
+        territories.add(Scandinavia);
+        territories.add(Ukraine);
+        territories.add(NorthernEurope);
+        territories.add(WesternEurope);
+        territories.add(SouthernEurope);
+        
 
         //Territory Holland = new Territory(250, 250, 40, 40, "holland", Color.BLUE, Europe);
         //Territory US1 = new Territory(75, 150, 40, 40, "US", Color.BLUE, NorthAmerica);
@@ -157,58 +173,6 @@ public class BuildingMode extends JFrame {
         //Territory India = new Territory(280, 300, 40, 40, "India", Color.BLUE, Asia);
         //Territory China = new Territory(250, 100, 40, 40, "China", Color.BLUE, Asia);
 
-        //Adding neighbors to draw lines
-        Alaska.addNeighbor(Kamchatka);
-        Alaska.addNeighbor(NorthWestTerritory);
-        Alaska.addNeighbor(Alberta);
-        
-        NorthWestTerritory.addNeighbor(Greenland);
-        NorthWestTerritory.addNeighbor(Alberta);
-        NorthWestTerritory.addNeighbor(Alaska);
-        NorthWestTerritory.addNeighbor(Ontario);
-
-        Alberta.addNeighbor(Ontario);
-        Alberta.addNeighbor(WesternUnitedStates);
-        
-        Ontario.addNeighbor(Quebec);
-        Ontario.addNeighbor(Greenland);
-        Ontario.addNeighbor(WesternUnitedStates);
-        Ontario.addNeighbor(EasternAustralia);
-
-        WesternUnitedStates.addNeighbor(EasternUnitedStates);
-        WesternUnitedStates.addNeighbor(CentralAmerica);
-
-        CentralAmerica.addNeighbor(Venezuela);
-
-        Venezuela.addNeighbor(Brazil);
-        Venezuela.addNeighbor(Peru);
-
-        Peru.addNeighbor(Argentina);
-        Peru.addNeighbor(Brazil);
-
-        Brazil.addNeighbor(NorthAfrica);
-
-        
-        NorthAfrica.addNeighbor(Egypt);
-        NorthAfrica.addNeighbor(EastAfrica);
-        NorthAfrica.addNeighbor(Congo);
-        NorthAfrica.addNeighbor(SouthernEurope);
-        NorthAfrica.addNeighbor(WesternEurope);
-
-        Egypt.addNeighbor(EastAfrica);
-        Egypt.addNeighbor(SouthernEurope);
-        Egypt.addNeighbor(MiddleEast);
-
-        Congo.addNeighbor(NorthAfrica);
-        Congo.addNeighbor(EastAfrica);
-        Congo.addNeighbor(SouthAfrica);
-
-        SouthAfrica.addNeighbor(Congo);
-        SouthAfrica.addNeighbor(EastAfrica);
-        SouthAfrica.addNeighbor(Madagascar);
-
-        Madagascar.addNeighbor(SouthAfrica);
-        Madagascar.addNeighbor(EastAfrica);
         
 
 
@@ -276,6 +240,162 @@ public class BuildingMode extends JFrame {
         this.add(SouthAmerica);
         this.add(Africa);
         this.add(Australia);
+        
+        //Adding neighbors to draw lines
+        Alaska.addNeighbor(Kamchatka);
+        Alaska.addNeighbor(NorthWestTerritory);
+        Alaska.addNeighbor(Alberta);
+        
+        NorthWestTerritory.addNeighbor(Greenland);
+        NorthWestTerritory.addNeighbor(Alberta);
+        NorthWestTerritory.addNeighbor(Alaska);
+        NorthWestTerritory.addNeighbor(Ontario);
+
+        Alberta.addNeighbor(Ontario);
+        Alberta.addNeighbor(WesternUnitedStates);
+        
+        Ontario.addNeighbor(Quebec);
+        Ontario.addNeighbor(Greenland);
+        Ontario.addNeighbor(WesternUnitedStates);
+        Ontario.addNeighbor(EasternAustralia);
+
+        WesternUnitedStates.addNeighbor(EasternUnitedStates);
+        WesternUnitedStates.addNeighbor(CentralAmerica);
+
+        CentralAmerica.addNeighbor(Venezuela);
+
+        Venezuela.addNeighbor(Brazil);
+        Venezuela.addNeighbor(Peru);
+
+        Peru.addNeighbor(Argentina);
+        Peru.addNeighbor(Brazil);
+
+        Brazil.addNeighbor(NorthAfrica);
+
+        
+        NorthAfrica.addNeighbor(Egypt);
+        NorthAfrica.addNeighbor(EastAfrica);
+        NorthAfrica.addNeighbor(Congo);
+        NorthAfrica.addNeighbor(SouthernEurope);
+        NorthAfrica.addNeighbor(WesternEurope);
+        
+
+        Egypt.addNeighbor(EastAfrica);
+        Egypt.addNeighbor(SouthernEurope);
+        Egypt.addNeighbor(MiddleEast);
+
+        Congo.addNeighbor(NorthAfrica);
+        Congo.addNeighbor(EastAfrica);
+        Congo.addNeighbor(SouthAfrica);
+
+        SouthAfrica.addNeighbor(Congo);
+        SouthAfrica.addNeighbor(EastAfrica);
+        SouthAfrica.addNeighbor(Madagascar);
+
+        Madagascar.addNeighbor(SouthAfrica);
+        Madagascar.addNeighbor(EastAfrica);
+        
+        Iceland.addNeighbor(GreatBritain);
+        Iceland.addNeighbor(Greenland);
+        Iceland.addNeighbor(Scandinavia);
+
+        Scandinavia.addNeighbor(Iceland);
+        Scandinavia.addNeighbor(GreatBritain);
+        Scandinavia.addNeighbor(NorthernEurope);
+        Scandinavia.addNeighbor(Ukraine);
+
+        GreatBritain.addNeighbor(Iceland);
+        GreatBritain.addNeighbor(Scandinavia);
+        GreatBritain.addNeighbor(NorthernEurope);
+        GreatBritain.addNeighbor(WesternEurope);
+
+        Ukraine.addNeighbor(Scandinavia);
+        Ukraine.addNeighbor(NorthernEurope);
+        Ukraine.addNeighbor(SouthernEurope);
+        Ukraine.addNeighbor(Ural);
+        Ukraine.addNeighbor(Afghanistan);
+        Ukraine.addNeighbor(MiddleEast);
+
+        WesternEurope.addNeighbor(NorthAfrica);
+        WesternEurope.addNeighbor(GreatBritain);
+        WesternEurope.addNeighbor(NorthernEurope);
+        WesternEurope.addNeighbor(SouthernEurope);
+
+        MiddleEast.addNeighbor(SouthernEurope);
+        MiddleEast.addNeighbor(Egypt);
+        MiddleEast.addNeighbor(Ukraine);
+        MiddleEast.addNeighbor(Afghanistan);
+        MiddleEast.addNeighbor(India);
+
+        Ural.addNeighbor(Afghanistan);
+        Ural.addNeighbor(Ukraine);
+        Ural.addNeighbor(Siberia);
+        Ural.addNeighbor(China);
+
+        Afghanistan.addNeighbor(Ukraine);
+        Afghanistan.addNeighbor(Ural);
+        Afghanistan.addNeighbor(MiddleEast);
+        Afghanistan.addNeighbor(India);
+        Afghanistan.addNeighbor(China);
+
+        Siberia.addNeighbor(Ural);
+        Siberia.addNeighbor(Yakutsk);
+        Siberia.addNeighbor(Irkutsk);
+        Siberia.addNeighbor(Mongolia);
+        Siberia.addNeighbor(China);
+        
+        Yakutsk.addNeighbor(Irkutsk);
+        Yakutsk.addNeighbor(Siberia);
+        Yakutsk.addNeighbor(Kamchatka);
+        
+        Irkutsk.addNeighbor(Yakutsk);
+        Irkutsk.addNeighbor(Kamchatka);
+        Irkutsk.addNeighbor(Mongolia);
+        Irkutsk.addNeighbor(Siberia);
+
+        Mongolia.addNeighbor(Japan);
+        Mongolia.addNeighbor(Kamchatka);
+        Mongolia.addNeighbor(China);
+        Mongolia.addNeighbor(Siberia);
+        Mongolia.addNeighbor(Irkutsk);
+
+        Kamchatka.addNeighbor(Alaska);
+        Kamchatka.addNeighbor(Japan);
+        Kamchatka.addNeighbor(Yakutsk);
+        Kamchatka.addNeighbor(Irkutsk);
+        Kamchatka.addNeighbor(Mongolia);
+
+        Japan.addNeighbor(Kamchatka);
+        Japan.addNeighbor(Mongolia);
+
+        China.addNeighbor(Mongolia);
+        China.addNeighbor(Siberia);
+        China.addNeighbor(Ural);
+        China.addNeighbor(Afghanistan);
+        China.addNeighbor(India);
+        China.addNeighbor(Siam);
+
+        Siam.addNeighbor(India);
+        Siam.addNeighbor(China);
+        Siam.addNeighbor(Indonesia);
+
+        Indonesia.addNeighbor(NewGuinea);
+        Indonesia.addNeighbor(WesternAustralia);
+        Indonesia.addNeighbor(Siam);
+
+        NewGuinea.addNeighbor(Indonesia);
+        NewGuinea.addNeighbor(EasternAustralia);
+        NewGuinea.addNeighbor(WesternAustralia);
+
+        WesternAustralia.addNeighbor(EasternAustralia);
+        WesternAustralia.addNeighbor(Indonesia);
+        WesternAustralia.addNeighbor(NewGuinea);
+
+        EasternAustralia.addNeighbor(NewGuinea);
+        EasternAustralia.addNeighbor(WesternAustralia);
+        
+        
+        
         this.pack();
         
         
@@ -327,7 +447,15 @@ public class BuildingMode extends JFrame {
         });
         
 	}
-	
+	public void paintComponent(Graphics g){
+     
+      Graphics2D g2= (Graphics2D) g;
+      for(Territory t : territories){
+        for(Territory n : t.getNeighbors()){
+            g2.draw(new Line2D.Double(n.getBounds().x, n.getBounds().y, this.getBounds().x/2, this.getBounds().y/2));
+		}
+      }
+    }
 	public int getNumberOfPlayer() {
 		return this.numberOfPlayer;
 	}
@@ -363,12 +491,13 @@ public class BuildingMode extends JFrame {
 
     	return this.continents;
     }
+    
 	
 	public static void main(String[] args) throws InterruptedException {
 	    BuildingMode RiskGameFrame = new BuildingMode();
 	    RiskGameFrame.setLayout(null);
 	    RiskGameFrame.setVisible(true);
-        
+       
         
 	    // Declare a variable to store the number of players
 	    AtomicInteger numberOfPlayers = new AtomicInteger(0);

@@ -138,9 +138,9 @@ public class Territory extends JPanel {
 	        g.drawString(this.name, this.xCoordinate, this.yCoordinate);
 			g2.setColor(Color.BLACK); // Set the color of the line to black
 			g2.setStroke(new BasicStroke(2)); 	
-			//for(Territory n : this.getNeighbors()){
-			//	g2.draw(new Line2D.Double(n.getBounds().x, n.getBounds().y, this.getBounds().x, this.getBounds().y));
-			//}
+			for(Territory n : this.getNeighbors()){
+				g2.draw(new Line2D.Double(n.getBounds().x, n.getBounds().y, this.getBounds().x/2, this.getBounds().y/2));
+			}
 			
 			
 	    }
