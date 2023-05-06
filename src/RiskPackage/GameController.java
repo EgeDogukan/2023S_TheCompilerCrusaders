@@ -71,7 +71,7 @@ public class GameController {
         
 	    ArrayList<Player> playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent());
         ArrayList<Continents> c= RiskGameFrame.initalSharing(playerList);
-		RunningMode g = new RunningMode(c);
+		RunningMode g = new RunningMode(c, playerList, numberOfAIPlayers.get(), numberOfPlayers.get());
                 
         g.setLayout(new BorderLayout());
         g.setVisible(true);
@@ -153,5 +153,6 @@ public class GameController {
 	public static int getCurrentTurnPlayerID() {
 		return turnID;
 	}
+	
 	
 }

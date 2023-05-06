@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import cardPackage.IArmyCard;
+
 public class Player {
 	
 	private int id;
@@ -13,6 +15,7 @@ public class Player {
 	private String name;
 	private boolean takeTurn = false;
 	protected ArrayList<Territory> territories;
+	public ArrayList<IArmyCard> armyCards = new ArrayList<IArmyCard>();
 	
 	public Player(int id, Color color,  ArrayList<Territory> territories) {
 		this.id=id;
@@ -54,6 +57,10 @@ public class Player {
 
 	public void setArmy(Army army) {
 		this.army = army;
+	}
+	
+	public void addArmyCard(IArmyCard card) {
+		this.armyCards.add(card);
 	}
 
 
