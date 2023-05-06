@@ -22,6 +22,8 @@ import javax.swing.JTextField;
 import RiskPackage.GameController;
 import cardPackage.ArmyCardFactory;
 import cardPackage.TerritoryCard;
+import uipackage.BuildingMode;
+import uipackage.RunningMode;
 
 public class Territory extends JPanel {
 	 private String name;
@@ -213,9 +215,20 @@ public class Territory extends JPanel {
 						}
 					}
 						else {
-							System.out.println("sahip değil");
+							System.out.println("sahip degil");
 							JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
-						"y"+Territory.this.yCoordinate);
+						"y"+Territory.this.yCoordinate+"kerem");
+							int counter=BuildingMode.turnCounter;
+							Player currentPlayer = GameController.getfromid(counter);
+							currentPlayer.setColor(Color.BLUE);
+							Territory.this.setColor(currentPlayer.getColor());
+							Territory.this.setBackground(currentPlayer.getColor());
+							Territory.this.setBackground(Color.BLUE);
+							Territory.this.setColor(Color.BLUE);
+							//repaint();
+							//ArrayList<Player> players=GameController.initGame(BuildingMode.BnumberOfPlayer, BuildingMode.BnumberOfComp, GameRiskGameFrame.getContinent(), isBuilding);
+							
+							
 						}
 					}
 					

@@ -37,11 +37,11 @@ public class BuildingMode extends JFrame {
 	public int numberOfPlayer;
     public int numberOfComp;
     
-    public int BnumberOfPlayer;
-    public int BnumberOfComp;
+    public static int BnumberOfPlayer;
+    public static int BnumberOfComp;
     
     public ArrayList<Continents> continents;
-    static int turnCounter=1;
+    public static int turnCounter=1;
     
     int numberOfArmyPerPlayer;
 	
@@ -425,19 +425,6 @@ public class BuildingMode extends JFrame {
         this.pack();
 
 
-//        
-//        JTextField numberOfAITextField = new JTextField("");
-//        JTextField numberOfHumanTextField = new JTextField("");
-//        
-//        numberOfAITextField.setSize(100,50);
-//        numberOfAITextField.setLocation(550,750);
-//        this.getContentPane().add(numberOfAITextField);
-//
-//        numberOfHumanTextField.setSize(100,50);
-//        numberOfHumanTextField.setLocation(250,750);
-//        this.getContentPane().add(numberOfHumanTextField);
-//        
-        
 
         
         Integer[] numberOfPlayers = {2, 3, 4, 5, 6};
@@ -547,12 +534,16 @@ public class BuildingMode extends JFrame {
 		nextButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				turnCounter++;
-				turnCounter=turnCounter%(getNumberOfPlayer()+getNumberOfComp());
+				turnCounter=turnCounter%(getNumberOfPlayer()+getNumberOfComp()+1);
+				if (turnCounter==0)
+				{
+					turnCounter++;
+				}
 				turnLabel.setText(Integer.toString(turnCounter));
 			}
 		});
 		
-		this.numberOfArmyPerPlayer = getNumberOfInitialArmy(this.BnumberOfComp+this.BnumberOfPlayer);
+		this.numberOfArmyPerPlayer = getNumberOfInitialArmy(BnumberOfComp+BnumberOfPlayer);
 
 	}
 	
@@ -580,7 +571,15 @@ public class BuildingMode extends JFrame {
         } 
         return this.getContinent();
 	}
+	
+	public Player getCurrentPlayer2(ArrayList<Player> players){
+		
+		return players.get(turnCounter);
 
+		
+	}
+	
+	
     public int getNumberOfComp() {
 		return this.numberOfComp;
 	}

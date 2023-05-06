@@ -13,6 +13,7 @@ import uipackage.*;;
 public class GameController {
 	
 	private static int turnID = 0;
+	private static ArrayList<Player> lst;
 	
 	private GameController() {
 		
@@ -80,9 +81,9 @@ public class GameController {
 	    }
 	    
         boolean isBuilding=true;
-	    ArrayList<Player> playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent(), isBuilding);
-        ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
-		RunningMode g = new RunningMode(c, playerList, numberOfAIPlayers.get(), numberOfPlayers.get());
+	    ArrayList<Player> lst = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent(), isBuilding);
+        ArrayList<Continents> c = RiskGameFrame.initalSharing(lst);
+		RunningMode g = new RunningMode(c, lst, numberOfAIPlayers.get(), numberOfPlayers.get());
                 
         g.setLayout(new BorderLayout());
         g.setVisible(true);
@@ -106,7 +107,7 @@ public class GameController {
     }
     
 
-	static private ArrayList<Player> initGame(int numberofPlayers, int numberofComp, ArrayList<Continents> continents, boolean isBuilding) {
+	static public ArrayList<Player> initGame(int numberofPlayers, int numberofComp, ArrayList<Continents> continents, boolean isBuilding) {
 		
 		ArrayList<Territory> territories = new ArrayList<Territory>();
 		for (Continents continent : continents) {
@@ -118,7 +119,6 @@ public class GameController {
 		int territoryPerPlayer = Math.floorDiv(territories.size(), (numberofPlayers+numberofComp));
 		System.out.println("Number of territory: "+territories.size());
 		System.out.println("Territory per player is: "+territoryPerPlayer);
-		
 		
 		ArrayList<Player> playerList = new ArrayList<Player>();
 		ArrayList<Player> playerList2 = new ArrayList<Player>();
@@ -164,6 +164,14 @@ public class GameController {
 	}
 	
 
+	public static Player getfromid(int id) {
+		for(Player player : lst) {
+			if(player.getId()==id);
+				return player;
+			
+		}
+		return null;
+	}
 
 	public static int getCurrentTurnPlayerID() {
 		return turnID;
@@ -171,6 +179,10 @@ public class GameController {
 
 	public static void setCurrentTurnPlayerID(int ID) {
 		turnID = ID - 1;
+	}
+	
+	public void getPlayerList() {
+		
 	}
 	
 	
