@@ -474,8 +474,8 @@ public class BuildingMode extends JFrame {
       				}
         			
         		}
-//        		setNumberOfPlayer(((int)Integer.valueOf((String) myComboBox.getSelectedItem())));
-//                setNumberOfComp(((int)Integer.valueOf((String) compBox.getSelectedItem())));
+      		setNumberOfPlayer(((int)Integer.valueOf((String) myComboBox.getSelectedItem())));
+                setNumberOfComp(((int)Integer.valueOf((String) compBox.getSelectedItem())));
         		
         	};
         });
