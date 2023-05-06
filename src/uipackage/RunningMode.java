@@ -110,9 +110,10 @@ public class RunningMode extends JFrame{
 		int curId=getTurn();
 		Random rand = new Random();
         int randomNumber = rand.nextInt(5) + 1;
-        IChanceCard chaneCard = new ChanceCardFactory().createCard(randomNumber);
-        this.players.get(curId).chanceCards.add(chaneCard);
-        System.out.println("Player with ID"+curId+" has drawn the card with ID"+randomNumber+" and it is added his/her list.");
+        
+        IChanceCard chanceCard = new ChanceCardFactory().createCard(randomNumber);
+        this.players.get(curId).chanceCards.add(chanceCard);
+        System.out.println("Player with ID"+curId+" has drawn the "+chanceCard.getClass().getName().split("\\.")[1]+" and it is added his/her list.");
 	}
 	
 	
