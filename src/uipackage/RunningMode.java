@@ -131,43 +131,7 @@ public class RunningMode extends JFrame{
 		});
 		
 		
-		JButton pauseButton = new JButton("Pause");
-		pauseButton.setSize(75,75);
-		pauseButton.setLocation(1450, 700);
 		
-		Image image1 = null;
-		try {
-			image1 = ImageIO.read(new File("495307-200.png"));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		ImageIcon icon = new ImageIcon(image1.getScaledInstance(75, 75, Image.SCALE_SMOOTH));
-		pauseButton.setIcon(icon);
-		
-		pauseButton.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				if (isContinue){
-					pauseButton.setText("Resume");
-					
-					nextButton.setVisible(false);
-					pickChanceCardButton.setVisible(false);
-					helpButton.setVisible(false);
-					useCard.setVisible(false);
-					cardComboBox.setVisible(false);
-					isContinue=false;
-				}
-				else {
-					pauseButton.setText("Pause");
-					nextButton.setVisible(true);
-					pickChanceCardButton.setVisible(true);
-					helpButton.setVisible(true);
-					useCard.setVisible(true);
-					cardComboBox.setVisible(true);
-					isContinue=true;
-				}
-				
-			}
-		});
 		
 		JButton quitButton = new JButton("Quit");
 		quitButton.setSize(75,75);
@@ -202,6 +166,46 @@ public class RunningMode extends JFrame{
 			}
 		});
 		
+		JButton pauseButton = new JButton("Pause");
+		pauseButton.setSize(75,75);
+		pauseButton.setLocation(1450, 700);
+		
+		Image image1 = null;
+		try {
+			image1 = ImageIO.read(new File("495307-200.png"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		ImageIcon icon = new ImageIcon(image1.getScaledInstance(75, 75, Image.SCALE_SMOOTH));
+		pauseButton.setIcon(icon);
+		
+		pauseButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (isContinue){
+					pauseButton.setText("Resume");
+					
+					nextButton.setVisible(false);
+					pickChanceCardButton.setVisible(false);
+					helpButton.setVisible(false);
+					useCard.setVisible(false);
+					cardComboBox.setVisible(false);
+					pickTerritoryCardButton.setVisible(false);
+					isContinue=false;
+				}
+				else {
+					pauseButton.setText("Pause");
+					nextButton.setVisible(true);
+					pickChanceCardButton.setVisible(true);
+					helpButton.setVisible(true);
+					useCard.setVisible(true);
+					cardComboBox.setVisible(true);
+					pickTerritoryCardButton.setVisible(true);
+					isContinue=true;
+				}
+				
+			}
+		});
+		
 		
 		this.getContentPane().add(nextButton);
 		this.getContentPane().add(turn);
@@ -217,7 +221,6 @@ public class RunningMode extends JFrame{
 
 		initializeArmies();
 		initializeTerritoryCards();
-
 
 	}
 
