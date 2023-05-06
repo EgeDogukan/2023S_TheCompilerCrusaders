@@ -13,5 +13,8 @@ public class NuclearStrikeChanceCard implements IChanceCard {
 		System.out.println("Action of Draft Card is applied.");
 		
 	}
+	public int getType() {
+		return this.type;
+	}
 
 }

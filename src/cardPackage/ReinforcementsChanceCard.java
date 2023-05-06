@@ -7,7 +7,7 @@ public class ReinforcementsChanceCard implements IChanceCard {
 	public int type;
 
 	public ReinforcementsChanceCard() {
-		this.type=2;
+		this.type=1;
 	}
 
 	@Override

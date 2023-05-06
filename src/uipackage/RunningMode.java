@@ -112,7 +112,6 @@ public class RunningMode extends JFrame{
 		useCard.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				int selectedCard = cardComboBox.getSelectedIndex();
-				System.out.println("Selected index: "+selectedCard);
 				players.get(getTurn()-1).useChanceCard(selectedCard);
 			}
 		});

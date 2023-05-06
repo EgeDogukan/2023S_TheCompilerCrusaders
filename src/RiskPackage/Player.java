@@ -70,19 +70,18 @@ public class Player {
 		boolean exist=false;
 		
 		for (IChanceCard chanceCard : chanceCards) {
-			System.out.println("type of chance card : "+chanceCard.type);
-			if (id==chanceCard.type) {
+			if (id==chanceCard.getType()) {
 				exist=true;
 				break;
 			}
 		}
 		
 		if (exist) {
-			if (id==0){ System.out.println("Action of card 1 is applied.");  }
-			else if (id==1){ System.out.println("Action of card 2 is applied.");  }
-			else if (id==2){ System.out.println("Action of card 3 is applied.");  }
-			else if (id==3){ System.out.println("Action of card 4 is applied.");  }
-			else if (id==4){ System.out.println("Action of card 5 is applied.");  }
+			if (id==0){ System.out.println("Draft chance Card is applied.");  }
+			else if (id==1){ System.out.println("Reinforcement Card is applied.");  }
+			else if (id==2){ System.out.println("Trade Deal Card is applied.");  }
+			else if (id==3){ System.out.println("Revolution Card is applied.");  }
+			else if (id==4){ System.out.println("Nuclear Strike Card is applied.");  }
 		}
 		else {
 			System.out.println("You don't have this card.");
