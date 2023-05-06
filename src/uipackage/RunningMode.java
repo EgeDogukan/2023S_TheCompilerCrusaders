@@ -48,6 +48,7 @@ public class RunningMode extends JFrame{
 		JButton nextButton = new JButton("next turn");
 		nextButton.setSize(100,100);
 		nextButton.setLocation(100, 650);
+		nextButton.setBackground(this.players.get(getTurn()-1).getColor());
 		
 		JButton pickChanceCardButton = new JButton("Pick a Chance Card");
 		pickChanceCardButton.setSize(175,175);
@@ -68,7 +69,9 @@ public class RunningMode extends JFrame{
 		nextButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
 
-            	//System.out.println(x);
+				
+				//nextButton.setBackground(GameController.getCurrentTurnPlayerID());
+            	//System.out.println();
             	RunningMode.turnCounter++;
             	RunningMode.turnCounter=RunningMode.turnCounter%(numberOfAIPlayer+numberOfHumanPlayer+1);
             	if (RunningMode.turnCounter==0) {
@@ -77,6 +80,7 @@ public class RunningMode extends JFrame{
             	turn.setText(Integer.toString(RunningMode.turnCounter));
 				GameController.setCurrentTurnPlayerID(RunningMode.turnCounter);
 				System.out.println("------------------------------" + RunningMode.turnCounter);
+				nextButton.setBackground(getPlayer(getTurn()-1));
             }
         });
 
@@ -155,7 +159,9 @@ public class RunningMode extends JFrame{
         System.out.println("Player with ID"+curId+" has drawn the "+chanceCard.getClass().getName().split("\\.")[1]+" and it is added his/her list.");
 	}
 	
-
+	public Color getPlayer(int id){
+		return this.players.get(id).getColor();
+	}
 	
 
 }
