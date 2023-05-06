@@ -55,7 +55,7 @@ public class login extends JFrame{
         helpScreenButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Code to execute when the button is clicked
-                helpScreen helpScreen = new helpScreen();
+                helpScreen helpScreen = new helpScreen("bla bla");
                 helpScreen.setVisible(true);
             }
         });
