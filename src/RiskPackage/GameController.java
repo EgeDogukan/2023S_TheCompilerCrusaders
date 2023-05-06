@@ -14,6 +14,17 @@ public class GameController {
 	
 	private static int turnID = 0;
 	
+	private GameController() {
+		
+	}
+	
+	public static GameController getInstance() {
+		
+		GameController instance = new GameController();
+		return instance;
+		
+	}
+	
     public static void main(String[] args) throws InterruptedException {
         
     	login loginPage = new login();
