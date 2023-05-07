@@ -2,13 +2,19 @@ package RiskPackage;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.ImageObserver;
+import java.text.AttributedCharacterIterator;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,13 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import javax.swing.JTextField;
-
-import RiskPackage.GameController;
-import cardPackage.ArmyCardFactory;
-import cardPackage.TerritoryCard;
 import uipackage.BuildingMode;
-import uipackage.RunningMode;
 
 public class Territory extends JPanel {
 	 private String name;
@@ -225,7 +225,10 @@ public class Territory extends JPanel {
 							Territory.this.setBackground(currentPlayer.getColor());
 							Territory.this.setBackground(Color.BLUE);
 							Territory.this.setColor(Color.BLUE);
-							//repaint();
+							Territory.this.setLayout(null); 
+							Territory.this.updateUI();
+							Territory.this.repaint();
+							Territory.this.revalidate();
 							//ArrayList<Player> players=GameController.initGame(BuildingMode.BnumberOfPlayer, BuildingMode.BnumberOfComp, GameRiskGameFrame.getContinent(), isBuilding);
 							
 							
@@ -264,9 +267,13 @@ public class Territory extends JPanel {
 	    public void paintComponent(Graphics g) {
 	    	super.paintComponent(g);
 	        g.setColor(this.getColor());
+	        g.setColor(getBackground());
 	        g.fillRect(this.xCoordinate, this.yCoordinate, this.width, this.height);
 	        g.setColor(Color.BLACK);
 	        g.drawString(this.name, this.xCoordinate, this.yCoordinate); 
+	        
+	        
+	        //g.fillRect(0, 0, getWidth(), getHeight());
 	    }
 	    
 	    public int getWidth() {

@@ -1,34 +1,20 @@
 package uipackage;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import RiskPackage.ComputerPlayer;
 import RiskPackage.Continents;
-import RiskPackage.GameManager;
-import RiskPackage.GamePanel;
-import RiskPackage.HumanPlayer;
 import RiskPackage.Player;
-import RiskPackage.RiskBoard;
 import RiskPackage.Territory;
 
 public class BuildingMode extends JFrame {
