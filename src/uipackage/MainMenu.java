@@ -9,6 +9,7 @@ public class MainMenu extends JFrame {
     private JButton startButton;
     private JButton loadButton;
     private JButton quitButton;
+    private JButton loginButton;
     private JLabel imageLabel;
     private Clip backgroundMusic;
 
@@ -30,7 +31,7 @@ public class MainMenu extends JFrame {
         }
 
         // Create the start button and add an action listener
-        startButton = new JButton("Start Game");
+        startButton = new JButton("New Game");
         startButton.addActionListener(e -> {
             // TODO: Implement code to start a new game
             System.out.println("Starting new game...");
@@ -41,6 +42,12 @@ public class MainMenu extends JFrame {
         loadButton.addActionListener(e -> {
             // TODO: Implement code to load a saved game
             System.out.println("Loading saved game...");
+        });
+        
+        loginButton = new JButton("Login/Register");
+        loginButton.addActionListener(e -> {
+            // TODO: Implement code to start a new game
+            System.out.println("Opening login screen...");
         });
 
         // Create the quit button and add an action listener
@@ -55,11 +62,12 @@ public class MainMenu extends JFrame {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(startButton);
         buttonPanel.add(loadButton);
+        buttonPanel.add(loginButton);
         buttonPanel.add(quitButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
         // Add the image to the main menu window
-        ImageIcon imageIcon = new ImageIcon("map2.png");
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\begum\\Documents\\GitHub\\2023S_TheCompilerCrusaders\\src\\uipackage\\menu.png");
         Image image = imageIcon.getImage().getScaledInstance(600, 300, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(image);
         imageLabel = new JLabel("", resizedIcon, JLabel.CENTER);
@@ -72,5 +80,6 @@ public class MainMenu extends JFrame {
 
     public static void main(String[] args) {
         MainMenu mainMenu = new MainMenu();
+        
     }
 }
