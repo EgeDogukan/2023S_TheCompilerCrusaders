@@ -44,14 +44,16 @@ public class MongoDBDatabase implements ISaveLoadAdapter {
 	}
 
 	public ArrayList<String> load(String username) throws IOException {
-		
 		Document my_doc = collection.find(eq("username", username)).first();
 		if(my_doc==null) {
 			return null;
 		}
+		
 		System.out.println("Game successfully loaded from the database for "+username);
 		ArrayList<String> informations = new ArrayList<String>();
 		informations.add(my_doc.getString("password").toString());
+
+		
 		return informations;
 	}
 
@@ -64,7 +66,7 @@ public class MongoDBDatabase implements ISaveLoadAdapter {
 	public static void main(String[] args) throws IOException {
 		MongoDBDatabase database =  new MongoDBDatabase();
 		database.prepare();
-		database.save("Kerem", "123");
+		database.save("Halil", "1234");
 	}
 
 }

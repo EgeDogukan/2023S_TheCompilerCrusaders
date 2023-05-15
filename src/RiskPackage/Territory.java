@@ -30,6 +30,7 @@ public class Territory extends JPanel {
 	    private int width;
 	    private int height;
 	    private Color color;
+	    private Continents continent;
 		private Continents c;
 	    private ArrayList<Territory> neighbors;
 		private int playerID;
@@ -363,6 +364,20 @@ public class Territory extends JPanel {
 			this.armyOnTerritory.setInfantry(this.Inumber - destination.Inumber);
 			this.Inumber -= destination.Inumber;
 
+		}
+		
+		public ArrayList<String> getList(){
+			ArrayList<String> list = new ArrayList<String>();
+			list.add(((Integer)xCoordinate).toString());
+			list.add(((Integer)yCoordinate).toString());
+			list.add(((Integer)width).toString());
+			list.add(((Integer)height).toString());
+			list.add(name);
+			list.add(color.toString());
+			list.add("tr");
+			list.add(((Integer)playerID).toString());
+			
+			return list;
 		}
 
 
