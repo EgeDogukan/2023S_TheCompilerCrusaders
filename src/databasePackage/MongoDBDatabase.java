@@ -21,10 +21,9 @@ public class MongoDBDatabase implements ISaveLoadAdapter {
 	MongoClient mongoClient;
 	MongoDatabase database;
 	MongoCollection<Document> collection;
-	@Override
+
 	public void prepare() {
 		mongoLogger = Logger.getLogger("org.mongodb.driver");
-		System.out.println("selamm");
 		mongoLogger.setLevel(Level.SEVERE); // e.g. or Log.WARNING, etc.	
 		mongoClient = MongoClients.create("mongodb+srv://compilercrusader:comp123comp@compilercrusader.pw4xqlq.mongodb.net/"); // uri connection to the server
 		database = mongoClient.getDatabase("users"); // selecting the database 
@@ -35,7 +34,6 @@ public class MongoDBDatabase implements ISaveLoadAdapter {
 
 		Document doc = new Document();
 		Bson filter = eq("username", username);
-		System.out.println("selam");
 		collection.deleteMany(filter);
 		doc.append("username", username);
 		doc.append("password", password);
@@ -45,17 +43,23 @@ public class MongoDBDatabase implements ISaveLoadAdapter {
 		
 	}
 
-	public String load(String username) throws IOException {
+	public ArrayList<String> load(String username) throws IOException {
 		
 		Document my_doc = collection.find(eq("username", username)).first();
 		if(my_doc==null) {
 			return null;
 		}
 		System.out.println("Game successfully loaded from the database for "+username);
-		return my_doc.getString("password").toString();
+		ArrayList<String> informations = new ArrayList<String>();
+		informations.add(my_doc.getString("password").toString());
+		return informations;
+	}
 
+	public void save(ArrayList<String> saveList, String username) throws IOException {
+		return;
 		
 	}
+	
 	
 	public static void main(String[] args) throws IOException {
 		MongoDBDatabase database =  new MongoDBDatabase();
