@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import javax.swing.JTextField;
+import javax.swing.plaf.synth.Region;
 
 import RiskPackage.GameController;
 import cardPackage.ArmyCardFactory;
@@ -40,6 +41,7 @@ public class Territory extends JPanel {
 		private int Inumber;
 		private Army armyOnTerritory;
 		private boolean isBuilding=false;
+		private Region terr_Region;
 	    
 	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color, Continents continent, int playerID) {
 	    	this.isBuilding=false;
@@ -63,6 +65,31 @@ public class Territory extends JPanel {
 	        this.name = name;
 	        this.color = color;
 	        this.neighbors = new ArrayList<Territory>();
+
+
+
+
+			WorldMap map = new WorldMap();
+			//this.terr_Region = map.
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	        
 	        
 			JLabel nameLabel = new JLabel(this.getName());
