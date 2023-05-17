@@ -172,6 +172,7 @@ public class login extends JFrame{
                 if (contFlag == 2) {    	
                     JOptionPane.showMessageDialog(null, "Login successful!");
                     System.out.println("BURADAYIZ");
+                    
                     setLoginStatus(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Login failed. Please try again.");

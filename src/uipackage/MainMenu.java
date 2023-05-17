@@ -2,6 +2,11 @@ package uipackage;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
+
+import RiskPackage.GameManager;
+import RiskPackage.GamePanel;
+import RiskPackage.RiskBoard;
+
 import java.awt.*;
 
 public class MainMenu extends JFrame {
@@ -48,6 +53,10 @@ public class MainMenu extends JFrame {
         loginButton.addActionListener(e -> {
             // TODO: Implement code to start a new game
             System.out.println("Opening login screen...");
+            backgroundMusic.stop();
+            
+            
+            login lg = new login();
         });
 
         // Create the quit button and add an action listener
@@ -67,7 +76,7 @@ public class MainMenu extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
 
         // Add the image to the main menu window
-        ImageIcon imageIcon = new ImageIcon("src\\uipackage\\menu.png");
+        ImageIcon imageIcon = new ImageIcon("2023S_TheCompilerCrusaders\\src\\uipackage\\menu.png");
         Image image = imageIcon.getImage().getScaledInstance(600, 300, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(image);
         imageLabel = new JLabel("", resizedIcon, JLabel.CENTER);

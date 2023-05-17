@@ -12,6 +12,9 @@ import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.*;
+import java.awt.*;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -43,6 +46,8 @@ public class RunningMode extends JFrame{
 	public static boolean isContinue = true;
 	public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
 	
+
+	
 	
 	public RunningMode(ArrayList<Continents> continents, ArrayList<Player> players, int numberOfAIPlayer, int numberOfHumanPlayer)  {
 		this.numberOfAIPlayer=numberOfAIPlayer;
@@ -50,7 +55,7 @@ public class RunningMode extends JFrame{
 		this.players=players;
 		this.continents=continents;
 		this.setSize(1920,1080);
-		
+		this.setTitle("ConKUerror");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		RiskBoard board = new RiskBoard(this.continents);
@@ -113,6 +118,10 @@ public class RunningMode extends JFrame{
 			}
 		});
 		
+		
+		
+
+
 		//this.players.get(turnCounter).chanceCards.get(0).getClass().getName().split("\\.")[1]
 		String[] CardsOfCurrentPlayer = {"Draft Chance Card", "Reinforcement Card", "Trade Deal Card", "Revolution Card", "Nuclear Strike Card"};
         JComboBox<String> cardComboBox = new JComboBox<String>(CardsOfCurrentPlayer);
@@ -140,7 +149,7 @@ public class RunningMode extends JFrame{
 		
 		Image image2 = null;
 		try {
-			image2 = ImageIO.read(new File("images.png"));
+			image2 = ImageIO.read(new File("2023S_TheCompilerCrusaders\\images.png"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -172,7 +181,7 @@ public class RunningMode extends JFrame{
 		
 		Image image1 = null;
 		try {
-			image1 = ImageIO.read(new File("495307-200.png"));
+			image1 = ImageIO.read(new File("2023S_TheCompilerCrusaders\\495307-200.png"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -227,7 +236,9 @@ public class RunningMode extends JFrame{
 	public int getTurn() {
 		return RunningMode.turnCounter;
 	}
-
+	public Color getTurnColor(){
+		return this.players.get(getTurn()-1).getColor();
+	}
 	/*public void initializeArmies() {
 		for (Player p : this.players) {
 			for (int i=0;i<3;i++) { p.addArmyCard(new ArmyCardFactory().createArmyCard(3));}
