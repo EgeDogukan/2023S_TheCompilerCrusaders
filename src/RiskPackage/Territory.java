@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import RiskPackage.GameController;
 import cardPackage.ArmyCardFactory;
 import cardPackage.TerritoryCard;
+import uipackage.WorldMap;
 
 public class Territory extends JPanel {
 	 private String name;
