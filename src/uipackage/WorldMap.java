@@ -181,6 +181,10 @@ public class WorldMap {
         return ui;
     }
 
+    public ArrayList<Shape> getShapeList() {
+        return shapeList;
+    }
+
     public static void main(String[] args) {
         Runnable r = () -> {
             try {
