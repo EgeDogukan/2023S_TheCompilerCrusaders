@@ -13,7 +13,7 @@ import uipackage.*;;
 public class GameController {
 	
 	private static int turnID = 0;
-	
+	private static ArrayList<Player> playerList = new ArrayList<Player>();
 	private GameController() {
 		
 	}
@@ -24,6 +24,8 @@ public class GameController {
 		return instance;
 		
 	}
+	
+	
 	
     public static void main(String[] args) throws InterruptedException {
         
@@ -80,7 +82,8 @@ public class GameController {
 	    }
 	    
         
-	    ArrayList<Player> playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent());
+	    
+	    GameController.playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent());
         ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
 		RunningMode g = new RunningMode(c, playerList, numberOfAIPlayers.get(), numberOfPlayers.get());
                 
@@ -88,6 +91,10 @@ public class GameController {
         g.setVisible(true);
 		turnID = g.getTurn() - 1;
 
+    }
+    
+    public static ArrayList<Player> getPlayers(){
+    	return playerList;
     }
     
     static private void startLogin() {

@@ -16,6 +16,8 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+import RiskPackage.GameController;
+import RiskPackage.Player;
 import RiskPackage.Territory;
 
 public class TerritoryDBDatabase implements ISaveLoadAdapter {
@@ -34,45 +36,59 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 		
 	}
 
-	public void save(ArrayList<String> saveList, String username) throws IOException {
+	public void save(Player player) throws IOException {
 		
-		Document doc = new Document();
-		Bson filter = eq("username", username);
-        collection.deleteMany(filter);
-		doc.append("username", username);
-		doc.append("xCoordinate", saveList.get(0));
-		doc.append("yCoordinate", saveList.get(1));
-		doc.append("width", saveList.get(2));
-		doc.append("height", saveList.get(3));
-		doc.append("name", saveList.get(4));
-		doc.append("color", saveList.get(5));
-		doc.append("continentName", saveList.get(6));
-		doc.append("playerID", saveList.get(7));
-		collection.insertOne(doc);
+		String username = String.valueOf(player.getId());
+		
+		for (int i=0;i<player.getTerritories().size();i++) {
+			Document doc = new Document();
+			//Bson filter = eq("username", username);
+	        //collection.deleteMany(filter);
+			
+			ArrayList<String> saveList = player.getTerritories().get(i).getList();
+			
+			doc.append("username", username);
+			doc.append("xCoordinate", saveList.get(0));
+			doc.append("yCoordinate", saveList.get(1));
+			doc.append("width", saveList.get(2));
+			doc.append("height", saveList.get(3));
+			doc.append("name", saveList.get(4));
+			doc.append("color", saveList.get(5));
+			doc.append("continentName", saveList.get(6));
+			doc.append("playerID", saveList.get(7));
+			collection.insertOne(doc);
+		}
 		
 		System.out.println("Game saved to the database for " +username);
 		
 	}
 
-	@Override
-	public ArrayList<String> load(String username) throws IOException {
+	public ArrayList<ArrayList<String>> load(Player player) throws IOException {
 		
-		Document my_doc = collection.find(eq("username", username)).first();
+		String username = String.valueOf(player.getId());
+				
+		Document my_doc = collection.find(eq("username", player.getId())).first();
 		if(my_doc==null) {return null;}
 		
-		ArrayList<String> loadList = new ArrayList<String>();
+		ArrayList<ArrayList<String>> informations = new ArrayList<ArrayList<String>>();
 		
-		loadList.add(my_doc.get("xCoordinate").toString());
-		loadList.add(my_doc.get("yCoordinate").toString());
-		loadList.add(my_doc.get("width").toString());
-		loadList.add(my_doc.get("height").toString());
-		loadList.add(my_doc.get("name").toString());
-		loadList.add(my_doc.get("color").toString());
-		loadList.add(my_doc.get("continentName").toString());
-		loadList.add(my_doc.get("playerID").toString());
+		for (int i=0;i<player.getTerritories().size();i++) {
+			ArrayList<String> loadList = new ArrayList<String>();
+			
+			loadList.add(my_doc.get("xCoordinate").toString());
+			loadList.add(my_doc.get("yCoordinate").toString());
+			loadList.add(my_doc.get("width").toString());
+			loadList.add(my_doc.get("height").toString());
+			loadList.add(my_doc.get("name").toString());
+			loadList.add(my_doc.get("color").toString());
+			loadList.add(my_doc.get("continentName").toString());
+			loadList.add(my_doc.get("playerID").toString());
+			informations.add(loadList);
+		}
+		
 		
 		System.out.println("Game successfully loaded from the database for "+username);
-		return loadList;
+		return informations;
 	}
 
 	
@@ -82,12 +98,20 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 		
 	}
 	
-	public static void main(String[] args) throws IOException {
+	public void saveAll() throws IOException {
 		TerritoryDBDatabase database =  new TerritoryDBDatabase();
 		database.prepare();
-		database.save((new Territory(15, 25, 4, 8, "bursa", Color.blue, null, 1)).getList(), "Kerem");
-		
+		ArrayList<Player> players = GameController.getPlayers();
+		for (Player player : players) {
+			database.save(player);
+		}
 	}
+	
+
+	@Override
+	public void save(ArrayList<String> saveList, String username) throws IOException {
+	}
+
 
 
 	

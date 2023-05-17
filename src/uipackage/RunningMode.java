@@ -31,6 +31,7 @@ import cardPackage.ArmyCardFactory;
 import cardPackage.ChanceCardFactory;
 import cardPackage.IChanceCard;
 import cardPackage.TerritoryCard;
+import databasePackage.TerritoryDBDatabase;
 
 public class RunningMode extends JFrame{
 
@@ -206,6 +207,21 @@ public class RunningMode extends JFrame{
 			}
 		});
 		
+		JButton saveButton = new JButton("Save Button");
+		saveButton.setSize(175,175);
+		saveButton.setLocation(1050, 700);
+		
+		saveButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				TerritoryDBDatabase database = new TerritoryDBDatabase();
+				try {
+					database.saveAll();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
 		
 		this.getContentPane().add(nextButton);
 		this.getContentPane().add(turn);
@@ -217,6 +233,7 @@ public class RunningMode extends JFrame{
 		this.getContentPane().add(pauseButton);
 		this.getContentPane().add(quitButton);
 		this.getContentPane().add(pickTerritoryCardButton);
+		this.getContentPane().add(saveButton);
 		this.add(panel); 
 
 		//initializeArmies();
@@ -297,6 +314,10 @@ public class RunningMode extends JFrame{
 		for (Territory territory : continentToBeConquered.getTerritories()) {
 			this.players.get(curId-1).addTerritories(territory);
 		}
+	}
+	
+	public ArrayList<Player> getPlayers() {
+		return this.players;
 	}
 	
 
