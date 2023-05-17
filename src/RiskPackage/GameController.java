@@ -26,69 +26,84 @@ public class GameController {
 	}
 	
     public static void main(String[] args) throws InterruptedException {
+    	
+    	MainMenu menu = new MainMenu();
+    	menu.setVisible(true);
         
     	login loginPage = new login();
-        loginPage.frame.setVisible(true);
-
-        do {                                                        //waiting until login phase completed
-            System.out.println(loginPage.getLoginStatus());
-            
-        } while (loginPage.getLoginStatus() == false);
-		loginPage.frame.dispose();
-		
-		BuildingMode RiskGameFrame = new BuildingMode();
-	    RiskGameFrame.setLayout(null);
-	    RiskGameFrame.setVisible(true);
-
-	    // Declare a variable to store the number of players
-	    AtomicInteger numberOfPlayers = new AtomicInteger(0);
-	    AtomicInteger numberOfAIPlayers = new AtomicInteger(0);
-	    
-	    
-	    do {                                                        //waiting until login phase completed
-            System.out.println(loginPage.getLoginStatus());
-            
-        } while (loginPage.getLoginStatus() == false);
-		loginPage.frame.dispose();
-	    
-		
-		do {                                                        //waiting until login phase completed
-            System.out.println(RiskGameFrame.getNumberOfPlayer());
-            
-        } while (RiskGameFrame.getNumberOfPlayer() < 0);
-		
-		numberOfPlayers.set(RiskGameFrame.getNumberOfPlayer());
-		
-		
-		do {                                                        //waiting until login phase completed
-            System.out.println(RiskGameFrame.getNumberOfComp());
-            
-        } while (RiskGameFrame.getNumberOfComp() < 0);
-
-		numberOfAIPlayers.set(RiskGameFrame.getNumberOfComp());
-	        
-
-	    // Use the variable after the frame is closed
-	    System.out.println("Number of players: "+numberOfPlayers.get());
-	    System.out.println("Number of AI players: "+numberOfAIPlayers.get());
-	    
-	    for (Continents continent : RiskGameFrame.getContinent()) {
-	    	System.out.println("Name of the continent: "+continent.getName());
-	    	for (Territory territory : continent.getTerritories()) {
-	    		System.out.println("    Name of the territory: "+territory.getName());
-	    	}
-	    }
-	    
-        
-	    ArrayList<Player> playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent());
-        ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
-		RunningMode g = new RunningMode(c, playerList, numberOfAIPlayers.get(), numberOfPlayers.get());
+    	
+    	while(true) {
+    	if (menu.isLoginClicked==false) {
+    		
+            loginPage.frame.setVisible(false);
+    	}
+    	
+    	else if (menu.isLoginClicked==true) {
+    		menu.dispose();
+    		loginPage.frame.setVisible(true);
+    		
+            do {                                                        //waiting until login phase completed
+                System.out.println(loginPage.getLoginStatus());
                 
-        g.setLayout(new BorderLayout());
-        g.setVisible(true);
-		turnID = g.getTurn() - 1;
+            } while (loginPage.getLoginStatus() == false);
+    		loginPage.frame.dispose();
+    		
+    		BuildingMode RiskGameFrame = new BuildingMode();
+    	    RiskGameFrame.setLayout(null);
+    	    RiskGameFrame.setVisible(true);
 
+    	    // Declare a variable to store the number of players
+    	    AtomicInteger numberOfPlayers = new AtomicInteger(0);
+    	    AtomicInteger numberOfAIPlayers = new AtomicInteger(0);
+    	    
+    	    
+    	    do {                                                        //waiting until login phase completed
+                System.out.println(loginPage.getLoginStatus());
+                
+            } while (loginPage.getLoginStatus() == false);
+    		loginPage.frame.dispose();
+    	    
+    		
+    		do {                                                        //waiting until login phase completed
+                System.out.println(RiskGameFrame.getNumberOfPlayer());
+                
+            } while (RiskGameFrame.getNumberOfPlayer() < 0);
+    		
+    		numberOfPlayers.set(RiskGameFrame.getNumberOfPlayer());
+    		
+    		
+    		do {                                                        //waiting until login phase completed
+                System.out.println(RiskGameFrame.getNumberOfComp());
+                
+            } while (RiskGameFrame.getNumberOfComp() < 0);
+
+    		numberOfAIPlayers.set(RiskGameFrame.getNumberOfComp());
+    		 // Use the variable after the frame is closed
+    	    System.out.println("Number of players: "+numberOfPlayers.get());
+    	    System.out.println("Number of AI players: "+numberOfAIPlayers.get());
+    	    
+    	    for (Continents continent : RiskGameFrame.getContinent()) {
+    	    	System.out.println("Name of the continent: "+continent.getName());
+    	    	for (Territory territory : continent.getTerritories()) {
+    	    		System.out.println("    Name of the territory: "+territory.getName());
+    	    	}
+    	    }
+    	    
+            
+    	    ArrayList<Player> playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent());
+            ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
+    		RunningMode g = new RunningMode(c, playerList, numberOfAIPlayers.get(), numberOfPlayers.get());
+                    
+            g.setLayout(new BorderLayout());
+            g.setVisible(true);
+    		turnID = g.getTurn() - 1;
+
+    		break;
+        }
+    	}
     }
+
+	   
     
     static private void startLogin() {
         login loginPage = new login();

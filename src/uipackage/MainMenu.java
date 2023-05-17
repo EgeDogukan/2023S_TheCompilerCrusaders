@@ -17,7 +17,12 @@ public class MainMenu extends JFrame {
     private Clip backgroundMusic;
 
     private int imageX; // X-coordinate of the image
-
+    
+    public boolean isStartClicked;
+    
+	public boolean isLoginClicked;
+	
+	
     public MainMenu() {
         // Set up the main menu window
         super("Risk Game Main Menu");
@@ -51,8 +56,10 @@ public class MainMenu extends JFrame {
 
         loginButton = new JButton("Login/Register");
         loginButton.addActionListener(e -> {
+        	isLoginClicked=true;
+        
+            //System.out.println("Opening login screen...");
            
-            System.out.println("Opening login screen...");
         });
 
         // Create the quit button and add an action listener
