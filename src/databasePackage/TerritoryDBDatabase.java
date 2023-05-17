@@ -65,6 +65,8 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 
 	public ArrayList<ArrayList<String>> load(Player player) throws IOException {
 		
+		this.prepare();
+		
 		String username = String.valueOf(player.getId());
 		System.out.println(this.collection);
 		Document my_doc = this.collection.find(eq("username", username)).first();
@@ -100,11 +102,10 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 	}
 	
 	public void saveAll() throws IOException {
-		TerritoryDBDatabase database =  new TerritoryDBDatabase();
-		database.prepare();
+		this.prepare();
 		ArrayList<Player> players = GameController.getPlayers();
 		for (Player player : players) {
-			database.save(player);
+			this.save(player);
 		}
 	}
 	

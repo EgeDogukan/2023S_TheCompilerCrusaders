@@ -208,14 +208,15 @@ public class RunningMode extends JFrame{
 		});
 		
 		JButton saveButton = new JButton("Save Button");
-		saveButton.setSize(175,175);
+		saveButton.setSize(100,100);
 		saveButton.setLocation(1050, 700);
 		
 		saveButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				System.out.println("Save button is clicked.");
 				TerritoryDBDatabase database = new TerritoryDBDatabase();
 				try {
-					//database.saveAll();
+					database.saveAll();
 					System.out.println("bitti");
 					for(Player i : RunningMode.this.players){
 						System.out.println(database.load(i));
