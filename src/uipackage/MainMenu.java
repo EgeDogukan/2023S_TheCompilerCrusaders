@@ -93,7 +93,7 @@ public class MainMenu extends JFrame {
         add(layeredPane, BorderLayout.CENTER);
 
         // Add the image labels to the layered pane
-        ImageIcon imageIcon = new ImageIcon("src\\uipackage\\menuMap.png");
+        ImageIcon imageIcon = new ImageIcon("2023S_TheCompilerCrusaders\\src\\uipackage\\menuMap.png");
         Image image = imageIcon.getImage().getScaledInstance(600, 300, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(image);
         imageLabel1 = new JLabel("", resizedIcon, JLabel.CENTER);
@@ -104,7 +104,7 @@ public class MainMenu extends JFrame {
         imageLabel2.setBounds(-600, 0, 600, 300);
         layeredPane.add(imageLabel2, new Integer(0)); // Add the image label with lower layer
         
-        ImageIcon imageIcon1 = new ImageIcon("src\\uipackage\\menuTitle.png");
+        ImageIcon imageIcon1 = new ImageIcon("2023S_TheCompilerCrusaders\\src\\uipackage\\menuTitle.png");
         Image image1 = imageIcon1.getImage().getScaledInstance(600, 300, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon1 = new ImageIcon(image1);
         JLabel titleLabel = new JLabel("", resizedIcon1, JLabel.CENTER);
