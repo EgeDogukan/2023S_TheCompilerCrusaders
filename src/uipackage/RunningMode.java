@@ -218,8 +218,8 @@ public class RunningMode extends JFrame{
 				try {
 					database.saveAll();
 					System.out.println("bitti");
-					for(Player i : RunningMode.this.players){
-						System.out.println(database.load(i));
+					for(Player player : RunningMode.this.players){
+						System.out.println(database.load(player));
 					}
 				} catch (IOException e1) {
 					e1.printStackTrace();

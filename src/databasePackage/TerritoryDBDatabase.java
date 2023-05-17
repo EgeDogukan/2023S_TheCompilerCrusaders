@@ -91,13 +91,49 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 			
 		}
 		
-		
-		
-		
+
 		System.out.println("Game successfully loaded from the database for "+username);
 		return informations;
 	}
+	
+	public ArrayList<ArrayList<ArrayList<String>>> loadAll() throws IOException{
+		
+		this.prepare();
+		ArrayList<ArrayList<ArrayList<String>>> allArrayList = new ArrayList<>();
+		
+		String[] usernames = {"0","1","2","3","4","5"};
+		
+		for (String username : usernames) {
+			ArrayList<Document> documents = this.collection.find(eq("username", username)).into(new ArrayList<>());
 
+
+			if(documents==null) {return null;}
+			
+			ArrayList<ArrayList<String>> informations = new ArrayList<ArrayList<String>>();
+			
+			for (Document my_doc : documents) {
+				ArrayList<String> loadList = new ArrayList<String>();
+				
+				loadList.add(my_doc.get("xCoordinate").toString());
+				loadList.add(my_doc.get("yCoordinate").toString());
+				loadList.add(my_doc.get("width").toString());
+				loadList.add(my_doc.get("height").toString());
+				loadList.add(my_doc.get("name").toString());
+				loadList.add(my_doc.get("color").toString());
+				loadList.add(my_doc.get("continentName").toString());
+				loadList.add(my_doc.get("playerID").toString());
+				informations.add(loadList);
+				
+			}
+			if (informations.size()!=0){
+				allArrayList.add(informations);
+			}
+			
+		}
+		return allArrayList;
+		
+		
+	}
 	
 
 	public void save(String username, String password) throws IOException {
@@ -116,6 +152,15 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 
 	@Override
 	public void save(ArrayList<String> saveList, String username) throws IOException {
+	}
+	
+	public static void main(String[] args) throws IOException {
+		TerritoryDBDatabase database =  new TerritoryDBDatabase();
+		ArrayList<ArrayList<ArrayList<String>>> allArrayList = database.loadAll();
+		
+		for(int i=0;i<allArrayList.size();i++) {
+			System.out.println(allArrayList.get(i));
+		}
 	}
 
 

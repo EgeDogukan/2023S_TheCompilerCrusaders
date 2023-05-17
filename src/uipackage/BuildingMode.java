@@ -513,24 +513,7 @@ public class BuildingMode extends JFrame {
         this.getContentPane().add(nextButton);
         
         
-        JButton loadPreviousGame = new JButton("Load Button");
-		loadPreviousGame.setSize(100,100);
-		loadPreviousGame.setLocation(1150, 700);
-		
-		loadPreviousGame.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("Load button is clicked.");
-				TerritoryDBDatabase database = new TerritoryDBDatabase();
-				try {
-					for(Player player : RunningMode.players){
-						System.out.println(database.load(player));
-					}
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-		this.getContentPane().add(loadPreviousGame);
+   
 	}
 	
 	
@@ -573,5 +556,6 @@ public class BuildingMode extends JFrame {
     public ArrayList<Continents> getContinent() {
     	return this.continents;
     }
+  
 	
 }

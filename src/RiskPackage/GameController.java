@@ -109,7 +109,17 @@ public class GameController {
 		}
 		
 		else {
-			
+			LoadMode RiskGameFrame = new LoadMode();
+		    RiskGameFrame.setLayout(null);
+		    RiskGameFrame.setVisible(true);
+		    
+		    GameController.playerList = initGame(RiskGameFrame.getNumberofPlayers()-1, 1, RiskGameFrame.getContinent());
+	        ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
+			RunningMode g = new RunningMode(c, playerList, 1, RiskGameFrame.getNumberofPlayers()-1);
+	                
+	        g.setLayout(new BorderLayout());
+	        g.setVisible(true);
+			turnID = g.getTurn() - 1;
 		}
 
     }
@@ -118,10 +128,6 @@ public class GameController {
     	return playerList;
     }
     
-    static private void startLogin() {
-        login loginPage = new login();
-        loginPage.frame.setVisible(true);
-    }
 
 
     
@@ -131,6 +137,29 @@ public class GameController {
         int g = random.nextInt(255);
         int b = random.nextInt(255);
     	return new Color(r,g,b);
+    }
+    
+    static private ArrayList<Player> initGameLoadMode(int numberofPlayers, int numberofComp, ArrayList<Continents> continents) {
+    	ArrayList<Territory> territories = new ArrayList<Territory>();
+    	ArrayList<Player> playerList = new ArrayList<Player>();
+    	
+    	for (Continents continent : continents) {
+			for (Territory territory : continent.getTerritories()){
+				territories.add(territory);
+			}
+		}
+    	
+    	for (int i=0;i<numberofPlayers;i++) {
+    		ArrayList<Territory> currentTerritories = new ArrayList<Territory>();
+    		for (Territory territory : territories) {
+        		if (territory.getOwnerID()==i){
+        			currentTerritories.add(territory);
+        		}
+        	}
+    		playerList.add(new Player(i, territories.get(0).getColor(), currentTerritories));
+    	}
+    	
+    	return playerList;
     }
     
 
