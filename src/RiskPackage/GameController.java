@@ -113,7 +113,7 @@ public class GameController {
 		    RiskGameFrame.setLayout(null);
 		    RiskGameFrame.setVisible(true);
 		    
-		    GameController.playerList = initGame(RiskGameFrame.getNumberofPlayers()-1, 1, RiskGameFrame.getContinent());
+		    playerList = initGame(RiskGameFrame.getNumberofPlayers()-1, 1, RiskGameFrame.getContinent());
 	        ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
 			RunningMode g = new RunningMode(c, playerList, 1, RiskGameFrame.getNumberofPlayers()-1);
 	                

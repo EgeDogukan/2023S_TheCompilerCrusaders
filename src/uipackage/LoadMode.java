@@ -138,9 +138,14 @@ public class LoadMode extends JFrame {
         		}
         	}
         
-//        for (Territory territory : this.territories) {
-//        	System.out.println(territory);
-//        }
+        System.out.println("************** LOAD MODE ********");
+        
+        for (Territory territory : this.territories) {
+        	System.out.println(territory);
+        }
+        
+        System.out.println("************** LOAD MODE ********");
+        
         
         continents.add(Asia);
         continents.add(NorthAmerica);
@@ -383,8 +388,7 @@ public class LoadMode extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		LoadMode loadMode = new LoadMode();
-		
+		LoadMode loadMode = new LoadMode();	
 	}
 	
 	
