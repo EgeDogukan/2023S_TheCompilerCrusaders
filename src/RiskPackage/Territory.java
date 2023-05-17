@@ -69,7 +69,7 @@ public class Territory extends JPanel {
 
 
 
-			WorldMap map = new WorldMap();
+			//WorldMap map = new WorldMap();
 			//this.terr_Region = map.
 			
 

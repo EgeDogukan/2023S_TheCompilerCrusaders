@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -30,6 +31,7 @@ import RiskPackage.HumanPlayer;
 import RiskPackage.Player;
 import RiskPackage.RiskBoard;
 import RiskPackage.Territory;
+import databasePackage.TerritoryDBDatabase;
 
 public class BuildingMode extends JFrame {
 
@@ -509,6 +511,26 @@ public class BuildingMode extends JFrame {
         	}
         });
         this.getContentPane().add(nextButton);
+        
+        
+        JButton loadPreviousGame = new JButton("Load Button");
+		loadPreviousGame.setSize(100,100);
+		loadPreviousGame.setLocation(1150, 700);
+		
+		loadPreviousGame.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Load button is clicked.");
+				TerritoryDBDatabase database = new TerritoryDBDatabase();
+				try {
+					for(Player player : RunningMode.players){
+						System.out.println(database.load(player));
+					}
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		this.getContentPane().add(loadPreviousGame);
 	}
 	
 	

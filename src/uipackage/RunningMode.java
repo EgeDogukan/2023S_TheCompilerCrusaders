@@ -39,7 +39,7 @@ public class RunningMode extends JFrame{
 	private static JButton turn = new JButton();
 	int numberOfAIPlayer;
 	int numberOfHumanPlayer;
-	ArrayList<Player> players;
+	static ArrayList<Player> players;
 	static int turnCounter=1;
 	public static boolean isContinue = true;
 	public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
@@ -226,6 +226,8 @@ public class RunningMode extends JFrame{
 				}
 			}
 		});
+		
+		
 		
 		
 		this.getContentPane().add(nextButton);

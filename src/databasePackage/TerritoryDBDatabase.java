@@ -68,7 +68,7 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 		this.prepare();
 		
 		String username = String.valueOf(player.getId());
-		System.out.println(this.collection);
+		//System.out.println(this.collection);
 		ArrayList<Document> documents = this.collection.find(eq("username", username)).into(new ArrayList<>());
 
 
