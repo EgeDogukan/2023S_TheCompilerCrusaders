@@ -69,13 +69,14 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 		
 		String username = String.valueOf(player.getId());
 		System.out.println(this.collection);
-		Document my_doc = this.collection.find(eq("username", username)).first();
+		ArrayList<Document> documents = this.collection.find(eq("username", username)).into(new ArrayList<>());
 
-		if(my_doc==null) {return null;}
+
+		if(documents==null) {return null;}
 		
 		ArrayList<ArrayList<String>> informations = new ArrayList<ArrayList<String>>();
 		
-		for (int i=0;i<player.getTerritories().size();i++) {
+		for (Document my_doc : documents) {
 			ArrayList<String> loadList = new ArrayList<String>();
 			
 			loadList.add(my_doc.get("xCoordinate").toString());
@@ -87,7 +88,10 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 			loadList.add(my_doc.get("continentName").toString());
 			loadList.add(my_doc.get("playerID").toString());
 			informations.add(loadList);
+			
 		}
+		
+		
 		
 		
 		System.out.println("Game successfully loaded from the database for "+username);
