@@ -21,6 +21,7 @@ public class MongoDBDatabase implements ISaveLoadAdapter {
 
 	Logger mongoLogger;
 	MongoClient mongoClient;
+	
 	MongoDatabase database;
 	MongoCollection<Document> collection;
 
