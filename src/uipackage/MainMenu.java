@@ -3,6 +3,8 @@ package uipackage;
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainMenu extends JFrame {
 
@@ -10,8 +12,11 @@ public class MainMenu extends JFrame {
     private JButton loadButton;
     private JButton quitButton;
     private JButton loginButton;
-    private JLabel imageLabel;
+    private JLabel imageLabel1;
+    private JLabel imageLabel2;
     private Clip backgroundMusic;
+
+    private int imageX; // X-coordinate of the image
 
     public MainMenu() {
         // Set up the main menu window
@@ -33,20 +38,20 @@ public class MainMenu extends JFrame {
         // Create the start button and add an action listener
         startButton = new JButton("New Game");
         startButton.addActionListener(e -> {
-            // TODO: Implement code to start a new game
+            
             System.out.println("Starting new game...");
         });
 
         // Create the load button and add an action listener
         loadButton = new JButton("Load Game");
         loadButton.addActionListener(e -> {
-            // TODO: Implement code to load a saved game
+   
             System.out.println("Loading saved game...");
         });
-        
+
         loginButton = new JButton("Login/Register");
         loginButton.addActionListener(e -> {
-            // TODO: Implement code to start a new game
+           
             System.out.println("Opening login screen...");
         });
 
@@ -66,12 +71,57 @@ public class MainMenu extends JFrame {
         buttonPanel.add(quitButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Add the image to the main menu window
-        ImageIcon imageIcon = new ImageIcon("src\\uipackage\\menu.png");
+        // Create the layered pane
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(new Dimension(600, 400));
+
+        // Add the layered pane to the main menu window
+        add(layeredPane, BorderLayout.CENTER);
+
+        // Add the image labels to the layered pane
+        ImageIcon imageIcon = new ImageIcon("src\\uipackage\\menuMap.png");
         Image image = imageIcon.getImage().getScaledInstance(600, 300, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(image);
-        imageLabel = new JLabel("", resizedIcon, JLabel.CENTER);
-        add(imageLabel, BorderLayout.CENTER);
+        imageLabel1 = new JLabel("", resizedIcon, JLabel.CENTER);
+        imageLabel1.setBounds(0, 0, 600, 300);
+        layeredPane.add(imageLabel1, new Integer(0)); // Add the image label with lower layer
+
+        imageLabel2 = new JLabel("", resizedIcon, JLabel.CENTER);
+        imageLabel2.setBounds(-600, 0, 600, 300);
+        layeredPane.add(imageLabel2, new Integer(0)); // Add the image label with lower layer
+        
+        ImageIcon imageIcon1 = new ImageIcon("src\\uipackage\\menuTitle.png");
+        Image image1 = imageIcon1.getImage().getScaledInstance(600, 300, Image.SCALE_SMOOTH);
+        ImageIcon resizedIcon1 = new ImageIcon(image1);
+        JLabel titleLabel = new JLabel("", resizedIcon1, JLabel.CENTER);
+        titleLabel.setBounds(0, 0, 600, 300);
+        layeredPane.add(titleLabel, new Integer(1)); // Add the title label with higher layer
+
+
+        // Set the initial X-coordinate of the images
+        imageX = 0;
+
+        // Create a timer to update the image position
+        int delay = 10; // Delay in milliseconds
+        Timer timer = new Timer(delay, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Update the image position
+                imageX += 1; // Increase X-coordinate by 1
+
+                // Update the location of the image labels
+                imageLabel1.setLocation(imageX, 0);
+                imageLabel2.setLocation(imageX - 600, 0);
+
+                // If the first image reaches the right edge, reset its position to the left edge
+                if (imageX >= 600) {
+                    imageX = 0;
+                }
+            }
+        });
+
+        // Start the timer
+        timer.start();
 
         // Show the main menu window and start the background music
         setVisible(true);
@@ -80,6 +130,5 @@ public class MainMenu extends JFrame {
 
     public static void main(String[] args) {
         MainMenu mainMenu = new MainMenu();
-        
     }
 }
