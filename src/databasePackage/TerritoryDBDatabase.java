@@ -66,8 +66,9 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 	public ArrayList<ArrayList<String>> load(Player player) throws IOException {
 		
 		String username = String.valueOf(player.getId());
-				
-		Document my_doc = collection.find(eq("username", player.getId())).first();
+		System.out.println(this.collection);
+		Document my_doc = this.collection.find(eq("username", username)).first();
+
 		if(my_doc==null) {return null;}
 		
 		ArrayList<ArrayList<String>> informations = new ArrayList<ArrayList<String>>();

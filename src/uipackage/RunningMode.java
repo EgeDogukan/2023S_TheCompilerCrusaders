@@ -215,7 +215,11 @@ public class RunningMode extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				TerritoryDBDatabase database = new TerritoryDBDatabase();
 				try {
-					database.saveAll();
+					//database.saveAll();
+					System.out.println("bitti");
+					for(Player i : RunningMode.this.players){
+						System.out.println(database.load(i));
+					}
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
