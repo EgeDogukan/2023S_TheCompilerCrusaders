@@ -109,7 +109,7 @@ public class LoadMode extends JFrame {
         		    	this.territories.add(terrAu);
         		        break;
         		        
-		        	case "SouthAmerica":
+		        	case "South America":
 				    	//String name, Color color, Continents continent, int playerID
 				    	Territory terrSa = new Territory(xCoordinate, yCoordinate, width, height, territory,color, SouthAmerica , id);
 				    	southAmericaTerritories.add(terrSa);
@@ -118,7 +118,7 @@ public class LoadMode extends JFrame {
 				        break;
 				        
 				        
-		        	case "NorthAmerica":
+		        	case "North America":
 				    	//String name, Color color, Continents continent, int playerID
 				    	Territory terrNa = new Territory(xCoordinate, yCoordinate, width, height, territory,color, NorthAmerica , id);
 				    	northAmericaTerritories.add(terrNa);
