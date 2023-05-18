@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
 import java.util.Random;
 import RiskPackage.*;
 
@@ -25,7 +26,8 @@ public class AttackTerr extends JFrame {
     private int defenderSides = 6;
     private int attackerSides = 6;
     private Random random = new Random();
-
+    RunningMode rm;
+    ArrayList<Player> players;
     public AttackTerr(Territory territory){
         this.setTitle(territory.getName());
         this.setLayout(null);
@@ -37,7 +39,9 @@ public class AttackTerr extends JFrame {
 
         int defenderDiceResult = random.nextInt(defenderSides) + 1;
         int attackerDiceResult = random.nextInt(attackerSides) + 1;
-
+        for(Player player :rm.getPlayer()){
+            players.add(player);
+        }
         
 
 
@@ -104,6 +108,7 @@ public class AttackTerr extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Territory destination = null;
+                
                 String name = (String) chooseToAttackBox.getSelectedItem();
                 for(Territory t : territory.getNeighbors()){
                     if(name.equals(t.getName())){
@@ -113,69 +118,82 @@ public class AttackTerr extends JFrame {
                 }
 
                 if(destination != null){
-                    if(destination.armyOnTerritory.calculateStrength() <= territory.armyOnTerritory.calculateStrength()&& defenderDiceResult<attackerDiceResult ){
+                    if(destination.armyOnTerritory.calculateStrength() <= territory.armyOnTerritory.calculateStrength()){
+                        if(defenderDiceResult<attackerDiceResult){
+                            destination.decreaseArmy(territory);
+                            if(destination.armyOnTerritory.calculateStrength()<=0){
+                                
+                                destination.setColor(territory.getColor());    
+                            }
+                            
+                            
+                            //Winning animation
+                            starVisible = true;
+                            Timer timer = new Timer(DELAY, null);
+                            timer.addActionListener(new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
+                                    if (isGrowing) {
+                                        scale += 0.03;
+                                        if (scale > 0.3) {
+                                            isGrowing = false;
+                                        }
+                                    } else {
+                                        scale -= 0.03;
+                                        if (scale < 0) {
+                                            scale = 0.01;
+                                            isGrowing = true;
+                                            starVisible = false;
+                                            ((Timer) e.getSource()).stop();
+                                        }
+                                    }
+                                    territoryPromptJPanel.repaint();
+                                }
+                            });
+                            timer.start();
+                        }
+                        else if(defenderDiceResult>=attackerDiceResult){
+                            territory.decreaseArmy(destination);
                         
-                        destination.decreaseArmy(territory);
-                        if(destination.armyOnTerritory.calculateStrength()<=0){
-                            destination.setColor(territory.getColor());    
+                            if(territory.armyOnTerritory.calculateStrength() <= 0){
+                                territory.armyOnTerritory.setInfantry(1);
+                                
+                            }
+                            
+                            
+                            //Loosing animation
+                            crossVisible = true;
+                            Timer timer = new Timer(DELAY, null);
+                            timer.addActionListener(new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
+                                    if (isGrowing) {
+                                        scale += 0.03;
+                                        if (scale > 0.3) {
+                                            isGrowing = false;
+                                        }
+                                    } else {
+                                        scale -= 0.03;
+                                        if (scale < 0) {
+                                            scale = 0.01;
+                                            isGrowing = true;
+                                            crossVisible = false;
+                                            ((Timer) e.getSource()).stop();
+                                        }
+                                    }
+                                    territoryPromptJPanel.repaint();
+                                }
+                            });
+                            timer.start();
                         }
                         
+                    } else if (destination.armyOnTerritory.calculateStrength() > territory.armyOnTerritory.calculateStrength()){
                         
-                        //Winning animation
-                        starVisible = true;
-                        Timer timer = new Timer(DELAY, null);
-                        timer.addActionListener(new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                if (isGrowing) {
-                                    scale += 0.03;
-                                    if (scale > 0.3) {
-                                        isGrowing = false;
-                                    }
-                                } else {
-                                    scale -= 0.03;
-                                    if (scale < 0) {
-                                        scale = 0.01;
-                                        isGrowing = true;
-                                        starVisible = false;
-                                        ((Timer) e.getSource()).stop();
-                                    }
-                                }
-                                territoryPromptJPanel.repaint();
-                            }
-                        });
-                        timer.start();
-                    } else /*if (destination.armyOnTerritory.calculateStrength() >= territory.armyOnTerritory.calculateStrength())*/{
-                        
-                        territory.decreaseArmy(destination);
-                        
-                        if(territory.armyOnTerritory.calculateStrength() == 0){
-                            territory.armyOnTerritory.setInfantry(1);
+                        if(territory.getAArmy()<destination.getAArmy()||territory.getCArym()<destination.getCArym()||territory.getIArmy()<destination.getIArmy()){
+                            JOptionPane.showMessageDialog(null, "Your soldiers are not strong enugh to take on this fight");    
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "There is not enough power to attack");
                         }
                         
-                        
-                        //Loosing animation
-                        crossVisible = true;
-                        Timer timer = new Timer(DELAY, null);
-                        timer.addActionListener(new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                if (isGrowing) {
-                                    scale += 0.03;
-                                    if (scale > 0.3) {
-                                        isGrowing = false;
-                                    }
-                                } else {
-                                    scale -= 0.03;
-                                    if (scale < 0) {
-                                        scale = 0.01;
-                                        isGrowing = true;
-                                        crossVisible = false;
-                                        ((Timer) e.getSource()).stop();
-                                    }
-                                }
-                                territoryPromptJPanel.repaint();
-                            }
-                        });
-                        timer.start();
                     }
                 }
             }

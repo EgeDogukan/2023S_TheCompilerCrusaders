@@ -482,6 +482,18 @@ public class Territory extends JPanel {
 			this.Inumber -= destination.Inumber;
 
 		}
-		
+
+		public int getAArmy(){
+			return this.Anumber;
+		}		
+		public int getCArym(){
+			return this.Cnumber;
+		}
+		public int getIArmy(){
+			return this.Inumber;
+		}
+
+
+
 
 }

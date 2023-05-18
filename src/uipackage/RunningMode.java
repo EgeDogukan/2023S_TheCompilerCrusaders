@@ -309,6 +309,9 @@ public class RunningMode extends JFrame{
 			this.players.get(curId-1).addTerritories(territory);
 		}
 	}
+	public ArrayList<Player> getPlayer(){
+		return players;
+	}
 	
 
 }
