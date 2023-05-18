@@ -1,6 +1,7 @@
 package uipackage;
 
 import java.awt.*;
+import java.awt.desktop.QuitEvent;
 import java.awt.event.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
@@ -8,6 +9,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import RiskPackage.Territory;
+
 import javax.imageio.ImageIO;
 
 
@@ -19,6 +23,9 @@ public class WorldMap {
     BufferedImage image;
     Area area;
     ArrayList<Shape> shapeList;
+    private Shape clickedShape;
+    private MouseListener ml;
+
 
     public WorldMap() {
         try {
@@ -45,6 +52,26 @@ public class WorldMap {
 
         output.addMouseMotionListener(new MousePositionListener());
 
+        MouseListener ml = new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Point p = MouseInfo.getPointerInfo().getLocation();
+                Point p1 = output.getLocationOnScreen();
+                
+                int x = p.x - p1.x;
+                int y = p.y - p1.y;
+                Point pointOnImage = new Point(x, y);
+                for (Shape shape : shapeList) {
+                    if (shape.contains(pointOnImage)) {   
+                        JOptionPane.showMessageDialog(null, "Clicked!"); 
+                        clickedShape = shape;
+                        break;
+                    }
+                }
+                Territory.setClickedShape(clickedShape);
+            }
+        };
+        output.addMouseListener(ml);
         ui.add(output);
 
         refresh();
@@ -157,8 +184,10 @@ public class WorldMap {
         g.setColor(Color.RED);
         g.draw(area);
         try {
+            
             Point p = MouseInfo.getPointerInfo().getLocation();
             Point p1 = output.getLocationOnScreen();
+            
             int x = p.x - p1.x;
             int y = p.y - p1.y;
             Point pointOnImage = new Point(x, y);
@@ -166,9 +195,21 @@ public class WorldMap {
                 if (shape.contains(pointOnImage)) {
                     g.setColor(Color.GREEN.darker());
                     g.fill(shape);
+                    
+                    //clickedShape = shape;
                     break;
                 }
             }
+            /*MouseListener ml = new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    JOptionPane.showMessageDialog(null, "Clicked!");
+                    removeMouseListener();
+                    
+                }
+            };
+            output.addMouseListener(ml);*/
+
         } catch (Exception doNothing) {
         }
 
@@ -181,8 +222,16 @@ public class WorldMap {
         return ui;
     }
 
+    private void removeMouseListener() {
+        output.removeMouseListener(ml);
+    }
+
     public ArrayList<Shape> getShapeList() {
         return shapeList;
+    }
+
+    public Shape getClickedShape() {
+        return clickedShape;
     }
 
     public static void main(String[] args) {

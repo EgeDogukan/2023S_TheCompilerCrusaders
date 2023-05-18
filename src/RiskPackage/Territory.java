@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
@@ -42,6 +43,7 @@ public class Territory extends JPanel {
 		private Army armyOnTerritory;
 		private boolean isBuilding=false;
 		private Region terr_Region;
+		private static Shape clickedShape;
 	    
 	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color, Continents continent, int playerID) {
 	    	this.isBuilding=false;
@@ -351,6 +353,10 @@ public class Territory extends JPanel {
 		
 		public void setIsBuilding(boolean status) {
 			this.isBuilding=status;
+		}
+
+		public static void setClickedShape(Shape shape) {
+			clickedShape = shape;
 		}
 
 
