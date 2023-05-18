@@ -15,10 +15,13 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+
+import RiskPackage.Player;
 public class MongoDBDatabase implements ISaveLoadAdapter {
 
 	Logger mongoLogger;
 	MongoClient mongoClient;
+	
 	MongoDatabase database;
 	MongoCollection<Document> collection;
 
@@ -67,6 +70,18 @@ public class MongoDBDatabase implements ISaveLoadAdapter {
 		MongoDBDatabase database =  new MongoDBDatabase();
 		database.prepare();
 		database.save("Halil", "1234");
+	}
+
+	@Override
+	public ArrayList<ArrayList<String>> load(Player player) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save(Player player) throws IOException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
