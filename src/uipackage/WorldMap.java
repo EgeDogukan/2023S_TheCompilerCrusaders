@@ -1,7 +1,6 @@
 package uipackage;
 
 import java.awt.*;
-import java.awt.desktop.QuitEvent;
 import java.awt.event.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
@@ -51,7 +50,6 @@ public class WorldMap {
         ui.setBorder(new EmptyBorder(4, 4, 4, 4));
 
         output.addMouseMotionListener(new MousePositionListener());
-
         MouseListener ml = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -73,7 +71,6 @@ public class WorldMap {
         };
         output.addMouseListener(ml);
         ui.add(output);
-
         refresh();
     }
 
@@ -195,20 +192,9 @@ public class WorldMap {
                 if (shape.contains(pointOnImage)) {
                     g.setColor(Color.GREEN.darker());
                     g.fill(shape);
-                    
-                    //clickedShape = shape;
                     break;
                 }
             }
-            /*MouseListener ml = new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    JOptionPane.showMessageDialog(null, "Clicked!");
-                    removeMouseListener();
-                    
-                }
-            };
-            output.addMouseListener(ml);*/
 
         } catch (Exception doNothing) {
         }
