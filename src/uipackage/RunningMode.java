@@ -167,6 +167,31 @@ public class RunningMode extends JFrame{
 			}
 		});
 		
+		
+		
+		JButton saveButton = new JButton("Save Button");
+		saveButton.setSize(100,100);
+		saveButton.setLocation(1050, 700);
+		
+		saveButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Save button is clicked.");
+				TerritoryDBDatabase database = new TerritoryDBDatabase();
+				try {
+					database.delete();
+					database.saveAll();
+					System.out.println("bitti");
+//					for(Player player : RunningMode.this.players){
+//						System.out.println(database.load(player));
+//					}
+					RunningMode.this.dispose();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		
 		JButton pauseButton = new JButton("Pause");
 		pauseButton.setSize(75,75);
 		pauseButton.setLocation(1450, 700);
@@ -191,6 +216,7 @@ public class RunningMode extends JFrame{
 					useCard.setVisible(false);
 					cardComboBox.setVisible(false);
 					pickTerritoryCardButton.setVisible(false);
+					saveButton.setVisible(false);
 					isContinue=false;
 				}
 				else {
@@ -201,32 +227,12 @@ public class RunningMode extends JFrame{
 					useCard.setVisible(true);
 					cardComboBox.setVisible(true);
 					pickTerritoryCardButton.setVisible(true);
+					saveButton.setVisible(true);
 					isContinue=true;
 				}
 				
 			}
 		});
-		
-		JButton saveButton = new JButton("Save Button");
-		saveButton.setSize(100,100);
-		saveButton.setLocation(1050, 700);
-		
-		saveButton.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("Save button is clicked.");
-				TerritoryDBDatabase database = new TerritoryDBDatabase();
-				try {
-					database.saveAll();
-					System.out.println("bitti");
-					for(Player player : RunningMode.this.players){
-						System.out.println(database.load(player));
-					}
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-		
 		
 		
 		

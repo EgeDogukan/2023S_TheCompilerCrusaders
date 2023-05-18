@@ -52,8 +52,6 @@ public class GameController {
 		
 		if (modeSelection.status==1) {
 			
-			
-			
 			BuildingMode RiskGameFrame = new BuildingMode();
 		    RiskGameFrame.setLayout(null);
 		    RiskGameFrame.setVisible(true);
@@ -102,7 +100,7 @@ public class GameController {
 		    GameController.playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent());
 	        ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
 			RunningMode g = new RunningMode(c, playerList, numberOfAIPlayers.get(), numberOfPlayers.get());
-	                
+	        
 	        g.setLayout(new BorderLayout());
 	        g.setVisible(true);
 			turnID = g.getTurn() - 1;
@@ -113,13 +111,14 @@ public class GameController {
 		    RiskGameFrame.setLayout(null);
 		    RiskGameFrame.setVisible(true);
 		    
-		    playerList = initGame(RiskGameFrame.getNumberofPlayers()-1, 1, RiskGameFrame.getContinent());
+		    playerList = initGameLoadMode(RiskGameFrame.getNumberofPlayers()-1, 1, RiskGameFrame.getContinent());
 	        ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
 			RunningMode g = new RunningMode(c, playerList, 1, RiskGameFrame.getNumberofPlayers()-1);
-	                
+	        
 	        g.setLayout(new BorderLayout());
 	        g.setVisible(true);
 			turnID = g.getTurn() - 1;
+			RiskGameFrame.dispose();
 		}
 
     }
@@ -129,8 +128,6 @@ public class GameController {
     }
     
 
-
-    
     public static Color randomColorGenerator() {
     	Random random = new Random(); // Create a new Random object
         int r = random.nextInt(255);
@@ -144,9 +141,11 @@ public class GameController {
     	ArrayList<Player> playerList = new ArrayList<Player>();
     	
     	for (Continents continent : continents) {
-			for (Territory territory : continent.getTerritories()){
-				territories.add(territory);
-			}
+    		if (continent.isIncluded){
+				for (Territory territory : continent.getTerritories()){
+					territories.add(territory);
+				}
+    		}
 		}
     	
     	for (int i=0;i<numberofPlayers;i++) {
@@ -156,7 +155,7 @@ public class GameController {
         			currentTerritories.add(territory);
         		}
         	}
-    		playerList.add(new Player(i, territories.get(0).getColor(), currentTerritories));
+    		playerList.add(new Player(i, randomColorGenerator(), currentTerritories));
     	}
     	
     	return playerList;
@@ -167,9 +166,12 @@ public class GameController {
 		
 		ArrayList<Territory> territories = new ArrayList<Territory>();
 		for (Continents continent : continents) {
-			for (Territory territory : continent.getTerritories()){
-				territories.add(territory);
+			if (continent.isIncluded){
+				for (Territory territory : continent.getTerritories()){
+					territories.add(territory);
+				}
 			}
+			
 		}
 		
 		int territoryPerPlayer = Math.floorDiv(territories.size(), (numberofPlayers+numberofComp));

@@ -147,21 +147,30 @@ public class LoadMode extends JFrame {
         System.out.println("************** LOAD MODE ********");
         
         
-        continents.add(Asia);
-        continents.add(NorthAmerica);
-        continents.add(SouthAmerica);
-        continents.add(Europe);
-        continents.add(Africa);
-        continents.add(Australia);
-
-        
-
-        this.add(Europe);
-        this.add(Asia);
-        this.add(NorthAmerica);
-        this.add(SouthAmerica);
-        this.add(Africa);
-        this.add(Australia);
+        if (Asia.isIncluded) {
+        	continents.add(Asia);
+        	this.add(Asia);
+        }
+        if (NorthAmerica.isIncluded) {
+        	continents.add(NorthAmerica);
+        	this.add(NorthAmerica);
+        }
+        if (SouthAmerica.isIncluded) {
+        	continents.add(SouthAmerica);
+        	this.add(SouthAmerica);
+        }
+        if (Europe.isIncluded) {
+        	continents.add(Europe);
+        	this.add(Europe);
+        }
+        if (Australia.isIncluded) {
+        	continents.add(Australia);
+        	this.add(Australia);
+        }
+        if (Africa.isIncluded) {
+        	continents.add(Africa);
+        	this.add(Africa);
+        }
         
         
         for (Territory territory1 : this.territories) {
@@ -367,19 +376,27 @@ public class LoadMode extends JFrame {
         
 		for(Player p : players){
         	for(Territory t: p.getTerritories()){
+        		if (t.getContinent().isIncluded==true) {
         			Continents c = t.getContinent();
-                    
         			t.setColor(p.getColor());
         			c.add(t);
                     t.setOwnerID(p.getId());
                     t.setArmy(1,2,3);
+        		}
+        			
             }
         } 
         return this.getContinent();
 	}
 	
 	public ArrayList<Continents> getContinent() {
-		return this.continents;
+		ArrayList<Continents> currentContinents = new ArrayList<>();
+		for (Continents continent : this.continents) {
+			if (continent.isIncluded) {
+				currentContinents.add(continent);
+			}
+		}
+		return currentContinents;
 	}
 	
 	public int getNumberofPlayers() {

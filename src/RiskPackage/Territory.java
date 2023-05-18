@@ -334,7 +334,7 @@ public class Territory extends JPanel {
 		}
 
 		public void setColor(Color color) {
-			this.setBackground(color); 
+			this.setBackground(color);
 		}
 
 		public int getOwnerID() {
@@ -401,7 +401,7 @@ public class Territory extends JPanel {
 			list.add(((Integer)width).toString());
 			list.add(((Integer)height).toString());
 			list.add(name);
-			list.add(color.toString());
+			list.add(this.color.toString());
 			list.add(c.getName());
 			list.add(((Integer)playerID).toString());
 			

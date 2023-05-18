@@ -149,6 +149,11 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 		}
 	}
 	
+	public void delete() throws IOException{
+		this.prepare();
+        this.collection.deleteMany(new Document());
+	}
+	
 
 	@Override
 	public void save(ArrayList<String> saveList, String username) throws IOException {
