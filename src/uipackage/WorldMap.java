@@ -44,7 +44,7 @@ public class WorldMap {
         //image = ImageIO.read(url);
         try
         {
-            image = ImageIO.read(new File("/home/egeds/Desktop/Okul/comp302/2023S_TheCompilerCrusaders/MAP.png"));
+            image = ImageIO.read(new File("/home/egeds/Desktop/Okul/comp302/2023S_TheCompilerCrusaders/MAP2.png"));
         }
         catch (IOException e) {
             System.out.println("couldnt load map image!");
