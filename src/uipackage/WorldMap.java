@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -38,8 +40,16 @@ public class WorldMap {
         if (ui != null) {
             return;
         }
-        URL url = new URL("https://i.stack.imgur.com/N4eOn.png");
-        image = ImageIO.read(url);
+        //URL url = new URL("https://i.stack.imgur.com/N4eOn.png");
+        //image = ImageIO.read(url);
+        try
+        {
+            image = ImageIO.read(new File("/home/egeds/Desktop/Okul/comp302/2023S_TheCompilerCrusaders/MAP.png"));
+        }
+        catch (IOException e) {
+            System.out.println("couldnt load map image!");
+        }
+
         long then = System.currentTimeMillis();
         System.out.println("" + then);
         area = getOutline(Color.WHITE, image, 12);
