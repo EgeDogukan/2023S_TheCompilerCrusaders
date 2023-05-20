@@ -143,7 +143,7 @@ public class LoadMode extends JFrame {
         for (Territory territory : this.territories) {
         	System.out.println(territory);
         }
-        
+        System.out.println(this.territories.size());
         System.out.println("************** LOAD MODE ********");
         
         
@@ -386,7 +386,7 @@ public class LoadMode extends JFrame {
         			
             }
         } 
-        return this.getContinent();
+        return getContinent();
 	}
 	
 	public ArrayList<Continents> getContinent() {
@@ -404,9 +404,7 @@ public class LoadMode extends JFrame {
 		return this.allArrayList.size();
 	}
 	
-	public static void main(String[] args) {
-		LoadMode loadMode = new LoadMode();	
-	}
+	
 	
 	
 
