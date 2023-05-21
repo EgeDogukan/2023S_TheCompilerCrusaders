@@ -23,7 +23,7 @@ public class LoadMode extends JFrame {
 	
 	public ArrayList<Continents> continents;
 	public ArrayList<Territory> territories = new ArrayList<>();
-	public int databaseChooser=0;
+	public static int databaseChooser=RunningMode.databaseChooser;
 
 	public LoadMode()  {
 		super("Load Mode");
@@ -34,9 +34,11 @@ public class LoadMode extends JFrame {
         
         if (databaseChooser==0) {
         	database =  new TerritoryDBDatabase();
+        	System.out.println("Game loaded from MONGO");
         }
         else {
         	database =  new TerritoryJSONDBDatabase();
+        	System.out.println("Game loaded from JSON");
         }
     		
         try {
