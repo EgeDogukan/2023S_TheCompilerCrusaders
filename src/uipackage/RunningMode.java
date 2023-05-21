@@ -46,6 +46,7 @@ public class RunningMode extends JFrame{
 	int numberOfHumanPlayer;
 	static ArrayList<Player> players;
 	static int turnCounter=1;
+	public static boolean isItFirstTour=true;
 	public static boolean isContinue = true;
 	public static int databaseChooser=0;
 	
@@ -93,10 +94,11 @@ public class RunningMode extends JFrame{
             	//System.out.println();
             	//printTerritoryCard();
             	RunningMode.turnCounter++;
-            	
+            	RunningMode.isItFirstTour=false;
             	if (RunningMode.turnCounter==numberOfAIPlayer+numberOfHumanPlayer+1) {
             		RunningMode.turnCounter=1;
             	}
+            	
             	turn.setText(Integer.toString(RunningMode.turnCounter));
 				GameController.setCurrentTurnPlayerID(RunningMode.turnCounter);
 				System.out.println("------------------------------" + RunningMode.turnCounter);
@@ -192,7 +194,7 @@ public class RunningMode extends JFrame{
 				
 				ISaveLoadAdapter database;
 				
-				if (databaseChooser==1) {
+				if (databaseChooser==0) {
 					database = new TerritoryJSONDBDatabase();
 				}
 				else {

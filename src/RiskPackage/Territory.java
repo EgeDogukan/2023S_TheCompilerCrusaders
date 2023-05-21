@@ -40,8 +40,7 @@ public class Territory extends JPanel {
 	    private int yCoordinate;
 	    private int width;
 	    private int height;
-		//public static JButton attackButton;
-		;
+		private boolean isFirst=true;
 	    private Color color;
 	    private Continents continent;
 		private Continents c;
@@ -109,140 +108,46 @@ public class Territory extends JPanel {
 						
 
 						
-
-						if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
+						
+					if(RunningMode.isItFirstTour) {
+						if(Territory.this.getOwnerID()+1 == GameController.getCurrentTurnPlayerID()) {
+							
+							
+							
 							System.out.println("sahip");
 							JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
 						"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
 						
 								
 								AttackTerr at = new AttackTerr(Territory.this);
+								System.out.println("birinci tur");
 
-								
-
 							
-						//		if(destination.armyOnTerritory.calculateStrength() >= Territory.this.armyOnTerritory.calculateStrength()){
-						//			int tempc = Territory.this.Cnumber;
-						//			int tempi = Territory.this.Inumber;
-						//			int tempa = Territory.this.Anumber;
-						//			destination.decreaseArmy(Territory.this);
-						//			
-						//			Territory.this.decreaseArmy(tempa, tempc, tempi);
-						//			Random rant = new Random();
-						//			int i = rant.nextInt(3) + 1;
-						//			int k = rant.nextInt(2);
-						//			
-						//			if(k == 0) {	
-						//				if(i == 1) {
-						//					Territory.this.increaseArmy(1, 0, 0);
-						//					System.out.println("Artillary army card drawn.");
-						//				}
-						//				else if(i == 2) {
-						//					Territory.this.increaseArmy(0, 1, 0);
-						//					System.out.println("Cavalry army card drawn.");
-						//				}
-						//				else if(i == 3) {
-						//					Territory.this.increaseArmy(0, 0, 1);
-						//					System.out.println("Infantry army card drawn.");
-						//				}
-						/* 			}
-									else if( k == 1) {
-										//pick territory card
-									}
-									
-									attackButton.addActionListener(new ActionListener() {
-										Timer timer = new Timer(DELAY, null);
-							
-										{
-											timer.addActionListener(new ActionListener() {
-												public void actionPerformed(ActionEvent e) {
-													if (isGrowing) {
-														scale += 0.03;
-														if (scale > 0.3) {
-															isGrowing = false;
-														}
-													} else {
-														scale -= 0.03;
-														if (scale < 0) {
-															scale = 0.01;
-															isGrowing = true;
-															crossVisible = false;
-															((Timer) e.getSource()).stop();
-														}
-													}
-													repaint();
-													
-												}
-											});
-										}
-							
-										public void actionPerformed(ActionEvent e) {
-											
-											crossVisible = true;
-											timer.start();
-										}
-									});
-									
-									JLabel ppp = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
-						+ Territory.this.Inumber +" Infantry.");
-						territoryPromptjFrame.add(ppp);
-						
-						setColor(Territory.this.getColor());
-						//JOptionPane.showMessageDialog(null, "Attack successful!");
-						
-						
-						
-						//territoryPromptjFrame.dispose();
-								}
-								else if(destination.armyOnTerritory.calculateStrength() < Territory.this.armyOnTerritory.calculateStrength()){
-									attackButton.addActionListener(new ActionListener() {
-										Timer timer = new Timer(DELAY, null);
-							
-										{
-											timer.addActionListener(new ActionListener() {
-												public void actionPerformed(ActionEvent e) {
-													if (isGrowing) {
-														scale += 0.03;
-														if (scale > 0.2) {
-															isGrowing = false;
-														}
-													} else {
-														scale -= 0.02;
-														if (scale < 0) {
-															scale = 0.01;
-															isGrowing = true;
-															starVisible = false;
-															((Timer) e.getSource()).stop();
-														}
-													}
-													repaint();
-																	
-												}
-											});
-										}
-							
-										public void actionPerformed(ActionEvent e) {
-											starVisible = true;
-											timer.start();
-										}
-									});
-								}
-							}
-						});
-						territoryPromptJPanel.add(chooseToAttackBox);
-						territoryPromptJPanel.setVisible(true);
-
-						territoryPromptjFrame.pack();
-
+					
 						}
-						else {
-							System.out.println("sahip degil");
-							JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
-						"y"+Territory.this.yCoordinate);
-						}
-							
-*/							
 					}
+					else {
+						if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
+							
+							
+							
+							System.out.println("sahip");
+							JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+						"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
+						
+								
+								AttackTerr at = new AttackTerr(Territory.this);
+								System.out.println("birinci tur");
+
+							
+					
+						}
+					}
+					
+						
+						
+						
+						
 
 						
 					
