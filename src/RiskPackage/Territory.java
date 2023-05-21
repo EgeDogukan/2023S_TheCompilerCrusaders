@@ -407,7 +407,7 @@ public class Territory extends JPanel {
 			list.add(((Integer)width).toString());
 			list.add(((Integer)height).toString());
 			list.add(name);
-			//list.add(this.color.toString());
+			list.add(this.color.toString());
 			list.add(c.getName());
 			list.add(((Integer)playerID).toString());
 			
