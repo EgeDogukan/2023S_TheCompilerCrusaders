@@ -1,11 +1,10 @@
 package databasePackage;
 
-import java.awt.Color;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 
 import org.bson.Document;
@@ -43,9 +42,9 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 		String filePath="data.json";
 		Gson gson = new Gson();
 		
-		FileWriter writer = new FileWriter(filePath, true);
+		
 		for (int i=0;i<player.getTerritories().size();i++) {
-			
+			FileWriter writer = new FileWriter(filePath, true);
 			Territory ter = player.getTerritories().get(i);
 			ArrayList<String> saveList = ter.getList();
 			
@@ -55,18 +54,21 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 			writer.write(json);
 
 			writer.write("\n");
+			writer.close();		
 		}
 		
 	}
 	
 	public void saveAll() throws IOException {
+		this.prepare();
 		ArrayList<Player> players = GameController.getPlayers();
 		for (Player player : players) {
 			savePlayer(player);
 		}
 	}
 	
-	public static void load(String filePath) {
+	public void load(String filePath) {
+		this.prepare();
 		Gson gson = new Gson();
 		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -81,7 +83,8 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 	
 	
 	
-	public static void loadAll() {
+	public void loadAll() {
+		this.prepare();
 		Gson gson = new Gson();
 		String filePath="data.json";
 		
