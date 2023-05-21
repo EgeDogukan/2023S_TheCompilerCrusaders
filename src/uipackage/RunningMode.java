@@ -152,7 +152,8 @@ public class RunningMode extends JFrame{
 		
 		Image image2 = null;
 		try {
-			image2 = ImageIO.read(new File("2023S_TheCompilerCrusaders\\images.png"));
+			String cwd = System.getProperty("user.dir");
+			image2 = ImageIO.read(new File(cwd + "/images.png"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -209,7 +210,8 @@ public class RunningMode extends JFrame{
 		
 		Image image1 = null;
 		try {
-			image1 = ImageIO.read(new File("2023S_TheCompilerCrusaders\\495307-200.png"));
+			String cwd = System.getProperty("user.dir");
+			image1 = ImageIO.read(new File(cwd + "/495307-200.png"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
