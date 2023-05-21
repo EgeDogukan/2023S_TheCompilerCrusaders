@@ -38,6 +38,48 @@ import databasePackage.ISaveLoadAdapter;
 import databasePackage.TerritoryDBDatabase;
 import databasePackage.TerritoryJSONDBDatabase;
 
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.security.PublicKey;
+import java.util.ArrayList;
+import java.util.Random;
+
+import javax.swing.*;
+import java.awt.*;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import RiskPackage.Continents;
+import RiskPackage.GameController;
+import RiskPackage.GamePanel;
+import RiskPackage.Player;
+import RiskPackage.RiskBoard;
+import RiskPackage.Territory;
+import cardPackage.ArmyCardFactory;
+import cardPackage.ChanceCardFactory;
+import cardPackage.IChanceCard;
+import cardPackage.TerritoryCard;
+import databasePackage.ISaveLoadAdapter;
+import databasePackage.TerritoryDBDatabase;
+import databasePackage.TerritoryJSONDBDatabase;
+
 public class RunningMode extends JFrame{
 
 	public ArrayList<Continents> continents;
@@ -298,15 +340,7 @@ public class RunningMode extends JFrame{
 		}
 	}*/
 	
-	public void pickChanceCard() {
-		int curId=getTurn();
-		Random rand = new Random();
-        int randomNumber = rand.nextInt(5);
-        
-        IChanceCard chanceCard = new ChanceCardFactory().createCard(randomNumber);
-        this.players.get(curId-1).chanceCards.add(chanceCard);
-        System.out.println("Player with ID"+curId+" has drawn the "+chanceCard.getClass().getName().split("\\.")[1]+" and it is added his/her list.");
-	}
+
 	
 	public Color getPlayer(int id){
 		return this.players.get(id-1).getColor();
@@ -367,6 +401,72 @@ public class RunningMode extends JFrame{
 	
 	public ArrayList<Player> getPlayers() {
 		return this.players;
+	}
+	
+	
+	
+	
+	public void pickChanceCard() {
+	int curId = getTurn();
+    Random rand = new Random();
+    int randomNumber = rand.nextInt(5);
+
+    IChanceCard chanceCard = new ChanceCardFactory().createCard(randomNumber);
+    this.players.get(curId-1).chanceCards.add(chanceCard);
+    System.out.println("Player with ID"+curId+" has drawn the "+chanceCard.getClass().getName().split("\\.")[1]+" and it is added his/her list.");
+
+    // Suppose you have a getImage method that returns an Image object based on the card
+    String cwd = System.getProperty("user.dir");
+    Image cardImage = Toolkit.getDefaultToolkit().getImage(cwd+"/chanceCard.png");
+
+    FadingImageComponent cardImageComponent = new FadingImageComponent(cardImage);
+    cardImageComponent.setBounds(0, 0, getWidth(), getHeight());
+
+    this.getContentPane().add(cardImageComponent);
+    this.getContentPane().setComponentZOrder(cardImageComponent, 0);
+
+    double maxX = getWidth()/2;
+    double maxY = getHeight()/2;
+
+    Timer timer = new Timer(20, new ActionListener() {
+        double posX = 0;
+        double posY = maxY / 2;
+        double scale = 0.01;
+        double velocityX = 4.0;
+        double velocityY = 3;
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Update the image's position
+            posX += velocityX;
+            posY += velocityY;
+            cardImageComponent.setPosition(posX, posY);
+
+            // Update the image's scale
+            if (posX < maxX / 2) {
+                scale += 0.001;
+            } else {
+                scale -= 0.001;
+            }
+            cardImageComponent.setScale(scale);
+
+			
+			
+            
+
+            // If the image has moved off the right edge of the screen, stop the animation
+            if (posX > maxX) {
+                ((Timer) e.getSource()).stop();
+                RunningMode.this.getContentPane().remove(cardImageComponent);
+				RunningMode.this.revalidate();
+				RunningMode.this.repaint();
+            }
+        }
+    });
+    timer.start();
+	
+
+			
 	}
 	
 

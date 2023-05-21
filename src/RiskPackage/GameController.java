@@ -17,6 +17,7 @@ public class GameController {
 	
 	private static int turnID = 0;
 	private static ArrayList<Player> playerList = new ArrayList<Player>();
+	public static boolean isBuildingMode;
 	
 	private GameController() {
 		
@@ -110,7 +111,7 @@ public class GameController {
 		    	}
 		    }
 		    
-		    
+		    isBuildingMode=true;
 		    
 		    GameController.playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent());
 	        ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
@@ -127,7 +128,7 @@ public class GameController {
 		
 		else {
 			
-			
+			isBuildingMode=false;
 			LoadMode RiskGameFrame = new LoadMode();
 		    RiskGameFrame.setLayout(null);
 		    RiskGameFrame.setVisible(true);

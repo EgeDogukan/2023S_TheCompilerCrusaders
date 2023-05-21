@@ -51,8 +51,6 @@ public class Territory extends JPanel {
 		public int Inumber;
 		public Army armyOnTerritory;
 		private boolean isBuilding=false;
-
-		
 		private boolean winner = false;
 
 
@@ -109,8 +107,8 @@ public class Territory extends JPanel {
 
 						
 						
-					if(RunningMode.isItFirstTour) {
-						if(Territory.this.getOwnerID()+1 == GameController.getCurrentTurnPlayerID()) {
+					if(GameController.isBuildingMode) {
+						if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
 							
 							
 							
@@ -127,20 +125,39 @@ public class Territory extends JPanel {
 						}
 					}
 					else {
-						if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
-							
-							
-							
-							System.out.println("sahip");
-							JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
-						"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
-						
+						if(RunningMode.isItFirstTour) {
+							if(Territory.this.getOwnerID()+1 == GameController.getCurrentTurnPlayerID()) {
 								
-								AttackTerr at = new AttackTerr(Territory.this);
-								System.out.println("birinci tur");
-
+								
+								
+								System.out.println("sahip");
+								JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+							"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
 							
-					
+									
+									AttackTerr at = new AttackTerr(Territory.this);
+									System.out.println("birinci tur");
+
+								
+						
+							}
+						}
+						else {
+							if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
+								
+								
+								
+								System.out.println("sahip");
+								JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+							"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
+							
+									
+									AttackTerr at = new AttackTerr(Territory.this);
+									System.out.println("birinci tur");
+
+								
+						
+							}
 						}
 					}
 					
