@@ -63,7 +63,7 @@ public class MainMenu extends JFrame {
         loginButton.addActionListener(e -> {
 
         	isLoginClicked=true;
-        
+            backgroundMusic.stop();
             //System.out.println("Opening login screen...");
            
 

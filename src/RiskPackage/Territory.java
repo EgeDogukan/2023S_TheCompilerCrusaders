@@ -45,17 +45,10 @@ public class Territory extends JPanel {
 		public int playerID;
 		public int Cnumber;
 		public int Anumber;
-		public static int Inumber;
+		public int Inumber;
 		public Army armyOnTerritory;
 		private boolean isBuilding=false;
-		private static final int DELAY = 20;
 
-		private Image star;
-		private Image cross;
-		private double scale = 0.01;
-		private boolean isGrowing = true;
-		private boolean starVisible = false;
-	    private boolean crossVisible = false;
 		private boolean winner = false;
 
 	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color, Continents continent, int playerID) {
