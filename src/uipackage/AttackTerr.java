@@ -45,8 +45,9 @@ public class AttackTerr extends JFrame {
 
 
         // Load images
-        star = Toolkit.getDefaultToolkit().getImage("2023S_TheCompilerCrusaders\\Star.png");
-        cross = Toolkit.getDefaultToolkit().getImage("cross.png");
+        String cwd = System.getProperty("user.dir");
+        star = Toolkit.getDefaultToolkit().getImage(cwd + "/Star.png");
+        cross = Toolkit.getDefaultToolkit().getImage(cwd +"cross.png");
 
         territoryPromptJPanel = new JPanel() {
             @Override
