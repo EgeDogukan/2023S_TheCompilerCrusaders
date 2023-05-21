@@ -1,11 +1,16 @@
 package databasePackage;
 
 
+import static com.mongodb.client.model.Filters.eq;
+
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bson.Document;
 import org.json.simple.JsonArray;
@@ -20,6 +25,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSerializer;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
 import RiskPackage.GameController;
@@ -36,9 +42,8 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 	}
 	
 	
-	
-	public static void savePlayer(Player player) throws IOException {
-		
+	public void save(Player player) throws IOException {
+		this.prepare();
 		String filePath="data.json";
 		Gson gson = new Gson();
 		
@@ -63,41 +68,12 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 		this.prepare();
 		ArrayList<Player> players = GameController.getPlayers();
 		for (Player player : players) {
-			savePlayer(player);
+			save(player);
 		}
 	}
-	
-	public void load(String filePath) {
-		this.prepare();
-		Gson gson = new Gson();
-		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                JsonObject jsonObject = gson.fromJson(line, JsonObject.class);
-                System.out.println(jsonObject.get("nationality"));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-	}
+
 	
 	
-	
-	public void loadAll() {
-		this.prepare();
-		Gson gson = new Gson();
-		String filePath="data.json";
-		
-		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                JsonObject jsonObject = gson.fromJson(line, JsonObject.class);
-                System.out.println(jsonObject);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-	}
 
 	public void empty() throws IOException {
 		String filePath="data.json";
@@ -114,30 +90,70 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 		this.filePath="data.json";
 		
 	}
-
-	@Override
-	public void save(String username, String password) throws IOException {
-		// TODO Auto-generated method stub
+	
+	public ArrayList<ArrayList<String>> load() throws FileNotFoundException, IOException {
+		this.prepare();
+		Gson gson = new Gson();
 		
+		ArrayList<ArrayList<String>> informations = new ArrayList<>();
+
+	    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            Type listType = new TypeToken<ArrayList<String>>() {}.getType();
+	            ArrayList<String> data = gson.fromJson(line, listType);
+	            informations.add(data);
+	           
+	        }
+	    }
+	    return informations;
 	}
 
-	@Override
-	public void save(ArrayList<String> saveList, String username) throws IOException {
-		// TODO Auto-generated method stub
+
+	public ArrayList<ArrayList<ArrayList<String>>> loadAll() throws IOException {
+		this.prepare();
 		
-	}
-
-	@Override
-	public void save(Player player) throws IOException {
-		// TODO Auto-generated method stub
+		ArrayList<ArrayList<ArrayList<String>>> allArrayList = new ArrayList<>();
+		Gson gson = new Gson();
 		
+		String[] usernames = {"0","1","2","3","4","5"};
+		
+		for (String username : usernames) {
+			try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+		        String line;
+		        ArrayList<ArrayList<String>> informations = new ArrayList<ArrayList<String>>();
+		        while ((line = reader.readLine()) != null) {
+		            Type listType = new TypeToken<ArrayList<String>>() {}.getType();
+		            ArrayList<String> data = gson.fromJson(line, listType);
+		            
+		            if (data.get(data.size()-1).equals(username)) {
+		            	informations.add(data);
+		            }
+		           
+		        }
+		        if (informations.size()!=0) {
+			        allArrayList.add(informations);
+		        }
+		    }
+			
+		}
+		return allArrayList;
 	}
+	
+	
 
-	@Override
-	public ArrayList<ArrayList<String>> load(Player player) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
+
+
+	
+
+
+
+
+
+
+	
 		
 	
 
