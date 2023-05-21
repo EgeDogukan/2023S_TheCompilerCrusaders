@@ -111,10 +111,10 @@ public class GameController {
 		    RiskGameFrame.setLayout(null);
 		    RiskGameFrame.setVisible(true);
 		    
-		    playerList = initGameLoadMode(RiskGameFrame.getNumberofPlayers()-1, 1, RiskGameFrame.getContinent());
+		    GameController.playerList = initGameLoadMode(RiskGameFrame.getNumberofPlayers()-1, 1, RiskGameFrame.getContinent());
 	        ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
 			RunningMode g = new RunningMode(c, playerList, 1, RiskGameFrame.getNumberofPlayers()-1);
-	        
+			
 	        g.setLayout(new BorderLayout());
 	        g.setVisible(true);
 			turnID = g.getTurn() - 1;
