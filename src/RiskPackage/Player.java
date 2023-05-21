@@ -19,6 +19,9 @@ public class Player {
 	private String name;
 	private boolean takeTurn = false;
 	protected ArrayList<Territory> territories;
+	private int Cnumber;
+	private int Anumber;
+	private int Inumber;
 	public ArrayList<IArmyCard> armyCards = new ArrayList<IArmyCard>();
 	public ArrayList<IChanceCard> chanceCards = new ArrayList<IChanceCard>();
 	public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
@@ -72,6 +75,7 @@ public class Player {
 	public void setArmy(Army army) {
 		this.army = army;
 	}
+	
 	
 	public void addArmyCard(IArmyCard card) {
 		this.armyCards.add(card);
