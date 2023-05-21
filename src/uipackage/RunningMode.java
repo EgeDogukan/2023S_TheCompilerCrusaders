@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.security.PublicKey;
@@ -404,66 +405,60 @@ public class RunningMode extends JFrame{
 	}
 	
 	
-	
-	
 	public void pickChanceCard() {
-	int curId = getTurn();
-    Random rand = new Random();
-    int randomNumber = rand.nextInt(5);
+		String cwd = System.getProperty("user.dir");
+		String imagePath = cwd + "/chanceCard.jpeg";
+		File imageFile = new File(imagePath);
 
-    IChanceCard chanceCard = new ChanceCardFactory().createCard(randomNumber);
-    this.players.get(curId-1).chanceCards.add(chanceCard);
-    System.out.println("Player with ID"+curId+" has drawn the "+chanceCard.getClass().getName().split("\\.")[1]+" and it is added his/her list.");
+		try {
+		    BufferedImage cardImage = ImageIO.read(imageFile);
 
-    // Suppose you have a getImage method that returns an Image object based on the card
-    String cwd = System.getProperty("user.dir");
-    Image cardImage = Toolkit.getDefaultToolkit().getImage(cwd+"/chanceCard.png");
+		    FadingImageComponent cardImageComponent = new FadingImageComponent(cardImage);
+		    cardImageComponent.setBounds(0, 0, getWidth(), getHeight());
 
-    FadingImageComponent cardImageComponent = new FadingImageComponent(cardImage);
-    cardImageComponent.setBounds(0, 0, getWidth(), getHeight());
+		    getContentPane().add(cardImageComponent);
+		    getContentPane().setComponentZOrder(cardImageComponent, 0);
 
-    this.getContentPane().add(cardImageComponent);
-    this.getContentPane().setComponentZOrder(cardImageComponent, 0);
+		    double maxX = getWidth() / 2;
+		    double maxY = getHeight() / 2;
 
-    double maxX = getWidth()/2;
-    double maxY = getHeight()/2;
+		    Timer timer = new Timer(20, new ActionListener() {
+		        double posX = 0;
+		        double posY = maxY / 2;
+		        double scale = 0.01;
+		        double velocityX = 4.0;
+		        double velocityY = 3;
 
-    Timer timer = new Timer(20, new ActionListener() {
-        double posX = 0;
-        double posY = maxY / 2;
-        double scale = 0.01;
-        double velocityX = 4.0;
-        double velocityY = 3;
+		        @Override
+		        public void actionPerformed(ActionEvent e) {
+		            // Update the image's position
+		            posX += velocityX;
+		            posY += velocityY;
+		            cardImageComponent.setPosition(posX, posY);
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // Update the image's position
-            posX += velocityX;
-            posY += velocityY;
-            cardImageComponent.setPosition(posX, posY);
+		            // Update the image's scale
+		            if (posX < maxX / 2) {
+		                scale += 0.001;
+		            } else {
+		                scale -= 0.001;
+		            }
+		            cardImageComponent.setScale(scale);
 
-            // Update the image's scale
-            if (posX < maxX / 2) {
-                scale += 0.001;
-            } else {
-                scale -= 0.001;
-            }
-            cardImageComponent.setScale(scale);
+		            // If the image has moved off the right edge of the screen, stop the animation
+		            if (posX > maxX) {
+		                ((Timer) e.getSource()).stop();
+		                getContentPane().remove(cardImageComponent);
+		                revalidate();
+		                repaint();
+		            }
+		        }
+		    });
+		    timer.start();
+		} catch (IOException ex) {
+		    ex.printStackTrace();
+		}
 
-			
-			
-            
 
-            // If the image has moved off the right edge of the screen, stop the animation
-            if (posX > maxX) {
-                ((Timer) e.getSource()).stop();
-                RunningMode.this.getContentPane().remove(cardImageComponent);
-				RunningMode.this.revalidate();
-				RunningMode.this.repaint();
-            }
-        }
-    });
-    timer.start();
 	
 
 			
