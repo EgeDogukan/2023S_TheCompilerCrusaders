@@ -305,7 +305,7 @@ public class RunningMode extends JFrame{
 			for (int i=0;i<1;i++) { p.addArmyCard(new ArmyCardFactory().createArmyCard(1));}
 		}
 	}*/
-	//TODO: add animation for picking a chance card
+	
 	public void pickChanceCard() {
 		//int curId=getTurn();
 		//Random rand = new Random();
