@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
 //import javax.management.StringValueExp;
 
 import uipackage.*;;
@@ -13,7 +16,7 @@ import uipackage.*;;
 public class GameController {
 	
 	private static int turnID = 0;
-	
+	private static ArrayList<Player> playerList = new ArrayList<Player>();
 	private GameController() {
 		
 	}
@@ -25,12 +28,15 @@ public class GameController {
 		
 	}
 	
+	
+	
     public static void main(String[] args) throws InterruptedException {
     	
     	MainMenu menu = new MainMenu();
     	menu.setVisible(true);
         
     	login loginPage = new login();
+<<<<<<< HEAD
     	
     	while(true) {
     	if (menu.isLoginClicked==false) {
@@ -51,6 +57,95 @@ public class GameController {
     		BuildingMode RiskGameFrame = new BuildingMode();
     	    RiskGameFrame.setLayout(null);
     	    RiskGameFrame.setVisible(true);
+=======
+        loginPage.frame.setVisible(true);
+
+        do {                                                        //waiting until login phase completed
+            System.out.println(loginPage.getLoginStatus());
+            
+        } while (loginPage.getLoginStatus() == false);
+		loginPage.frame.dispose();
+		
+		whichMode modeSelection = new whichMode();
+		modeSelection.setVisible(true);
+		
+		do {                                                        //waiting until login phase completed
+            System.out.println(modeSelection.status);
+            
+        } while (modeSelection.status == -1);
+		modeSelection.dispose();
+		
+		if (modeSelection.status==1) {
+			
+			BuildingMode RiskGameFrame = new BuildingMode();
+		    RiskGameFrame.setLayout(null);
+		    RiskGameFrame.setVisible(true);
+	
+		    // Declare a variable to store the number of players
+		    AtomicInteger numberOfPlayers = new AtomicInteger(0);
+		    AtomicInteger numberOfAIPlayers = new AtomicInteger(0);
+		    
+		    
+		    do {                                                        //waiting until login phase completed
+	            System.out.println(loginPage.getLoginStatus());
+	            
+	        } while (loginPage.getLoginStatus() == false);
+			loginPage.frame.dispose();
+		    
+			
+			do {                                                        //waiting until login phase completed
+	            System.out.println(RiskGameFrame.getNumberOfPlayer());
+	            
+	        } while (RiskGameFrame.getNumberOfPlayer() < 0);
+			
+			numberOfPlayers.set(RiskGameFrame.getNumberOfPlayer());
+			
+			
+			do {                                                        //waiting until login phase completed
+	            System.out.println(RiskGameFrame.getNumberOfComp());
+	            
+	        } while (RiskGameFrame.getNumberOfComp() < 0);
+	
+			numberOfAIPlayers.set(RiskGameFrame.getNumberOfComp());
+		        
+	
+		    // Use the variable after the frame is closed
+		    System.out.println("Number of players: "+numberOfPlayers.get());
+		    System.out.println("Number of AI players: "+numberOfAIPlayers.get());
+		    
+		    for (Continents continent : RiskGameFrame.getContinent()) {
+		    	System.out.println("Name of the continent: "+continent.getName());
+		    	for (Territory territory : continent.getTerritories()) {
+		    		System.out.println("    Name of the territory: "+territory.getName());
+		    	}
+		    }
+		    
+	        
+		    
+		    GameController.playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent());
+	        ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
+			RunningMode g = new RunningMode(c, playerList, numberOfAIPlayers.get(), numberOfPlayers.get());
+	        
+	        g.setLayout(new BorderLayout());
+	        g.setVisible(true);
+			turnID = g.getTurn() - 1;
+		}
+		
+		else {
+			LoadMode RiskGameFrame = new LoadMode();
+		    RiskGameFrame.setLayout(null);
+		    RiskGameFrame.setVisible(true);
+		    
+		    GameController.playerList = initGameLoadMode(RiskGameFrame.getNumberofPlayers()-1, 1, RiskGameFrame.getContinent());
+	        ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
+			RunningMode g = new RunningMode(c, playerList, 1, RiskGameFrame.getNumberofPlayers()-1);
+			
+	        g.setLayout(new BorderLayout());
+	        g.setVisible(true);
+			turnID = g.getTurn() - 1;
+			RiskGameFrame.dispose();
+		}
+>>>>>>> main
 
     	    // Declare a variable to store the number of players
     	    AtomicInteger numberOfPlayers = new AtomicInteger(0);
@@ -105,13 +200,11 @@ public class GameController {
 
 	   
     
-    static private void startLogin() {
-        login loginPage = new login();
-        loginPage.frame.setVisible(true);
+    public static ArrayList<Player> getPlayers(){
+    	return playerList;
     }
-
-
     
+
     public static Color randomColorGenerator() {
     	Random random = new Random(); // Create a new Random object
         int r = random.nextInt(255);
@@ -120,14 +213,42 @@ public class GameController {
     	return new Color(r,g,b);
     }
     
+    static private ArrayList<Player> initGameLoadMode(int numberofPlayers, int numberofComp, ArrayList<Continents> continents) {
+    	ArrayList<Territory> territories = new ArrayList<Territory>();
+    	ArrayList<Player> playerList = new ArrayList<Player>();
+    	
+    	for (Continents continent : continents) {
+    		if (continent.isIncluded){
+				for (Territory territory : continent.getTerritories()){
+					territories.add(territory);
+				}
+    		}
+		}
+    	
+    	for (int i=0;i<numberofPlayers;i++) {
+    		ArrayList<Territory> currentTerritories = new ArrayList<Territory>();
+    		for (Territory territory : territories) {
+        		if (territory.getOwnerID()==i){
+        			currentTerritories.add(territory);
+        		}
+        	}
+    		playerList.add(new Player(i, randomColorGenerator(), currentTerritories));
+    	}
+    	
+    	return playerList;
+    }
+    
 
 	static private ArrayList<Player> initGame(int numberofPlayers, int numberofComp, ArrayList<Continents> continents) {
 		
 		ArrayList<Territory> territories = new ArrayList<Territory>();
 		for (Continents continent : continents) {
-			for (Territory territory : continent.getTerritories()){
-				territories.add(territory);
+			if (continent.isIncluded){
+				for (Territory territory : continent.getTerritories()){
+					territories.add(territory);
+				}
 			}
+			
 		}
 		
 		int territoryPerPlayer = Math.floorDiv(territories.size(), (numberofPlayers+numberofComp));

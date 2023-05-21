@@ -92,7 +92,12 @@ public class Continents extends JPanel {
 
 	
 	public String getName() {
-		return name;
+		if (this.equals(null)) {
+			return "tr";
+		}
+		else {
+			return this.name;
+		}
 	}
 
 

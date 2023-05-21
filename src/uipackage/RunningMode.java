@@ -34,6 +34,9 @@ import cardPackage.ArmyCardFactory;
 import cardPackage.ChanceCardFactory;
 import cardPackage.IChanceCard;
 import cardPackage.TerritoryCard;
+import databasePackage.ISaveLoadAdapter;
+import databasePackage.TerritoryDBDatabase;
+import databasePackage.TerritoryJSONDBDatabase;
 
 public class RunningMode extends JFrame{
 
@@ -41,7 +44,7 @@ public class RunningMode extends JFrame{
 	private static JButton turn = new JButton();
 	int numberOfAIPlayer;
 	int numberOfHumanPlayer;
-	ArrayList<Player> players;
+	static ArrayList<Player> players;
 	static int turnCounter=1;
 	public static boolean isContinue = true;
 	public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
@@ -175,6 +178,31 @@ public class RunningMode extends JFrame{
 			}
 		});
 		
+		
+		
+		JButton saveButton = new JButton("Save Button");
+		saveButton.setSize(100,100);
+		saveButton.setLocation(1050, 700); 
+		
+		saveButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Save button is clicked.");
+				
+				ISaveLoadAdapter database = new TerritoryJSONDBDatabase();
+				try {
+					database.empty();
+					database.saveAll();
+//					for(Player player : RunningMode.this.players){
+//						System.out.println(database.load(player));
+//					}
+					RunningMode.this.dispose();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		
 		JButton pauseButton = new JButton("Pause");
 		pauseButton.setSize(75,75);
 		pauseButton.setLocation(1450, 700);
@@ -199,6 +227,7 @@ public class RunningMode extends JFrame{
 					useCard.setVisible(false);
 					cardComboBox.setVisible(false);
 					pickTerritoryCardButton.setVisible(false);
+					saveButton.setVisible(false);
 					isContinue=false;
 				}
 				else {
@@ -209,11 +238,13 @@ public class RunningMode extends JFrame{
 					useCard.setVisible(true);
 					cardComboBox.setVisible(true);
 					pickTerritoryCardButton.setVisible(true);
+					saveButton.setVisible(true);
 					isContinue=true;
 				}
 				
 			}
 		});
+		
 		
 		
 		this.getContentPane().add(nextButton);
@@ -226,6 +257,7 @@ public class RunningMode extends JFrame{
 		this.getContentPane().add(pauseButton);
 		this.getContentPane().add(quitButton);
 		this.getContentPane().add(pickTerritoryCardButton);
+		this.getContentPane().add(saveButton);
 		this.add(panel); 
 
 		//initializeArmies();
@@ -311,6 +343,10 @@ public class RunningMode extends JFrame{
 	}
 	public ArrayList<Player> getPlayer(){
 		return players;
+	}
+	
+	public ArrayList<Player> getPlayers() {
+		return this.players;
 	}
 	
 

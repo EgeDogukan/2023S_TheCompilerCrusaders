@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -24,12 +25,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import javax.swing.JTextField;
+import javax.swing.plaf.synth.Region;
 
 import RiskPackage.GameController;
 import cardPackage.ArmyCardFactory;
 import cardPackage.TerritoryCard;
 import uipackage.AttackTerr;
 import uipackage.RunningMode;
+import uipackage.WorldMap;
 
 public class Territory extends JPanel {
 	 private String name;
@@ -40,6 +43,7 @@ public class Territory extends JPanel {
 		//public static JButton attackButton;
 		;
 	    private Color color;
+	    private Continents continent;
 		private Continents c;
 	    private ArrayList<Territory> neighbors;
 		public int playerID;
@@ -49,7 +53,13 @@ public class Territory extends JPanel {
 		public Army armyOnTerritory;
 		private boolean isBuilding=false;
 
+
 		private boolean winner = false;
+
+
+		private Region terr_Region;
+		private static Shape clickedShape;
+	    
 
 	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color, Continents continent, int playerID) {
 	    	this.isBuilding=false;
@@ -73,6 +83,31 @@ public class Territory extends JPanel {
 	        this.name = name;
 	        this.color = color;
 	        this.neighbors = new ArrayList<Territory>();
+
+
+
+
+			//WorldMap map = new WorldMap();
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	        
 	        
 			JLabel nameLabel = new JLabel(this.getName());
@@ -416,7 +451,7 @@ public class Territory extends JPanel {
 		}
 
 		public void setColor(Color color) {
-			this.setBackground(color); 
+			this.setBackground(color);
 		}
 
 		public int getOwnerID() {
@@ -433,6 +468,10 @@ public class Territory extends JPanel {
 		
 		public void setIsBuilding(boolean status) {
 			this.isBuilding=status;
+		}
+
+		public static void setClickedShape(Shape shape) {
+			clickedShape = shape;
 		}
 
 
@@ -474,6 +513,20 @@ public class Territory extends JPanel {
 			this.armyOnTerritory.setInfantry(this.Inumber - destination.Inumber);
 			this.Inumber -= destination.Inumber;
 
+		}
+		
+		public ArrayList<String> getList(){
+			ArrayList<String> list = new ArrayList<String>();
+			list.add(((Integer)xCoordinate).toString());
+			list.add(((Integer)yCoordinate).toString());
+			list.add(((Integer)width).toString());
+			list.add(((Integer)height).toString());
+			list.add(name);
+			list.add(this.color.toString());
+			list.add(c.getName());
+			list.add(((Integer)playerID).toString());
+			
+			return list;
 		}
 
 		public int getAArmy(){

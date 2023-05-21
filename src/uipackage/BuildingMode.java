@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -30,6 +31,7 @@ import RiskPackage.HumanPlayer;
 import RiskPackage.Player;
 import RiskPackage.RiskBoard;
 import RiskPackage.Territory;
+import databasePackage.TerritoryDBDatabase;
 
 public class BuildingMode extends JFrame {
 
@@ -191,22 +193,33 @@ public class BuildingMode extends JFrame {
         Australia.addTerritory(EasternAustralia);
         Australia.addTerritory(WesternAustralia);
         
+        if (Asia.isIncluded) {
+        	continents.add(Asia);
+        	this.add(Asia);
+        }
+        if (NorthAmerica.isIncluded) {
+        	continents.add(NorthAmerica);
+        	this.add(NorthAmerica);
+        }
+        if (SouthAmerica.isIncluded) {
+        	continents.add(SouthAmerica);
+        	this.add(SouthAmerica);
+        }
+        if (Europe.isIncluded) {
+        	continents.add(Europe);
+        	this.add(Europe);
+        }
+        if (Australia.isIncluded) {
+        	continents.add(Australia);
+        	this.add(Australia);
+        }
+        if (Africa.isIncluded) {
+        	continents.add(Africa);
+        	this.add(Africa);
+        }
         
-        continents.add(Asia);
-        continents.add(NorthAmerica);
-        continents.add(SouthAmerica);
-        continents.add(Europe);
-        continents.add(Africa);
-        continents.add(Australia);
-
         
 
-        this.add(Europe);
-        this.add(Asia);
-        this.add(NorthAmerica);
-        this.add(SouthAmerica);
-        this.add(Africa);
-        this.add(Australia);
         
         Alaska.addNeighbor(Kamchatka);
         Alaska.addNeighbor(NorthWestTerritory);
@@ -509,6 +522,7 @@ public class BuildingMode extends JFrame {
         	}
         });
         this.getContentPane().add(nextButton);
+        
 	}
 	
 	
@@ -551,5 +565,6 @@ public class BuildingMode extends JFrame {
     public ArrayList<Continents> getContinent() {
     	return this.continents;
     }
+  
 	
 }
