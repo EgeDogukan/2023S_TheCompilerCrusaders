@@ -47,6 +47,7 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 			
 			ArrayList<String> saveList = player.getTerritories().get(i).getList();
 			
+			
 			doc.append("username", username);
 			doc.append("xCoordinate", saveList.get(0));
 			doc.append("yCoordinate", saveList.get(1));
@@ -60,7 +61,6 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 		}
 		
 		System.out.println("Game saved to the database for " +username);
-		
 	}
 
 	public ArrayList<ArrayList<String>> load(Player player) throws IOException {
@@ -149,7 +149,8 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 		}
 	}
 	
-	public void delete() throws IOException{
+	@Override
+	public void empty() throws IOException{
 		this.prepare();
         this.collection.deleteMany(new Document());
 	}
@@ -167,6 +168,7 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 			System.out.println(allArrayList.get(i));
 		}
 	}
+
 
 
 

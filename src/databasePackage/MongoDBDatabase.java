@@ -84,4 +84,16 @@ public class MongoDBDatabase implements ISaveLoadAdapter {
 		
 	}
 
+	@Override
+	public void empty() throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveAll() throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

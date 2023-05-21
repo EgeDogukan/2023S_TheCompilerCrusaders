@@ -31,7 +31,9 @@ import cardPackage.ArmyCardFactory;
 import cardPackage.ChanceCardFactory;
 import cardPackage.IChanceCard;
 import cardPackage.TerritoryCard;
+import databasePackage.ISaveLoadAdapter;
 import databasePackage.TerritoryDBDatabase;
+import databasePackage.TerritoryJSONDBDatabase;
 
 public class RunningMode extends JFrame{
 
@@ -171,16 +173,16 @@ public class RunningMode extends JFrame{
 		
 		JButton saveButton = new JButton("Save Button");
 		saveButton.setSize(100,100);
-		saveButton.setLocation(1050, 700);
+		saveButton.setLocation(1050, 700); 
 		
 		saveButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Save button is clicked.");
-				TerritoryDBDatabase database = new TerritoryDBDatabase();
+				
+				ISaveLoadAdapter database = new TerritoryJSONDBDatabase();
 				try {
-					database.delete();
+					database.empty();
 					database.saveAll();
-					System.out.println("bitti");
 //					for(Player player : RunningMode.this.players){
 //						System.out.println(database.load(player));
 //					}
