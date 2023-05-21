@@ -31,44 +31,12 @@ import RiskPackage.Territory;
 public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 	
 
+	public String filePath;
+
 	public TerritoryJSONDBDatabase() {
-		
 	}
 	
-	/*public static void save(String filePath) {
-		
-		Gson gson = new Gson();
-		TerritoryJSONDBDatabase user1 = new TerritoryJSONDBDatabase("1", "Tom Smith", "American");
-		TerritoryJSONDBDatabase user2 = new TerritoryJSONDBDatabase("2", "Tom", "American");
-		TerritoryJSONDBDatabase user3 = new TerritoryJSONDBDatabase("2", "TomS", "American");
-		TerritoryJSONDBDatabase user4 = new TerritoryJSONDBDatabase("1", "TomSm", "American");
-		ArrayList<TerritoryJSONDBDatabase> users = new ArrayList<TerritoryJSONDBDatabase>();
-		
-		users.add(user1);
-		users.add(user2);
-		users.add(user3);
-		users.add(user4);
-		
-		try (FileWriter writer = new FileWriter(filePath)) {
-            for (int i = 0; i < users.size(); i++) {
-                TerritoryJSONDBDatabase user = users.get(i);
-                String json = gson.toJson(user);
-
-                // Write the JSON string to the file
-                writer.write(json);
-
-                // Add a separator between JSON objects
-                if (i < users.size() - 1) {
-                    writer.write("\n");
-                }
-
-                System.out.println("Successfully added.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		
-	}*/
+	
 	
 	public static void savePlayer(Player player) throws IOException {
 		
@@ -140,7 +108,7 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 
 	@Override
 	public void prepare() {
-		// TODO Auto-generated method stub
+		this.filePath="data.json";
 		
 	}
 
