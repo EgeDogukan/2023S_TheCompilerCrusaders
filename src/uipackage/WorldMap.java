@@ -44,7 +44,9 @@ public class WorldMap {
         //image = ImageIO.read(url);
         try
         {
-            image = ImageIO.read(new File("/home/egeds/Desktop/Okul/comp302/2023S_TheCompilerCrusaders/MAP2.png"));
+            String cwd = System.getProperty("user.dir");
+            //System.out.println("AAAAAAAAAAAAA" + cwd);
+            image = ImageIO.read(new File(cwd + "/MAP2.png"));
         }
         catch (IOException e) {
             System.out.println("couldnt load map image!");
@@ -73,6 +75,7 @@ public class WorldMap {
                     if (shape.contains(pointOnImage)) {   
                         JOptionPane.showMessageDialog(null, "Clicked!"); 
                         clickedShape = shape;
+                        //setShapeColor(shape, Color.RED);
                         break;
                     }
                 }
@@ -228,6 +231,13 @@ public class WorldMap {
 
     public Shape getClickedShape() {
         return clickedShape;
+    }
+
+    public void setShapeColor(Shape shape, Color color) {
+        BufferedImage bi = new BufferedImage(
+                2 * SIZE, SIZE, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = bi.createGraphics();
+        g.setColor(color);
     }
 
     public static void main(String[] args) {
