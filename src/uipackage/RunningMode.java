@@ -50,7 +50,7 @@ public class RunningMode extends JFrame{
 	public static int databaseChooser=0;
 	
 	public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
-	public static int databaseChooser = 0;
+	
 	
 
 	
