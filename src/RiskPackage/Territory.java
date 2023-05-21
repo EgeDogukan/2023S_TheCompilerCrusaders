@@ -35,13 +35,13 @@ import uipackage.RunningMode;
 import uipackage.WorldMap;
 
 public class Territory extends JPanel {
-	 private String name;
+	 	private String name;
 	    private int xCoordinate;
 	    private int yCoordinate;
 	    private int width;
 	    private int height;
 		//public static JButton attackButton;
-		;
+		
 	    private Color color;
 	    private Continents continent;
 		private Continents c;

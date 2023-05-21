@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import RiskPackage.Player;
 import RiskPackage.Territory;
 
 import javax.imageio.ImageIO;
@@ -28,7 +29,7 @@ public class WorldMap {
     private MouseListener ml;
     private BufferedImage bi;
     private Graphics2D g;
-
+    public static int clickedShapeIndex;
 
 
     public WorldMap() {
@@ -67,6 +68,7 @@ public class WorldMap {
         MouseListener ml = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+            	System.out.println("Butona basildi");
                 Point p = MouseInfo.getPointerInfo().getLocation();
                 Point p1 = output.getLocationOnScreen();
                 
@@ -77,7 +79,13 @@ public class WorldMap {
                     if (shape.contains(pointOnImage)) {   
                         JOptionPane.showMessageDialog(null, "Clicked!"); 
                         clickedShape = shape;
-                        setShapeColor(clickedShape, Color.RED);
+                        WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
+                        //setClickedShapeIndex(clickedShapeIndex);
+                        System.out.println("WorldMap clickedshape index: "+ clickedShapeIndex);
+                        BuildingModeNew.nextTurn();
+                        System.out.println("Current turn in WorldMap: "+BuildingModeNew.turn);
+                        System.out.println("Current clickedShapeIndex in WorldMap: "+clickedShapeIndex);
+                        //setIndexColor(clickedShapeIndex, Color.red);
                         break;
                     }
                 }
@@ -252,7 +260,25 @@ public class WorldMap {
     }
 
     public void setIndexColor(int index, Color color) {
+    	System.out.println("set index color function is called");
         colorList.set(index, color);
+        refresh();
+    }
+    
+    public int getClickedShapeIndex() {
+    	return this.clickedShapeIndex;
+    }
+    
+    public void setClickedShapeIndex(int clickedShapeIndex) {
+    	this.clickedShapeIndex=clickedShapeIndex;
+    }
+    
+    public MouseListener getMouseListener() {
+    	return this.ml;
+    }
+    
+    public void setMouseListener(MouseListener ml) {
+    	this.ml=ml;
     }
 
     public static void main(String[] args) {
@@ -276,4 +302,5 @@ public class WorldMap {
         };
         SwingUtilities.invokeLater(r);
     }
+    
 }

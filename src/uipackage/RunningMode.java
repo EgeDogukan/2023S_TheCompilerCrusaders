@@ -52,8 +52,6 @@ public class RunningMode extends JFrame{
 	public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
 	
 
-	
-	
 	public RunningMode(ArrayList<Continents> continents, ArrayList<Player> players, int numberOfAIPlayer, int numberOfHumanPlayer)  {
 		this.numberOfAIPlayer=numberOfAIPlayer;
 		this.numberOfHumanPlayer=numberOfHumanPlayer;
@@ -82,7 +80,6 @@ public class RunningMode extends JFrame{
 				
 			}
 		});
-
 
 		JLabel turn = new JLabel(Integer.toString(turnCounter));
 		turn.setSize(150, 150);

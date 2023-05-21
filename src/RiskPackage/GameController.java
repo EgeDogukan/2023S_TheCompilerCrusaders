@@ -119,6 +119,7 @@ public class GameController {
 	        g.setLayout(new BorderLayout());
 	        g.setVisible(true);
 			turnID = g.getTurn() - 1;
+			RiskGameFrame.dispose();
 		}
 		
 		else {
