@@ -238,6 +238,10 @@ public class WorldMap {
         return shapeList;
     }
 
+    public void removeFromShapeList(Shape shape) {
+        shapeList.remove(shape);
+    }
+
     public Shape getClickedShape() {
         return clickedShape;
     }
