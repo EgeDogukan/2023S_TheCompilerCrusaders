@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -48,7 +51,7 @@ public class RunningMode extends JFrame{
 	static int turnCounter=1;
 	public static boolean isContinue = true;
 	public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
-	
+	private double angle = 0.0;
 
 	
 	
@@ -124,7 +127,7 @@ public class RunningMode extends JFrame{
 		
 		
 
-
+		ImageIcon iconChanceCard = new ImageIcon("2023S_TheCompilerCrusaders\\chanceCard.png");
 		//this.players.get(turnCounter).chanceCards.get(0).getClass().getName().split("\\.")[1]
 		String[] CardsOfCurrentPlayer = {"Draft Chance Card", "Reinforcement Card", "Trade Deal Card", "Revolution Card", "Nuclear Strike Card"};
         JComboBox<String> cardComboBox = new JComboBox<String>(CardsOfCurrentPlayer);
@@ -132,10 +135,11 @@ public class RunningMode extends JFrame{
         cardComboBox.setLocation(600, 700);
 		
 		JButton useCard = new JButton("Use Card");
+		//useCard.setIcon(iconChanceCard);
 		useCard.setSize(100,100);
 		useCard.setLocation(850,700);
 		
-		useCard.addMouseListener(new MouseAdapter() {
+		useCard.addMouseListener(new MouseAdapter() {//Add animation for using a chance card
 			public void mouseClicked(MouseEvent e) {
 				int selectedCard = cardComboBox.getSelectedIndex();
 				players.get(getTurn()-1).useChanceCard(selectedCard);
@@ -153,7 +157,7 @@ public class RunningMode extends JFrame{
 		Image image2 = null;
 		try {
 			String cwd = System.getProperty("user.dir");
-			image2 = ImageIO.read(new File(cwd + "/images.png"));
+			image2 = ImageIO.read(new File("2023S_TheCompilerCrusaders\\images.png"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -232,7 +236,7 @@ public class RunningMode extends JFrame{
 		Image image1 = null;
 		try {
 			String cwd = System.getProperty("user.dir");
-			image1 = ImageIO.read(new File(cwd + "/495307-200.png"));
+			image1 = ImageIO.read(new File("2023S_TheCompilerCrusaders\\495307-200.png"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -301,15 +305,74 @@ public class RunningMode extends JFrame{
 			for (int i=0;i<1;i++) { p.addArmyCard(new ArmyCardFactory().createArmyCard(1));}
 		}
 	}*/
-	
+	//TODO: add animation for picking a chance card
 	public void pickChanceCard() {
-		int curId=getTurn();
-		Random rand = new Random();
-        int randomNumber = rand.nextInt(5);
+		//int curId=getTurn();
+		//Random rand = new Random();
+        //int randomNumber = rand.nextInt(5);
         
-        IChanceCard chanceCard = new ChanceCardFactory().createCard(randomNumber);
-        this.players.get(curId-1).chanceCards.add(chanceCard);
-        System.out.println("Player with ID"+curId+" has drawn the "+chanceCard.getClass().getName().split("\\.")[1]+" and it is added his/her list.");
+        //IChanceCard chanceCard = new ChanceCardFactory().createCard(randomNumber);
+        //this.players.get(curId-1).chanceCards.add(chanceCard);
+        //System.out.println("Player with ID"+curId+" has drawn the "+chanceCard.getClass().getName().split("\\.")[1]+" and it is added his/her list.");
+		int curId = getTurn();
+    Random rand = new Random();
+    int randomNumber = rand.nextInt(5);
+
+    IChanceCard chanceCard = new ChanceCardFactory().createCard(randomNumber);
+    this.players.get(curId-1).chanceCards.add(chanceCard);
+    System.out.println("Player with ID"+curId+" has drawn the "+chanceCard.getClass().getName().split("\\.")[1]+" and it is added his/her list.");
+
+    // Suppose you have a getImage method that returns an Image object based on the card
+    Image cardImage = Toolkit.getDefaultToolkit().getImage("2023S_TheCompilerCrusaders\\chanceCard.png");
+
+    FadingImageComponent cardImageComponent = new FadingImageComponent(cardImage);
+    cardImageComponent.setBounds(0, 0, getWidth(), getHeight());
+
+    this.getContentPane().add(cardImageComponent);
+    this.getContentPane().setComponentZOrder(cardImageComponent, 0);
+
+    double maxX = getWidth()/2;
+    double maxY = getHeight()/2;
+
+    Timer timer = new Timer(20, new ActionListener() {
+        double posX = 0;
+        double posY = maxY / 2;
+        double scale = 0.01;
+        double velocityX = 4.0;
+        double velocityY = 3;
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Update the image's position
+            posX += velocityX;
+            posY += velocityY;
+            cardImageComponent.setPosition(posX, posY);
+
+            // Update the image's scale
+            if (posX < maxX / 2) {
+                scale += 0.001;
+            } else {
+                scale -= 0.001;
+            }
+            cardImageComponent.setScale(scale);
+
+			
+			
+            
+
+            // If the image has moved off the right edge of the screen, stop the animation
+            if (posX > maxX) {
+                ((Timer) e.getSource()).stop();
+                RunningMode.this.getContentPane().remove(cardImageComponent);
+				RunningMode.this.revalidate();
+				RunningMode.this.repaint();
+            }
+        }
+    });
+    timer.start();
+	
+
+			
 	}
 	
 	public Color getPlayer(int id){
@@ -326,11 +389,13 @@ public class RunningMode extends JFrame{
 	}
 	
 	public void pickTerritoryCard() {
-		int curId=getTurn();
+		/*int curId=getTurn();
 		Random rand = new Random();
 		int index = rand.nextInt(this.territoryCards.size());
 		TerritoryCard currentCard = this.territoryCards.get(index);
-		this.players.get(curId-1).territoryCards.add(currentCard);
+		this.players.get(curId-1).territoryCards.add(currentCard);*/
+		//Start
+
 	}
 	
 	
