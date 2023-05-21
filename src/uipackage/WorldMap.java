@@ -15,7 +15,6 @@ import RiskPackage.Territory;
 
 import javax.imageio.ImageIO;
 
-
 public class WorldMap {
 
     private JComponent ui = null;
@@ -24,8 +23,12 @@ public class WorldMap {
     BufferedImage image;
     Area area;
     ArrayList<Shape> shapeList;
+    static ArrayList<Color> colorList = new ArrayList<>();
     private Shape clickedShape;
     private MouseListener ml;
+    private BufferedImage bi;
+    private Graphics2D g;
+
 
 
     public WorldMap() {
@@ -45,7 +48,6 @@ public class WorldMap {
         try
         {
             String cwd = System.getProperty("user.dir");
-            //System.out.println("AAAAAAAAAAAAA" + cwd);
             image = ImageIO.read(new File(cwd + "/MAP2.png"));
         }
         catch (IOException e) {
@@ -75,7 +77,7 @@ public class WorldMap {
                     if (shape.contains(pointOnImage)) {   
                         JOptionPane.showMessageDialog(null, "Clicked!"); 
                         clickedShape = shape;
-                        //setShapeColor(shape, Color.RED);
+                        setShapeColor(clickedShape, Color.RED);
                         break;
                     }
                 }
@@ -123,6 +125,7 @@ public class WorldMap {
 
         PathIterator pi = shape.getPathIterator(null);
         GeneralPath gp = new GeneralPath();
+        int k = 0;
         while (!pi.isDone()) {
             double[] coords = new double[6];
             int pathSegmentType = pi.currentSegment(coords);
@@ -144,6 +147,8 @@ public class WorldMap {
             } else if (pathSegmentType == PathIterator.SEG_CLOSE) {
                 gp.closePath();
                 regions.add(new Area(gp));
+                colorList.add(k, Color.ORANGE.darker());
+                k++;
             } else {
                 System.err.println("Unexpected value! " + pathSegmentType);
             }
@@ -184,17 +189,22 @@ public class WorldMap {
     }
 
     private BufferedImage getImage() {
-        BufferedImage bi = new BufferedImage(
-                2 * SIZE, SIZE, BufferedImage.TYPE_INT_RGB);
-
-        Graphics2D g = bi.createGraphics();
+        bi = new BufferedImage(2 * SIZE, SIZE, BufferedImage.TYPE_INT_RGB);
+        int colorIndex;
+        g = bi.createGraphics();
         g.drawImage(image, 0, 0, output);
-        g.setColor(Color.ORANGE.darker());
-        g.fill(area);
+        //g.setColor(Color.ORANGE.darker());
+        //g.fill(area);
         g.setColor(Color.RED);
         g.draw(area);
-        try {
-            
+
+        for(Shape k :shapeList) {
+            colorIndex = shapeList.indexOf(k);
+            g.setColor(colorList.get(colorIndex));
+            g.fill(k);
+        }
+        
+        try {    
             Point p = MouseInfo.getPointerInfo().getLocation();
             Point p1 = output.getLocationOnScreen();
             
@@ -208,7 +218,6 @@ public class WorldMap {
                     break;
                 }
             }
-
         } catch (Exception doNothing) {
         }
 
@@ -234,10 +243,8 @@ public class WorldMap {
     }
 
     public void setShapeColor(Shape shape, Color color) {
-        BufferedImage bi = new BufferedImage(
-                2 * SIZE, SIZE, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g = bi.createGraphics();
-        g.setColor(color);
+        int colorIndex = shapeList.indexOf(shape);
+        colorList.set(colorIndex, color);
     }
 
     public static void main(String[] args) {
