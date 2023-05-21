@@ -247,6 +247,10 @@ public class WorldMap {
         colorList.set(colorIndex, color);
     }
 
+    public void setIndexColor(int index, Color color) {
+        colorList.set(index, color);
+    }
+
     public static void main(String[] args) {
         Runnable r = () -> {
             try {
