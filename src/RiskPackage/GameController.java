@@ -33,8 +33,22 @@ public class GameController {
 	
     public static void main(String[] args) throws InterruptedException {
         
+    	MainMenu menu = new MainMenu();
+    	menu.setVisible(true);
+        
     	login loginPage = new login();
-        loginPage.frame.setVisible(true);
+    	
+    	while(true) {
+    	if (menu.isLoginClicked==false) {
+    		
+            loginPage.frame.setVisible(false);
+    	}
+    	
+    	else if (menu.isLoginClicked==true) {
+    		menu.dispose();
+    		loginPage.frame.setVisible(true);
+    		
+
 
         do {                                                        //waiting until login phase completed
             System.out.println(loginPage.getLoginStatus());
@@ -120,9 +134,13 @@ public class GameController {
 	        g.setVisible(true);
 			turnID = g.getTurn() - 1;
 			RiskGameFrame.dispose();
+			break;
 		}
+	
+		}
+	}
 
-    }
+	}
     
     public static ArrayList<Player> getPlayers(){
     	return playerList;
@@ -199,14 +217,14 @@ public class GameController {
 		}
 		
 		
-		System.out.println("*****************");
+		System.out.println("*******");
 		for (Player player : playerList) {
 			System.out.println(player.getId());
 			//System.out.println(player.getTerritories().getNames());
 			for (Territory territory : player.getTerritories())
 				System.out.println(territory.getName());
 				
-			System.out.println("*****************");
+			System.out.println("*******");
 		}
 		
 		return playerList;
