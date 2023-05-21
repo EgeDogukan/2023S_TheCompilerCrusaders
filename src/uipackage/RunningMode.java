@@ -189,17 +189,38 @@ public class RunningMode extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Save button is clicked.");
 				
-				ISaveLoadAdapter database = new TerritoryJSONDBDatabase();
-				try {
-					database.empty();
-					database.saveAll();
-//					for(Player player : RunningMode.this.players){
-//						System.out.println(database.load(player));
-//					}
-					RunningMode.this.dispose();
-				} catch (IOException e1) {
-					e1.printStackTrace();
+				int databaseChooser=0;
+				
+				ISaveLoadAdapter database;
+				
+				if (databaseChooser==0) {
+					database = new TerritoryJSONDBDatabase();
 				}
+				else {
+					database = new TerritoryDBDatabase();
+				}
+					try {
+						database.empty();
+						database.saveAll();
+						RunningMode.this.dispose();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					try {
+						ArrayList<ArrayList<ArrayList<String>>> informations =  database.loadAll();
+						for(int i=0;i<informations.size();i++) {
+							System.out.println(informations.get(i));
+						}
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				
+				
+					
+				
+				
+				
 			}
 		});
 		

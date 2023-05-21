@@ -1,12 +1,16 @@
 package databasePackage;
 
-import java.awt.Color;
+
+import static com.mongodb.client.model.Filters.eq;
+
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bson.Document;
 import org.json.simple.JsonArray;
@@ -21,6 +25,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSerializer;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
 import RiskPackage.GameController;
@@ -31,53 +36,20 @@ import RiskPackage.Territory;
 public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 	
 
+	public String filePath;
+
 	public TerritoryJSONDBDatabase() {
-		
 	}
 	
-	/*public static void save(String filePath) {
-		
-		Gson gson = new Gson();
-		TerritoryJSONDBDatabase user1 = new TerritoryJSONDBDatabase("1", "Tom Smith", "American");
-		TerritoryJSONDBDatabase user2 = new TerritoryJSONDBDatabase("2", "Tom", "American");
-		TerritoryJSONDBDatabase user3 = new TerritoryJSONDBDatabase("2", "TomS", "American");
-		TerritoryJSONDBDatabase user4 = new TerritoryJSONDBDatabase("1", "TomSm", "American");
-		ArrayList<TerritoryJSONDBDatabase> users = new ArrayList<TerritoryJSONDBDatabase>();
-		
-		users.add(user1);
-		users.add(user2);
-		users.add(user3);
-		users.add(user4);
-		
-		try (FileWriter writer = new FileWriter(filePath)) {
-            for (int i = 0; i < users.size(); i++) {
-                TerritoryJSONDBDatabase user = users.get(i);
-                String json = gson.toJson(user);
-
-                // Write the JSON string to the file
-                writer.write(json);
-
-                // Add a separator between JSON objects
-                if (i < users.size() - 1) {
-                    writer.write("\n");
-                }
-
-                System.out.println("Successfully added.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		
-	}*/
 	
-	public static void savePlayer(Player player) throws IOException {
-		
+	public void save(Player player) throws IOException {
+		this.prepare();
 		String filePath="data.json";
 		Gson gson = new Gson();
 		
-		FileWriter writer = new FileWriter(filePath, true);
+		
 		for (int i=0;i<player.getTerritories().size();i++) {
-			
+			FileWriter writer = new FileWriter(filePath, true);
 			Territory ter = player.getTerritories().get(i);
 			ArrayList<String> saveList = ter.getList();
 			
@@ -87,46 +59,21 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 			writer.write(json);
 
 			writer.write("\n");
+			writer.close();		
 		}
 		
 	}
 	
 	public void saveAll() throws IOException {
+		this.prepare();
 		ArrayList<Player> players = GameController.getPlayers();
 		for (Player player : players) {
-			savePlayer(player);
+			save(player);
 		}
 	}
-	
-	public static void load(String filePath) {
-		Gson gson = new Gson();
-		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                JsonObject jsonObject = gson.fromJson(line, JsonObject.class);
-                System.out.println(jsonObject.get("nationality"));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-	}
+
 	
 	
-	
-	public static void loadAll() {
-		Gson gson = new Gson();
-		String filePath="data.json";
-		
-		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                JsonObject jsonObject = gson.fromJson(line, JsonObject.class);
-                System.out.println(jsonObject);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-	}
 
 	public void empty() throws IOException {
 		String filePath="data.json";
@@ -140,33 +87,73 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 
 	@Override
 	public void prepare() {
-		// TODO Auto-generated method stub
+		this.filePath="data.json";
 		
 	}
-
-	@Override
-	public void save(String username, String password) throws IOException {
-		// TODO Auto-generated method stub
+	
+	public ArrayList<ArrayList<String>> load() throws FileNotFoundException, IOException {
+		this.prepare();
+		Gson gson = new Gson();
 		
+		ArrayList<ArrayList<String>> informations = new ArrayList<>();
+
+	    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            Type listType = new TypeToken<ArrayList<String>>() {}.getType();
+	            ArrayList<String> data = gson.fromJson(line, listType);
+	            informations.add(data);
+	           
+	        }
+	    }
+	    return informations;
 	}
 
-	@Override
-	public void save(ArrayList<String> saveList, String username) throws IOException {
-		// TODO Auto-generated method stub
+
+	public ArrayList<ArrayList<ArrayList<String>>> loadAll() throws IOException {
+		this.prepare();
 		
-	}
-
-	@Override
-	public void save(Player player) throws IOException {
-		// TODO Auto-generated method stub
+		ArrayList<ArrayList<ArrayList<String>>> allArrayList = new ArrayList<>();
+		Gson gson = new Gson();
 		
+		String[] usernames = {"0","1","2","3","4","5"};
+		
+		for (String username : usernames) {
+			try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+		        String line;
+		        ArrayList<ArrayList<String>> informations = new ArrayList<ArrayList<String>>();
+		        while ((line = reader.readLine()) != null) {
+		            Type listType = new TypeToken<ArrayList<String>>() {}.getType();
+		            ArrayList<String> data = gson.fromJson(line, listType);
+		            
+		            if (data.get(data.size()-1).equals(username)) {
+		            	informations.add(data);
+		            }
+		           
+		        }
+		        if (informations.size()!=0) {
+			        allArrayList.add(informations);
+		        }
+		    }
+			
+		}
+		return allArrayList;
 	}
+	
+	
 
-	@Override
-	public ArrayList<ArrayList<String>> load(Player player) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
+
+
+	
+
+
+
+
+
+
+	
 		
 	
 

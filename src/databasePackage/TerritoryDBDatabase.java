@@ -3,6 +3,7 @@ package databasePackage;
 import static com.mongodb.client.model.Filters.eq;
 
 import java.awt.Color;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -136,11 +137,6 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 	}
 	
 
-	public void save(String username, String password) throws IOException {
-		return;
-		
-	}
-	
 	public void saveAll() throws IOException {
 		this.prepare();
 		ArrayList<Player> players = GameController.getPlayers();
@@ -154,20 +150,11 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 		this.prepare();
         this.collection.deleteMany(new Document());
 	}
+
 	
 
-	@Override
-	public void save(ArrayList<String> saveList, String username) throws IOException {
-	}
+
 	
-	public static void main(String[] args) throws IOException {
-		TerritoryDBDatabase database =  new TerritoryDBDatabase();
-		ArrayList<ArrayList<ArrayList<String>>> allArrayList = database.loadAll();
-		
-		for(int i=0;i<allArrayList.size();i++) {
-			System.out.println(allArrayList.get(i));
-		}
-	}
 
 
 

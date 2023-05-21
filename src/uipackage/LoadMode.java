@@ -10,29 +10,44 @@ import javax.swing.JFrame;
 import RiskPackage.Continents;
 import RiskPackage.Player;
 import RiskPackage.Territory;
+import databasePackage.ISaveLoadAdapter;
 import databasePackage.TerritoryDBDatabase;
+import databasePackage.TerritoryJSONDBDatabase;
 
 public class LoadMode extends JFrame {
 	
 	int numberOfPlayer;
 	int numberOfComp;
 	ArrayList<ArrayList<ArrayList<String>>> allArrayList;
+	ArrayList<ArrayList<String>> allArrayListJSON;
+	
 	public ArrayList<Continents> continents;
 	public ArrayList<Territory> territories = new ArrayList<>();
+	public int databaseChooser=0;
 
 	public LoadMode()  {
 		super("Load Mode");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(1920, 1080));
         this.setLayout(null);
+        ISaveLoadAdapter database;
+        
+        if (databaseChooser==0) {
+        	database =  new TerritoryDBDatabase();
+        }
+        else {
+        	database =  new TerritoryJSONDBDatabase();
+        }
+    		
+        try {
+    		this.allArrayList = database.loadAll();
+    		} 
+        catch (IOException e) {
+    			e.printStackTrace();
+    		}
+        
+       
 		
-
-		TerritoryDBDatabase database =  new TerritoryDBDatabase();
-		try {
-			this.allArrayList = database.loadAll();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 		this.numberOfComp = 1;
 		this.numberOfPlayer = this.allArrayList.size();
@@ -63,6 +78,7 @@ public class LoadMode extends JFrame {
         Continents Australia = new Continents("Australia",australiaTerritories, 200, 200, Color.LIGHT_GRAY);
         Australia.setLocation(1150, 450);
         
+        
         for(int i=0;i<this.allArrayList.size();i++) {
         	for (int j=0;j<this.allArrayList.get(i).size();j++) {
         			//System.out.println(this.allArrayList.get(i).get(j));
@@ -74,9 +90,6 @@ public class LoadMode extends JFrame {
         			int width = Integer.parseInt(this.allArrayList.get(i).get(j).get(2));
         			
         			int height = Integer.parseInt(this.allArrayList.get(i).get(j).get(3));
-        			
-        			
-        			
         			
         			String territory = this.allArrayList.get(i).get(j).get(4);
         			String colorString = this.allArrayList.get(i).get(j).get(5);

@@ -17,6 +17,7 @@ public class GameController {
 	
 	private static int turnID = 0;
 	private static ArrayList<Player> playerList = new ArrayList<Player>();
+	
 	private GameController() {
 		
 	}
