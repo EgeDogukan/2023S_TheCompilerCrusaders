@@ -29,7 +29,7 @@ public class whichMode extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				whichMode.status=0;
 				System.out.println(status);
-				RunningMode.databaseChooser=0;
+				RunningMode.databaseChooser=1;
 			}
 		});
 		

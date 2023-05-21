@@ -19,7 +19,6 @@ public class LoadMode extends JFrame {
 	int numberOfPlayer;
 	int numberOfComp;
 	ArrayList<ArrayList<ArrayList<String>>> allArrayList;
-	ArrayList<ArrayList<String>> allArrayListJSON;
 	
 	public ArrayList<Continents> continents;
 	public ArrayList<Territory> territories = new ArrayList<>();
@@ -106,7 +105,6 @@ public class LoadMode extends JFrame {
         		    	Territory terrAs = new Territory(xCoordinate, yCoordinate, width, height, territory,color, Asia , id);
         		    	asiaTerritories.add(terrAs);
         		    	this.territories.add(terrAs);
-        		        
         		        break;
         		        
 		        	case "Africa":
@@ -114,7 +112,6 @@ public class LoadMode extends JFrame {
 				    	Territory terrAf = new Territory(xCoordinate, yCoordinate, width, height, territory,color, Africa , id);
 				    	africaTerritories.add(terrAf);
 				    	this.territories.add(terrAf);
-				        
 				        break;
 				       
 		        	case "Australia":
@@ -151,7 +148,11 @@ public class LoadMode extends JFrame {
         
         			}	
         		}
-        	}
+        }
+        
+        for(Territory ter : this.territories) {
+        	ter.setIsBuilding(true);
+        }
         
         System.out.println("************** LOAD MODE ********");
         
@@ -361,9 +362,9 @@ public class LoadMode extends JFrame {
         }
         this.pack();
         
-           
-	
+         
 	}
+	
 	public static Color changeToColor(String colorString) {
 		//String colorString = "java.awt.Color[r=0,g=0,b=255]";
 

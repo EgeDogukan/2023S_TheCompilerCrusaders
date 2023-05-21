@@ -87,26 +87,6 @@ public class Territory extends JPanel {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	        
 	        
 			JLabel nameLabel = new JLabel(this.getName());
 			System.out.println(this.getName());

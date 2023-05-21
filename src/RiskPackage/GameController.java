@@ -110,7 +110,7 @@ public class GameController {
 		    	}
 		    }
 		    
-	        
+		    
 		    
 		    GameController.playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent());
 	        ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
@@ -119,22 +119,29 @@ public class GameController {
 	        g.setLayout(new BorderLayout());
 	        g.setVisible(true);
 			turnID = g.getTurn() - 1;
+			System.out.println("Currently, building mode!");
+			RiskGameFrame.dispose();
+			RiskGameFrame.dispose();
+			break;
 		}
 		
 		else {
+			
+			
 			LoadMode RiskGameFrame = new LoadMode();
 		    RiskGameFrame.setLayout(null);
 		    RiskGameFrame.setVisible(true);
 		    
-		    GameController.playerList = initGameLoadMode(RiskGameFrame.getNumberofPlayers()-1, 1, RiskGameFrame.getContinent());
+		    GameController.playerList = initGameLoadMode(4, 0, RiskGameFrame.getContinent());
 	        ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
-			RunningMode g = new RunningMode(c, playerList, 1, RiskGameFrame.getNumberofPlayers()-1);
+			RunningMode g = new RunningMode(c, playerList, 0, 4);
 			
 	        g.setLayout(new BorderLayout());
 	        g.setVisible(true);
-			turnID = g.getTurn() - 1;
+			turnID = g.getTurn();
 			RiskGameFrame.dispose();
 			break;
+			
 		}
 	
 		}

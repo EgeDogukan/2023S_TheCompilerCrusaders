@@ -498,6 +498,7 @@ public class BuildingMode extends JFrame {
                 setNumberOfComp(((int)Integer.valueOf((String) compBox.getSelectedItem())));
             	JOptionPane.showMessageDialog(null, "Game started!");
             	
+            	BuildingMode.this.dispose();
             	getThisFrame().dispose();
             }
         });
@@ -522,6 +523,7 @@ public class BuildingMode extends JFrame {
         	}
         });
         this.getContentPane().add(nextButton);
+        
         
 	}
 	

@@ -72,9 +72,6 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 		}
 	}
 
-	
-	
-
 	public void empty() throws IOException {
 		String filePath="data.json";
 		Gson gson = new Gson();
@@ -90,24 +87,7 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 		this.filePath="data.json";
 		
 	}
-	
-	public ArrayList<ArrayList<String>> load() throws FileNotFoundException, IOException {
-		this.prepare();
-		Gson gson = new Gson();
-		
-		ArrayList<ArrayList<String>> informations = new ArrayList<>();
 
-	    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-	        String line;
-	        while ((line = reader.readLine()) != null) {
-	            Type listType = new TypeToken<ArrayList<String>>() {}.getType();
-	            ArrayList<String> data = gson.fromJson(line, listType);
-	            informations.add(data);
-	           
-	        }
-	    }
-	    return informations;
-	}
 
 
 	public ArrayList<ArrayList<ArrayList<String>>> loadAll() throws IOException {

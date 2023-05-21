@@ -51,10 +51,6 @@ public class RunningMode extends JFrame{
 	
 	public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
 	
-	
-
-	
-	
 	public RunningMode(ArrayList<Continents> continents, ArrayList<Player> players, int numberOfAIPlayer, int numberOfHumanPlayer)  {
 		this.numberOfAIPlayer=numberOfAIPlayer;
 		this.numberOfHumanPlayer=numberOfHumanPlayer;
@@ -95,16 +91,16 @@ public class RunningMode extends JFrame{
 				
 				//nextButton.setBackground(GameController.getCurrentTurnPlayerID());
             	//System.out.println();
-            	printTerritoryCard();
+            	//printTerritoryCard();
             	RunningMode.turnCounter++;
-            	RunningMode.turnCounter=RunningMode.turnCounter%(numberOfAIPlayer+numberOfHumanPlayer+1);
-            	if (RunningMode.turnCounter==0) {
-            		RunningMode.turnCounter++;
+            	
+            	if (RunningMode.turnCounter==numberOfAIPlayer+numberOfHumanPlayer+1) {
+            		RunningMode.turnCounter=1;
             	}
             	turn.setText(Integer.toString(RunningMode.turnCounter));
 				GameController.setCurrentTurnPlayerID(RunningMode.turnCounter);
 				System.out.println("------------------------------" + RunningMode.turnCounter);
-				nextButton.setBackground(getPlayer(getTurn()-1));
+				nextButton.setBackground(getPlayer(getTurn()));
 				
             }
         });
@@ -196,7 +192,7 @@ public class RunningMode extends JFrame{
 				
 				ISaveLoadAdapter database;
 				
-				if (databaseChooser==0) {
+				if (databaseChooser==1) {
 					database = new TerritoryJSONDBDatabase();
 				}
 				else {
@@ -218,12 +214,7 @@ public class RunningMode extends JFrame{
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				
-				
 					
-				
-				
-				
 			}
 		});
 		
@@ -316,7 +307,7 @@ public class RunningMode extends JFrame{
 	}
 	
 	public Color getPlayer(int id){
-		return this.players.get(id).getColor();
+		return this.players.get(id-1).getColor();
 	}
 	
 	public void initializeTerritoryCards() {
@@ -340,7 +331,8 @@ public class RunningMode extends JFrame{
 	public void printTerritoryCard() {
 		int curId=getTurn();
 		System.out.println("Territory Cards of the player are: ");
-		for (TerritoryCard card : this.players.get(curId-1).territoryCards) {
+		System.out.println("Current id: "+this.players.get(curId));
+		for (TerritoryCard card : this.players.get(curId).territoryCards) {
 			System.out.println(card.territory);
 		}
 	}
