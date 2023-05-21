@@ -119,13 +119,13 @@ public class AttackTerr extends JFrame {
                 if(destination != null){
                     if(destination.armyOnTerritory.calculateStrength() <= territory.armyOnTerritory.calculateStrength()){
                         if(defenderDiceResult<attackerDiceResult){
-                            if(territory.getAArmy() >= destination.getAArmy()&& destination.getAArmy() != 0){
+                            if(territory.armyOnTerritory.getArtillery() >= destination.armyOnTerritory.getArtillery()&& destination.armyOnTerritory.getArtillery() != 0){
                                 destination.armyOnTerritory.setArtillery(destination.armyOnTerritory.getArtillery() - 1);
                             }
-                            else if(territory.getIArmy() >= destination.getIArmy() && destination.getIArmy() != 0){
+                            else if(territory.armyOnTerritory.getInfantry() >= destination.armyOnTerritory.getInfantry() && destination.armyOnTerritory.getInfantry() != 0){
                                 destination.armyOnTerritory.setInfantry(destination.armyOnTerritory.getInfantry() - 1);
                             }
-                            else if(territory.getCArym() >= destination.getCArym() && destination.getCArym() != 0){
+                            else if(territory.armyOnTerritory.getCavalry() >= destination.armyOnTerritory.getCavalry() && destination.armyOnTerritory.getCavalry() != 0){
                                 destination.armyOnTerritory.setCavalry(destination.armyOnTerritory.getCavalry() - 1);
                             }
                             //destination.decreaseArmy(territory);
@@ -161,13 +161,13 @@ public class AttackTerr extends JFrame {
                         }
                         else if(defenderDiceResult>=attackerDiceResult){
                             
-                            if(destination.getAArmy() >= territory.getAArmy()&& territory.getAArmy() != 0){
+                            if(destination.armyOnTerritory.getArtillery() >= territory.armyOnTerritory.getArtillery()&& territory.armyOnTerritory.getArtillery() != 0){
                                 territory.armyOnTerritory.setArtillery(territory.armyOnTerritory.getArtillery() - 1);
                             }
-                            else if(destination.getIArmy() >= territory.getIArmy() && territory.getIArmy() != 0){
+                            else if(destination.armyOnTerritory.getInfantry() >= territory.armyOnTerritory.getInfantry() && territory.armyOnTerritory.getInfantry() != 0){
                                 territory.armyOnTerritory.setInfantry(territory.armyOnTerritory.getInfantry() - 1);
                             }
-                            else if(destination.getCArym() >= territory.getCArym() && territory.getCArym() != 0){
+                            else if(destination.armyOnTerritory.getCavalry() >= territory.getCArym() && territory.armyOnTerritory.getCavalry() != 0){
                                 territory.armyOnTerritory.setCavalry(territory.armyOnTerritory.getCavalry() - 1);
                             }
                             //territory.decreaseArmy(destination);

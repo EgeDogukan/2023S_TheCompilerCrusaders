@@ -31,12 +31,11 @@ public class GameController {
 	
 	
     public static void main(String[] args) throws InterruptedException {
-    	
+        
     	MainMenu menu = new MainMenu();
     	menu.setVisible(true);
         
     	login loginPage = new login();
-<<<<<<< HEAD
     	
     	while(true) {
     	if (menu.isLoginClicked==false) {
@@ -48,17 +47,7 @@ public class GameController {
     		menu.dispose();
     		loginPage.frame.setVisible(true);
     		
-            do {                                                        //waiting until login phase completed
-                System.out.println(loginPage.getLoginStatus());
-                
-            } while (loginPage.getLoginStatus() == false);
-    		loginPage.frame.dispose();
-    		
-    		BuildingMode RiskGameFrame = new BuildingMode();
-    	    RiskGameFrame.setLayout(null);
-    	    RiskGameFrame.setVisible(true);
-=======
-        loginPage.frame.setVisible(true);
+
 
         do {                                                        //waiting until login phase completed
             System.out.println(loginPage.getLoginStatus());
@@ -144,61 +133,13 @@ public class GameController {
 	        g.setVisible(true);
 			turnID = g.getTurn() - 1;
 			RiskGameFrame.dispose();
+			break;
 		}
->>>>>>> main
+	
+		}
+	}
 
-    	    // Declare a variable to store the number of players
-    	    AtomicInteger numberOfPlayers = new AtomicInteger(0);
-    	    AtomicInteger numberOfAIPlayers = new AtomicInteger(0);
-    	    
-    	    
-    	    do {                                                        //waiting until login phase completed
-                System.out.println(loginPage.getLoginStatus());
-                
-            } while (loginPage.getLoginStatus() == false);
-    		loginPage.frame.dispose();
-    	    
-    		
-    		do {                                                        //waiting until login phase completed
-                System.out.println(RiskGameFrame.getNumberOfPlayer());
-                
-            } while (RiskGameFrame.getNumberOfPlayer() < 0);
-    		
-    		numberOfPlayers.set(RiskGameFrame.getNumberOfPlayer());
-    		
-    		
-    		do {                                                        //waiting until login phase completed
-                System.out.println(RiskGameFrame.getNumberOfComp());
-                
-            } while (RiskGameFrame.getNumberOfComp() < 0);
-
-    		numberOfAIPlayers.set(RiskGameFrame.getNumberOfComp());
-    		 // Use the variable after the frame is closed
-    	    System.out.println("Number of players: "+numberOfPlayers.get());
-    	    System.out.println("Number of AI players: "+numberOfAIPlayers.get());
-    	    
-    	    for (Continents continent : RiskGameFrame.getContinent()) {
-    	    	System.out.println("Name of the continent: "+continent.getName());
-    	    	for (Territory territory : continent.getTerritories()) {
-    	    		System.out.println("    Name of the territory: "+territory.getName());
-    	    	}
-    	    }
-    	    
-            
-    	    ArrayList<Player> playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent());
-            ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
-    		RunningMode g = new RunningMode(c, playerList, numberOfAIPlayers.get(), numberOfPlayers.get());
-                    
-            g.setLayout(new BorderLayout());
-            g.setVisible(true);
-    		turnID = g.getTurn() - 1;
-
-    		break;
-        }
-    	}
-    }
-
-	   
+	}
     
     public static ArrayList<Player> getPlayers(){
     	return playerList;
@@ -275,14 +216,14 @@ public class GameController {
 		}
 		
 		
-		System.out.println("*****************");
+		System.out.println("*******");
 		for (Player player : playerList) {
 			System.out.println(player.getId());
 			//System.out.println(player.getTerritories().getNames());
 			for (Territory territory : player.getTerritories())
 				System.out.println(territory.getName());
 				
-			System.out.println("*****************");
+			System.out.println("*******");
 		}
 		
 		return playerList;

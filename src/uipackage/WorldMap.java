@@ -48,7 +48,7 @@ public class WorldMap {
         try
         {
             String cwd = System.getProperty("user.dir");
-            image = ImageIO.read(new File(cwd + "/MAP2.png"));
+            image = ImageIO.read(new File("2023S_TheCompilerCrusaders\\MAP2.png"));
         }
         catch (IOException e) {
             System.out.println("couldnt load map image!");

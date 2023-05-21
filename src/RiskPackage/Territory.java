@@ -53,7 +53,7 @@ public class Territory extends JPanel {
 		public Army armyOnTerritory;
 		private boolean isBuilding=false;
 
-
+		
 		private boolean winner = false;
 
 
@@ -88,7 +88,7 @@ public class Territory extends JPanel {
 
 
 			//WorldMap map = new WorldMap();
-		
+			
 			
 
 
@@ -127,56 +127,7 @@ public class Territory extends JPanel {
 					if (isBuilding) {
 						System.out.println("Panel clicked!");
 
-						//JFrame territoryPromptjFrame = new JFrame(Territory.this.getName());
-						//territoryPromptjFrame.setLayout(null);
-						//territoryPromptjFrame.setVisible(true);
-						//territoryPromptjFrame.setPreferredSize(new Dimension(300, 300
-						//));
-						//territoryPromptjFrame.setLocationRelativeTo(null);
-						//JPanel territoryPromptJPanel = new JPanel();
-						//territoryPromptJPanel.setBackground(Color.GREEN);
-						//territoryPromptJPanel.setSize(500, 500);
 						
-						//
-						//territoryPromptJPanel.setOpaque(true);
-	        			//territoryPromptJPanel.setFocusable(true);
-	        			//territoryPromptJPanel.setEnabled(true);
-	        			
-					/* 	JLabel presentArmyJLabel = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
-						+ Territory.this.Inumber +" Infantry.");
-						JLabel power = new JLabel("Total power: "+ "\n" + Territory.this.armyOnTerritory.calculateStrength());
-						
-						String[] terrToAttack = new String[Territory.this.getNeighbors().size()];
-						//for(Territory t : Territory.this.getNeighbors()){
-						for(int t=0; t< Territory.this.getNeighbors().size();t++){
-
-						JLabel neig = new JLabel(Territory.this.getNeighbors().get(t).getName() + " territory power : " + Territory.this.getNeighbors().get(t).armyOnTerritory.calculateStrength());
-						//territoryPromptJPanel.add(neig);
-						terrToAttack[t]=Territory.this.getNeighbors().get(t).getName();
-						
-						System.out.println(terrToAttack[t]);
-
-
-
-								
-								JLabel ppp = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
-								+ Territory.this.Inumber +" Infantry.");
-								territoryPromptjFrame.add(ppp);
-								
-
-							}
-
-						presentArmyJLabel.setLocation(500, 500);*/
-						//territoryPromptJPanel.add(presentArmyJLabel);
-						//territoryPromptJPanel.add(power);
-
-						//territoryPromptjFrame.add(territoryPromptJPanel);
-						//territoryPromptjFrame.setContentPane(territoryPromptJPanel);
-						//JComboBox<String> cardComboBox = new JComboBox<String>(CardsOfCurrentPlayer);
-						//JComboBox<String> chooseToAttackBox = new JComboBox<String>(terrToAttack);
-						
-						//territoryPromptjFrame.pack();
-
 						
 
 						
@@ -185,19 +136,7 @@ public class Territory extends JPanel {
 							System.out.println("sahip");
 							JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
 						"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
-						//attackButton = new JButton("Attack");
-						//String name = (String) chooseToAttackBox.getSelectedItem();
-						//territoryPromptJPanel.add(attackButton);
-						//attackButton.addMouseListener(new MouseAdapter() {
-						//	public void mouseClicked(MouseEvent e) {
-						/* 		Territory destination = null;
-								for(Territory t : Territory.this.getNeighbors()){
-									if(name.equals(t.getName())){
-										destination = t;
-										
-										break;
-									}
-								}*/
+						
 								
 								AttackTerr at = new AttackTerr(Territory.this);
 
@@ -357,7 +296,9 @@ public class Territory extends JPanel {
 			this.setFocusable(true);
 	    }
 	    
-	    
+		private Point getCenter() {
+			return new Point(getWidth() / 2, getHeight() / 2);
+		}
 		
 		@Override
 	    public void paintComponent(Graphics g) {
@@ -366,7 +307,8 @@ public class Territory extends JPanel {
 	        g.fillRect(this.xCoordinate, this.yCoordinate, this.width, this.height);
 	        g.setColor(Color.BLACK);
 	        g.drawString(this.name, this.xCoordinate, this.yCoordinate); 
-
+			
+			
 
 	    }
 		public boolean Winner(){
