@@ -19,16 +19,31 @@ public class whichMode extends JFrame {
         this.setSize(1920, 1080);
         this.setLayout(null);
         
-		JButton loadButton = new JButton("For loading a previous game press this button.");
-		loadButton.setSize(275,275);
-		loadButton.setLocation(300, 300);
-		this.add(loadButton);
+		JButton loadJSON = new JButton("For JSON.");
+		loadJSON.setSize(275,275);
+		loadJSON.setLocation(300, 300);
+		this.add(loadJSON);
 		
 		
-		loadButton.addMouseListener(new MouseAdapter() {
+		loadJSON.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				whichMode.status=0;
 				System.out.println(status);
+				RunningMode.databaseChooser=0;
+			}
+		});
+		
+		JButton loadMONGO = new JButton("Load MONGO.");
+		loadMONGO.setSize(275,275);
+		loadMONGO.setLocation(300, 600);
+		this.add(loadMONGO);
+		
+		
+		loadMONGO.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				whichMode.status=0;
+				System.out.println(status);
+				RunningMode.databaseChooser=0;
 			}
 		});
 		

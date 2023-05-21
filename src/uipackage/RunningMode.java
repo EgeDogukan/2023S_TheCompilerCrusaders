@@ -47,6 +47,8 @@ public class RunningMode extends JFrame{
 	static ArrayList<Player> players;
 	static int turnCounter=1;
 	public static boolean isContinue = true;
+	public static int databaseChooser=0;
+	
 	public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
 	
 
@@ -189,7 +191,7 @@ public class RunningMode extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Save button is clicked.");
 				
-				int databaseChooser=0;
+			
 				
 				ISaveLoadAdapter database;
 				
