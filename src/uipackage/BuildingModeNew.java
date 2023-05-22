@@ -63,6 +63,8 @@ public class BuildingModeNew extends JFrame {
 		}
 		
 	}
+
+	
 	
 	
 	
@@ -75,6 +77,18 @@ public class BuildingModeNew extends JFrame {
 	     buildingModeNew.setResizable(false);
 	     buildingModeNew.pack();
 	     buildingModeNew.setVisible(true);
+		 boolean flag = true;
+		 do{
+			System.out.println(BuildingModeNew.worldMap.getIsAllSelected());
+			if(BuildingModeNew.worldMap.getIsAllSelected()){
+				System.out.println("aaaaaaaaaaaaaaaa");
+				flag = false;
+		 		buildingModeNew.dispose();
+			}
+		}
+		 while(flag);
+		 	
+		 
 	}
 
 }
