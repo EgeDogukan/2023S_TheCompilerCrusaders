@@ -2,6 +2,7 @@ package uipackage;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Shape;
 import java.awt.event.MouseAdapter;
@@ -15,20 +16,32 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import RiskPackage.Player;
 import RiskPackage.PlayerNew;
 
 public class BuildingModeNew extends JFrame {
 	
+	public static ArrayList<PlayerNew> getPlayerList() {
+		return playerList;
+	}
+
 	public static int numberOfPlayer;
 	public static int turn;
 	public static WorldMap worldMap;
 	public MouseListener mouseListener;
 	static ArrayList<PlayerNew> playerList = new ArrayList<>();
+	public ArrayList<ArrayList<Integer>> shapeList = new ArrayList<>();
 	static JLabel turnShowButton;
+
+	
+
 
 	public BuildingModeNew() {
 		super("Building Mode New");
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setPreferredSize(new Dimension(1920, 1080));
+        //this.setLayout(null);
+        
 		numberOfPlayer=4;
 		turn=1;
 		worldMap=new WorldMap();
@@ -36,6 +49,7 @@ public class BuildingModeNew extends JFrame {
 		ArrayList<Integer> indices = new ArrayList<>();
 		for(int i=1;i<numberOfPlayer+1;i++) {
 			playerList.add(new PlayerNew(i, generateRandomColor(), indices));
+			this.shapeList.add(indices);
 		}
 		JPanel panel = new JPanel();
 		
@@ -43,11 +57,12 @@ public class BuildingModeNew extends JFrame {
 		turnShowButton.setForeground(Color.BLUE);
 		turnShowButton.setSize(50,50);
 		
-		panel.add(turnShowButton);
-		panel.add(worldMap.getUI());
+		//panel.add(turnShowButton);
+		this.add(worldMap.getUI());
+		//this.setVisible(true);
 		
 		
-		this.add(panel);
+		
 		
 
 		
@@ -78,13 +93,25 @@ public class BuildingModeNew extends JFrame {
 		}	
 	}
 	
-	public ArrayList<Shape> initalSharing(){
+	public ArrayList<ArrayList<Shape>> initalSharing(ArrayList<PlayerNew> players){
 		
+		ArrayList<ArrayList<Shape>> initialShapes = new ArrayList<>();
 		
-		return null;
+		for(PlayerNew player : players) {
+			ArrayList<Shape> shapesOfPlayer = new ArrayList<>();
+			for(Integer index : player.getShapeIndices()) {
+				shapesOfPlayer.add(worldMap.getShape(index));
+			}
+			initialShapes.add(shapesOfPlayer);
+		}
+		
+		return initialShapes;
 		
 	}
 	
+	public ArrayList<ArrayList<Integer>> getShapeList() {
+		return shapeList;
+	}
 	
 	
 	public static void main(String[] args) {

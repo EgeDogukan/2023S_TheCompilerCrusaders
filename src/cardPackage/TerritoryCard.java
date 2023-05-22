@@ -6,10 +6,10 @@ import RiskPackage.Territory;
 
 public class TerritoryCard {
 
-	public Shape shape;
+	public Territory territory;
 	
-	public TerritoryCard(Shape shape) {
-		this.shape=shape;
+	public TerritoryCard(Territory territory) {
+		this.territory=territory;
 		
 	}
 

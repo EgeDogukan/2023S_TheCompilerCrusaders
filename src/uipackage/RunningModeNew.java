@@ -28,6 +28,7 @@ import RiskPackage.Continents;
 import RiskPackage.GameController;
 import RiskPackage.GamePanel;
 import RiskPackage.Player;
+import RiskPackage.PlayerNew;
 import RiskPackage.RiskBoard;
 import RiskPackage.Territory;
 import cardPackage.ArmyCardFactory;
@@ -41,17 +42,17 @@ import databasePackage.TerritoryJSONDBDatabase;
 
 public class RunningModeNew extends JFrame {
 
-    public ArrayList<Player> players;
+    public ArrayList<PlayerNew> players;
 	private static JButton turn = new JButton();
 	int numberOfAIPlayer;
 	int numberOfHumanPlayer;
     static int turnCounter=1;
 	public static boolean isContinue = true;
 	public static int databaseChooser=0;
-    public ArrayList<Shape> shapelist = new ArrayList<>();
+    public ArrayList<ArrayList<Shape>> shapelist = new ArrayList<>();
     public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
 
-    public RunningModeNew(ArrayList<Shape> shapelist, ArrayList<Player> players , int numberOfAIPlayer, int numberOfHumanPlayer){
+    public RunningModeNew(ArrayList<ArrayList<Shape>> shapelist, ArrayList<PlayerNew> players , int numberOfAIPlayer, int numberOfHumanPlayer){
         this.numberOfAIPlayer=numberOfAIPlayer;
 		this.numberOfHumanPlayer=numberOfHumanPlayer;
 		this.players=players;
@@ -60,14 +61,46 @@ public class RunningModeNew extends JFrame {
 		this.setTitle("ConKUerror");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		RiskBoard board = new RiskBoard();
-		GamePanel panel = new GamePanel(board);
-		panel.setBackground(Color.pink);
+//		RiskBoard board = new RiskBoard();
+//		GamePanel panel = new GamePanel(board);
+//		panel.setBackground(Color.pink);
+		
+		BuildingModeNew buildingModeNew = new BuildingModeNew();
+		BuildingModeNew.worldMap = new WorldMap();
+
+	     buildingModeNew.setResizable(false);
+	     buildingModeNew.pack();
+	     buildingModeNew.setVisible(true);
+		 boolean flag = true;
+		 
+		 do{
+			System.out.println(WorldMap.isEveryTerritorySelected);
+			if(WorldMap.isEveryTerritorySelected){
+				System.out.println("Building Mode Ended.");
+				flag = false;
+		 		buildingModeNew.dispose();
+			}
+		}
+		 while(flag);
+		 
+		 
 
 		JButton nextButton = new JButton("next turn");
 		nextButton.setSize(100,100);
 		nextButton.setLocation(100, 650);
 		nextButton.setBackground(this.players.get(getTurn()-1).getColor());
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		JButton pickChanceCardButton = new JButton("Pick a Chance Card");
 		pickChanceCardButton.setSize(175,175);
@@ -90,7 +123,7 @@ public class RunningModeNew extends JFrame {
 				
 				//nextButton.setBackground(GameController.getCurrentTurnPlayerID());
             	//System.out.println();
-            	printTerritoryCard();
+            	//printTerritoryCard();
             	RunningMode.turnCounter++;
             	RunningMode.turnCounter=RunningMode.turnCounter%(numberOfAIPlayer+numberOfHumanPlayer+1);
             	if (RunningMode.turnCounter==0) {
@@ -136,7 +169,7 @@ public class RunningModeNew extends JFrame {
 		useCard.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				int selectedCard = cardComboBox.getSelectedIndex();
-				players.get(getTurn()-1).useChanceCard(selectedCard);
+				//players.get(getTurn()-1).useChanceCard(selectedCard);
 			}
 		});
 		
@@ -280,10 +313,10 @@ public class RunningModeNew extends JFrame {
 		this.getContentPane().add(quitButton);
 		this.getContentPane().add(pickTerritoryCardButton);
 		this.getContentPane().add(saveButton);
-		this.add(panel); 
+		this.getContentPane().add(BuildingModeNew.worldMap.getUI()); 
 
 		//initializeArmies();
-		initializeTerritoryCards();
+		//initializeTerritoryCards();
     }
     
     public int getTurn() {
@@ -306,7 +339,7 @@ public class RunningModeNew extends JFrame {
         int randomNumber = rand.nextInt(5);
         
         IChanceCard chanceCard = new ChanceCardFactory().createCard(randomNumber);
-        this.players.get(curId-1).chanceCards.add(chanceCard);
+        //this.players.get(curId-1).chanceCards.add(chanceCard);
         System.out.println("Player with ID"+curId+" has drawn the "+chanceCard.getClass().getName().split("\\.")[1]+" and it is added his/her list.");
 	}
 	
@@ -314,30 +347,30 @@ public class RunningModeNew extends JFrame {
 		return this.players.get(id).getColor();
 	}
 	
-	public void initializeTerritoryCards() {//
-		for (Shape shape : shapelist){
-            this.territoryCards.add(new  TerritoryCard(shape));
-        }
-
-        System.out.println(this.territoryCards.size());
-	}
+//	public void initializeTerritoryCards() {//
+//		for (Shape shape : shapelist){
+//            this.territoryCards.add(new  TerritoryCard(shape));
+//        }
+//
+//        System.out.println(this.territoryCards.size());
+//	}
 	
 	public void pickTerritoryCard() {
 		int curId=getTurn();
 		Random rand = new Random();
 		int index = rand.nextInt(this.territoryCards.size());
 		TerritoryCard currentCard = this.territoryCards.get(index);
-		this.players.get(curId-1).territoryCards.add(currentCard);
+		//this.players.get(curId-1).territoryCards.add(currentCard);
 	}
 	
-	
-	public void printTerritoryCard() {
-		int curId=getTurn();
-		System.out.println("Territory Cards of the player are: ");
-		for (TerritoryCard card : this.players.get(curId-1).territoryCards) {
-			System.out.println(card.shape);
-		}
-	}
+//	
+//	public void printTerritoryCard() {
+//		int curId=getTurn();
+//		System.out.println("Territory Cards of the player are: ");
+//		for (TerritoryCard card : this.players.get(curId-1).territoryCards) {
+//			System.out.println(card.shape);
+//		}
+//	}
 	
 	// public void useTerritoryCard() { //BURDA shape.getindex metodu çağrılmalı
 	// 	int curId=getTurn();
@@ -361,11 +394,11 @@ public class RunningModeNew extends JFrame {
 	// 		this.players.get(curId-1).addTerritories(territory);
 	// 	}
 	// }
-	public ArrayList<Player> getPlayer(){
+	public ArrayList<PlayerNew> getPlayer(){
 		return players;
 	}
 	
-	public ArrayList<Player> getPlayers() {
+	public ArrayList<PlayerNew> getPlayers() {
 		return this.players;
 	}
 	

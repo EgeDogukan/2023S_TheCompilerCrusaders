@@ -214,7 +214,8 @@ public class WorldMap {
     }
 
     private BufferedImage getImage() {
-        bi = new BufferedImage(2 * SIZE, SIZE, BufferedImage.TYPE_INT_RGB);
+        //bi = new BufferedImage(2 * SIZE, SIZE, BufferedImage.TYPE_INT_RGB);
+        bi = new BufferedImage(1720, 800 , BufferedImage.TYPE_INT_RGB);
         int colorIndex;
         g = bi.createGraphics();
         g.drawImage(image, 0, 0, output);
