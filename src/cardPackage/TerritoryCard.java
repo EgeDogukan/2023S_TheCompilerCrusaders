@@ -1,13 +1,15 @@
 package cardPackage;
 
+import java.awt.Shape;
+
 import RiskPackage.Territory;
 
 public class TerritoryCard {
 
-	public Territory territory;
+	public Shape shape;
 	
-	public TerritoryCard(Territory territory) {
-		this.territory=territory;
+	public TerritoryCard(Shape shape) {
+		this.shape=shape;
 		
 	}
 

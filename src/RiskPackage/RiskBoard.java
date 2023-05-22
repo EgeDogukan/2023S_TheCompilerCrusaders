@@ -17,8 +17,8 @@ public class RiskBoard extends JPanel{
 	private int width;
 	private int height;
     
-    public RiskBoard(ArrayList<Continents> continents) {
-        this.continents = continents;
+    public RiskBoard() {
+        
         this.setBackground(color);
 		this.setLayout(new BorderLayout());
         this.setPreferredSize(getPreferredSize());

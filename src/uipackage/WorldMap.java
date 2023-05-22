@@ -74,7 +74,7 @@ public class WorldMap {
         }
         
         System.out.println("boyut2:"+shapeList.size());
-        shapeList= new ArrayList<>(shapeList.subList(0, Math.min(shapeList.size(), 3)));
+        shapeList= new ArrayList<>(shapeList.subList(0, Math.min(shapeList.size(), 10)));
         System.out.println("boyut3:"+shapeList.size());
         
         ui = new JPanel(new BorderLayout(4, 4));
@@ -98,11 +98,7 @@ public class WorldMap {
                         numofSelectedTerritory++;
                         if (numofSelectedTerritory==shapeList.size()) 
                         	isEveryTerritorySelected=true;
-                        	
-                        
-                        if(isEveryTerritorySelected)
-                        	break;
-                        
+                        	                    
                         clickedShape = shape;
                         WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
                         BuildingModeNew.nextTurn();
@@ -341,6 +337,14 @@ public class WorldMap {
 
     public boolean getIsAllSelected() {
         return isEveryTerritorySelected;
+    }
+    
+    public int getShapeIndex(Shape shape) {
+    	return shapeList.indexOf(shape);
+    }
+    
+    public Shape getShape(int index) {
+    	return shapeList.get(index);
     }
 
     

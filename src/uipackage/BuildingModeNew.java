@@ -1,13 +1,19 @@
 package uipackage;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import RiskPackage.PlayerNew;
 
@@ -18,25 +24,31 @@ public class BuildingModeNew extends JFrame {
 	public static WorldMap worldMap;
 	public MouseListener mouseListener;
 	static ArrayList<PlayerNew> playerList = new ArrayList<>();
-	JPanel panel = new JPanel();
+	static JLabel turnShowButton;
 
 	public BuildingModeNew() {
 		super("Building Mode New");
-		this.numberOfPlayer=4;
-		this.turn=1;
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		numberOfPlayer=4;
+		turn=1;
 		worldMap=new WorldMap();
 		
 		ArrayList<Integer> indices = new ArrayList<>();
 		for(int i=1;i<numberOfPlayer+1;i++) {
 			playerList.add(new PlayerNew(i, generateRandomColor(), indices));
 		}
+		JPanel panel = new JPanel();
 		
-		System.out.println("slm");
-		this.mouseListener=worldMap.getMouseListener();
+		turnShowButton = new JLabel("TURN");
+		turnShowButton.setForeground(Color.BLUE);
+		turnShowButton.setSize(50,50);
 		
-			
-		this.panel.add(worldMap.getUI());
+		panel.add(turnShowButton);
+		panel.add(worldMap.getUI());
+		
+		
 		this.add(panel);
+		
 
 		
 	}
@@ -52,17 +64,27 @@ public class BuildingModeNew extends JFrame {
 	public static void nextTurn() {
 		int clicked = worldMap.clickedShapeIndex;
 		System.out.println(clicked);
+		
 		playerList.get(turn-1).getShapeIndices().add(clicked);
 		
-		worldMap.setIndexColor(clicked, playerList.get(turn-1).getColor());
 		
+		worldMap.setIndexColor(clicked, playerList.get(turn-1).getColor());	
+		turnShowButton.setForeground(playerList.get(turn-1).getColor());
 		
 		turn++;
+		
 		if(turn==numberOfPlayer+1) {
 			turn=1;
 		}	
 	}
-
+	
+	public ArrayList<Shape> initalSharing(){
+		
+		
+		return null;
+		
+	}
+	
 	
 	
 	public static void main(String[] args) {
@@ -89,6 +111,3 @@ public class BuildingModeNew extends JFrame {
 	}
 
 }
-
-
-

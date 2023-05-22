@@ -218,14 +218,14 @@ public class GameController {
 		}
 		
 		
-		System.out.println("*******");
+		System.out.println("***");
 		for (Player player : playerList) {
 			System.out.println(player.getId());
 			//System.out.println(player.getTerritories().getNames());
 			for (Territory territory : player.getTerritories())
 				System.out.println(territory.getName());
 				
-			System.out.println("*******");
+			System.out.println("***");
 		}
 		
 		return playerList;
