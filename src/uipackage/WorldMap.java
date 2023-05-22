@@ -32,7 +32,7 @@ public class WorldMap {
     private Graphics2D g;
     public static int clickedShapeIndex;
     final int areaThreshold = 450;
-    public boolean isEveryTerritorySelected = false;
+    public static boolean isEveryTerritorySelected = false;
     public int numofSelectedTerritory = 0;
 
 
@@ -69,21 +69,14 @@ public class WorldMap {
         for(int i = 0; i < shapeList2.size(); i++){
             Shape shape =shapeList2.get(i);
             
-            if((int) (shape.getBounds2D().getHeight()*shape.getBounds2D().getWidth()) > areaThreshold){
-                //System.out.println(shape.getBounds2D());
-                //shapeList2.remove(shape);
+            if((int) (shape.getBounds2D().getHeight()*shape.getBounds2D().getWidth()) > areaThreshold)
                 shapeList.add(shape);
-            }
-            // else{
-            //     shapeList.add(shape);
-            // }
         }
+        
         System.out.println("boyut2:"+shapeList.size());
-        //Collections.shuffle(shapeList);
-        shapeList= new ArrayList<>(shapeList.subList(0, Math.min(shapeList.size(), 1)));
+        shapeList= new ArrayList<>(shapeList.subList(0, Math.min(shapeList.size(), 3)));
         System.out.println("boyut3:"+shapeList.size());
-        // System.out.println("type:siberia "+shapeList.get(15).getBounds2D().toString());
-        // System.out.println("type:izland "+shapeList.get(17).getBounds2D().toString());
+        
         ui = new JPanel(new BorderLayout(4, 4));
         ui.setBorder(new EmptyBorder(4, 4, 4, 4));
         
@@ -103,19 +96,17 @@ public class WorldMap {
                     if (shape.contains(pointOnImage)) {   
                         JOptionPane.showMessageDialog(null, "Clicked!"); 
                         numofSelectedTerritory++;
-                        checkIfAllSelected(numofSelectedTerritory, 1);
+                        if (numofSelectedTerritory==shapeList.size()) 
+                        	isEveryTerritorySelected=true;
+                        	
+                        
+                        if(isEveryTerritorySelected)
+                        	break;
+                        
                         clickedShape = shape;
                         WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
-                        System.out.println("numberof terr:"+numofSelectedTerritory);
-                        //setClickedShapeIndex(clickedShapeIndex);
-                        System.out.println("WorldMap clickedshape index: "+ clickedShapeIndex);
                         BuildingModeNew.nextTurn();
-                        System.out.println("Current turn in WorldMap: "+BuildingModeNew.turn);
-                        System.out.println("Current clickedShapeIndex in WorldMap: "+clickedShapeIndex);
-                        System.out.println("area:"+ shape.getBounds2D());
-                        System.out.println("w:h"+ shape.getBounds2D().getHeight() * shape.getBounds2D().getWidth() );
 
-                        //setIndexColor(clickedShapeIndex, Color.red);
                         break;
                     }
                 }
@@ -314,14 +305,19 @@ public class WorldMap {
     public void setMouseListener(MouseListener ml) {
     	this.ml=ml;
     }
+    
     public void checkIfAllSelected(int numClicked, int numTerr){
-		if(numClicked>numTerr){
-            this.isEveryTerritorySelected = true;
+		if(numClicked==numTerr){
+            isEveryTerritorySelected=true;
             System.out.println("true olduuuuu");
         }
 	}
+    
+    
 
-    public static void main(String[] args) {
+   
+
+	public static void main(String[] args) {
         Runnable r = () -> {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -344,7 +340,7 @@ public class WorldMap {
     }
 
     public boolean getIsAllSelected() {
-        return this.isEveryTerritorySelected;
+        return isEveryTerritorySelected;
     }
 
     

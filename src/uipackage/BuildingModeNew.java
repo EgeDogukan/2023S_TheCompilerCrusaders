@@ -60,13 +60,9 @@ public class BuildingModeNew extends JFrame {
 		turn++;
 		if(turn==numberOfPlayer+1) {
 			turn=1;
-		}
-		
+		}	
 	}
 
-	
-	
-	
 	
 	
 	public static void main(String[] args) {
@@ -78,10 +74,11 @@ public class BuildingModeNew extends JFrame {
 	     buildingModeNew.pack();
 	     buildingModeNew.setVisible(true);
 		 boolean flag = true;
+		 
 		 do{
-			System.out.println(BuildingModeNew.worldMap.getIsAllSelected());
-			if(BuildingModeNew.worldMap.getIsAllSelected()){
-				System.out.println("aaaaaaaaaaaaaaaa");
+			System.out.println(WorldMap.isEveryTerritorySelected);
+			if(WorldMap.isEveryTerritorySelected){
+				System.out.println("Building Mode Ended.");
 				flag = false;
 		 		buildingModeNew.dispose();
 			}
