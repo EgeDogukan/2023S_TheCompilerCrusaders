@@ -91,10 +91,16 @@ public class worldmaptests {
     @Test
     public void testRemoveFromShapeList() {
         WorldMap worldMap = new WorldMap();
-        Shape shape = worldMap.getShapeList().get(0);
+        ArrayList<Shape> shapeList = worldMap.getShapeList();
+        Shape shape = shapeList.get(0);
 
+        // Remove shape from shape list
         worldMap.removeFromShapeList(shape);
 
-        Assertions.assertFalse(worldMap.getShapeList().contains(shape));
+        Assertions.assertFalse(shapeList.contains(shape), "Shape should be removed from the shape list");
+
+        // Try to remove the same shape again (should have no effect)
+        worldMap.removeFromShapeList(shape);
+        Assertions.assertFalse(shapeList.contains(shape), "Shape should not be in the shape list");
     }
 }
