@@ -280,4 +280,13 @@ public class WorldMap {
     public ArrayList<Color> getColorList() {
         return colorList;
     }
+
+    public boolean repOk() {
+        // Check if clickedShape is null or refers to a shape in shapeList
+        if (clickedShape != null && !shapeList.contains(clickedShape)) {
+            return false;
+        }
+
+        return true; // Representation invariant holds
+    }    
 }

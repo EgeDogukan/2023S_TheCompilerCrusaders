@@ -82,6 +82,9 @@ public class worldmaptests {
         Assertions.assertEquals(originalColor, colorList.get(0), "Shape color should be reset");
     }
 
-    
-    
+    @Test
+    public void testRepOk() {
+        WorldMap worldMap = new WorldMap();
+        Assertions.assertTrue(worldMap.repOk());
+    }
 }
