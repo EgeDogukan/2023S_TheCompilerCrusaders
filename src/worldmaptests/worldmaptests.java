@@ -87,4 +87,14 @@ public class worldmaptests {
         WorldMap worldMap = new WorldMap();
         Assertions.assertTrue(worldMap.repOk());
     }
+
+    @Test
+    public void testRemoveFromShapeList() {
+        WorldMap worldMap = new WorldMap();
+        Shape shape = worldMap.getShapeList().get(0);
+
+        worldMap.removeFromShapeList(shape);
+
+        Assertions.assertFalse(worldMap.getShapeList().contains(shape));
+    }
 }
