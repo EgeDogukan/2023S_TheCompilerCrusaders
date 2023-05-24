@@ -48,9 +48,6 @@ public class PreBuildingMode extends JFrame {
 				setNumberOfCompPlayer(Integer.parseInt((String) numberOfCompComboBox.getSelectedItem()));
 
 				dispose();
-				BuildingModeNew buildingMode = new BuildingModeNew();
-				BuildingModeNew.setNumberOfPlayer(numberOfPlayer);
-				buildingMode.setVisible(true);
 
 			}
 		});

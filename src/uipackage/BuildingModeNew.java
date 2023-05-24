@@ -41,14 +41,19 @@ public class BuildingModeNew extends JFrame {
 	static JLabel turnShowButton;
 	JComboBox<String> numberOfPlayerComboBox;
 	JComboBox<String> numberOfCompComboBox;
+	PreBuildingMode preBuildingMode;
 	
 	public BuildingModeNew() {
 		super("Building Mode New");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(1920, 1080));
         this.setLayout(null);
-
-		turn=1;
+        turn=1;
+		
+		
+		preBuildingMode=new PreBuildingMode();
+		
+		numberOfPlayer=preBuildingMode.getNumberOfPlayer();
 		
 		ArrayList<Integer> indices = new ArrayList<>();
 		for(int i=1;i<numberOfPlayer+1;i++) {
@@ -68,13 +73,8 @@ public class BuildingModeNew extends JFrame {
 	
 	public static void main(String[] args) {
 		
-		SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                BuildingModeNew buildingMode = new BuildingModeNew();
-                buildingMode.setVisible(true);
-            }
-        });
+		BuildingModeNew slModeNew = new BuildingModeNew();
+		slModeNew.setVisible(true);
 
 
 	}
