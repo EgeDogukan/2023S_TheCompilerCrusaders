@@ -276,4 +276,8 @@ public class WorldMap {
         };
         SwingUtilities.invokeLater(r);
     }
+
+    public ArrayList<Color> getColorList() {
+        return colorList;
+    }
 }

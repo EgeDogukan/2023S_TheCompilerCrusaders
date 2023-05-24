@@ -1,5 +1,6 @@
 package worldmaptests;
 
+import java.awt.Color;
 import java.awt.Shape;
 import java.util.ArrayList;
 
@@ -34,5 +35,53 @@ public class worldmaptests {
         Shape clickedShape = worldMap.getClickedShape();
         Assertions.assertNull(clickedShape, "Clicked shape should be null initially");
     }
+
+    @Test
+    public void testSetShapeColorToBlue() {
+        WorldMap worldMap = new WorldMap();
+        ArrayList<Shape> shapeList = worldMap.getShapeList();
+        ArrayList<Color> colorList = worldMap.getColorList();
+
+        // Change color of the first shape
+        Shape shape = shapeList.get(0);
+        Color originalColor = colorList.get(0);
+        worldMap.setShapeColor(shape, Color.BLUE);
+
+        Assertions.assertEquals(Color.BLUE, colorList.get(0), "Shape color should be changed to blue");
+    }
+
+    @Test
+    public void testSetShapeColorToRed() {
+        WorldMap worldMap = new WorldMap();
+        ArrayList<Shape> shapeList = worldMap.getShapeList();
+        ArrayList<Color> colorList = worldMap.getColorList();
+
+        // Change color of the first shape
+        Shape shape = shapeList.get(0);
+        Color originalColor = colorList.get(0);
+        worldMap.setShapeColor(shape, Color.RED);
+
+        Assertions.assertEquals(Color.RED, colorList.get(0), "Shape color should be changed to red");
+    }
+
+    @Test
+    public void testSetShapeColorReset() {
+        WorldMap worldMap = new WorldMap();
+        ArrayList<Shape> shapeList = worldMap.getShapeList();
+        ArrayList<Color> colorList = worldMap.getColorList();
+
+        // Change color of the first shape
+        Shape shape = shapeList.get(0);
+        Color originalColor = colorList.get(0);
+        worldMap.setShapeColor(shape, Color.BLUE);
+
+        Assertions.assertEquals(Color.BLUE, colorList.get(0), "Shape color should be changed to blue");
+
+        // Reset color of the first shape
+        worldMap.setShapeColor(shape, originalColor);
+        Assertions.assertEquals(originalColor, colorList.get(0), "Shape color should be reset");
+    }
+
+    
     
 }
