@@ -3,7 +3,6 @@ package worldmaptests;
 import java.awt.Color;
 import java.awt.Shape;
 import java.util.ArrayList;
-
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import uipackage.WorldMap;
@@ -44,7 +43,6 @@ public class worldmaptests {
 
         // Change color of the first shape
         Shape shape = shapeList.get(0);
-        Color originalColor = colorList.get(0);
         worldMap.setShapeColor(shape, Color.BLUE);
 
         Assertions.assertEquals(Color.BLUE, colorList.get(0), "Shape color should be changed to blue");
@@ -58,7 +56,6 @@ public class worldmaptests {
 
         // Change color of the first shape
         Shape shape = shapeList.get(0);
-        Color originalColor = colorList.get(0);
         worldMap.setShapeColor(shape, Color.RED);
 
         Assertions.assertEquals(Color.RED, colorList.get(0), "Shape color should be changed to red");
