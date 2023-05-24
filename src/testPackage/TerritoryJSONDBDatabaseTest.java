@@ -10,13 +10,26 @@ import org.junit.jupiter.api.Test;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class TerritoryJSONDBDatabaseTest  {
     private TerritoryJSONDBDatabase a;
 
+    private static final String DATA_JSON_FILE_PATH = "data.json";
+
     @BeforeEach
-    public void setup() {
-        TerritoryJSONDBDatabase  a = new TerritoryJSONDBDatabase();
+    void setup() throws IOException {
+        // Delete the existing data.json file if it exists
+        File dataFile = new File(DATA_JSON_FILE_PATH);
+        if (dataFile.exists()) {
+            dataFile.delete();
+        }
+        
+        // Recreate an empty data.json file
+        dataFile.createNewFile();
     }
 
     @Test
