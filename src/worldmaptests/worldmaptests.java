@@ -18,7 +18,7 @@ public class worldmaptests {
 	
 	
 	@Test
-    public void testShapeListNotEmpty() {
+    public void testShapeListInit() {
         WorldMap worldMap = new WorldMap();
         ArrayList<Shape> shapeList = worldMap.getShapeList();
         Assertions.assertFalse(shapeList.isEmpty(), "Shape list should not be empty");
