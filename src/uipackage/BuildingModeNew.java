@@ -38,23 +38,19 @@ public class BuildingModeNew extends JFrame {
 	public MouseListener mouseListener;
 	static ArrayList<PlayerNew> playerList = new ArrayList<>();
 	public ArrayList<ArrayList<Integer>> shapeList = new ArrayList<>();
-	static JLabel turnShowButton;
+
 	JComboBox<String> numberOfPlayerComboBox;
 	JComboBox<String> numberOfCompComboBox;
-	PreBuildingMode preBuildingMode;
 	
-	public BuildingModeNew() {
+	public BuildingModeNew(int numberOfPlayer) {
 		super("Building Mode New");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(1920, 1080));
         this.setLayout(null);
+        
         turn=1;
-		
-		
-		preBuildingMode=new PreBuildingMode();
-		
-		numberOfPlayer=preBuildingMode.getNumberOfPlayer();
-		
+		this.numberOfPlayer=numberOfPlayer;
+
 		ArrayList<Integer> indices = new ArrayList<>();
 		for(int i=1;i<numberOfPlayer+1;i++) {
 			playerList.add(new PlayerNew(i, generateRandomColor(), indices));
@@ -68,20 +64,9 @@ public class BuildingModeNew extends JFrame {
 		this.add(worldPanel);
 		
 		this.pack();
-	    System.out.println(numberOfPlayer);
-	}
-	
-	public static void main(String[] args) {
 		
-		BuildingModeNew slModeNew = new BuildingModeNew();
-		slModeNew.setVisible(true);
-
-
+	    System.out.println("numberOfPlayer: "+numberOfPlayer);
 	}
-	
-	
-	
-
 	
 	
 	public static int getNumberOfPlayer() {
@@ -116,13 +101,8 @@ public class BuildingModeNew extends JFrame {
 		this.mouseListener = mouseListener;
 	}
 
-	public static JLabel getTurnShowButton() {
-		return turnShowButton;
-	}
 
-	public static void setTurnShowButton(JLabel turnShowButton) {
-		BuildingModeNew.turnShowButton = turnShowButton;
-	}
+
 
 	public JComboBox<String> getNumberOfPlayerComboBox() {
 		return numberOfPlayerComboBox;
@@ -170,7 +150,6 @@ public class BuildingModeNew extends JFrame {
 		
 		
 		worldMap.setIndexColor(clicked, playerList.get(turn-1).getColor());	
-		turnShowButton.setForeground(playerList.get(turn-1).getColor());
 		
 		turn++;
 		

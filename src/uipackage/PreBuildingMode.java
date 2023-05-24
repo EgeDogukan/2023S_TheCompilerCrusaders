@@ -40,6 +40,7 @@ public class PreBuildingMode extends JFrame {
 		
 		JButton nextButton = new JButton("Continue to the building mode");
 		nextButton.setBounds(100, 100, 200, 200);
+		
 		nextButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -51,6 +52,7 @@ public class PreBuildingMode extends JFrame {
 
 			}
 		});
+		
 		this.add(numberOfPlayerJLabel);
 		this.add(numberOfCompJLabel);
 		this.add(numberOfPlayerComboBox);

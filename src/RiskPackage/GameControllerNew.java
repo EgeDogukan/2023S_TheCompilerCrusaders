@@ -91,11 +91,13 @@ public class GameControllerNew {
 		    System.out.println("Number of players: "+numberOfPlayers.get());
 		    System.out.println("Number of AI players: "+numberOfAIPlayers.get());
 		    
-		    BuildingModeNew RiskGameFrame = new BuildingModeNew();
-		    RiskGameFrame.setLayout(null);
-		    RiskGameFrame.setVisible(true);
+		    //BuildingModeNew RiskGameFrame = new BuildingModeNew(numberOfPlayers.get());
+		    //RiskGameFrame.setLayout(null);
+		    //RiskGameFrame.setVisible(true);
 		    
-		    for (ArrayList<Integer> indices : RiskGameFrame.getShapeList()) {
+		    IntermediaryBetweenPreBuildingAndBuilding s = new IntermediaryBetweenPreBuildingAndBuilding();
+		    
+		    for (ArrayList<Integer> indices : s.getBuildingModeNew().getShapeList()) {
 		    	System.out.println("Indices of a player "+indices);
 		    	for (Integer index : indices) {
 		    		System.out.println("Name of the territory: "+BuildingModeNew.worldMap.getShapeList().get(index));
@@ -106,7 +108,7 @@ public class GameControllerNew {
 		    
 		    playerList = BuildingModeNew.getPlayerList();
 		    System.out.println(playerList);
-	        ArrayList<ArrayList<Shape>> shapes = RiskGameFrame.initalSharing(playerList);
+	        ArrayList<ArrayList<Shape>> shapes = s.getBuildingModeNew().initalSharing(playerList);
 	        
 	        //RiskGameFrame.dispose();
 	        
@@ -115,10 +117,8 @@ public class GameControllerNew {
 	        g.setLayout(new BorderLayout());
 	        g.setVisible(true);
 			turnID = g.getTurn() - 1;
-			RiskGameFrame.dispose();
-			
-			
-			
+			s.getBuildingModeNew().dispose();
+
 			break;
 			
 			

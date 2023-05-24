@@ -65,7 +65,7 @@ public class RunningModeNew extends JFrame {
 //		GamePanel panel = new GamePanel(board);
 //		panel.setBackground(Color.pink);
 		
-		BuildingModeNew buildingModeNew = new BuildingModeNew();
+		BuildingModeNew buildingModeNew = new BuildingModeNew(numberOfHumanPlayer);
 		BuildingModeNew.worldMap = new WorldMap();
 
 	     buildingModeNew.setResizable(false);
