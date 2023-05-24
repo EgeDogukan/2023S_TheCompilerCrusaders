@@ -191,6 +191,17 @@ public class GameController {
 
 	static public ArrayList<Player> initGame(int numberofPlayers, int numberofComp, ArrayList<Continents> continents) throws Exception {
 		
+		if (numberofPlayers<0) {
+			throw (new Exception("number of player cannot be negative"));
+		}
+		else if (numberofComp<0) {
+			throw (new Exception("number of computer player cannot be negative"));
+		}
+		else if (continents==null) {
+			throw (new Exception("continent list cannot be null"));
+		}
+		
+		
 		ArrayList<Territory> territories = new ArrayList<Territory>();
 		for (Continents continent : continents) {
 			if (continent.isIncluded){
@@ -201,9 +212,11 @@ public class GameController {
 			
 		}
 		
-		if (numberofPlayers<0 || numberofComp<0) {
-			throw (new Exception("number of player cannot be negative"));
+		if(continents.size()<numberofComp+numberofComp) {
+			throw (new Exception("insufficient territories to assign to players"));
 		}
+		
+		
 		
 		int territoryPerPlayer = Math.floorDiv(territories.size(), (numberofPlayers+numberofComp));
 		System.out.println("Number of territory: "+territories.size());
