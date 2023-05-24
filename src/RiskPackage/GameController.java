@@ -32,7 +32,7 @@ public class GameController {
 	
 	
 	
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
         
     	MainMenu menu = new MainMenu();
     	menu.setVisible(true);
@@ -189,7 +189,7 @@ public class GameController {
     }
     
 
-	static private ArrayList<Player> initGame(int numberofPlayers, int numberofComp, ArrayList<Continents> continents) {
+	static public ArrayList<Player> initGame(int numberofPlayers, int numberofComp, ArrayList<Continents> continents) throws Exception {
 		
 		ArrayList<Territory> territories = new ArrayList<Territory>();
 		for (Continents continent : continents) {
@@ -199,6 +199,10 @@ public class GameController {
 				}
 			}
 			
+		}
+		
+		if (numberofPlayers<0 || numberofComp<0) {
+			throw (new Exception("number of player cannot be negative"));
 		}
 		
 		int territoryPerPlayer = Math.floorDiv(territories.size(), (numberofPlayers+numberofComp));
@@ -219,21 +223,9 @@ public class GameController {
 			}
 			
 			playerList.add(new Player(j, randomColorGenerator(), currentTerritories));
-			
-		
-		
+
 		}
 		
-		
-		System.out.println("*******");
-		for (Player player : playerList) {
-			System.out.println(player.getId());
-			//System.out.println(player.getTerritories().getNames());
-			for (Territory territory : player.getTerritories())
-				System.out.println(territory.getName());
-				
-			System.out.println("*******");
-		}
 		
 		return playerList;
 	}

@@ -31,7 +31,7 @@ import RiskPackage.HumanPlayer;
 import RiskPackage.Player;
 import RiskPackage.RiskBoard;
 import RiskPackage.Territory;
-import databasePackage.TerritoryDBDatabase;
+import databasePackage.TerritoryMONGODBDatabase;
 
 public class BuildingMode extends JFrame {
 

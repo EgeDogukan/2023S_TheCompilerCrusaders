@@ -11,7 +11,7 @@ import RiskPackage.Continents;
 import RiskPackage.Player;
 import RiskPackage.Territory;
 import databasePackage.ISaveLoadAdapter;
-import databasePackage.TerritoryDBDatabase;
+import databasePackage.TerritoryMONGODBDatabase;
 import databasePackage.TerritoryJSONDBDatabase;
 
 public class LoadMode extends JFrame {
@@ -32,7 +32,7 @@ public class LoadMode extends JFrame {
         ISaveLoadAdapter database;
         
         if (databaseChooser==0) {
-        	database =  new TerritoryDBDatabase();
+        	database =  new TerritoryMONGODBDatabase();
         	System.out.println("Game loaded from MONGO");
         }
         else {

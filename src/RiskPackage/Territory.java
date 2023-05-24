@@ -82,8 +82,6 @@ public class Territory extends JPanel {
 	        this.neighbors = new ArrayList<Territory>();
 
 
-
-
 	        
 			JLabel nameLabel = new JLabel(this.getName());
 			System.out.println(this.getName());
@@ -102,10 +100,6 @@ public class Territory extends JPanel {
 					if (isBuilding) {
 						System.out.println("Panel clicked!");
 
-						
-						
-
-						
 						
 					if(GameController.isBuildingMode) {
 						if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
@@ -162,12 +156,6 @@ public class Territory extends JPanel {
 					}
 					
 						
-						
-						
-						
-
-						
-					
 					
 					
 				}

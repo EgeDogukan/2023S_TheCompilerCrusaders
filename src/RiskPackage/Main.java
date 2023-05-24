@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import uipackage.login;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         
     	GameController instance = GameController.getInstance();
     	try {

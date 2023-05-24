@@ -29,6 +29,7 @@ public class AttackTerr extends JFrame {
     private Player player;
     RunningMode rm;
     ArrayList<Player> players;
+    
     public AttackTerr(Territory territory){
         this.setTitle(territory.getName());
         this.setLayout(null);
