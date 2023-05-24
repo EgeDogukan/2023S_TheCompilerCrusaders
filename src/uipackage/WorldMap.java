@@ -53,7 +53,9 @@ public class WorldMap {
         try
         {
             String cwd = System.getProperty("user.dir");
-            image = ImageIO.read(new File(cwd+"/MAP2.png"));
+            image = ImageIO.read(new File(cwd+"/MAP3.png"));
+            
+
         }
         catch (IOException e) {
             System.out.println("couldnt load map image!");
@@ -215,7 +217,7 @@ public class WorldMap {
 
     private BufferedImage getImage() {
         //bi = new BufferedImage(2 * SIZE, SIZE, BufferedImage.TYPE_INT_RGB);
-        bi = new BufferedImage(1720, 800 , BufferedImage.TYPE_INT_RGB);
+        bi = new BufferedImage(1000, 500 , BufferedImage.TYPE_INT_RGB);
         int colorIndex;
         g = bi.createGraphics();
         g.drawImage(image, 0, 0, output);
