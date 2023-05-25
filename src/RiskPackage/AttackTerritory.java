@@ -3,7 +3,7 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 import javax.xml.catalog.Catalog;
-public class AttackTerr {
+public class AttackTerritory {
     Territory territory;
     Territory destination;
     //Trowing Two dices
@@ -16,7 +16,7 @@ public class AttackTerr {
     public Army armyOnTerritory;
     private boolean terrWins;
     private boolean canAttack = true;
-    public AttackTerr(Territory territory, Territory destination){
+    public AttackTerritory(Territory territory, Territory destination){
         this.territory = territory;
         this.destination = destination;
         defenderDiceResult = random.nextInt(defenderSides) + 1;

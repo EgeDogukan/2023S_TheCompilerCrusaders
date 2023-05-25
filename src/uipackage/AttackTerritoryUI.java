@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import RiskPackage.*;
 
-public class AttackTerrUI extends JFrame {
+public class AttackTerritoryUI extends JFrame {
     private static final int FRAME_WIDTH = 800;
     private static final int FRAME_HEIGHT = 600;
     private static final int DELAY = 20;
@@ -26,11 +26,11 @@ public class AttackTerrUI extends JFrame {
     private int defenderSides = 6;
     private int attackerSides = 6;
     private Random random = new Random();
-    private AttackTerr at;
+    private AttackTerritory at;
     RunningMode rm;
     ArrayList<Player> players;
     
-    public AttackTerrUI(Territory territory){
+    public AttackTerritoryUI(Territory territory){
         this.setTitle(territory.getName());
         this.setLayout(null);
         this.setVisible(true);
@@ -118,7 +118,7 @@ public class AttackTerrUI extends JFrame {
                 }
 
                 if(destination != null){
-                    at = new AttackTerr(territory, destination);
+                    at = new AttackTerritory(territory, destination);
                     
                     if(at.AttackerWins(territory, destination) == true){
                         
