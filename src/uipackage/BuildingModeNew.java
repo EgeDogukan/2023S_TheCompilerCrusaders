@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.List;
 import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,6 +39,11 @@ public class BuildingModeNew extends JFrame {
 	public MouseListener mouseListener;
 	static ArrayList<PlayerNew> playerList = new ArrayList<>();
 	public ArrayList<ArrayList<Integer>> shapeList = new ArrayList<>();
+
+	public static ArrayList<ArrayList<Integer>> playerShapes = new ArrayList<ArrayList<Integer>>(100);
+	/*for(int i = 0; i < 101; i++)  {
+        playerShapes.add(new ArrayList<Integer>(10));
+    }*/
 
 	JComboBox<String> numberOfPlayerComboBox;
 	JComboBox<String> numberOfCompComboBox;
@@ -143,13 +149,17 @@ public class BuildingModeNew extends JFrame {
 	}
 
 	public static void nextTurn() {
-		int clicked = worldMap.clickedShapeIndex;
+		int clicked = WorldMap.clickedShapeIndex;
+		PlayerNew player = playerList.get(turn - 1);
 		System.out.println(clicked);
 		
-		playerList.get(turn-1).getShapeIndices().add(clicked);
+		player.getShapeIndices().add(clicked);
+		//playerList.get(turn-1).getShapeIndices().add(clicked);
 		
 		
 		worldMap.setIndexColor(clicked, playerList.get(turn-1).getColor());	
+		//playerShapes[player.getId()].add(clicked);
+		
 		
 		turn++;
 		
@@ -176,9 +186,5 @@ public class BuildingModeNew extends JFrame {
 	
 	public ArrayList<ArrayList<Integer>> getShapeList() {
 		return shapeList;
-	}
-	
-	
-	
-
+	}	
 }
