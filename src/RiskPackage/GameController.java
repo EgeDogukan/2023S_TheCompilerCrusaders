@@ -17,6 +17,7 @@ public class GameController {
 	
 	private static int turnID = 0;
 	private static ArrayList<Player> playerList = new ArrayList<Player>();
+	public static boolean isBuildingMode;
 	
 	private GameController() {
 		
@@ -31,7 +32,7 @@ public class GameController {
 	
 	
 	
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
         
     	MainMenu menu = new MainMenu();
     	menu.setVisible(true);
@@ -110,7 +111,7 @@ public class GameController {
 		    	}
 		    }
 		    
-		    
+		    isBuildingMode=true;
 		    
 		    GameController.playerList = initGame(numberOfPlayers.get(), numberOfAIPlayers.get(), RiskGameFrame.getContinent());
 	        ArrayList<Continents> c = RiskGameFrame.initalSharing(playerList);
@@ -127,7 +128,7 @@ public class GameController {
 		
 		else {
 			
-			
+			isBuildingMode=false;
 			LoadMode RiskGameFrame = new LoadMode();
 		    RiskGameFrame.setLayout(null);
 		    RiskGameFrame.setVisible(true);
@@ -188,7 +189,18 @@ public class GameController {
     }
     
 
-	static private ArrayList<Player> initGame(int numberofPlayers, int numberofComp, ArrayList<Continents> continents) {
+	static public ArrayList<Player> initGame(int numberofPlayers, int numberofComp, ArrayList<Continents> continents) throws Exception {
+		
+		if (numberofPlayers<0) {
+			throw (new Exception("number of player cannot be negative"));
+		}
+		else if (numberofComp<0) {
+			throw (new Exception("number of computer player cannot be negative"));
+		}
+		else if (continents==null) {
+			throw (new Exception("continent list cannot be null"));
+		}
+		
 		
 		ArrayList<Territory> territories = new ArrayList<Territory>();
 		for (Continents continent : continents) {
@@ -199,6 +211,12 @@ public class GameController {
 			}
 			
 		}
+		
+		if(continents.size()<numberofComp+numberofComp) {
+			throw (new Exception("insufficient territories to assign to players"));
+		}
+		
+		
 		
 		int territoryPerPlayer = Math.floorDiv(territories.size(), (numberofPlayers+numberofComp));
 		System.out.println("Number of territory: "+territories.size());
@@ -218,21 +236,9 @@ public class GameController {
 			}
 			
 			playerList.add(new Player(j, randomColorGenerator(), currentTerritories));
-			
-		
-		
+
 		}
 		
-		
-		System.out.println("*******");
-		for (Player player : playerList) {
-			System.out.println(player.getId());
-			//System.out.println(player.getTerritories().getNames());
-			for (Territory territory : player.getTerritories())
-				System.out.println(territory.getName());
-				
-			System.out.println("*******");
-		}
 		
 		return playerList;
 	}

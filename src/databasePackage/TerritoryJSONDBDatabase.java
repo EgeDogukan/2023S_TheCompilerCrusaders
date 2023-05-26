@@ -85,7 +85,6 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 	@Override
 	public void prepare() {
 		this.filePath="data.json";
-		
 	}
 
 

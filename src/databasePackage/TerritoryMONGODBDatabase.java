@@ -21,7 +21,7 @@ import RiskPackage.GameController;
 import RiskPackage.Player;
 import RiskPackage.Territory;
 
-public class TerritoryDBDatabase implements ISaveLoadAdapter {
+public class TerritoryMONGODBDatabase implements ISaveLoadAdapter {
 
 	Logger mongoLogger;
 	MongoClient mongoClient;

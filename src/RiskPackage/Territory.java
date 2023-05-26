@@ -30,7 +30,7 @@ import javax.swing.plaf.synth.Region;
 import RiskPackage.GameController;
 import cardPackage.ArmyCardFactory;
 import cardPackage.TerritoryCard;
-import uipackage.AttackTerr;
+import uipackage.AttackTerrUI;
 import uipackage.RunningMode;
 import uipackage.WorldMap;
 
@@ -40,8 +40,7 @@ public class Territory extends JPanel {
 	    private int yCoordinate;
 	    private int width;
 	    private int height;
-		//public static JButton attackButton;
-		;
+		private boolean isFirst=true;
 	    private Color color;
 	    private Continents continent;
 		private Continents c;
@@ -85,8 +84,6 @@ public class Territory extends JPanel {
 	        this.neighbors = new ArrayList<Territory>();
 
 
-
-
 	        
 			JLabel nameLabel = new JLabel(this.getName());
 			System.out.println(this.getName());
@@ -105,19 +102,41 @@ public class Territory extends JPanel {
 						System.out.println("Panel clicked!");
 
 						if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
+							
+							
+							
 							System.out.println("sahip");
 							JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
 						"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
 						
 								
-								AttackTerr at = new AttackTerr(Territory.this);
+								AttackTerrUI at = new AttackTerrUI(Territory.this);
+								System.out.println("birinci tur");
+
+							
+					
+						}
+					}
+					else {
+						if(RunningMode.isItFirstTour) {
+							if(Territory.this.getOwnerID()+1 == GameController.getCurrentTurnPlayerID()) {
+								
+								
+								
+								System.out.println("sahip");
+								JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+							"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
+							
+									
+									AttackTerrUI at = new AttackTerrUI(Territory.this);
+									System.out.println("birinci tur");
 
 					}					
 				}
 			}
 
-				@Override
-				public void mousePressed(MouseEvent e) {
+				//@Override
+				//public void mousePressed(MouseEvent e) {
 					/*if (isBuilding){
 						oldColor = getColor();
 						setColor(Color.RED);

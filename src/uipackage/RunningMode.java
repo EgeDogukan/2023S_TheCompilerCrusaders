@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.security.PublicKey;
@@ -38,7 +39,49 @@ import cardPackage.ChanceCardFactory;
 import cardPackage.IChanceCard;
 import cardPackage.TerritoryCard;
 import databasePackage.ISaveLoadAdapter;
-import databasePackage.TerritoryDBDatabase;
+import databasePackage.TerritoryMONGODBDatabase;
+import databasePackage.TerritoryJSONDBDatabase;
+
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.security.PublicKey;
+import java.util.ArrayList;
+import java.util.Random;
+
+import javax.swing.*;
+import java.awt.*;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import RiskPackage.Continents;
+import RiskPackage.GameController;
+import RiskPackage.GamePanel;
+import RiskPackage.Player;
+import RiskPackage.RiskBoard;
+import RiskPackage.Territory;
+import cardPackage.ArmyCardFactory;
+import cardPackage.ChanceCardFactory;
+import cardPackage.IChanceCard;
+import cardPackage.TerritoryCard;
+import databasePackage.ISaveLoadAdapter;
+import databasePackage.TerritoryMONGODBDatabase;
 import databasePackage.TerritoryJSONDBDatabase;
 
 public class RunningMode extends JFrame{
@@ -49,6 +92,7 @@ public class RunningMode extends JFrame{
 	int numberOfHumanPlayer;
 	static ArrayList<Player> players;
 	static int turnCounter=1;
+	public static boolean isItFirstTour=true;
 	public static boolean isContinue = true;
 	public static int databaseChooser=0;
 	
@@ -99,10 +143,11 @@ public class RunningMode extends JFrame{
             	//System.out.println();
             	//printTerritoryCard();
             	RunningMode.turnCounter++;
-            	
+            	RunningMode.isItFirstTour=false;
             	if (RunningMode.turnCounter==numberOfAIPlayer+numberOfHumanPlayer+1) {
             		RunningMode.turnCounter=1;
             	}
+            	
             	turn.setText(Integer.toString(RunningMode.turnCounter));
 				GameController.setCurrentTurnPlayerID(RunningMode.turnCounter);
 				System.out.println("------------------------------" + RunningMode.turnCounter);
@@ -199,11 +244,11 @@ public class RunningMode extends JFrame{
 				
 				ISaveLoadAdapter database;
 				
-				if (databaseChooser==1) {
+				if (databaseChooser==0) {
 					database = new TerritoryJSONDBDatabase();
 				}
 				else {
-					database = new TerritoryDBDatabase();
+					database = new TerritoryMONGODBDatabase();
 				}
 					try {
 						database.empty();
@@ -434,6 +479,9 @@ public class RunningMode extends JFrame{
 	public ArrayList<Player> getPlayers() {
 		return this.players;
 	}
+	
+	
+	
 	
 
 }
