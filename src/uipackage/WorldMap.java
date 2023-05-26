@@ -93,20 +93,25 @@ public class WorldMap {
                 int x = p.x - p1.x;
                 int y = p.y - p1.y;
                 Point pointOnImage = new Point(x, y);
-                for (Shape shape : shapeList) {
 
-                    if (shape.contains(pointOnImage)) {   
-                        JOptionPane.showMessageDialog(null, "Clicked!"); 
-                        numofSelectedTerritory++;
-                        if (numofSelectedTerritory==shapeList.size()) 
-                        	isEveryTerritorySelected=true;
-                        	                    
-                        clickedShape = shape;
-                        WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
-                        BuildingModeNew.nextTurn();
-
-                        break;
+                if(RunningModeNew.isInBuildingMode == true) {
+                    for (Shape shape : shapeList) {
+                        if (shape.contains(pointOnImage)) {   
+                            JOptionPane.showMessageDialog(null, "Clicked!"); 
+                            numofSelectedTerritory++;
+                            if (numofSelectedTerritory==shapeList.size()) 
+                                isEveryTerritorySelected=true;
+                                                    
+                            clickedShape = shape;
+                            WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
+                            BuildingModeNew.nextTurn();
+    
+                            break;
+                        }
                     }
+                }
+                else if (RunningModeNew.isInBuildingMode == false) {
+                    //running mode functions
                 }
                 Territory.setClickedShape(clickedShape);
             }

@@ -51,6 +51,7 @@ public class RunningModeNew extends JFrame {
 	public static int databaseChooser=0;
     public ArrayList<ArrayList<Shape>> shapelist = new ArrayList<>();
     public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
+	public static boolean isInBuildingMode = true;
 
     public RunningModeNew(ArrayList<ArrayList<Shape>> shapelist, ArrayList<PlayerNew> players , int numberOfAIPlayer, int numberOfHumanPlayer){
         this.numberOfAIPlayer=numberOfAIPlayer;
@@ -78,6 +79,7 @@ public class RunningModeNew extends JFrame {
 			if(WorldMap.isEveryTerritorySelected){
 				System.out.println("Building Mode Ended.");
 				flag = false;
+				isInBuildingMode = false;
 		 		buildingModeNew.dispose();
 			}
 		}
@@ -402,6 +404,8 @@ public class RunningModeNew extends JFrame {
 		return this.players;
 	}
 	
-
+	public Boolean getIsInBuildingMode() {
+		return isInBuildingMode;
+	}
 }
 
