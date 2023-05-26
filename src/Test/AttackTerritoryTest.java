@@ -105,6 +105,7 @@ public class AttackTerritoryTest {
         attack.setDice(4,3);
         assertEquals(Attacker.getColor(), Destination.getColor());
     }
+    @Test
     public void testInfantryReductionAfterAttack() {
         // Create territories and armies
         // Ensure attacker has at least 2 Infantry
