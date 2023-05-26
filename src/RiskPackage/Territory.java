@@ -30,7 +30,8 @@ import javax.swing.plaf.synth.Region;
 import RiskPackage.GameController;
 import cardPackage.ArmyCardFactory;
 import cardPackage.TerritoryCard;
-import uipackage.AttackTerrUI;
+
+import uipackage.AttackTerritoryUI;
 import uipackage.RunningMode;
 import uipackage.WorldMap;
 
@@ -110,7 +111,7 @@ public class Territory extends JPanel {
 						"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
 						
 								
-								AttackTerrUI at = new AttackTerrUI(Territory.this);
+							AttackTerritoryUI at = new AttackTerritoryUI(Territory.this);
 								System.out.println("birinci tur");
 
 							
@@ -128,7 +129,7 @@ public class Territory extends JPanel {
 							"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
 							
 									
-									AttackTerrUI at = new AttackTerrUI(Territory.this);
+								AttackTerritoryUI at = new AttackTerritoryUI(Territory.this);
 									System.out.println("birinci tur");
 
 					}					
