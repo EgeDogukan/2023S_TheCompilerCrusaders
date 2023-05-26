@@ -19,8 +19,9 @@ public class AttackTerritory {
     public AttackTerritory(Territory territory, Territory destination){
         this.territory = territory;
         this.destination = destination;
-        defenderDiceResult = random.nextInt(defenderSides) + 1;
-        attackerDiceResult = random.nextInt(attackerSides) + 1;
+
+       // setDice(random.nextInt(attackerSides) + 1, random.nextInt(defenderSides) + 1);
+        setDice(4,4);
         if(destination != null){
             if(destination.armyOnTerritory.calculateStrength() <= territory.armyOnTerritory.calculateStrength()){
                 canAttack = true;
@@ -97,6 +98,10 @@ public class AttackTerritory {
         return terrWins;
 
         
+    }
+    public void setDice(int attackerDice, int defenderDice){
+        this.defenderDiceResult = defenderDice;
+        this.attackerDiceResult = attackerDice;
     }
     public boolean canAttackTerr(Territory territory, Territory destination){
         if (destination.armyOnTerritory.calculateStrength() > territory.armyOnTerritory.calculateStrength()){
