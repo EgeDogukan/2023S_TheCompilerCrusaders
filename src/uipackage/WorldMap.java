@@ -311,9 +311,23 @@ public class WorldMap {
             System.out.println("true olduuuuu");
         }
 	}
-    
-    
 
+    public boolean getIsAllSelected() {
+        return isEveryTerritorySelected;
+    }
+    
+    public int getShapeIndex(Shape shape) {
+    	return shapeList.indexOf(shape);
+    }
+    
+    public Shape getShape(int index) {
+    	return shapeList.get(index);
+    }
+
+    public ArrayList<Color> getColorList() {
+        return colorList;
+    }
+    
    
 
 	public static void main(String[] args) {
@@ -336,19 +350,5 @@ public class WorldMap {
             f.setVisible(true);
         };
         SwingUtilities.invokeLater(r);
-    }
-
-    public boolean getIsAllSelected() {
-        return isEveryTerritorySelected;
-    }
-    
-    public int getShapeIndex(Shape shape) {
-    	return shapeList.indexOf(shape);
-    }
-    
-    public Shape getShape(int index) {
-    	return shapeList.get(index);
-    }
-
-    
+    } 
 }
