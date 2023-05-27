@@ -21,7 +21,7 @@ import cardPackage.*;
 
 public class useCardTest {
     
-    @Test
+    @Test 
     public void testUseChanceCard_ValidCardID() {
         ArrayList<Territory> territories = new ArrayList<Territory>();
         Player player = new Player(1, null, territories);
@@ -29,7 +29,7 @@ public class useCardTest {
         IChanceCard card = new DraftChanceCard();
         player.chanceCards.add(card); // Add a chance card to the player's collection
         
-        // Test using a valid card ID for DraftChanceCard (assuming 0 represents DraftChanceCard)
+        // Test using a valid card ID for DraftChanceCard (0 represents DraftChanceCard)
         player.useChanceCard(0);
         
         // Assert that the card was removed from the player's collection
@@ -90,7 +90,7 @@ public class useCardTest {
         IChanceCard card = new DraftChanceCard();
         player.chanceCards.add(card); // Add a chance card to the player's collection
         
-        // Test using a valid card ID for DraftChanceCard (assuming 0 represents DraftChanceCard)
+        // Test using a valid card ID for DraftChanceCard (0 represents DraftChanceCard)
         player.useChanceCard(0);
         
         // Assert that the card was removed from the player's collection
