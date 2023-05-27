@@ -7,12 +7,12 @@ public class AttackTerritory {
     Territory territory;
     Territory destination;
     //Trowing Two dices
-    private int defenderSides = 6;
-    private int attackerSides = 6;
+    public int defenderSides = 6;
+    public int attackerSides = 6;
     private Random random = new Random();
     
-    int defenderDiceResult;
-    int attackerDiceResult;
+    public int defenderDiceResult;
+    public int attackerDiceResult;
     public Army armyOnTerritory;
     private boolean terrWins;
     private boolean canAttack = true;
@@ -20,8 +20,8 @@ public class AttackTerritory {
         this.territory = territory;
         this.destination = destination;
 
-       // setDice(random.nextInt(attackerSides) + 1, random.nextInt(defenderSides) + 1);
-        setDice(4,4);
+        //setDice(random.nextInt(attackerSides) + 1, random.nextInt(defenderSides) + 1);
+        
         if(destination != null){
             if(destination.armyOnTerritory.calculateStrength() <= territory.armyOnTerritory.calculateStrength()){
                 canAttack = true;

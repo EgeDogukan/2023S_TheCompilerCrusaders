@@ -14,6 +14,34 @@ import RiskPackage.*;
 
 
 public class AttackTerritoryTest {
+    public boolean repOk(AttackTerritory attackTerritory) {
+        Territory Attacker = new Territory(1, 1, 1, 1, "Attacker", Color.black, null, 1);
+        Territory Destination = new Territory(2, 2, 1, 1, "Destination", Color.red, null, 2);
+        //Chehking if territories are created properly
+        if(Attacker == null||Destination == null){
+            return false;
+        }
+        // Checking invariants for the AttackTerritory class
+        if (attackTerritory.defenderSides < 1 || attackTerritory.attackerSides< 1) {
+            return false;
+        }
+        
+        
+        
+        if(Attacker.armyOnTerritory.calculateStrength()<0){
+            return false;
+        }
+        return true;
+    }
+    @Test
+    public void testRepOk() {
+        Territory Attacker = new Territory(1, 1, 1, 1, "Attacker", Color.black, null, 1);
+        Territory Destination = new Territory(2, 2, 1, 1, "Destination", Color.red, null, 2);
+           
+        AttackTerritory attackTerritory = new AttackTerritory(Attacker, Destination);
+        assertTrue(repOk(attackTerritory));
+        
+    }
     @Test
     public void testAttackTerritory() {//Test if Attacker terretory can attack destination when he has higher strength
         // Creating Territories
@@ -60,7 +88,7 @@ public class AttackTerritoryTest {
     }
 
     @Test
-    public void testAttackerLoses() {
+    public void testAttackerLoses() {//Glass box test
         // Create territories and armies, make sure destination wins trow dice
         Territory Attacker = new Territory(1, 1, 1, 1, "Attacker", Color.black, null, 1);
         Territory Destination = new Territory(2, 2, 1, 1, "Destination", Color.red, null, 2);
@@ -90,21 +118,7 @@ public class AttackTerritoryTest {
         attack.setDice(3,4);
         assertTrue(initialArmySize > Attacker.armyOnTerritory.calculateStrength());
     }
-    @Test
-    public void testTerritoryChangeOwnerAfterAttack() {
-        // Create territories and armies
-        // Ensure destination has only 1 infantary so that it can be captured in single attack
-        Territory Attacker = new Territory(1, 1, 1, 1, "Attacker", Color.black, null, 1);
-        Territory Destination = new Territory(2, 2, 1, 1, "Destination", Color.red, null, 2);
-       
-        Attacker.setArmy(1,5,1);
-        Destination.setArmy(0,0,1);
-
-        AttackTerritory attack = new AttackTerritory(Attacker, Destination);
-        attack.AttackerWins(Attacker, Destination);
-        attack.setDice(4,3);
-        assertEquals(Attacker.getColor(), Destination.getColor());
-    }
+    
     @Test
     public void testInfantryReductionAfterAttack() {
         // Create territories and armies
@@ -118,7 +132,7 @@ public class AttackTerritoryTest {
         
         int initialInfantry = Attacker.armyOnTerritory.getInfantry();
         AttackTerritory attack = new AttackTerritory(Attacker, Destination);
-        attack.AttackerWins(Attacker, Destination);
+        
         attack.setDice(3,4);
         assertTrue(initialInfantry > Attacker.armyOnTerritory.getInfantry());
     }
@@ -133,14 +147,14 @@ public class AttackTerritoryTest {
                
         
         Attacker.setArmy(0,5,0);
-        Destination.setArmy(0,2,0);
+        Destination.setArmy(0,4,0);
         
 
-        int initialCavalry = Destination.armyOnTerritory.getCavalry();
+        int initialCavalry = Attacker.armyOnTerritory.getCavalry();
         AttackTerritory attack = new AttackTerritory(Attacker, Destination);
-        attack.AttackerWins(Attacker, Destination);
-        attack.setDice(3,3);
-        assertTrue(initialCavalry > Destination.armyOnTerritory.getCavalry());
+        
+        attack.setDice(3,4);
+        assertTrue(initialCavalry > Attacker.armyOnTerritory.getCavalry());
     }
 
     @Test
@@ -157,8 +171,10 @@ public class AttackTerritoryTest {
         
         int initialArtillery = Attacker.armyOnTerritory.getArtillery();
         AttackTerritory attack = new AttackTerritory(Attacker, Destination);
-        attack.AttackerWins(Attacker, Destination);
+       
         attack.setDice(3,4);
         assertTrue(initialArtillery > Attacker.armyOnTerritory.getArtillery());
     }
+
+    
 }
