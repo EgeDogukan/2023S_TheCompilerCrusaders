@@ -95,27 +95,52 @@ public class login extends JFrame {
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                JLabel usernameLabel = new JLabel("New Username:");
-                JLabel passwordLabel = new JLabel("New Password:");
+                JLabel usernameLabel = new JLabel("                                                New Username:");
+                JLabel passwordLabel = new JLabel("                                                New Password:");
                 JTextField newPassword = new JTextField();
                 JTextField newUsername = new JTextField();
-                JPanel registerPanel = new JPanel();
+                JLabel registerPanel = new JLabel();
+                registerPanel = new JLabel(backgroundImage);
                 JButton saveEssentialsButton = new JButton("Register Now!");
 
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
                 registerPanel.add(usernameLabel);
+                registerPanel.add(newUsername);
+                registerPanel.add(new JLabel());
                 registerPanel.add(passwordLabel);
                 registerPanel.add(newPassword);
-                registerPanel.add(newUsername);
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
                 registerPanel.add(saveEssentialsButton);
-
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                registerPanel.add(new JLabel());
+                
                 JFrame registerFrame = new JFrame();
 
                 registerFrame.setVisible(true);
                 registerFrame.setResizable(false);
                 registerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                registerFrame.setBounds(120, 120, 1207, 728);
+                registerFrame.setBounds(120, 120, 800, 500);
                 registerFrame.add(registerPanel);
-                registerPanel.setLayout(new GridLayout(3, 2));
+                
+                registerPanel.setLayout(new GridLayout(10, 10,10,10));
                 registerFrame.setContentPane(registerPanel);
                 registerPanel.setBackground(new Color(153, 153, 255));
                 registerPanel.getRootPane().setDefaultButton(saveEssentialsButton);
