@@ -118,14 +118,7 @@ public class GameControllerNew {
 		    System.out.println(playerList);
 	        ArrayList<ArrayList<Shape>> shapes = s.getBuildingModeNew().initalSharing(playerList);
 	        
-	        //RiskGameFrame.dispose();
-	        System.out.println("G IS INITALIOZE.");
-	        g = new RunningModeNew(shapes, GameControllerNew.playerList, 0, GameControllerNew.playerList.size() );
 	        
-	        g.setLayout(new BorderLayout());
-	        g.setVisible(true);
-			turnID = g.getTurn() - 1;
-			s.getBuildingModeNew().dispose();
 
 			break;
 			

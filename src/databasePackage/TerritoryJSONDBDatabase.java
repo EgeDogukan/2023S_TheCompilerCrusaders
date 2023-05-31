@@ -3,6 +3,7 @@ package databasePackage;
 
 import static com.mongodb.client.model.Filters.eq;
 
+import java.awt.Shape;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -31,6 +32,9 @@ import com.google.gson.stream.JsonReader;
 import RiskPackage.GameController;
 import RiskPackage.Player;
 import RiskPackage.Territory;
+import uipackage.BuildingModeNew;
+import uipackage.RunningModeNew;
+import uipackage.WorldMap;
 
 
 public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
@@ -41,35 +45,41 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 	public TerritoryJSONDBDatabase() {
 	}
 	
-	
-	public void save(Player player) throws IOException {
-		this.prepare();
-		String filePath="data.json";
-		Gson gson = new Gson();
-		
-		
-		for (int i=0;i<player.getTerritories().size();i++) {
-			FileWriter writer = new FileWriter(filePath, true);
-			Territory ter = player.getTerritories().get(i);
-			ArrayList<String> saveList = ter.getList();
-			
-			System.out.println("player.getTerritories().size()"+player.getTerritories().size());
-			
-			String json = gson.toJson(saveList);
-			writer.write(json);
-
-			writer.write("\n");
-			writer.close();		
-		}
+	@Override
+	public void prepare() {
+		this.filePath="data.json";
 		
 	}
+
 	
 	public void saveAll() throws IOException {
 		this.prepare();
-		ArrayList<Player> players = GameController.getPlayers();
-		for (Player player : players) {
-			save(player);
+		ArrayList<Shape> shapes = BuildingModeNew.getWorldMap().getShapeList();
+		for (Shape shape : shapes) {
+			System.out.println(shape);
+			save(shape);
 		}
+	}
+	
+	public void save(Shape shape) throws IOException {
+		Gson gson = new Gson();
+		FileWriter writer = new FileWriter(filePath, true);
+		
+		WorldMap worldMap = BuildingModeNew.getWorldMap();
+		
+		int index = worldMap.getShapeIndex(shape);
+		
+		
+		int r = worldMap.getColorList().get(index).getRed();
+		int g = worldMap.getColorList().get(index).getGreen();
+		int b = worldMap.getColorList().get(index).getBlue();
+		
+		int[] infos = {index, r, g, b};
+		
+		String json = gson.toJson(infos);
+		writer.write(json);
+		writer.write("\n");
+		writer.close();	
 	}
 
 	
@@ -85,11 +95,7 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 		writer.write(json);
 	}
 
-	@Override
-	public void prepare() {
-		this.filePath="data.json";
-		
-	}
+	
 	
 	public ArrayList<ArrayList<String>> load() throws FileNotFoundException, IOException {
 		this.prepare();
@@ -109,36 +115,14 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 	    return informations;
 	}
 
-
+	@Override
 	public ArrayList<ArrayList<ArrayList<String>>> loadAll() throws IOException {
-		this.prepare();
-		
-		ArrayList<ArrayList<ArrayList<String>>> allArrayList = new ArrayList<>();
-		Gson gson = new Gson();
-		
-		String[] usernames = {"0","1","2","3","4","5"};
-		
-		for (String username : usernames) {
-			try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-		        String line;
-		        ArrayList<ArrayList<String>> informations = new ArrayList<ArrayList<String>>();
-		        while ((line = reader.readLine()) != null) {
-		            Type listType = new TypeToken<ArrayList<String>>() {}.getType();
-		            ArrayList<String> data = gson.fromJson(line, listType);
-		            
-		            if (data.get(data.size()-1).equals(username)) {
-		            	informations.add(data);
-		            }
-		           
-		        }
-		        if (informations.size()!=0) {
-			        allArrayList.add(informations);
-		        }
-		    }
-			
-		}
-		return allArrayList;
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+
+	
 	
 	
 

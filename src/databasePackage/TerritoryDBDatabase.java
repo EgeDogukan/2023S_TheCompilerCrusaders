@@ -3,6 +3,7 @@ package databasePackage;
 import static com.mongodb.client.model.Filters.eq;
 
 import java.awt.Color;
+import java.awt.Shape;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -149,6 +150,12 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 	public void empty() throws IOException{
 		this.prepare();
         this.collection.deleteMany(new Document());
+	}
+
+	@Override
+	public void save(Shape shape) throws IOException {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
