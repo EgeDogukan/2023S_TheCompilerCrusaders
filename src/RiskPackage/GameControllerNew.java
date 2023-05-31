@@ -57,16 +57,19 @@ public class GameControllerNew {
         } while (loginPage.getLoginStatus() == false);
 		loginPage.frame.dispose();
 		
-		whichMode modeSelection = new whichMode();
-		modeSelection.setVisible(true);
+		MainMenuLoggedIn mainMenuLoggedIn = new MainMenuLoggedIn();
+		mainMenuLoggedIn.setVisible(true);
+
+		//whichMode modeSelection = new whichMode();
+		//modeSelection.setVisible(true);
 		
 		do {                                                        //waiting until login phase completed
-            System.out.println(modeSelection.status);
+            System.out.println(mainMenuLoggedIn.status);
             
-        } while (modeSelection.status == -1);
-		modeSelection.dispose();
+        } while (mainMenuLoggedIn.status == -1);
+		mainMenuLoggedIn.dispose();
 		
-		if (modeSelection.status==1) {
+		if (mainMenuLoggedIn.status==1) {
 			
 			
 	
