@@ -95,9 +95,25 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 	
 
 	@Override
-	public int[] loadAll() throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ArrayList<Integer>> loadAll() throws IOException {
+		this.prepare();
+		ArrayList<ArrayList<Integer>> informations = new ArrayList<>();
+		
+		Gson gson = new Gson();
+		
+		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+            	Type listType = new TypeToken<ArrayList<Integer>>() {}.getType();
+	            ArrayList<Integer> data = gson.fromJson(line, listType);
+	            informations.add(data);
+                
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		
+		return informations;
 	}
 
 

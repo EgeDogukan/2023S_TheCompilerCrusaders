@@ -42,7 +42,7 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 	}
 
 	@Override
-	public int[] loadAll() throws IOException {
+	public ArrayList<ArrayList<Integer>> loadAll() throws IOException {
 		return null;
 	}
 

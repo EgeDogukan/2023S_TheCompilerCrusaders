@@ -71,7 +71,7 @@ public class RunningModeNew extends JFrame {
 	}
 
 	public void initGame(){
-		//super("Building Mode New");
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(new Dimension(1920, 1080));
 		this.setLayout(null); // Use BorderLayout for the JFrame

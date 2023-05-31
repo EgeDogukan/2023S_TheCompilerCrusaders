@@ -11,7 +11,7 @@ public interface ISaveLoadAdapter {
 
 	public void prepare();
 	void save(Shape shape) throws IOException;
-	public int[] loadAll() throws IOException;
+	public ArrayList<ArrayList<Integer>> loadAll() throws IOException;
 	public void empty() throws IOException;
 	public void saveAll() throws IOException;
 }

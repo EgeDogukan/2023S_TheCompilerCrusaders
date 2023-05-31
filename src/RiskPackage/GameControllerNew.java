@@ -111,19 +111,17 @@ public class GameControllerNew {
 //		    		System.out.println("Name of the territory: "+BuildingModeNew.worldMap.getShapeList().get(index));
 //		    	}
 //		    }
+		    break;
 		    
 	        
-		    
-		    playerList = BuildingModeNew.getPlayerList();
-		    System.out.println(playerList);
-	        ArrayList<ArrayList<Shape>> shapes = s.getBuildingModeNew().initalSharing(playerList);
-	        
-	        
-
-			break;
-			
 			
 		}
+		else {
+			System.out.println("selection is 0.");
+			LoadMode loadMode = new LoadMode();
+			break;
+		}
+		
 		
 //		else {
 //			LoadMode RiskGameFrame = new LoadMode();

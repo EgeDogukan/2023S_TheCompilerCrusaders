@@ -15,7 +15,6 @@ public class MainNew {
 			instance.init();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		
 		}   
     }
 }
