@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import RiskPackage.Player;
-import RiskPackage.Territory;
 import java.util.Collections;
 import javax.imageio.ImageIO;
 
@@ -116,7 +114,6 @@ public class WorldMap {
                 else if (isInBuildingMode == false) {
                     System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
                 }
-                Territory.setClickedShape(clickedShape);
             }
             
             public void mousePressed(MouseEvent e) {

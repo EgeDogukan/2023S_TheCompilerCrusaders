@@ -22,17 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import RiskPackage.Continents;
-import RiskPackage.GameController;
-import RiskPackage.GamePanel;
-import RiskPackage.Player;
 import RiskPackage.PlayerNew;
-import RiskPackage.RiskBoard;
-import RiskPackage.Territory;
-import cardPackage.ArmyCardFactory;
-import cardPackage.ChanceCardFactory;
-import cardPackage.IChanceCard;
-import cardPackage.TerritoryCard;
 import databasePackage.ISaveLoadAdapter;
 import databasePackage.TerritoryDBDatabase;
 import databasePackage.TerritoryJSONDBDatabase;
@@ -48,7 +38,6 @@ public class RunningModeNew extends JFrame {
 	public static boolean isContinue = true;
 	public static int databaseChooser=0;
     public ArrayList<Shape> shapelist = new ArrayList<>();
-    public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
 	public static boolean isInBuildingMode = true;
 
 	public RunningModeNew() {
@@ -57,21 +46,12 @@ public class RunningModeNew extends JFrame {
 	
 
     public int getTurn() {
-		return RunningMode.turnCounter;
+		return RunningModeNew.turnCounter;
 	}
 	public Color getTurnColor(){
 		return this.players.get(getTurn()-1).getColor();
 	}
 
-	public void pickChanceCard() {
-		int curId=getTurn();
-		Random rand = new Random();
-        int randomNumber = rand.nextInt(5);
-        
-        IChanceCard chanceCard = new ChanceCardFactory().createCard(randomNumber);
-        //this.players.get(curId-1).chanceCards.add(chanceCard);
-        System.out.println("Player with ID"+curId+" has drawn the "+chanceCard.getClass().getName().split("\\.")[1]+" and it is added his/her list.");
-	}
 	
 	public Color getPlayer(int id){
 		return this.players.get(id).getColor();

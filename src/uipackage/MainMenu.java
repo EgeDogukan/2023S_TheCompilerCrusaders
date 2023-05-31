@@ -3,9 +3,6 @@ package uipackage;
 import javax.sound.sampled.*;
 import javax.swing.*;
 
-import RiskPackage.GameManager;
-import RiskPackage.GamePanel;
-import RiskPackage.RiskBoard;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

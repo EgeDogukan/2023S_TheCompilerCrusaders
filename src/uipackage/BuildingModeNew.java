@@ -23,7 +23,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import RiskPackage.GameControllerNew;
-import RiskPackage.Player;
 import RiskPackage.PlayerNew;
 
 

@@ -29,9 +29,6 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
-import RiskPackage.GameController;
-import RiskPackage.Player;
-import RiskPackage.Territory;
 import uipackage.BuildingModeNew;
 import uipackage.RunningModeNew;
 import uipackage.WorldMap;
@@ -56,7 +53,6 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 		this.prepare();
 		ArrayList<Shape> shapes = BuildingModeNew.getWorldMap().getShapeList();
 		for (Shape shape : shapes) {
-			System.out.println(shape);
 			save(shape);
 		}
 	}
@@ -97,26 +93,9 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 
 	
 	
-	public ArrayList<ArrayList<String>> load() throws FileNotFoundException, IOException {
-		this.prepare();
-		Gson gson = new Gson();
-		
-		ArrayList<ArrayList<String>> informations = new ArrayList<>();
-
-	    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-	        String line;
-	        while ((line = reader.readLine()) != null) {
-	            Type listType = new TypeToken<ArrayList<String>>() {}.getType();
-	            ArrayList<String> data = gson.fromJson(line, listType);
-	            informations.add(data);
-	           
-	        }
-	    }
-	    return informations;
-	}
 
 	@Override
-	public ArrayList<ArrayList<ArrayList<String>>> loadAll() throws IOException {
+	public int[] loadAll() throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
