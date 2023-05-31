@@ -114,7 +114,7 @@ public class WorldMap {
                     }
                 }
                 else if (isInBuildingMode == false) {
-                    //running mode functions
+                    System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
                 }
                 Territory.setClickedShape(clickedShape);
             }

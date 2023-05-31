@@ -14,7 +14,7 @@ import java.util.Random;
 
 import javax.swing.*;
 import java.awt.*;
-
+import uipackage.WorldMap;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -350,11 +350,29 @@ public class RunningModeNew extends JFrame {
 	}
 
 	public void initGame(){
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		//super("Building Mode New");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(new Dimension(1920, 1080));
-		this.setLayout(new BorderLayout()); // Use BorderLayout for the JFrame
-		this.setVisible(true);
+		this.setLayout(null); // Use BorderLayout for the JFrame
+	
+		
+		WorldMap worldmap = BuildingModeNew.getWorldMap();
+		
+	
+		
+		JPanel worldPanel = (JPanel) worldmap.getUI();
+		worldPanel.setBounds(0, 0, worldPanel.getPreferredSize().width, worldPanel.getPreferredSize().height);
+		this.add(worldPanel); // Add the map panel to the center of the JFrame
+	
+		
+		
+		
+		
+		
+	
+		pack();
+		setLocationRelativeTo(null); // Center the JFrame on the screen
+		setVisible(true);
 	}
 }
 
