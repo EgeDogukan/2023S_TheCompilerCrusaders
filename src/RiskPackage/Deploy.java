@@ -18,7 +18,10 @@ public class Deploy {
         int currentInfantry = territory.armyOnTerritory.getInfantry();
         territory.armyOnTerritory.setInfantry(currentInfantry + infantryToDeploy);
     }
-
+    public int getAmountInfantry(){
+        return infantryToDeploy;
+    }
+    
     public void deployCavalry() {
         int currentCavalry = territory.armyOnTerritory.getCavalry();
         territory.armyOnTerritory.setCavalry(currentCavalry + cavalryToDeploy);
