@@ -51,28 +51,44 @@ public class BuildingModeNew extends JFrame {
 	public BuildingModeNew(int numberOfPlayer) {
 		super("Building Mode New");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setPreferredSize(new Dimension(1920, 1080));
-        this.setLayout(null);
-        
-        turn=1;
-		this.numberOfPlayer=numberOfPlayer;
-
+		this.setPreferredSize(new Dimension(1920, 1080));
+		this.setLayout(new BorderLayout()); // Use BorderLayout for the JFrame
+	
+		turn = 1;
+		this.numberOfPlayer = numberOfPlayer;
+	
 		ArrayList<Integer> indices = new ArrayList<>();
-		for(int i=1;i<numberOfPlayer+1;i++) {
+		for (int i = 1; i < numberOfPlayer + 1; i++) {
 			playerList.add(new PlayerNew(i, generateRandomColor(), indices));
 			this.shapeList.add(indices);
 		}
-
-		worldMap=new WorldMap();
+	
+		worldMap = new WorldMap();
 		JPanel worldPanel = (JPanel) worldMap.getUI();
 		worldPanel.setBounds(0, 0, worldPanel.getPreferredSize().width, worldPanel.getPreferredSize().height);
-        
-		this.add(worldPanel);
-		
-		this.pack();
-		
-	    System.out.println("numberOfPlayer: "+numberOfPlayer);
+
+	
+		this.add(worldPanel,BorderLayout.NORTH); // Add the map panel to the center of the JFrame
+	
+		JButton nextButton = new JButton("Next");
+		nextButton.setPreferredSize(new Dimension(100, 30)); // Set preferred size for the button
+		nextButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Add the code to execute when the "Next" button is clicked
+			}
+		});
+	
+		JPanel buttonPanel = new JPanel(new FlowLayout()); // Create a panel for the button
+		buttonPanel.add(nextButton); // Add the button to the button panel
+	
+		this.add(buttonPanel, BorderLayout.SOUTH); // Add the button panel to the south of the JFrame
+	
+		pack();
+		setLocationRelativeTo(null); // Center the JFrame on the screen
+		setVisible(true);
 	}
+	
 	
 	
 	public static int getNumberOfPlayer() {
