@@ -21,7 +21,7 @@ public class GameControllerNew {
 	private static int turnID = 0;
 	private static ArrayList<PlayerNew> playerList = new ArrayList<>();
 	private static GameControllerNew instance;
-	private RunningModeNew g;
+	public static RunningModeNew g;
 	
 	private GameControllerNew() {
 	}
@@ -101,14 +101,16 @@ public class GameControllerNew {
 		    //RiskGameFrame.setLayout(null);
 		    //RiskGameFrame.setVisible(true);
 		    
+		    System.out.println("G IS NOT INITALIZED YET");
+		    
 		    IntermediaryBetweenPreBuildingAndBuilding s = new IntermediaryBetweenPreBuildingAndBuilding();
 		    
-		    for (ArrayList<Integer> indices : s.getBuildingModeNew().getShapeList()) {
-		    	System.out.println("Indices of a player "+indices);
-		    	for (Integer index : indices) {
-		    		System.out.println("Name of the territory: "+BuildingModeNew.worldMap.getShapeList().get(index));
-		    	}
-		    }
+//		    for (ArrayList<Integer> indices : s.getBuildingModeNew().getShapeList()) {
+//		    	System.out.println("Indices of a player "+indices);
+//		    	for (Integer index : indices) {
+//		    		System.out.println("Name of the territory: "+BuildingModeNew.worldMap.getShapeList().get(index));
+//		    	}
+//		    }
 		    
 	        
 		    
@@ -117,8 +119,8 @@ public class GameControllerNew {
 	        ArrayList<ArrayList<Shape>> shapes = s.getBuildingModeNew().initalSharing(playerList);
 	        
 	        //RiskGameFrame.dispose();
-	        
-	        this.g = new RunningModeNew(shapes, GameControllerNew.playerList, 0, 4);
+	        System.out.println("G IS INITALIOZE.");
+	        g = new RunningModeNew(shapes, GameControllerNew.playerList, 0, GameControllerNew.playerList.size() );
 	        
 	        g.setLayout(new BorderLayout());
 	        g.setVisible(true);

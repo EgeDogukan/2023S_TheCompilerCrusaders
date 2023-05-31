@@ -53,6 +53,9 @@ public class RunningModeNew extends JFrame {
     public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
 	public static boolean isInBuildingMode = true;
 
+	public RunningModeNew() {
+		initGame();
+	}
 	
 	
     public RunningModeNew(ArrayList<ArrayList<Shape>> shapelist, ArrayList<PlayerNew> players , int numberOfAIPlayer, int numberOfHumanPlayer){
