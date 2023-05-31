@@ -23,6 +23,7 @@ public class WorldMap {
     Area area;
     ArrayList<Shape> shapeList2=null;
     ArrayList<Shape> shapeList = new ArrayList<>();
+    static ArrayList<Integer> armyList = new ArrayList<Integer>(60);
     static ArrayList<Color> colorList = new ArrayList<>();
     private Shape clickedShape;
     private MouseListener ml;
@@ -38,6 +39,9 @@ public class WorldMap {
 
     public WorldMap() {
         try {
+            for(int i = 0;i<50;i++){
+                armyList.add(0);
+            }
             initUI();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -97,16 +101,39 @@ public class WorldMap {
                 if(isInBuildingMode == true) {
                     for (Shape shape : shapeList) {
                         if (shape.contains(pointOnImage)) {   
-                            JOptionPane.showMessageDialog(null, "Clicked!"); 
+                            //JOptionPane.showMessageDialog(null, "Clicked!"); 
                             numofSelectedTerritory++;
+
                             if (numofSelectedTerritory==shapeList.size()) 
                                 isEveryTerritorySelected=true;
                                                     
                             clickedShape = shape;
                             WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
+                            JFrame optionFrame = new JFrame();
+                            optionFrame.setSize(300, 300);
+                            JPanel optionPanel = new JPanel();
+                            JTextField numberOfArmy = new JTextField();
+                            numberOfArmy.setPreferredSize(new Dimension(100,50));
+                            optionPanel.add(numberOfArmy);
+                            optionFrame.add(optionPanel);
+                            JButton retrieveButton = new JButton("Retrieve");
+                            retrieveButton.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    String numberOfArmyonarea = numberOfArmy.getText();
+                                    System.out.println("Retrieved value: " + numberOfArmyonarea);
+                                    //armyList.set(WorldMap.clickedShapeIndex, Integer.parseInt(numberOfArmyonarea));
+                                    setShapeArmy(shape, Integer.parseInt(numberOfArmyonarea));
+                                    System.out.println(armyList);
+                                }
+                            });
+                            optionPanel.add(retrieveButton);
+                            optionFrame.setVisible(true);
+                            
+                            System.out.println(armyList);
                             BuildingModeNew.nextTurn();
                             selectedShapeList.add(shape);
-    
+                            
                             break;
                         }
                     }
@@ -313,6 +340,12 @@ public class WorldMap {
     public void setShapeColor(Shape shape, Color color) {
         int colorIndex = shapeList.indexOf(shape);
         colorList.set(colorIndex, color);
+    }
+
+    public void setShapeArmy(Shape shape, int numberOfArmy){
+        int armyIndex = shapeList.indexOf(shape);
+        
+        armyList.set(armyIndex, numberOfArmy);
     }
 
     public void setIndexColor(int index, Color color) {
