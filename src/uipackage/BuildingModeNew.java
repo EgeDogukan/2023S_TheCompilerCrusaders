@@ -42,10 +42,8 @@ public class BuildingModeNew extends JFrame {
 	public ArrayList<ArrayList<Integer>> shapeList = new ArrayList<>();
 	private boolean isInBuildingMode = true;
 	public static ArrayList<ArrayList<Integer>> playerShapes = new ArrayList<ArrayList<Integer>>(100);
-	/*for(int i = 0; i < 101; i++)  {
-        playerShapes.add(new ArrayList<Integer>(10));
-    }*/
-
+	public static JPanel turnPanel;
+	
 	JComboBox<String> numberOfPlayerComboBox;
 	JComboBox<String> numberOfCompComboBox;
 	
@@ -53,7 +51,7 @@ public class BuildingModeNew extends JFrame {
 		super("Building Mode New");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(new Dimension(1920, 1080));
-		this.setLayout(new BorderLayout()); // Use BorderLayout for the JFrame
+		this.setLayout(null); // Use BorderLayout for the JFrame
 	
 		turn = 1;
 		this.numberOfPlayer = numberOfPlayer;
@@ -67,12 +65,11 @@ public class BuildingModeNew extends JFrame {
 		worldMap = new WorldMap();
 		JPanel worldPanel = (JPanel) worldMap.getUI();
 		worldPanel.setBounds(0, 0, worldPanel.getPreferredSize().width, worldPanel.getPreferredSize().height);
-
+		this.add(worldPanel); // Add the map panel to the center of the JFrame
 	
-		this.add(worldPanel,BorderLayout.NORTH); // Add the map panel to the center of the JFrame
-	
+		
 		JButton nextButton = new JButton("Next");
-		nextButton.setPreferredSize(new Dimension(100, 30)); // Set preferred size for the button
+		nextButton.setBounds(1200, 300, 100, 100); // Set preferred size for the button
 		nextButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -83,11 +80,14 @@ public class BuildingModeNew extends JFrame {
 
 			}
 		});
-	
-		JPanel buttonPanel = new JPanel(new FlowLayout()); // Create a panel for the button
-		buttonPanel.add(nextButton); // Add the button to the button panel
-	
-		this.add(buttonPanel, BorderLayout.SOUTH); // Add the button panel to the south of the JFrame
+		this.add(nextButton);
+		
+		
+		turnPanel = new JPanel();
+		turnPanel.setBounds(1400, 300, 100, 100);
+		turnPanel.setVisible(false);
+		this.add(turnPanel);
+
 	
 		pack();
 		setLocationRelativeTo(null); // Center the JFrame on the screen
@@ -173,11 +173,9 @@ public class BuildingModeNew extends JFrame {
 		System.out.println(clicked);
 		
 		player.getShapeIndices().add(clicked);
-		//playerList.get(turn-1).getShapeIndices().add(clicked);
 		
 		
 		worldMap.setIndexColor(clicked, playerList.get(turn-1).getColor());	
-		//playerShapes[player.getId()].add(clicked);
 		
 		
 		turn++;
@@ -185,6 +183,9 @@ public class BuildingModeNew extends JFrame {
 		if(turn==numberOfPlayer+1) {
 			turn=1;
 		}	
+		
+		turnPanel.setVisible(true);
+		BuildingModeNew.turnPanel.setBackground(playerList.get(turn-1).getColor());
 	}
 	
 	public ArrayList<ArrayList<Shape>> initalSharing(ArrayList<PlayerNew> players){
