@@ -34,6 +34,7 @@ public class WorldMap {
     final int areaThreshold = 450;
     public static boolean isEveryTerritorySelected = false;
     public int numofSelectedTerritory = 0;
+    private boolean isInBuildingMode = true;
 
 
     public WorldMap() {
@@ -94,7 +95,7 @@ public class WorldMap {
                 int y = p.y - p1.y;
                 Point pointOnImage = new Point(x, y);
 
-                if(RunningModeNew.isInBuildingMode == true) {
+                if(isInBuildingMode == true) {
                     for (Shape shape : shapeList) {
                         if (shape.contains(pointOnImage)) {   
                             JOptionPane.showMessageDialog(null, "Clicked!"); 
@@ -110,7 +111,7 @@ public class WorldMap {
                         }
                     }
                 }
-                else if (RunningModeNew.isInBuildingMode == false) {
+                else if (isInBuildingMode == false) {
                     //running mode functions
                 }
                 Territory.setClickedShape(clickedShape);
@@ -296,6 +297,14 @@ public class WorldMap {
     
     public int getClickedShapeIndex() {
     	return this.clickedShapeIndex;
+    }
+
+    public boolean getIsInBuildingMode() {
+        return isInBuildingMode;
+    }
+
+    public void setIsInBuildingMode(boolean bool) {
+        isInBuildingMode = bool;
     }
     
     public void setClickedShapeIndex(int clickedShapeIndex) {

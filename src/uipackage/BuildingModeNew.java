@@ -25,6 +25,7 @@ import javax.swing.WindowConstants;
 import RiskPackage.Player;
 import RiskPackage.PlayerNew;
 
+
 import java.util.concurrent.Semaphore;
 
 public class BuildingModeNew extends JFrame {
@@ -39,7 +40,7 @@ public class BuildingModeNew extends JFrame {
 	public MouseListener mouseListener;
 	static ArrayList<PlayerNew> playerList = new ArrayList<>();
 	public ArrayList<ArrayList<Integer>> shapeList = new ArrayList<>();
-
+	private boolean isInBuildingMode = true;
 	public static ArrayList<ArrayList<Integer>> playerShapes = new ArrayList<ArrayList<Integer>>(100);
 	/*for(int i = 0; i < 101; i++)  {
         playerShapes.add(new ArrayList<Integer>(10));
@@ -76,6 +77,10 @@ public class BuildingModeNew extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// Add the code to execute when the "Next" button is clicked
+				//ArrayList<ArrayList<Shape>> shapelist, ArrayList<PlayerNew> players , int numberOfAIPlayer, int numberOfHumanPlayer
+				
+				worldMap.setIsInBuildingMode(false);
+
 			}
 		});
 	
@@ -88,8 +93,6 @@ public class BuildingModeNew extends JFrame {
 		setLocationRelativeTo(null); // Center the JFrame on the screen
 		setVisible(true);
 	}
-	
-	
 	
 	public static int getNumberOfPlayer() {
 		return numberOfPlayer;

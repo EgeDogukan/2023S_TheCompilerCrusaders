@@ -74,17 +74,7 @@ public class RunningModeNew extends JFrame {
 	     buildingModeNew.setVisible(true);
 		 boolean flag = true;
 		 
-		 do{
-			System.out.println(WorldMap.isEveryTerritorySelected);
-			if(WorldMap.isEveryTerritorySelected){
-				System.out.println("Building Mode Ended.");
-				flag = false;
-				isInBuildingMode = false;
-		 		buildingModeNew.dispose();
-			}
-		}
-		 while(flag);
-		 
+		
 		 
 
 		JButton nextButton = new JButton("next turn");
