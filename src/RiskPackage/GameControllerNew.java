@@ -10,6 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import databasePackage.ISaveLoadAdapter;
+
 //import javax.management.StringValueExp;
 
 import uipackage.*;;
@@ -26,7 +28,7 @@ public class GameControllerNew {
 	
 	public static GameControllerNew getInstance() {
 		
-		if (instance!=null) {
+		if (instance == null) {
 			instance = new GameControllerNew();
 		}
 		
@@ -150,6 +152,7 @@ public class GameControllerNew {
 	}
     
 	public RunningModeNew getRunningModeNew() {
+		System.out.println(g);
 		return this.g;
 	}
     
