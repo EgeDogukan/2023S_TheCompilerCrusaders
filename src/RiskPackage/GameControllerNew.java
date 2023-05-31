@@ -21,7 +21,6 @@ public class GameControllerNew {
 	private static GameControllerNew instance;
 	
 	private GameControllerNew() {
-		
 	}
 	
 	public static GameControllerNew getInstance() {
@@ -36,7 +35,7 @@ public class GameControllerNew {
 	
 	
 	
-    public static void main(String[] args) throws InterruptedException {
+    public static void init() throws InterruptedException {
         
     	MainMenu menu = new MainMenu();
     	menu.setVisible(true);

@@ -12,7 +12,7 @@ public class MainNew {
         
     	GameControllerNew instance = GameControllerNew.getInstance();
     	try {
-			instance.main(args);
+			instance.init();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		

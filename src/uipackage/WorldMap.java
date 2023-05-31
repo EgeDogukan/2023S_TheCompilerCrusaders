@@ -116,6 +116,37 @@ public class WorldMap {
                 }
                 Territory.setClickedShape(clickedShape);
             }
+            
+            public void mousePressed(MouseEvent e) {
+            	
+            	Point p = MouseInfo.getPointerInfo().getLocation();
+                Point p1 = output.getLocationOnScreen();
+                
+                int x = p.x - p1.x;
+                int y = p.y - p1.y;
+                Point pointOnImage = new Point(x, y);
+                
+                if (e.getButton() == MouseEvent.BUTTON3) {
+                    System.out.println("right click is added.");
+                    if(isInBuildingMode == true) {
+                        for (Shape shape : shapeList) {
+                            if (shape.contains(pointOnImage)) {   
+                                JOptionPane.showMessageDialog(null, "Clicked!"); 
+                                numofSelectedTerritory++;
+                                if (numofSelectedTerritory==shapeList.size()) 
+                                    isEveryTerritorySelected=true;
+                                                        
+                                clickedShape = shape;
+                                setIndexColor(shapeList.indexOf(shape), Color.gray);
+        
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                
+            }
         };
         output.addMouseListener(ml);
         ui.add(output);
