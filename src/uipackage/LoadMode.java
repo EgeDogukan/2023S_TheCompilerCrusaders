@@ -20,7 +20,7 @@ public class LoadMode extends JFrame {
 	ArrayList<ArrayList<Integer>> informations;
 	
 
-	public int databaseChooser=0;
+	public int databaseChooser=RunningModeNew.databaseChooser;
 
 	public LoadMode()  {
 		super("Load Mode");
@@ -30,6 +30,7 @@ public class LoadMode extends JFrame {
         ISaveLoadAdapter database;
         
         if (databaseChooser==1) {
+        	System.out.println("db is chosen.");
         	database =  new TerritoryDBDatabase();
         }
         else {

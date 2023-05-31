@@ -117,7 +117,6 @@ public class GameControllerNew {
 			
 		}
 		else {
-			System.out.println("selection is 0.");
 			LoadMode loadMode = new LoadMode();
 			break;
 		}

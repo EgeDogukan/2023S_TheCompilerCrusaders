@@ -92,7 +92,16 @@ public class RunningModeNew extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				TerritoryDBDatabase database = new TerritoryDBDatabase();
+				try {
+					database.empty();
+					database.saveAll();
+					System.out.println("MONGO IS SAVED");
+					RunningModeNew.this.dispose();
+				} catch (IOException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 			}
 		});
 		this.add(saveButtonMongo);

@@ -16,7 +16,11 @@ import org.bson.conversions.Bson;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+
+import uipackage.BuildingModeNew;
+import uipackage.WorldMap;
 
 
 public class TerritoryDBDatabase implements ISaveLoadAdapter {
@@ -38,22 +42,52 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 
 	@Override
 	public void save(Shape shape) throws IOException {
-		
+		return;
 	}
 
 	@Override
 	public ArrayList<ArrayList<Integer>> loadAll() throws IOException {
-		return null;
-	}
-
-	@Override
-	public void empty() throws IOException {
+		this.prepare();
+		ArrayList<ArrayList<Integer>> informations = new ArrayList<>();
+		
+		MongoCursor<Document> cursor = collection.find().iterator();
+        while (cursor.hasNext()) {
+            Document document = cursor.next();
+            ArrayList<Integer> currentInformations = new ArrayList<>();
+            currentInformations.add(Integer.parseInt(document.get("index").toString()));
+            currentInformations.add(Integer.parseInt(document.get("r").toString()));
+            currentInformations.add(Integer.parseInt(document.get("g").toString()));
+            currentInformations.add(Integer.parseInt(document.get("b").toString()));
+            informations.add(currentInformations);
+            
+        }
+		
+		return informations;
 		
 	}
-
+	
+	@Override
+	public void empty() throws IOException{
+		this.prepare();
+        this.collection.deleteMany(new Document());
+	}
+	
 	@Override
 	public void saveAll() throws IOException {
+		this.prepare();
 		
+		WorldMap worldMap = BuildingModeNew.getWorldMap();
+		ArrayList<Shape> shapes = worldMap.getShapeList();
+		
+		for (Shape shape : shapes) {
+			Document doc = new Document();
+			doc.append("index", worldMap.getShapeIndex(shape));
+			int index = worldMap.getShapeIndex(shape);
+			doc.append("r", worldMap.getColorList().get(index).getRed());
+			doc.append("g", worldMap.getColorList().get(index).getGreen());
+			doc.append("b", worldMap.getColorList().get(index).getBlue());
+			collection.insertOne(doc);
+		}
 	}
 
 	
