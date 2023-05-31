@@ -18,6 +18,7 @@ public class GameControllerNew {
 	
 	private static int turnID = 0;
 	private static ArrayList<PlayerNew> playerList = new ArrayList<>();
+	private static GameControllerNew instance;
 	
 	private GameControllerNew() {
 		
@@ -25,7 +26,10 @@ public class GameControllerNew {
 	
 	public static GameControllerNew getInstance() {
 		
-		GameControllerNew instance = new GameControllerNew();
+		if (instance!=null) {
+			instance = new GameControllerNew();
+		}
+		
 		return instance;
 		
 	}

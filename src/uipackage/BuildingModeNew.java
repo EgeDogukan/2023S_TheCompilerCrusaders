@@ -43,6 +43,7 @@ public class BuildingModeNew extends JFrame {
 	private boolean isInBuildingMode = true;
 	public static ArrayList<ArrayList<Integer>> playerShapes = new ArrayList<ArrayList<Integer>>(100);
 	public static JPanel turnPanel;
+	public static JButton nextButton;
 	
 	JComboBox<String> numberOfPlayerComboBox;
 	JComboBox<String> numberOfCompComboBox;
@@ -68,7 +69,7 @@ public class BuildingModeNew extends JFrame {
 		this.add(worldPanel); // Add the map panel to the center of the JFrame
 	
 		
-		JButton nextButton = new JButton("Next");
+		nextButton = new JButton("Next");
 		nextButton.setBounds(1200, 300, 100, 100); // Set preferred size for the button
 		nextButton.addActionListener(new ActionListener() {
 			@Override
@@ -80,6 +81,7 @@ public class BuildingModeNew extends JFrame {
 
 			}
 		});
+		nextButton.setVisible(false);
 		this.add(nextButton);
 		
 		
@@ -166,6 +168,7 @@ public class BuildingModeNew extends JFrame {
 
 	    return new Color(red, green, blue);
 	}
+	
 
 	public static void nextTurn() {
 		int clicked = WorldMap.clickedShapeIndex;
@@ -176,8 +179,6 @@ public class BuildingModeNew extends JFrame {
 		
 		
 		worldMap.setIndexColor(clicked, playerList.get(turn-1).getColor());	
-		
-		
 		turn++;
 		
 		if(turn==numberOfPlayer+1) {
@@ -186,6 +187,10 @@ public class BuildingModeNew extends JFrame {
 		
 		turnPanel.setVisible(true);
 		BuildingModeNew.turnPanel.setBackground(playerList.get(turn-1).getColor());
+		if (worldMap.getIsAllSelected()) {
+			BuildingModeNew.nextButton.setVisible(true);
+			System.out.println("nextButton appeared.");
+		}
 	}
 	
 	public ArrayList<ArrayList<Shape>> initalSharing(ArrayList<PlayerNew> players){

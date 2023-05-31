@@ -132,11 +132,7 @@ public class WorldMap {
                 if (isIncluded(new Color(bi.getRGB(xx, yy)), target, tolerance)) {
                     //if (bi.getRGB(xx,yy)==targetRGB) {
                     if (cont) {
-                        gp.lineTo(xx, yy);
-                        gp.lineTo(xx, yy + 1);
-                        gp.lineTo(xx + 1, yy + 1);
-                        gp.lineTo(xx + 1, yy);
-                        gp.lineTo(xx, yy);
+                        gp.lineTo(xx, yy); gp.lineTo(xx, yy + 1); gp.lineTo(xx + 1, yy + 1); gp.lineTo(xx + 1, yy); gp.lineTo(xx, yy);
                     } else {
                         gp.moveTo(xx, yy);
                     }
