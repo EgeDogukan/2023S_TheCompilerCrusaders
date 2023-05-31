@@ -35,7 +35,8 @@ public class WorldMap {
     public static boolean isEveryTerritorySelected = false;
     public int numofSelectedTerritory = 0;
     private boolean isInBuildingMode = true;
-
+    private ArrayList<Shape> selectedShapeList = new ArrayList<>();
+    
 
     public WorldMap() {
         try {
@@ -106,6 +107,7 @@ public class WorldMap {
                             clickedShape = shape;
                             WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
                             BuildingModeNew.nextTurn();
+                            selectedShapeList.add(shape);
     
                             break;
                         }
@@ -369,6 +371,9 @@ public class WorldMap {
         return colorList;
     }
     
+    public ArrayList<Shape> getSelectedShapes(){
+    	return this.selectedShapeList;
+    }
    
 
 	public static void main(String[] args) {
