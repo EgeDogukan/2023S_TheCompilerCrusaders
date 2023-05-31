@@ -130,6 +130,7 @@ public class RunningModeNew extends JFrame {
 					database.empty();
 					database.saveAll();
 					System.out.println("JSON IS SAVED");
+					RunningModeNew.this.dispose();
 				} catch (IOException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
