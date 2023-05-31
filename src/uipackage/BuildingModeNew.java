@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
+import RiskPackage.GameControllerNew;
 import RiskPackage.Player;
 import RiskPackage.PlayerNew;
 
@@ -78,6 +79,9 @@ public class BuildingModeNew extends JFrame {
 				//ArrayList<ArrayList<Shape>> shapelist, ArrayList<PlayerNew> players , int numberOfAIPlayer, int numberOfHumanPlayer
 				
 				worldMap.setIsInBuildingMode(false);
+				BuildingModeNew.this.dispose();
+				GameControllerNew.getInstance().getRunningModeNew().initGame();
+				
 
 			}
 		});

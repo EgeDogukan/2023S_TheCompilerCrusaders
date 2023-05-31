@@ -19,6 +19,7 @@ public class GameControllerNew {
 	private static int turnID = 0;
 	private static ArrayList<PlayerNew> playerList = new ArrayList<>();
 	private static GameControllerNew instance;
+	private RunningModeNew g;
 	
 	private GameControllerNew() {
 	}
@@ -35,7 +36,7 @@ public class GameControllerNew {
 	
 	
 	
-    public static void init() throws InterruptedException {
+    public void init() throws InterruptedException {
         
     	MainMenu menu = new MainMenu();
     	menu.setVisible(true);
@@ -115,7 +116,7 @@ public class GameControllerNew {
 	        
 	        //RiskGameFrame.dispose();
 	        
-	        RunningModeNew g = new RunningModeNew(shapes, GameControllerNew.playerList, 0, 4);
+	        this.g = new RunningModeNew(shapes, GameControllerNew.playerList, 0, 4);
 	        
 	        g.setLayout(new BorderLayout());
 	        g.setVisible(true);
@@ -148,7 +149,9 @@ public class GameControllerNew {
 
 	}
     
-
+	public RunningModeNew getRunningModeNew() {
+		return this.g;
+	}
     
 
     public static Color randomColorGenerator() {

@@ -53,6 +53,8 @@ public class RunningModeNew extends JFrame {
     public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
 	public static boolean isInBuildingMode = true;
 
+	
+	
     public RunningModeNew(ArrayList<ArrayList<Shape>> shapelist, ArrayList<PlayerNew> players , int numberOfAIPlayer, int numberOfHumanPlayer){
         this.numberOfAIPlayer=numberOfAIPlayer;
 		this.numberOfHumanPlayer=numberOfHumanPlayer;
@@ -72,8 +74,7 @@ public class RunningModeNew extends JFrame {
 	     buildingModeNew.setResizable(false);
 	     buildingModeNew.pack();
 	     buildingModeNew.setVisible(true);
-		 boolean flag = true;
-		 
+			 
 		
 		 
 
@@ -197,7 +198,7 @@ public class RunningModeNew extends JFrame {
 		
 		pickTerritoryCardButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				pickTerritoryCard();
+				//pickTerritoryCard();
 				
 			}
 		});
@@ -317,14 +318,7 @@ public class RunningModeNew extends JFrame {
 	public Color getTurnColor(){
 		return this.players.get(getTurn()-1).getColor();
 	}
-	/*public void initializeArmies() {
-		for (Player p : this.players) {
-			for (int i=0;i<3;i++) { p.addArmyCard(new ArmyCardFactory().createArmyCard(3));}
-			for (int i=0;i<2;i++) { p.addArmyCard(new ArmyCardFactory().createArmyCard(2));}
-			for (int i=0;i<1;i++) { p.addArmyCard(new ArmyCardFactory().createArmyCard(1));}
-		}
-	}*/
-	
+
 	public void pickChanceCard() {
 		int curId=getTurn();
 		Random rand = new Random();
@@ -339,53 +333,7 @@ public class RunningModeNew extends JFrame {
 		return this.players.get(id).getColor();
 	}
 	
-//	public void initializeTerritoryCards() {//
-//		for (Shape shape : shapelist){
-//            this.territoryCards.add(new  TerritoryCard(shape));
-//        }
-//
-//        System.out.println(this.territoryCards.size());
-//	}
-	
-	public void pickTerritoryCard() {
-		int curId=getTurn();
-		Random rand = new Random();
-		int index = rand.nextInt(this.territoryCards.size());
-		TerritoryCard currentCard = this.territoryCards.get(index);
-		//this.players.get(curId-1).territoryCards.add(currentCard);
-	}
-	
-//	
-//	public void printTerritoryCard() {
-//		int curId=getTurn();
-//		System.out.println("Territory Cards of the player are: ");
-//		for (TerritoryCard card : this.players.get(curId-1).territoryCards) {
-//			System.out.println(card.shape);
-//		}
-//	}
-	
-	// public void useTerritoryCard() { //BURDA shape.getindex metodu çağrılmalı
-	// 	int curId=getTurn();
-	// 	boolean hasAllOfTheTerritories=true;
-	// 	Continents continentToBeConquered = null;
-		
-		
-	// 		hasAllOfTheTerritories=true;
-	// 		for (Shape shape : shapelist) {
-	// 			for (TerritoryCard territoryCard : this.players.get(curId-1).territoryCards) {
-	// 				if (!(shape.get.equals(territoryCard.territory.getName()))) {
-	// 					hasAllOfTheTerritories=false;
-	// 				}
-	// 			}
-	// 		}
-	// 		if (hasAllOfTheTerritories==true) {
-	// 			continentToBeConquered=continent;
-	// 		}
-		
-	// 	for (Territory territory : continentToBeConquered.getTerritories()) {
-	// 		this.players.get(curId-1).addTerritories(territory);
-	// 	}
-	// }
+
 	public ArrayList<PlayerNew> getPlayer(){
 		return players;
 	}
@@ -396,6 +344,14 @@ public class RunningModeNew extends JFrame {
 	
 	public Boolean getIsInBuildingMode() {
 		return isInBuildingMode;
+	}
+
+	public void initGame(){
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setPreferredSize(new Dimension(1920, 1080));
+		this.setLayout(new BorderLayout()); // Use BorderLayout for the JFrame
+		this.setVisible(true);
 	}
 }
 
