@@ -23,7 +23,7 @@ public class WorldMap {
     Area area;
     ArrayList<Shape> shapeList2=null;
     ArrayList<Shape> shapeList = new ArrayList<>();
-    static ArrayList<Integer> armyList = new ArrayList<Integer>(60);
+    static ArrayList<ArrayList<Integer>> armyList = new ArrayList<ArrayList<Integer>>(60);
     static ArrayList<Color> colorList = new ArrayList<>();
     private Shape clickedShape;
     private MouseListener ml;
@@ -39,8 +39,16 @@ public class WorldMap {
 
     public WorldMap() {
         try {
-            for(int i = 0;i<50;i++){
-                armyList.add(0);
+            for (int i = 0; i < 60; i++) {
+                armyList.add(new ArrayList<Integer>());
+            }
+            
+            // Set each entry in armyList to 0
+            for (int i = 0; i < armyList.size(); i++) {
+                ArrayList<Integer> innerList = armyList.get(i);
+                for (int j = 0; j < innerList.size(); j++) {
+                    innerList.set(j, 0);
+                }
             }
             initUI();
         } catch (Exception ex) {
@@ -123,8 +131,9 @@ public class WorldMap {
                                     String numberOfArmyonarea = numberOfArmy.getText();
                                     System.out.println("Retrieved value: " + numberOfArmyonarea);
                                     //armyList.set(WorldMap.clickedShapeIndex, Integer.parseInt(numberOfArmyonarea));
-                                    setShapeArmy(shape, Integer.parseInt(numberOfArmyonarea));
-                                    System.out.println(armyList);
+                                    
+                                    setShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));
+                                    System.out.println(armyList.get((clickedShapeIndex)));
                                 }
                             });
                             optionPanel.add(retrieveButton);
@@ -342,10 +351,13 @@ public class WorldMap {
         colorList.set(colorIndex, color);
     }
 
-    public void setShapeArmy(Shape shape, int numberOfArmy){
+    public void setShapeArmyInfantry(Shape shape, int numberOfArmy){
         int armyIndex = shapeList.indexOf(shape);
-        
-        armyList.set(armyIndex, numberOfArmy);
+    ArrayList<Integer> innerList = armyList.get(armyIndex);
+    
+    for (int i = 0; i < innerList.size(); i++) {
+        innerList.set(i, numberOfArmy);
+    }
     }
 
     public void setIndexColor(int index, Color color) {
