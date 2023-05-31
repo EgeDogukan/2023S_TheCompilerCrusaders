@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -357,12 +359,34 @@ public class RunningModeNew extends JFrame {
 	
 		
 		WorldMap worldmap = BuildingModeNew.getWorldMap();
-		
-	
-		
+
 		JPanel worldPanel = (JPanel) worldmap.getUI();
 		worldPanel.setBounds(0, 0, worldPanel.getPreferredSize().width, worldPanel.getPreferredSize().height);
 		this.add(worldPanel); // Add the map panel to the center of the JFrame
+		
+		
+		JButton saveButtonMongo = new JButton("SAVE MONGO");
+		saveButtonMongo.setBounds(1100, 300, 100, 100);
+		saveButtonMongo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("MONGO IS SAVED");
+			}
+		});
+		this.add(saveButtonMongo);
+		
+		
+		JButton saveButtonJSON = new JButton("SAVE JSON");
+		saveButtonJSON.setBounds(1300, 300, 100, 100);
+		saveButtonJSON.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("JSON IS SAVED");
+			}
+		});
+		this.add(saveButtonJSON);
 	
 		
 		
