@@ -3,7 +3,7 @@ package TestPackage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
+import java.awt.Color;
 import java.util.ArrayList;
 
 import RiskPackage.*;
@@ -18,6 +18,14 @@ public class RunningModeTest {
         // Initialize the RunningMode instance with sample data for testing
         ArrayList<Continents> continents = new ArrayList<>();
         ArrayList<Player> players = new ArrayList<>();
+        ArrayList<Territory> territoryList = new ArrayList<>();
+        Continents Continent = new Continents("asia", territoryList, 0, 0, Color.CYAN);
+        Territory t1 = new Territory(96, 70, 10, 17, "ist", Color.black, Continent, 1);
+        Territory t2 = new Territory(16, 17, 28, 45, "londra", Color.black, Continent, 1);
+        territoryList.add(t2);
+        territoryList.add(t1);
+        Player player = new Player(0, Color.GREEN, territoryList);
+        players.add(0, player);
         int numberOfAIPlayer = 2;
         int numberOfHumanPlayer = 2;
         runningMode = new RunningMode(continents, players, numberOfAIPlayer, numberOfHumanPlayer);
@@ -29,6 +37,15 @@ public class RunningModeTest {
         assertNotNull(runningMode.getPlayers());
         assertEquals(1, runningMode.getTurn());
         // Add more assertions for other initialization checks
+    }
+
+    @Test
+    public void testRepOk() {
+        assertTrue(runningMode.repOk());
+        // Modify the instance to violate the representation invariant
+        runningMode.numberOfAIPlayer = -1;
+        assertFalse(runningMode.repOk());
+        // Add more assertions for other scenarios
     }
 
     @Test

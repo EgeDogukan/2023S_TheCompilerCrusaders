@@ -85,8 +85,8 @@ public class RunningMode extends JFrame{
 
 	public ArrayList<Continents> continents;
 	private static JButton turn = new JButton();
-	int numberOfAIPlayer;
-	int numberOfHumanPlayer;
+	public int numberOfAIPlayer;
+	static int numberOfHumanPlayer;
 	static ArrayList<Player> players;
 	static int turnCounter=1;
 	public static boolean isItFirstTour=true;
@@ -467,6 +467,16 @@ public class RunningMode extends JFrame{
 	public ArrayList<Continents> getContinents(){
 		return continents;
 	}
+
+	public boolean repOk() {
+        // Check the representation invariant conditions
+        return continents != null
+                && players != null
+                && numberOfAIPlayer >= 0
+                && numberOfHumanPlayer >= 0
+                && turnCounter >= 1
+                && turnCounter <= (numberOfAIPlayer + numberOfHumanPlayer);
+    }
 	
 
 }
