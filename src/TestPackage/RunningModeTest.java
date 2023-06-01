@@ -51,6 +51,15 @@ public class RunningModeTest {
   
 
     @Test
+    public void testRepOk() {
+        assertTrue(runningMode.repOk());
+        // Modify the instance to violate the representation invariant
+        runningMode.numberOfAIPlayer = -1;
+        assertFalse(runningMode.repOk());
+        // Add more assertions for other scenarios
+    }
+
+    @Test
     public void testGetTurn() {
         assertEquals(1, runningMode.getTurn());
         // Change the turn and verify the updated turn value
