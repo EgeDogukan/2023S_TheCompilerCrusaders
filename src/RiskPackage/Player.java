@@ -43,6 +43,9 @@ public class Player {
 
 	}
 	
+	public Player() {
+	}
+
 	public ArrayList<Territory> getTerritories(){
 		return territories;
 	}
@@ -52,7 +55,12 @@ public class Player {
 	}
 	
 	public void addTerritories(ArrayList<Territory> newTerritories) {
-		this.territories.addAll(newTerritories);
+		if (newTerritories==null || newTerritories.size()==0) 
+			return;
+		
+		if (this.territories==null) {
+			this.territories=newTerritories;
+		}
 		
 	}
 

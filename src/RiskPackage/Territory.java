@@ -196,6 +196,9 @@ public class Territory extends JPanel {
 			this.setFocusable(true);
 	    }
 	    
+		public Territory() {
+		}
+
 		private Point getCenter() {
 			return new Point(getWidth() / 2, getHeight() / 2);
 		}

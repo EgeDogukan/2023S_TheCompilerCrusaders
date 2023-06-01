@@ -9,4 +9,8 @@ public class ComputerPlayer extends Player {
 		super(id, color, territories);
 	}
 
+	public ComputerPlayer() {
+		super();
+	}
+
 }
