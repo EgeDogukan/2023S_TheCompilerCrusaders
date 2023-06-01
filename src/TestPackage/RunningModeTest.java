@@ -12,6 +12,37 @@ import cardPackage.TerritoryCard;
 import uipackage.*;
 public class RunningModeTest {
 
+    /*
+    testInitialization():
+    Overview: This test ensures that the RunningMode instance is properly initialized.
+    Abstract function: Checks if the continents list is empty and if the players list is not null.
+
+    testRepOk():
+    Overview: This test verifies the representation invariant of the RunningMode instance.
+    Abstract function: Asserts that the repOk() method returns true initially and false after modifying the instance to violate the representation invariant.
+    
+    testGetTurn():
+    Overview: This test verifies the functionality of the getTurn() method in the RunningMode class.
+    Abstract function: Asserts that the initial turn value is 1 and suggests changing the turn and verifying the updated turn value.
+
+    testPickTerritoryCard():
+    Overview: This test checks the behavior of the pickTerritoryCard() method in the RunningMode class.
+    Abstract function: Calls the pickTerritoryCard() method, retrieves the current player's territory card list, and asserts that the list is not empty.
+
+    testPrintTerritoryCard():
+    Overview: This test verifies the output of the printTerritoryCard() method in the RunningMode class.
+    Abstract function: Assumes the player already has some territory cards, calls the printTerritoryCard() method, and suggests adding assertions to verify the output.
+
+    testUseTerritoryCard():
+    Overview: This test checks the behavior of the useTerritoryCard() method in the RunningMode class.
+    Abstract function: Assumes the current player holds all territories of a continent, adds the continent to the player's territory list, calls the useTerritoryCard() method, 
+    and asserts that the player no longer possesses the conquered continent.
+
+    Overview for RunningMode class:
+    The RunningMode class is a crucial component of the ConKUeror. It represents the main game mode where the actual gameplay takes place. 
+    This class manages the state of the game, including the players, territories, and various game-related actions.
+    */
+
     private RunningMode runningMode;
 
     @BeforeEach
