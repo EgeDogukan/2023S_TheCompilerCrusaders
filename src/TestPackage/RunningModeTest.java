@@ -73,14 +73,28 @@ public class RunningModeTest {
     	
     }
 
+    /*
+     * Test case for the initialization of the RunningMode class.
+     * 
+     * Requires: None.
+     * Modifies: None.
+     * Effects: - Verifies that the continents list is empty.
+     *          - Verifies that the players list is not null.
+     */
     @Test
     public void testInitialization() {
     	assertEquals(0, runningMode.getContinents().size());
         assertNotNull(runningMode.getPlayers());
     }
     
-  
-
+    /*
+     * Test case for the repOk() method of the RunningMode class.
+     * 
+     * Requires: None.
+     * Modifies: None.
+     * Effects: - Verifies that the repOk() method returns true when the class invariant is satisfied.
+     *          - Verifies that the repOk() method returns false when the class invariant is violated.
+     */
     @Test
     public void testRepOk() {
         assertTrue(runningMode.repOk());
@@ -90,6 +104,14 @@ public class RunningModeTest {
         // Add more assertions for other scenarios
     }
 
+    /*
+     * Test case for the getTurn() method of the RunningMode class.
+     * 
+     * Requires: None.
+     * Modifies: None.
+     * Effects: - Verifies that the getTurn() method returns the correct turn value.
+     *          - Modifies the turn and verifies the updated turn value.
+     */
     @Test
     public void testGetTurn() {
         assertEquals(1, runningMode.getTurn());
@@ -107,6 +129,14 @@ public class RunningModeTest {
         // Add more assertions for other scenarios
     }
 
+    /*
+     * Test case for the pickTerritoryCard() method of the RunningMode class.
+     * 
+     * Requires: None.
+     * Modifies: The territory card list of the current player.
+     * Effects: - Verifies that the pickTerritoryCard() method updates the territory card list of the current player.
+     *          - Verifies that the territory card list is not empty after picking a card.
+     */
     @Test
     public void testPrintTerritoryCard() {
         // Assuming the player already has some territory cards
@@ -116,6 +146,13 @@ public class RunningModeTest {
         // Add assertions to verify the output of the printTerritoryCard method
     }
 
+    /**
+     * Test case for the printTerritoryCard() method of the RunningMode class.
+     * 
+     * Requires: The current player has at least one territory card.
+     * Modifies: None.
+     * Effects: - Verifies the output or behavior of the printTerritoryCard() method.
+     */
     @Test
     public void testUseTerritoryCard() {
         // Assuming the current player holds all territories of a continent
