@@ -15,10 +15,21 @@ public class worldmaptests {
     different regions and provides functionality to identify and highlight the clicked regions. The class uses Java's AWT and Swing libraries to handle graphics 
     and user input. The map image is loaded from a file and processed to extractregions and shapes. The class provides methods to manipulate the map, 
     such as changing shape colors and retrieving information about clicked shapes.*/
-
     /*Abstract Function:
     The WorldMap class represents a graphical user interface component that displays a world map and allows users to interact with it. It provides methods to 
     handle user input, extract regions and shapes from the map image, and manipulate the map's appearance.*/
+
+    // Overview of worldmaptests:
+    /* The worldmaptests class contains a set of test methods to verify the functionality of the WorldMap class. 
+     * These tests cover various aspects of the WorldMap class, such as shape list initialization, setting shape colors, 
+     * resetting shape colors, and removing shapes from the shape list. The tests ensure that the WorldMap class behaves 
+     * as expected and satisfies the specified requirements.
+     */
+     /* Abstract Function:
+     * The worldmaptests class provides test methods to verify the behavior of the WorldMap class.
+     * It focuses on testing the initialization, color manipulation, repOK, and removal of shapes in the map.
+     * These tests help ensure the correctness of the WorldMap class implementation and validate its functionality.
+     */
 	
 
         // Test case for verifying the initialization of the shape list in WorldMap class.
