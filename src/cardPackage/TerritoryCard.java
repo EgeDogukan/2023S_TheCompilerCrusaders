@@ -8,6 +8,8 @@ public class TerritoryCard {
 	
 	public TerritoryCard(Territory territory) {
 		this.territory=territory;
+	}
+	public TerritoryCard() {
 		
 	}
 

@@ -20,6 +20,10 @@ public class Continents extends JPanel {
 	private int width;
 	private int height;
 	private ArrayList<Territory> territories;
+	
+	public Continents() {
+		
+	}
 
 	public Continents(String name,ArrayList<Territory> territories, int width, int height, Color color) {
 

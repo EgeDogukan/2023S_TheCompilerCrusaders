@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 import RiskPackage.*;
+import cardPackage.TerritoryCard;
 import uipackage.*;
 public class RunningModeTest {
 
@@ -60,7 +61,7 @@ public class RunningModeTest {
     @Test
     public void testUseTerritoryCard() {
         // Assuming the current player holds all territories of a continent
-        Continent continentToBeConquered = new Continent();
+        Continents continentToBeConquered = new Continents();
         // Add the continent to the player's territory list
         runningMode.getPlayers().get(runningMode.getTurn() - 1).addTerritories(continentToBeConquered.getTerritories());
         // Call the useTerritoryCard method

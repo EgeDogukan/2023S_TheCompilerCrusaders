@@ -464,5 +464,9 @@ public class RunningMode extends JFrame{
 			
 	}
 	
+	public ArrayList<Continents> getContinents(){
+		return continents;
+	}
+	
 
 }
