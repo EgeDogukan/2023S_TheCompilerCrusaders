@@ -36,7 +36,7 @@ import cardPackage.ChanceCardFactory;
 import cardPackage.IChanceCard;
 import cardPackage.TerritoryCard;
 import databasePackage.ISaveLoadAdapter;
-import databasePackage.TerritoryDBDatabase;
+import databasePackage.TerritoryMONGODBDatabase;
 import databasePackage.TerritoryJSONDBDatabase;
 
 
@@ -78,7 +78,7 @@ import cardPackage.ChanceCardFactory;
 import cardPackage.IChanceCard;
 import cardPackage.TerritoryCard;
 import databasePackage.ISaveLoadAdapter;
-import databasePackage.TerritoryDBDatabase;
+import databasePackage.TerritoryMONGODBDatabase;
 import databasePackage.TerritoryJSONDBDatabase;
 
 public class RunningMode extends JFrame{
@@ -243,7 +243,7 @@ public class RunningMode extends JFrame{
 					database = new TerritoryJSONDBDatabase();
 				}
 				else {
-					database = new TerritoryDBDatabase();
+					database = new TerritoryMONGODBDatabase();
 				}
 					try {
 						database.empty();

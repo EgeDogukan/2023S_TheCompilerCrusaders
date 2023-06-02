@@ -30,7 +30,7 @@ import javax.swing.plaf.synth.Region;
 import RiskPackage.GameController;
 import cardPackage.ArmyCardFactory;
 import cardPackage.TerritoryCard;
-import uipackage.AttackTerr;
+import uipackage.AttackTerritoryUI;
 import uipackage.RunningMode;
 import uipackage.WorldMap;
 
@@ -82,8 +82,6 @@ public class Territory extends JPanel {
 	        this.neighbors = new ArrayList<Territory>();
 
 
-
-
 	        
 			JLabel nameLabel = new JLabel(this.getName());
 			System.out.println(this.getName());
@@ -103,10 +101,6 @@ public class Territory extends JPanel {
 						System.out.println("Panel clicked!");
 
 						
-						
-
-						
-						
 					if(GameController.isBuildingMode) {
 						if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
 							
@@ -117,7 +111,7 @@ public class Territory extends JPanel {
 						"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
 						
 								
-								AttackTerr at = new AttackTerr(Territory.this);
+								AttackTerritoryUI at = new AttackTerritoryUI(Territory.this);
 								System.out.println("birinci tur");
 
 							
@@ -135,7 +129,7 @@ public class Territory extends JPanel {
 							"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
 							
 									
-									AttackTerr at = new AttackTerr(Territory.this);
+									AttackTerritoryUI at = new AttackTerritoryUI(Territory.this);
 									System.out.println("birinci tur");
 
 								
@@ -152,7 +146,7 @@ public class Territory extends JPanel {
 							"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
 							
 									
-									AttackTerr at = new AttackTerr(Territory.this);
+									AttackTerritoryUI at = new AttackTerritoryUI(Territory.this);
 									System.out.println("birinci tur");
 
 								
@@ -162,12 +156,6 @@ public class Territory extends JPanel {
 					}
 					
 						
-						
-						
-						
-
-						
-					
 					
 					
 				}

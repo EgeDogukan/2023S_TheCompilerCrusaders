@@ -95,6 +95,11 @@ public class Continents extends JPanel {
 	}
 
 	
+	public Continents() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public String getName() {
 		if (this.equals(null)) {
 			return "tr";
