@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -52,6 +53,7 @@ public class RunningModeNew extends JFrame {
     public ArrayList<ArrayList<Shape>> shapelist = new ArrayList<>();
     public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
 	public static boolean isInBuildingMode = true;
+	private int counter = 0;
 
     public RunningModeNew(ArrayList<ArrayList<Shape>> shapelist, ArrayList<PlayerNew> players , int numberOfAIPlayer, int numberOfHumanPlayer){
         this.numberOfAIPlayer=numberOfAIPlayer;
@@ -82,16 +84,35 @@ public class RunningModeNew extends JFrame {
 		nextButton.setLocation(100, 650);
 		nextButton.setBackground(this.players.get(getTurn()-1).getColor());
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+		JLabel stage = new JLabel("Deploy");
+		stage.setLocation(100,800);
+		stage.setSize(100, 100);
+
+		JButton nextStage = new JButton("Next Stage");
+		nextStage.setLocation(200,800);
+		nextStage.setSize(100, 100);
+		nextStage.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+
+			counter ++;
+
+			if(counter == 1){
+				stage.setText("Attack");
+
+			}
+			else if(counter==2){
+				stage.setText("Fortify");
+			}
+			
+			else if(counter<2){
+				counter=0;
+				stage.setText("Deploy");
+			}
+			}
+		});
+		this.add(stage);
+		this.add(nextStage);
 		
 		
 		JButton pickChanceCardButton = new JButton("Pick a Chance Card");
