@@ -13,6 +13,8 @@ import javax.swing.border.EmptyBorder;
 
 import RiskPackage.Player;
 import RiskPackage.Territory;
+import RiskPackage.TerritoryNew;
+import java.util.List;
 import java.util.Collections;
 import javax.imageio.ImageIO;
 
@@ -25,6 +27,7 @@ public class WorldMap {
     Area area;
     ArrayList<Shape> shapeList2=null;
     ArrayList<Shape> shapeList = new ArrayList<>();
+    List<List<Integer>> neighbourList = new ArrayList<>();
     static ArrayList<Color> colorList = new ArrayList<>();
     private Shape clickedShape;
     private MouseListener ml;
@@ -35,7 +38,7 @@ public class WorldMap {
     public static boolean isEveryTerritorySelected = false;
     public int numofSelectedTerritory = 0;
     private boolean isInBuildingMode = true;
-
+    
 
     public WorldMap() {
         try {
@@ -46,6 +49,7 @@ public class WorldMap {
     }
 
     public final void initUI() throws Exception {
+        InitNeighbors();
         if (ui != null) {
             return;
         }
@@ -71,15 +75,14 @@ public class WorldMap {
         System.out.println("boyut:"+shapeList2.size());
         for(int i = 0; i < shapeList2.size(); i++){
             Shape shape =shapeList2.get(i);
-            
             if((int) (shape.getBounds2D().getHeight()*shape.getBounds2D().getWidth()) > areaThreshold)
                 shapeList.add(shape);
         }
         
         System.out.println("boyut2:"+shapeList.size());
-        shapeList= new ArrayList<>(shapeList.subList(0, Math.min(shapeList.size(), 10)));
+        shapeList= new ArrayList<>(shapeList.subList(0, Math.min(shapeList.size(), 100)));
         System.out.println("boyut3:"+shapeList.size());
-        
+    
         ui = new JPanel(new BorderLayout(4, 4));
         ui.setBorder(new EmptyBorder(4, 4, 4, 4));
         
@@ -94,11 +97,13 @@ public class WorldMap {
                 int x = p.x - p1.x;
                 int y = p.y - p1.y;
                 Point pointOnImage = new Point(x, y);
-
+                
                 if(isInBuildingMode == true) {
                     for (Shape shape : shapeList) {
-                        if (shape.contains(pointOnImage)) {   
-                            JOptionPane.showMessageDialog(null, "Clicked!"); 
+                        if (shape.contains(pointOnImage)) {  
+                            System.out.println("Index of shape: " + shapeList.indexOf(shape));
+                            
+                            
                             numofSelectedTerritory++;
                             if (numofSelectedTerritory==shapeList.size()) 
                                 isEveryTerritorySelected=true;
@@ -109,18 +114,19 @@ public class WorldMap {
     
                             break;
                         }
+
                     }
                 }
                 else if (isInBuildingMode == false) {
                     //running mode functions
                 }
-                Territory.setClickedShape(clickedShape);
             }
         };
         output.addMouseListener(ml);
         ui.add(output);
         refresh();
     }
+    
 
     public Area getOutline(Color target, BufferedImage bi, int tolerance) {
         // construct the GeneralPath
@@ -248,6 +254,7 @@ public class WorldMap {
             Point pointOnImage = new Point(x, y);
             for (Shape shape : shapeList) {
                 areaCounter++;
+                
                 if (shape.contains(pointOnImage)) {
                     g.setColor(Color.GREEN.darker());
                     g.fill(shape);
@@ -263,6 +270,85 @@ public class WorldMap {
         return bi;
     }
 
+    public void InitNeighbors(){
+        
+        List<Integer> row0 = new ArrayList<Integer>();
+        row0.add(3);
+        row0.add(7);
+        row0.add(2);
+        
+        List<Integer> row1 = new ArrayList<Integer>();
+        row1.add(9);
+        row1.add(6);
+        row1.add(13);
+
+        List<Integer> row2 = new ArrayList<Integer>();
+        row2.add(0);
+        row2.add(11);
+        row2.add(12);
+
+        List<Integer> row3 = new ArrayList<Integer>();
+        row3.add(0);
+        row3.add(7);
+        row3.add(13);
+        
+        List<Integer> row4 = new ArrayList<Integer>();
+        row4.add(8);
+        row4.add(14);
+
+        List<Integer> row5 = new ArrayList<Integer>();
+        row5.add(13);
+
+        List<Integer> row6 = new ArrayList<Integer>();
+        row6.add(9);
+        row6.add(17);
+        row6.add(13);
+        row6.add(1);
+
+        List<Integer> row7 = new ArrayList<Integer>();
+        row7.add(3);
+        row7.add(0);
+        row7.add(11);
+        row7.add(19);
+
+        List<Integer> row8 = new ArrayList<Integer>();
+        row8.add(4);
+        row8.add(16);
+        row8.add(15);
+        row8.add(14);
+
+        List<Integer> row9 = new ArrayList<Integer>();
+        row9.add(10);
+        row9.add(17);
+        row9.add(6);
+        row9.add(1);
+
+        List<Integer> row10 = new ArrayList<Integer>();
+        
+        row10.add(14);
+        row10.add(18);
+        row10.add(21);
+        row10.add(9);
+        
+        List<Integer> row11 = new ArrayList<Integer>();
+        
+
+
+
+        neighbourList.add(row0);
+        neighbourList.add(row1);
+        neighbourList.add(row2);
+        neighbourList.add(row3);
+        neighbourList.add(row5);
+        neighbourList.add(row6);
+        neighbourList.add(row7);
+        neighbourList.add(row8);
+        neighbourList.add(row9);
+        List<Integer> rowToPrint = neighbourList.get(1);
+        for (Integer num : rowToPrint) {
+            System.out.println("Neighbor of index 1 territoriy: "+ num);
+        }
+    }
     public JComponent getUI() {
         return ui;
     }
@@ -356,7 +442,6 @@ public class WorldMap {
             JFrame f = new JFrame(o.getClass().getSimpleName());
             f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             f.setLocationByPlatform(true);
-
             f.setContentPane(o.getUI());
             f.setResizable(false);
             f.pack();

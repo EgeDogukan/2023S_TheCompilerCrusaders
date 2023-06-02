@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.Random;
 import RiskPackage.*;
 
-public class AttackTerr extends JFrame {
+public class AttackTerritoryUI extends JFrame {
     private static final int FRAME_WIDTH = 800;
     private static final int FRAME_HEIGHT = 600;
     private static final int DELAY = 20;
+    
 
     private Image star;
     private Image cross;
@@ -26,10 +27,11 @@ public class AttackTerr extends JFrame {
     private int defenderSides = 6;
     private int attackerSides = 6;
     private Random random = new Random();
-    private Player player;
+    private AttackTerritory at;
     RunningMode rm;
     ArrayList<Player> players;
-    public AttackTerr(Territory territory){
+    
+    public AttackTerritoryUI(Territory territory){
         this.setTitle(territory.getName());
         this.setLayout(null);
         this.setVisible(true);
@@ -38,8 +40,7 @@ public class AttackTerr extends JFrame {
         this.setLocationRelativeTo(null);
         
 
-        int defenderDiceResult = random.nextInt(defenderSides) + 1;
-        int attackerDiceResult = random.nextInt(attackerSides) + 1;
+        
         
         
 
@@ -47,7 +48,7 @@ public class AttackTerr extends JFrame {
         // Load images
         String cwd = System.getProperty("user.dir");
         star = Toolkit.getDefaultToolkit().getImage(cwd + "/Star.png");
-        cross = Toolkit.getDefaultToolkit().getImage(cwd +"/Cross.png");
+        cross = Toolkit.getDefaultToolkit().getImage("Cross.png");
 
         territoryPromptJPanel = new JPanel() {
             @Override
@@ -76,7 +77,7 @@ public class AttackTerr extends JFrame {
         territoryPromptJPanel.setBackground(Color.green);
         this.add(territoryPromptJPanel);
 
-        // Assume other UI components are set up here like chooseToAttackBox
+        // other UI components are set up here like chooseToAttackBox
         chooseToAttackBox = new JComboBox<>();
         int yPosition = 70;
         for (Territory neighbor : territory.getNeighbors()) {
@@ -118,23 +119,11 @@ public class AttackTerr extends JFrame {
                 }
 
                 if(destination != null){
-                    if(destination.armyOnTerritory.calculateStrength() <= territory.armyOnTerritory.calculateStrength()){
-                        if(defenderDiceResult<attackerDiceResult){
-                            if(territory.armyOnTerritory.getArtillery() >= destination.armyOnTerritory.getArtillery()&& destination.armyOnTerritory.getArtillery() != 0){
-                                destination.armyOnTerritory.setArtillery(destination.armyOnTerritory.getArtillery() - 1);
-                            }
-                            else if(territory.armyOnTerritory.getInfantry() >= destination.armyOnTerritory.getInfantry() && destination.armyOnTerritory.getInfantry() != 0){
-                                destination.armyOnTerritory.setInfantry(destination.armyOnTerritory.getInfantry() - 1);
-                            }
-                            else if(territory.armyOnTerritory.getCavalry() >= destination.armyOnTerritory.getCavalry() && destination.armyOnTerritory.getCavalry() != 0){
-                                destination.armyOnTerritory.setCavalry(destination.armyOnTerritory.getCavalry() - 1);
-                            }
-                            //destination.decreaseArmy(territory);
-                            if(destination.armyOnTerritory.calculateStrength()<=0){
-                                destination.armyOnTerritory.setInfantry(1);
-                                destination.setColor(territory.getColor());
-                            }
-                            
+                    at = new AttackTerritory(territory, destination);
+                    
+                    if(at.AttackerWins(territory, destination) == true){
+                        
+                        
                             
                             //Winning animation
                             starVisible = true;
@@ -160,23 +149,9 @@ public class AttackTerr extends JFrame {
                             });
                             timer.start();
                         }
-                        else if(defenderDiceResult>=attackerDiceResult){
+                        else if(at.AttackerWins(territory, destination) == false){
                             
-                            if(destination.armyOnTerritory.getArtillery() >= territory.armyOnTerritory.getArtillery()&& territory.armyOnTerritory.getArtillery() != 0){
-                                territory.armyOnTerritory.setArtillery(territory.armyOnTerritory.getArtillery() - 1);
-                            }
-                            else if(destination.armyOnTerritory.getInfantry() >= territory.armyOnTerritory.getInfantry() && territory.armyOnTerritory.getInfantry() != 0){
-                                territory.armyOnTerritory.setInfantry(territory.armyOnTerritory.getInfantry() - 1);
-                            }
-                            else if(destination.armyOnTerritory.getCavalry() >= territory.getCArym() && territory.armyOnTerritory.getCavalry() != 0){
-                                territory.armyOnTerritory.setCavalry(territory.armyOnTerritory.getCavalry() - 1);
-                            }
-                            //territory.decreaseArmy(destination);
-                        
-                            if(territory.armyOnTerritory.calculateStrength() <= 0){
-                                territory.armyOnTerritory.setInfantry(1);
-                                
-                            }
+                            
                             
                             
                             //Loosing animation
@@ -204,17 +179,7 @@ public class AttackTerr extends JFrame {
                             timer.start();
                         }
                         
-                    } else if (destination.armyOnTerritory.calculateStrength() > territory.armyOnTerritory.calculateStrength()){
-                        
-                    
-                        if(territory.getAArmy()<destination.getAArmy()||territory.getCArym()<destination.getCArym()||territory.getIArmy()<destination.getIArmy()){
-                            JOptionPane.showMessageDialog(null, "Your soldiers are not strong enugh to take on this fight");    
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(null, "There is not enough power to attack");
-                        }
-                        
-                    }
+                   
                 }
             }
         });

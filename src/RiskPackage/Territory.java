@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.Random;
+import uipackage.*;
 
 import java.util.Set;
 import java.awt.event.ActionEvent;
@@ -30,7 +31,7 @@ import javax.swing.plaf.synth.Region;
 import RiskPackage.GameController;
 import cardPackage.ArmyCardFactory;
 import cardPackage.TerritoryCard;
-import uipackage.AttackTerr;
+import uipackage.AttackTerritoryUI;
 import uipackage.RunningMode;
 import uipackage.WorldMap;
 
@@ -53,7 +54,7 @@ public class Territory extends JPanel {
 		public Army armyOnTerritory;
 		private boolean isBuilding=false;
 
-		
+		private int ShapeId;
 		private boolean winner = false;
 
 
@@ -61,7 +62,7 @@ public class Territory extends JPanel {
 		private static Shape clickedShape;
 	    
 
-	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color, Continents continent, int playerID) {
+	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color, Continents continent, int playerID,int ShapeId) {
 	    	this.isBuilding=false;
 	    	this.setVisible(true);
 	    	this.playerID = playerID;
@@ -80,6 +81,7 @@ public class Territory extends JPanel {
 	        this.setBackground(color);
 	        this.setColor(color);
 			
+			this.ShapeId = ShapeId;
 	        this.name = name;
 	        this.color = color;
 	        this.neighbors = new ArrayList<Territory>();
@@ -136,7 +138,7 @@ public class Territory extends JPanel {
 						"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
 						
 								
-								AttackTerr at = new AttackTerr(Territory.this);
+								
 
 								
 
@@ -292,7 +294,8 @@ public class Territory extends JPanel {
 			});
 			
 			this.setFocusable(true);
-	    }
+		}
+		
 	    
 		private Point getCenter() {
 			return new Point(getWidth() / 2, getHeight() / 2);
@@ -369,6 +372,12 @@ public class Territory extends JPanel {
 	    public String getName() {
 	        return this.name;
 	    }
+		public Void setShapeID(int shapeID){
+			this.ShapeId = ShapeId;
+		}
+		public int getShapeID(){
+			return this.ShapeId;
+		}
 		   
 	    public ArrayList<Territory> getNeighbors() {
 	        return this.neighbors;
