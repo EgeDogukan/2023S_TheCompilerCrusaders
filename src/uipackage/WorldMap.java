@@ -119,6 +119,11 @@ public class WorldMap {
                 }
                 else if (isInBuildingMode == false) {
                     //running mode functions
+                    if(RunningModeNew.whichStage == "Deploy") {
+                        DeployUI deployUI = new DeployUI();
+                        deployUI.setVisible(true);
+                    }
+
                 }
             }
         };

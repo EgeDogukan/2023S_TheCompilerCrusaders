@@ -54,6 +54,8 @@ public class RunningModeNew extends JFrame {
     public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
 	public static boolean isInBuildingMode = true;
 	private int counter = 0;
+	public static JLabel stage = new JLabel("Deploy");
+	public static String whichStage= new String();
 
     public RunningModeNew(ArrayList<ArrayList<Shape>> shapelist, ArrayList<PlayerNew> players , int numberOfAIPlayer, int numberOfHumanPlayer){
         this.numberOfAIPlayer=numberOfAIPlayer;
@@ -85,9 +87,9 @@ public class RunningModeNew extends JFrame {
 		nextButton.setBackground(this.players.get(getTurn()-1).getColor());
 		
 
-		JLabel stage = new JLabel("Deploy");
 		stage.setLocation(100,800);
 		stage.setSize(100, 100);
+		whichStage="Deploy";
 
 		JButton nextStage = new JButton("Next Stage");
 		nextStage.setLocation(200,800);
@@ -99,20 +101,25 @@ public class RunningModeNew extends JFrame {
 
 			if(counter == 1){
 				stage.setText("Attack");
+				whichStage="Attack";
 
 			}
 			else if(counter==2){
 				stage.setText("Fortify");
+				whichStage="Fortify";
 			}
 			
-			else if(counter<2){
+			else if(counter>2){
 				counter=0;
 				stage.setText("Deploy");
+				whichStage="Deploy";
 			}
 			}
 		});
 		this.add(stage);
 		this.add(nextStage);
+
+
 		
 		
 		JButton pickChanceCardButton = new JButton("Pick a Chance Card");
