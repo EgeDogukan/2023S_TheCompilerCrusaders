@@ -191,6 +191,30 @@ public class GameController {
 
 	static public ArrayList<Player> initGame(int numberofPlayers, int numberofComp, ArrayList<Continents> continents) throws Exception {
 		
+		
+		/*
+		Specifications for initGame() Method:
+		initGame initialises the game by assigning territories to players based on the specified parameters.
+		
+		Requires:
+		The number of players and computer players should not be negative.
+		The continent list should not be null.
+		
+		Modifies:
+		playerList
+		territories
+		
+		Effects:
+		Returns an ArrayList of Player objects representing the initialized players with assigned territories.
+		Throws an exception if any of the following conditions are violated:
+		- The number of players is negative.
+		- The number of computer players is negative.
+		- The continent list is null.
+		- There are insufficient territories to assign to players.
+		
+		*/
+		
+		
 		if (numberofPlayers<0) {
 			throw (new Exception("number of player cannot be negative"));
 		}
@@ -252,6 +276,13 @@ public class GameController {
 	public static void setCurrentTurnPlayerID(int ID) {
 		turnID = ID - 1;
 	}
+	
+	public boolean repOk() {
+        if (playerList==null) {
+            return false;
+        }
+        return true; 
+    } 
 	
 	
 }
