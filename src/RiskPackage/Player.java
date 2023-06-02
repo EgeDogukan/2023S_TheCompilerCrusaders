@@ -25,6 +25,7 @@ public class Player {
 	public ArrayList<IArmyCard> armyCards = new ArrayList<IArmyCard>();
 	public ArrayList<IChanceCard> chanceCards = new ArrayList<IChanceCard>();
 	public ArrayList<TerritoryCard> territoryCards = new ArrayList<TerritoryCard>();
+	public ArrayList<Continents> continents = new ArrayList<>();
 	
 	public Player(int id, Color color,  ArrayList<Territory> territories) {
 		this.id=id;
@@ -35,15 +36,32 @@ public class Player {
 		this.army = army;
 		//for(Territory ter : territories)
 			//this.territories.add(ter);
+		
+		for (Territory territory : territories) {
+			continents.add(territory.getContinent());
+		}
 
 	}
 	
+	public Player() {
+	}
+
 	public ArrayList<Territory> getTerritories(){
 		return territories;
 	}
 	
 	public void addTerritories(Territory territory) {
 		this.territories.add(territory);
+	}
+	
+	public void addTerritories(ArrayList<Territory> newTerritories) {
+		if (newTerritories==null || newTerritories.size()==0) 
+			return;
+		
+		if (this.territories==null) {
+			this.territories=newTerritories;
+		}
+		
 	}
 
 
@@ -117,6 +135,14 @@ public class Player {
 			//addArmyCard(new ArmyCardFactory().createArmyCard(randomNumber));
 		}
         
+	}
+	
+	public ArrayList<TerritoryCard> getTerritoryCards(){
+		return territoryCards;
+	}
+	
+	public ArrayList<Continents> getContinents(){
+		return continents;
 	}
 		
 	

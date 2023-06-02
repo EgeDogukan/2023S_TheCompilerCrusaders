@@ -15,6 +15,10 @@ public class HumanPlayer extends Player{
 		this.territories = territories;
 		System.out.println("FROM HUMAN");
 	}
+
+	public HumanPlayer() {
+		super();
+	}
 	
 	
 

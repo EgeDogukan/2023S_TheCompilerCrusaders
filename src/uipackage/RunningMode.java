@@ -83,10 +83,10 @@ import databasePackage.TerritoryJSONDBDatabase;
 
 public class RunningMode extends JFrame{
 
-	public ArrayList<Continents> continents;
+	public ArrayList<Continents> continents =  new ArrayList<>();
 	private static JButton turn = new JButton();
-	int numberOfAIPlayer;
-	int numberOfHumanPlayer;
+	public int numberOfAIPlayer;
+	static int numberOfHumanPlayer;
 	static ArrayList<Player> players;
 	static int turnCounter=1;
 	public static boolean isItFirstTour=true;
@@ -103,6 +103,8 @@ public class RunningMode extends JFrame{
 		this.setSize(1920,1080);
 		this.setTitle("ConKUerror");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		territoryCards.add(new TerritoryCard());
 
 		RiskBoard board = new RiskBoard(this.continents);
 		GamePanel panel = new GamePanel(board);
@@ -111,7 +113,7 @@ public class RunningMode extends JFrame{
 		JButton nextButton = new JButton("next turn");
 		nextButton.setSize(100,100);
 		nextButton.setLocation(100, 650);
-		nextButton.setBackground(this.players.get(getTurn()-1).getColor());
+		//nextButton.setBackground(players.get(getTurn()-1).getColor());
 		
 		JButton pickChanceCardButton = new JButton("Pick a Chance Card");
 		pickChanceCardButton.setSize(175,175);
@@ -359,8 +361,8 @@ public class RunningMode extends JFrame{
 	public void pickTerritoryCard() {
 		int curId=getTurn();
 		Random rand = new Random();
-		int index = rand.nextInt(this.territoryCards.size());
-		TerritoryCard currentCard = this.territoryCards.get(index);
+		//int index = rand.nextInt(this.territoryCards.size());
+		TerritoryCard currentCard = this.territoryCards.get(0);
 		this.players.get(curId-1).territoryCards.add(currentCard);
 	}
 	
@@ -392,8 +394,10 @@ public class RunningMode extends JFrame{
 				continentToBeConquered=continent;
 			}
 		}
-		for (Territory territory : continentToBeConquered.getTerritories()) {
-			this.players.get(curId-1).addTerritories(territory);
+		if (continentToBeConquered!=null) {
+			for (Territory territory : continentToBeConquered.getTerritories()) {
+				this.players.get(curId-1).addTerritories(territory);
+			}
 		}
 	}
 	public ArrayList<Player> getPlayer(){
@@ -463,6 +467,20 @@ public class RunningMode extends JFrame{
 
 			
 	}
+	
+	public ArrayList<Continents> getContinents(){
+		return this.continents;
+	}
+
+	public boolean repOk() {
+        // Check the representation invariant conditions
+        return continents != null
+                && players != null
+                && numberOfAIPlayer >= 0
+                && numberOfHumanPlayer >= 0
+                && turnCounter >= 1
+                && turnCounter <= (numberOfAIPlayer + numberOfHumanPlayer);
+    }
 	
 
 }
