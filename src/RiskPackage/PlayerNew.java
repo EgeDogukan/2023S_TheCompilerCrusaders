@@ -16,6 +16,7 @@ public class PlayerNew {
 		this.id=id;
 		this.color=color;
 		this.shapeIndices=shapeIndices;
+		chanceCards = new ArrayList<>();
 	}
 	
 	public void addChanceCard(int chanceCardType) {

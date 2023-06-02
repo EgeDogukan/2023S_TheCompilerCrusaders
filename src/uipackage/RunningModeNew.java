@@ -35,7 +35,7 @@ public class RunningModeNew extends JFrame {
 	private static JButton turn = new JButton();
 	int numberOfAIPlayer;
 	int numberOfHumanPlayer;
-    static int turnCounter=1;
+    static int turnCounter=0;
 	public static boolean isContinue = true;
 	public static int databaseChooser=0;
     public ArrayList<Shape> shapelist = new ArrayList<>();
@@ -43,6 +43,8 @@ public class RunningModeNew extends JFrame {
 
 	public RunningModeNew(ArrayList<PlayerNew> players) {
 		this.players=players;
+		numberOfHumanPlayer=players.size();
+		numberOfAIPlayer=0;
 		initGame(players);
 	}
 	
@@ -132,7 +134,7 @@ public class RunningModeNew extends JFrame {
 		this.add(saveButtonJSON);
 		
 		JButton pickChanceCard = new JButton("pick chance card");
-		pickChanceCard.setBounds(300, 450, 150, 150);
+		pickChanceCard.setBounds(300, 550, 100, 100);
 		pickChanceCard.addActionListener(new ActionListener() {
 			
 			@Override
@@ -144,11 +146,27 @@ public class RunningModeNew extends JFrame {
 		        players.get(turnCounter).addChanceCard(randomNumber);
 				ChanceCardFactory factory = new ChanceCardFactory();
 				
-				System.out.println("card with index "+randomNumber+"which is "+factory.createCard(randomNumber).getClass().getName()+"added to the players' list with id: " +turnCounter);;
+				System.out.println("card with index "+randomNumber+"which is "+factory.createCard(randomNumber).getClass().getName()+"added to the players' list with id: " +turnCounter);
 				
 			}
 		});
 		this.add(pickChanceCard);
+		
+		
+		JButton nextButton = new JButton("next turn");
+		nextButton.setBounds(500,550,100,100);
+		nextButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				turnCounter++;
+				if (turnCounter==numberOfAIPlayer+numberOfHumanPlayer)
+						turnCounter=0;
+				
+				
+			}
+		});
+		this.add(nextButton);
 		
 		
 	
