@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import RiskPackage.PlayerNew;
+import chanceCardPackage.ChanceCardFactory;
 import databasePackage.ISaveLoadAdapter;
 import databasePackage.TerritoryDBDatabase;
 import databasePackage.TerritoryJSONDBDatabase;
@@ -40,8 +41,9 @@ public class RunningModeNew extends JFrame {
     public ArrayList<Shape> shapelist = new ArrayList<>();
 	public static boolean isInBuildingMode = true;
 
-	public RunningModeNew() {
-		initGame();
+	public RunningModeNew(ArrayList<PlayerNew> players) {
+		this.players=players;
+		initGame(players);
 	}
 	
 
@@ -70,7 +72,7 @@ public class RunningModeNew extends JFrame {
 		return isInBuildingMode;
 	}
 
-	public void initGame(){
+	public void initGame(ArrayList<PlayerNew> players){
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(new Dimension(1920, 1080));
@@ -128,6 +130,27 @@ public class RunningModeNew extends JFrame {
 			}
 		});
 		this.add(saveButtonJSON);
+		
+		JButton pickChanceCard = new JButton("pick chance card");
+		pickChanceCard.setBounds(300, 450, 150, 150);
+		pickChanceCard.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				Random random = new Random();
+		        int randomNumber = random.nextInt(5);
+				//comment it out when the players are initialised.
+		        players.get(turnCounter).addChanceCard(randomNumber);
+				ChanceCardFactory factory = new ChanceCardFactory();
+				
+				System.out.println("card with index "+randomNumber+"which is "+factory.createCard(randomNumber).getClass().getName()+"added to the players' list with id: " +turnCounter);;
+				
+			}
+		});
+		this.add(pickChanceCard);
+		
+		
 	
 		
 		

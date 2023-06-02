@@ -80,7 +80,7 @@ public class BuildingModeNew extends JFrame {
 				worldMap.setIsInBuildingMode(false);
 				BuildingModeNew.this.dispose();
 				
-				RunningModeNew runningModeNew = new RunningModeNew();
+				RunningModeNew runningModeNew = new RunningModeNew(playerList);
 				
 
 			}

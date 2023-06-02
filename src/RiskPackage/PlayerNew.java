@@ -3,11 +3,14 @@ package RiskPackage;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import chanceCardPackage.IChanceCard;
+
 public class PlayerNew {
 
 	int id;
 	Color color;
-	ArrayList<Integer>shapeIndices;
+	ArrayList<Integer> shapeIndices;
+	ArrayList<Integer> chanceCards;
 	
 	public PlayerNew(int id, Color color, ArrayList<Integer> shapeIndices) {
 		this.id=id;
@@ -15,6 +18,21 @@ public class PlayerNew {
 		this.shapeIndices=shapeIndices;
 	}
 	
+	public void addChanceCard(int chanceCardType) {
+		this.chanceCards.add(chanceCardType);
+	}
+	
+	public void removeChanceCard(int chanceCardType) {
+		int index = this.chanceCards.indexOf(chanceCardType);
+		
+		if (index!=-1) 
+			this.chanceCards.remove(index);
+		
+		else 
+			throw new IllegalArgumentException("You don't have this card.");
+		
+		
+	}
 	
 	
 	
