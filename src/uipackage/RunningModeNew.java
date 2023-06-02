@@ -152,7 +152,11 @@ public class RunningModeNew extends JFrame {
 		});
 		this.add(pickChanceCard);
 		
+		JLabel turn = new JLabel("Turn: Player "+ players.get(turnCounter).getId());
+		turn.setBounds(500, 650, 100, 100);
 		
+		this.add(turn);
+
 		JButton nextButton = new JButton("next turn");
 		nextButton.setBounds(500,550,100,100);
 		nextButton.addActionListener(new ActionListener() {
@@ -160,8 +164,10 @@ public class RunningModeNew extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				turnCounter++;
+				turn.setText("Turn: Player "+players.get(turnCounter).getId());
 				if (turnCounter==numberOfAIPlayer+numberOfHumanPlayer)
 						turnCounter=0;
+						turn.setText("Turn: Player "+players.get(turnCounter).getId());
 				
 				
 			}
