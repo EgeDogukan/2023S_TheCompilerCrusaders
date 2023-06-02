@@ -21,18 +21,18 @@ import javax.imageio.ImageIO;
 public class WorldMap {
 
     private JComponent ui = null;
-    JLabel output = new JLabel();
+    static JLabel output = new JLabel();
     public static final int SIZE = 750;
-    BufferedImage image;
-    Area area;
+    static BufferedImage image;
+    static Area area;
     ArrayList<Shape> shapeList2=null;
-    ArrayList<Shape> shapeList = new ArrayList<>();
+    static ArrayList<Shape> shapeList = new ArrayList<>();
     List<List<Integer>> neighbourList = new ArrayList<>();
     static ArrayList<Color> colorList = new ArrayList<>();
     private Shape clickedShape;
     private MouseListener ml;
-    private BufferedImage bi;
-    private Graphics2D g;
+    private static BufferedImage bi;
+    private static Graphics2D g;
     public static int clickedShapeIndex;
     final int areaThreshold = 450;
     public static boolean isEveryTerritorySelected = false;
@@ -223,11 +223,11 @@ public class WorldMap {
                 && (bP - tolerance <= bT) && (bT <= bP + tolerance));
     }
 
-    private void refresh() {
+    private static void refresh() {
         output.setIcon(new ImageIcon(getImage()));
     }
 
-    private BufferedImage getImage() {
+    private static BufferedImage getImage() {
         //bi = new BufferedImage(2 * SIZE, SIZE, BufferedImage.TYPE_INT_RGB);
         bi = new BufferedImage(1000, 500 , BufferedImage.TYPE_INT_RGB);
         int colorIndex;
@@ -375,7 +375,7 @@ public class WorldMap {
         colorList.set(colorIndex, color);
     }
 
-    public void setIndexColor(int index, Color color) {
+    public static void setIndexColor(int index, Color color) {
     	System.out.println("set index color function is called");
         colorList.set(index, color);
         refresh();
@@ -424,7 +424,7 @@ public class WorldMap {
     	return shapeList.get(index);
     }
 
-    public ArrayList<Color> getColorList() {
+    public static ArrayList<Color> getColorList() {
         return colorList;
     }
     
