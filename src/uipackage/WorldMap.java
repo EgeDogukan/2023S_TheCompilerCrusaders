@@ -135,13 +135,8 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    System.out.println("Retrieved value: " + numberOfArmyonarea);                                    
-                                    setShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));
-                                    for (int i = 0; i < 60; i++) {
-                                        for(int k = 0; k < 3; k++){
-                                            System.out.println(armArrayLists[i][k]);
-                                        }
-                                    }   
+                                    setShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyInfantry(clickedShapeIndex));    
                                 }
                             });
                             JButton retrieveCavalryButton = new JButton("Cavalry");
@@ -149,13 +144,8 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    System.out.println("Retrieved value: " + numberOfArmyonarea);                                    
                                     setShapeArmyCavalry(shape, Integer.parseInt(numberOfArmyonarea));      
-                                    for (int i = 0; i < 60; i++) {
-                                        for(int k = 0; k < 3; k++){
-                                            System.out.println(armArrayLists[i][k]);
-                                        }
-                                    }      
+                                    System.out.println("Cavalry at shape index " + clickedShapeIndex + ": " + getShapeArmyCavalry(clickedShapeIndex));    
                                 }
                             });
                             JButton retrieveArtilleryButton = new JButton("Artillery");
@@ -163,15 +153,11 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    System.out.println("Retrieved value: " + numberOfArmyonarea);                                    
                                     setShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
-                                    for (int i = 0; i < 60; i++) {
-                                        for(int k = 0; k < 3; k++){
-                                            System.out.println(armArrayLists[i][k]);
-                                        }
-                                    }                                      
+                                    System.out.println("Artillery at shape index " + clickedShapeIndex + ": " + getShapeArmyArtillery(clickedShapeIndex));                                      
                                 }
                             });
+
                             optionPanel.add(retrieveArtilleryButton);
                             optionPanel.add(retrieveCavalryButton);
                             optionPanel.add(retrieveInfantryButton);
@@ -391,17 +377,29 @@ public class WorldMap {
 
     public void setShapeArmyInfantry(Shape shape, int numberOfArmy){
         int armyIndex = shapeList.indexOf(shape);
-        armArrayLists[armyIndex][0].add(numberOfArmy);
+        armArrayLists[armyIndex][0].set(0, numberOfArmy);
 
     }
     public void setShapeArmyCavalry(Shape shape, int numberOfArmy){
         int armyIndex = shapeList.indexOf(shape);
-        armArrayLists[armyIndex][1].add(numberOfArmy);
+        armArrayLists[armyIndex][1].set(0, numberOfArmy);
     }
     
     public void setShapeArmyArtillery(Shape shape, int numberOfArmy){
         int armyIndex = shapeList.indexOf(shape);
-        armArrayLists[armyIndex][2].add(numberOfArmy);
+        armArrayLists[armyIndex][2].set(0, numberOfArmy);
+    }
+
+    public int getShapeArmyInfantry(int index){
+        return (int) armArrayLists[index][0].get(0);
+    }
+
+    public int getShapeArmyCavalry(int index) {
+        return (int) armArrayLists[index][1].get(0);
+    }
+
+    public int getShapeArmyArtillery(int index) {
+        return (int) armArrayLists[index][2].get(0);
     }
 
     public void setIndexColor(int index, Color color) {
@@ -409,6 +407,8 @@ public class WorldMap {
         colorList.set(index, color);
         refresh();
     }
+
+    
     
     public int getClickedShapeIndex() {
     	return this.clickedShapeIndex;
