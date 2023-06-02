@@ -23,16 +23,15 @@ public class PlayerNew {
 		this.chanceCards.add(chanceCardType);
 	}
 	
-	public void removeChanceCard(int chanceCardType) {
+	
+	public void useCard(int chanceCardType) {
 		int index = this.chanceCards.indexOf(chanceCardType);
 		
-		if (index!=-1) 
+		if (index!=-1) {
 			this.chanceCards.remove(index);
-		
+		}
 		else 
-			throw new IllegalArgumentException("You don't have this card.");
-		
-		
+			System.out.println("You don't have this card.");
 	}
 	
 	

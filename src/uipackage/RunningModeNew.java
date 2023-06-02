@@ -168,6 +168,28 @@ public class RunningModeNew extends JFrame {
 		});
 		this.add(nextButton);
 		
+		String[] cardTypes = {"Draft Chance Card", "Reinforcement Card", "Trade Deal Card", "Revolution Card", "Nuclear Strike Card"};
+        JComboBox<String> cardComboBox = new JComboBox<String>(cardTypes);
+        cardComboBox.setBounds(900,550, 100, 100);
+        this.add(cardComboBox);
+        
+		
+        
+		JButton useCardButton = new JButton("use card");
+		useCardButton.setBounds(700, 550, 100, 100);
+		useCardButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("card with index "+cardComboBox.getSelectedIndex()+"which is "+cardComboBox.getSelectedItem()+"used by the player with id: " +turnCounter);
+				
+				players.get(turnCounter).useCard(cardComboBox.getSelectedIndex());
+				
+			}
+		});
+		this.add(useCardButton);
+		
+		
 		
 	
 		
