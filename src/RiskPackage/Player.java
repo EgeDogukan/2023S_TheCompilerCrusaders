@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.function.BooleanSupplier;
 
 import cardPackage.ArmyCardFactory;
 import cardPackage.IArmyCard;
@@ -114,12 +115,16 @@ public class Player {
 		Random rand = new Random();
 		for (int i=0;i<2;i++) {
 	        int randomNumber = rand.nextInt(3) + 1;
-			//addArmyCard(new ArmyCardFactory().createArmyCard(randomNumber));
+			addArmyCard(new ArmyCardFactory(randomNumber).createArmyCard(randomNumber));
 		}
         
 	}
-		
-	
+
+	public boolean repOk() {
+		// Check the representation invariant conditions here
+		// Return true if the conditions hold, false otherwise
+		return true; // Placeholder, modify as per your representation invariant
+	}
 	
 
 	

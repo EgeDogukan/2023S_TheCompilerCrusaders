@@ -115,6 +115,33 @@ public class useCardTest {
         // Assert that the correct number of army cards were added
         assertEquals(2, player.armyCards.size());
     }
+
+
+@Test
+public void testRepOk() {
+    ArrayList<Territory> territories = new ArrayList<Territory>();
+    Player player = new Player(1, null, territories);
+
+    // Assert that the representation invariant holds initially
+    assertTrue(player.repOk());
+
+    // Add a chance card to the player's collection
+    IChanceCard card = new DraftChanceCard();
+    player.chanceCards.add(card);
+
+    // Assert that the representation invariant still holds after adding the card
+    assertTrue(player.repOk());
+
+    // Remove the chance card from the player's collection
+    player.chanceCards.remove(card);
+
+    // Assert that the representation invariant holds after removing the card
+    assertTrue(player.repOk());
+
+    // Clear the player's chance cards collection
+    player.chanceCards.clear();
+
+    // Assert that the representation invariant still holds after clearing the collection
+    assertTrue(player.repOk());
 }
-
-
+}
