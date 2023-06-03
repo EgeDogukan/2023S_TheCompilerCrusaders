@@ -38,4 +38,8 @@ public class Deploy {
         deployCavalry();
         deployArtillery();
     }
+
+    public void setInfantryToDeploy(int infantryToDeploy) {
+        this.infantryToDeploy = infantryToDeploy;
+    }
 }

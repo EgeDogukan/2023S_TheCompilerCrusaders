@@ -372,7 +372,7 @@ public class Territory extends JPanel {
 	    public String getName() {
 	        return this.name;
 	    }
-		public Void setShapeID(int shapeID){
+		public void setShapeID(int shapeID){
 			this.ShapeId = ShapeId;
 		}
 		public int getShapeID(){

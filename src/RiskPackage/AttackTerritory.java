@@ -1,8 +1,12 @@
 package RiskPackage;
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
 import javax.xml.catalog.Catalog;
+
+import uipackage.WorldMap;
 
 public class AttackTerritory {
     Territory territory;
@@ -11,7 +15,7 @@ public class AttackTerritory {
     private int defenderSides = 6;
     private int attackerSides = 6;
     private Random random = new Random();
-    
+    public static ArrayList<Color> colorList = new ArrayList<Color>();
     int defenderDiceResult;
     int attackerDiceResult;
     public Army armyOnTerritory;
@@ -20,7 +24,7 @@ public class AttackTerritory {
     public AttackTerritory(Territory territory, Territory destination){
         this.territory = territory;
         this.destination = destination;
-        
+        this.colorList = WorldMap.getColorList();
         setDice(random.nextInt(attackerSides) + 1, random.nextInt(defenderSides) + 1);
         
         if(destination != null){
