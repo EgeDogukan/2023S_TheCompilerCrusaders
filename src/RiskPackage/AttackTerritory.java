@@ -7,6 +7,8 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.xml.catalog.Catalog;
 import java.awt.*;
+
+import uipackage.AttackTerritoryUI;
 import uipackage.WorldMap;
 
 import uipackage.WorldMap;
@@ -91,7 +93,7 @@ public class AttackTerritory {
         }
 
 
-        
+        AttackTerritoryUI atUI = new AttackTerritoryUI(territory);
 
 
     }

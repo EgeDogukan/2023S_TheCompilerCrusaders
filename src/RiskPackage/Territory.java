@@ -28,11 +28,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.plaf.synth.Region;
 
-import RiskPackage.GameController;
-import cardPackage.ArmyCardFactory;
-import cardPackage.TerritoryCard;
 import uipackage.AttackTerritoryUI;
-import uipackage.RunningMode;
+
 import uipackage.WorldMap;
 
 public class Territory extends JPanel {
@@ -44,8 +41,7 @@ public class Territory extends JPanel {
 		//public static JButton attackButton;
 		
 	    private Color color;
-	    private Continents continent;
-		private Continents c;
+	 
 	    private ArrayList<Territory> neighbors;
 		public int playerID;
 		public int Cnumber;
@@ -62,7 +58,7 @@ public class Territory extends JPanel {
 		private static Shape clickedShape;
 	    
 
-	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color, Continents continent, int playerID,int ShapeId) {
+	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color,  int playerID,int ShapeId) {
 	    	this.isBuilding=false;
 	    	this.setVisible(true);
 	    	this.playerID = playerID;
@@ -74,7 +70,7 @@ public class Territory extends JPanel {
 	        this.yCoordinate = yCoordinate;
 	        this.width = width;
 	        this.height = height;
-	        this.c = continent;
+	       
 	        this.setSize(width, height);
 			this.setLocation(xCoordinate, yCoordinate);
 			
@@ -132,10 +128,10 @@ public class Territory extends JPanel {
 
 						
 
-						if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
+						if(Territory.this.getOwnerID() == GameControllerNew.getCurrentTurnPlayerID()) {
 							System.out.println("sahip");
 							JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
-						"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
+						"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameControllerNew.getCurrentTurnPlayerID());
 						
 								
 								
@@ -411,9 +407,7 @@ public class Territory extends JPanel {
 			this.playerID = ID;
 		}
 
-		public Continents getContinent() {
-			return this.c;
-		}
+		
 		
 		public void setIsBuilding(boolean status) {
 			this.isBuilding=status;
@@ -472,7 +466,7 @@ public class Territory extends JPanel {
 			list.add(((Integer)height).toString());
 			list.add(name);
 			list.add(this.color.toString());
-			list.add(c.getName());
+	
 			list.add(((Integer)playerID).toString());
 			
 			return list;

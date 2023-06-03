@@ -28,8 +28,7 @@ public class AttackTerritoryUI extends JFrame {
     private int attackerSides = 6;
     private Random random = new Random();
     private AttackTerritory at;
-    RunningMode rm;
-    ArrayList<Player> players;
+    
     
     public AttackTerritoryUI(Territory territory){
         this.setTitle(territory.getName());
