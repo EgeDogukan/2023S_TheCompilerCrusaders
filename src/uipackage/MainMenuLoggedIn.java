@@ -3,9 +3,7 @@ package uipackage;
 import javax.sound.sampled.*;
 import javax.swing.*;
 
-import RiskPackage.GameManager;
-import RiskPackage.GamePanel;
-import RiskPackage.RiskBoard;
+
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -63,7 +61,7 @@ public class MainMenuLoggedIn extends JFrame {
 
             MainMenuLoggedIn.status=0;
 			System.out.println(status);
-			RunningMode.databaseChooser=0;
+			RunningModeNew.databaseChooser=0;
             backgroundMusic.stop();
    
             System.out.println("Loading saved game...");
@@ -74,7 +72,7 @@ public class MainMenuLoggedIn extends JFrame {
 
                 MainMenuLoggedIn.status=0;
 				System.out.println(status);
-				RunningMode.databaseChooser=0;
+				RunningModeNew.databaseChooser=0;
                 backgroundMusic.stop();
    
             System.out.println("Loading saved game...");

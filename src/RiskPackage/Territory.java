@@ -49,27 +49,22 @@ public class Territory extends JPanel {
 		public int Inumber;
 		public Army armyOnTerritory;
 		private boolean isBuilding=false;
-
+		private Shape shape;
 		private int ShapeId;
 		private boolean winner = false;
 
 
-		private Region terr_Region;
 		private static Shape clickedShape;
 	    
 
-	    public Territory(int xCoordinate, int yCoordinate,int width,int height, String name, Color color,  int playerID,int ShapeId) {
+	    public Territory(String name, Shape shape) {
 	    	this.isBuilding=false;
 	    	this.setVisible(true);
-	    	this.playerID = playerID;
 			this.Inumber = 0;
 			this.Cnumber = 0;
 			this.Anumber = 0;
 			this.armyOnTerritory = new Army(Cnumber, Anumber, Inumber);
-	        this.xCoordinate = xCoordinate;
-	        this.yCoordinate = yCoordinate;
-	        this.width = width;
-	        this.height = height;
+	       
 	       
 	        this.setSize(width, height);
 			this.setLocation(xCoordinate, yCoordinate);
@@ -77,35 +72,10 @@ public class Territory extends JPanel {
 	        this.setBackground(color);
 	        this.setColor(color);
 			
-			this.ShapeId = ShapeId;
+			this.shape = shape;
 	        this.name = name;
-	        this.color = color;
 	        this.neighbors = new ArrayList<Territory>();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	        
-	        
 			JLabel nameLabel = new JLabel(this.getName());
 			System.out.println(this.getName());
         	nameLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -114,180 +84,6 @@ public class Territory extends JPanel {
 	        this.setFocusable(true);
 	        this.setEnabled(true);
 	        
-			this.addMouseListener(new MouseAdapter() {
-				private Color oldColor;
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					
-				
-					if (isBuilding) {
-						System.out.println("Panel clicked!");
-
-						
-						
-
-						
-
-						if(Territory.this.getOwnerID() == GameControllerNew.getCurrentTurnPlayerID()) {
-							System.out.println("sahip");
-							JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
-						"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameControllerNew.getCurrentTurnPlayerID());
-						
-								
-								
-
-								
-
-							
-						//		if(destination.armyOnTerritory.calculateStrength() >= Territory.this.armyOnTerritory.calculateStrength()){
-						//			int tempc = Territory.this.Cnumber;
-						//			int tempi = Territory.this.Inumber;
-						//			int tempa = Territory.this.Anumber;
-						//			destination.decreaseArmy(Territory.this);
-						//			
-						//			Territory.this.decreaseArmy(tempa, tempc, tempi);
-						//			Random rant = new Random();
-						//			int i = rant.nextInt(3) + 1;
-						//			int k = rant.nextInt(2);
-						//			
-						//			if(k == 0) {	
-						//				if(i == 1) {
-						//					Territory.this.increaseArmy(1, 0, 0);
-						//					System.out.println("Artillary army card drawn.");
-						//				}
-						//				else if(i == 2) {
-						//					Territory.this.increaseArmy(0, 1, 0);
-						//					System.out.println("Cavalry army card drawn.");
-						//				}
-						//				else if(i == 3) {
-						//					Territory.this.increaseArmy(0, 0, 1);
-						//					System.out.println("Infantry army card drawn.");
-						//				}
-						/* 			}
-									else if( k == 1) {
-										//pick territory card
-									}
-									
-									attackButton.addActionListener(new ActionListener() {
-										Timer timer = new Timer(DELAY, null);
-							
-										{
-											timer.addActionListener(new ActionListener() {
-												public void actionPerformed(ActionEvent e) {
-													if (isGrowing) {
-														scale += 0.03;
-														if (scale > 0.3) {
-															isGrowing = false;
-														}
-													} else {
-														scale -= 0.03;
-														if (scale < 0) {
-															scale = 0.01;
-															isGrowing = true;
-															crossVisible = false;
-															((Timer) e.getSource()).stop();
-														}
-													}
-													repaint();
-													
-												}
-											});
-										}
-							
-										public void actionPerformed(ActionEvent e) {
-											
-											crossVisible = true;
-											timer.start();
-										}
-									});
-									
-									JLabel ppp = new JLabel("Present Armies: " + Territory.this.Anumber + " Artillery, " + Territory.this.Cnumber +" Cavalary, "
-						+ Territory.this.Inumber +" Infantry.");
-						territoryPromptjFrame.add(ppp);
-						
-						setColor(Territory.this.getColor());
-						//JOptionPane.showMessageDialog(null, "Attack successful!");
-						
-						
-						
-						//territoryPromptjFrame.dispose();
-								}
-								else if(destination.armyOnTerritory.calculateStrength() < Territory.this.armyOnTerritory.calculateStrength()){
-									attackButton.addActionListener(new ActionListener() {
-										Timer timer = new Timer(DELAY, null);
-							
-										{
-											timer.addActionListener(new ActionListener() {
-												public void actionPerformed(ActionEvent e) {
-													if (isGrowing) {
-														scale += 0.03;
-														if (scale > 0.2) {
-															isGrowing = false;
-														}
-													} else {
-														scale -= 0.02;
-														if (scale < 0) {
-															scale = 0.01;
-															isGrowing = true;
-															starVisible = false;
-															((Timer) e.getSource()).stop();
-														}
-													}
-													repaint();
-																	
-												}
-											});
-										}
-							
-										public void actionPerformed(ActionEvent e) {
-											starVisible = true;
-											timer.start();
-										}
-									});
-								}
-							}
-						});
-						territoryPromptJPanel.add(chooseToAttackBox);
-						territoryPromptJPanel.setVisible(true);
-
-						territoryPromptjFrame.pack();
-
-						}
-						else {
-							System.out.println("sahip degil");
-							JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
-						"y"+Territory.this.yCoordinate);
-						}
-							
-*/							
-					}
-
-						
-					
-					
-					
-				}
-			}//Added after commanding the codes
-
-				@Override
-				public void mousePressed(MouseEvent e) {
-					/*if (isBuilding){
-						oldColor = getColor();
-						setColor(Color.RED);
-						repaint();
-					}*/
-					
-				}
-
-				@Override
-				public void mouseReleased(MouseEvent e) {
-					/*if (isBuilding) {
-						setColor(oldColor);
-						repaint();
-					}*/
-					
-				}
-			});
 			
 			this.setFocusable(true);
 		}

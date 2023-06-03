@@ -1,5 +1,6 @@
 package RiskPackage;
 
+import uipackage.DeployUI;
 
 public class Deploy {
     private Territory territory;
@@ -13,6 +14,7 @@ public class Deploy {
         this.infantryToDeploy = infantryToDeploy;
         this.cavalryToDeploy = cavalryToDeploy;
         this.artilleryToDeploy = artilleryToDeploy;
+        DeployUI dplyUI = new DeployUI();
     }
 
     public void deployInfantry() {

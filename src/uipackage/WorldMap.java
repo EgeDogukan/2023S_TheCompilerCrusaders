@@ -26,7 +26,7 @@ public class WorldMap {
     static Area area;
     ArrayList<Shape> shapeList2=null;
 
-    List<List<Integer>> neighbourList = new ArrayList<>();
+    static List<List<Integer>> neighbourList = new ArrayList<>();
 
     static ArrayList<Shape> shapeList = new ArrayList<>();
     //static ArrayList<ArrayList<Integer>> armyList = new ArrayList<ArrayList<Integer>>(60);
@@ -120,6 +120,7 @@ public class WorldMap {
                 
                 if(isInBuildingMode == true) {
                     for (Shape shape : shapeList) {
+
                         if (shape.contains(pointOnImage)) {   
                             //JOptionPane.showMessageDialog(null, "Clicked!"); 
                             numofSelectedTerritory++;
@@ -182,7 +183,14 @@ public class WorldMap {
                     }
                 }
                 else if (isInBuildingMode == false) {
-                    System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+                    for (Shape shape : shapeList) {
+                        if (shape.contains(pointOnImage)) {   
+                            
+                            //First call Deploy UI before selecting to attack anyone in the map
+                           
+                        }
+                    }        
+                    
                 }
             }
             
@@ -641,6 +649,14 @@ public class WorldMap {
         neighbourList.add(row40);
 
     }
+
+    public static List<Integer> getNeighbour(int row){//Row here is the ID of the Territory
+        if (row < 0 || row >= neighbourList.size()) {
+            throw new IllegalArgumentException("Invalid Territory ID: " + row);
+        }
+        return neighbourList.get(row);
+    }
+
     public JComponent getUI() {
         return ui;
     }
@@ -650,7 +666,7 @@ public class WorldMap {
         output.removeMouseListener(ml);
     }
 
-    public ArrayList<Shape> getShapeList() {
+    public static ArrayList<Shape> getShapeList() {
         return shapeList;
     }
 

@@ -93,7 +93,6 @@ public class AttackTerritory {
         }
 
 
-        AttackTerritoryUI atUI = new AttackTerritoryUI(territory);
 
 
     }
