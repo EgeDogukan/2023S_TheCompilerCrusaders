@@ -132,9 +132,13 @@ public class Player {
 		Random rand = new Random();
 		for (int i=0;i<2;i++) {
 	        int randomNumber = rand.nextInt(3) + 1;
-			//addArmyCard(new ArmyCardFactory().createArmyCard(randomNumber));
+			addArmyCard(new ArmyCardFactory(randomNumber).createArmyCard(randomNumber));
 		}
         
+	}
+
+	public boolean repOk() {		
+		return true; 
 	}
 	
 	public ArrayList<TerritoryCard> getTerritoryCards(){
