@@ -122,11 +122,13 @@ public class WorldMap {
                             clickedShape = shape;
                             WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
 
-
+                            //Deploy UI
                             JFrame optionFrame = new JFrame();
                             optionFrame.setSize(500, 100);
+                            optionFrame.setLocationRelativeTo(null);
+                            optionFrame.setTitle("Deploy");
                             JPanel optionPanel = new JPanel();
-                            JTextField numberOfArmy = new JTextField();
+                            JLabel numberOfArmy = new JLabel("3");
                             numberOfArmy.setPreferredSize(new Dimension(100,50));
                             optionPanel.add(numberOfArmy);
                             optionFrame.add(optionPanel);
