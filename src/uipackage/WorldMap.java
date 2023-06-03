@@ -454,10 +454,56 @@ public class WorldMap {
         List<Integer> row30 = new ArrayList<Integer>();//RebelIndonesia
         row30.add(29);
 
-        List<Integer> row31 = new ArrayList<Integer>();
+        List<Integer> row31 = new ArrayList<Integer>();//New Guinea
         row31.add(29);
         row31.add(39);
         row31.add(38);
+
+        List<Integer> row32 = new ArrayList<Integer>();//East Africa
+        row32.add(22);
+        row32.add(37);
+        row32.add(33);
+        row32.add(23);
+        row32.add(34);
+
+        List<Integer> row33 = new ArrayList<Integer>();//Congo
+        row33.add(27);
+        row33.add(37);
+        row33.add(32);
+
+        List<Integer> row34 = new ArrayList<Integer>();//Madagascar
+        row34.add(32);
+        row34.add(37);
+
+        List<Integer> row35 = new ArrayList<Integer>();//Peru
+        row35.add(28);
+        row35.add(40);
+        row35.add(36);
+
+        List<Integer> row36 = new ArrayList<Integer>();//Brazil
+        row36.add(35);
+        row36.add(28);
+        row36.add(40);
+
+        List<Integer> row37 = new ArrayList<Integer>();//South Africa
+        row37.add(33);
+        row37.add(32);
+        row37.add(34);
+
+        List<Integer> row38 = new ArrayList<Integer>();//Western Australia
+
+        row38.add(39);
+        row38.add(30);
+        row38.add(31);
+
+        List<Integer> row39 = new ArrayList<Integer>();//Eastern Australia
+        row39.add(38);
+        row39.add(31);
+
+        List<Integer> row40 = new ArrayList<Integer>();//Eastern Australia
+        row40.add(35);
+        row40.add(36);
+
 
 
 
@@ -491,10 +537,18 @@ public class WorldMap {
         neighbourList.add(row27);
         neighbourList.add(row28);
         neighbourList.add(row29);
-        
-        for (List<Integer> num : neighbourList) {
-            System.out.println("Neighbor(s) of index "+neighbourList.indexOf(num) + " territoriy: "+ num);
-        }
+        neighbourList.add(row30);
+        neighbourList.add(row31);
+        neighbourList.add(row32);
+        neighbourList.add(row33);
+        neighbourList.add(row34);
+        neighbourList.add(row35);
+        neighbourList.add(row36);
+        neighbourList.add(row37);
+        neighbourList.add(row38);
+        neighbourList.add(row39);
+        neighbourList.add(row40);
+
     }
     public JComponent getUI() {
         return ui;
