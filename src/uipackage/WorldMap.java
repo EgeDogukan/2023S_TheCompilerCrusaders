@@ -11,10 +11,9 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import RiskPackage.Player;
-import RiskPackage.Territory;
-import RiskPackage.TerritoryNew;
+
 import java.util.List;
+
 import java.util.Collections;
 import javax.imageio.ImageIO;
 
@@ -26,8 +25,13 @@ public class WorldMap {
     static BufferedImage image;
     static Area area;
     ArrayList<Shape> shapeList2=null;
-    static ArrayList<Shape> shapeList = new ArrayList<>();
+
     List<List<Integer>> neighbourList = new ArrayList<>();
+
+    static ArrayList<Shape> shapeList = new ArrayList<>();
+    //static ArrayList<ArrayList<Integer>> armyList = new ArrayList<ArrayList<Integer>>(60);
+    static ArrayList[][] armArrayLists = new ArrayList[60][3];
+
     static ArrayList<Color> colorList = new ArrayList<>();
     private Shape clickedShape;
     private MouseListener ml;
@@ -38,10 +42,26 @@ public class WorldMap {
     public static boolean isEveryTerritorySelected = false;
     public int numofSelectedTerritory = 0;
     private boolean isInBuildingMode = true;
+    private ArrayList<Shape> selectedShapeList = new ArrayList<>();
     
 
     public WorldMap() {
         try {
+            for (int i = 0; i < 60; i++) {
+                //armyList[0].add(new ArrayList<Integer>());
+                for(int k = 0; k < 3; k++){
+                    armArrayLists[i][k] = new ArrayList<Integer>();
+                    armArrayLists[i][k].add(i);
+                }    
+            }
+            
+            /*// Set each entry in armyList to 0
+            for (int i = 0; i < armyList.size(); i++) {
+                ArrayList<Integer> innerList = armyList.get(i);
+                for (int j = 0; j < innerList.size(); j++) {
+                    innerList.set(j, 0);
+                }
+            }*/
             initUI();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -100,31 +120,101 @@ public class WorldMap {
                 
                 if(isInBuildingMode == true) {
                     for (Shape shape : shapeList) {
-                        if (shape.contains(pointOnImage)) {  
-                            System.out.println("Index of shape: " + shapeList.indexOf(shape));
-                            
-                            
+                        if (shape.contains(pointOnImage)) {   
+                            //JOptionPane.showMessageDialog(null, "Clicked!"); 
                             numofSelectedTerritory++;
-                            if (numofSelectedTerritory==shapeList.size()) 
+                            if (numofSelectedTerritory==shapeList.size()) {
                                 isEveryTerritorySelected=true;
-                                                    
+                            }                         
                             clickedShape = shape;
                             WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
+
+                            //Deploy UI
+                            JFrame optionFrame = new JFrame();
+                            optionFrame.setSize(500, 100);
+                            optionFrame.setLocationRelativeTo(null);
+                            optionFrame.setTitle("Deploy");
+                            JPanel optionPanel = new JPanel();
+                            JLabel numberOfArmy = new JLabel("3");
+                            numberOfArmy.setPreferredSize(new Dimension(100,50));
+                            optionPanel.add(numberOfArmy);
+                            optionFrame.add(optionPanel);
+                            JButton retrieveInfantryButton = new JButton("Infantry");
+                            retrieveInfantryButton.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    String numberOfArmyonarea = numberOfArmy.getText();
+                                    setShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyInfantry(clickedShapeIndex));    
+                                }
+                            });
+                            JButton retrieveCavalryButton = new JButton("Cavalry");
+                            retrieveCavalryButton.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    String numberOfArmyonarea = numberOfArmy.getText();
+                                    setShapeArmyCavalry(shape, Integer.parseInt(numberOfArmyonarea));      
+                                    System.out.println("Cavalry at shape index " + clickedShapeIndex + ": " + getShapeArmyCavalry(clickedShapeIndex));    
+                                }
+                            });
+                            JButton retrieveArtilleryButton = new JButton("Artillery");
+                            retrieveArtilleryButton.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    String numberOfArmyonarea = numberOfArmy.getText();
+                                    setShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
+                                    System.out.println("Artillery at shape index " + clickedShapeIndex + ": " + getShapeArmyArtillery(clickedShapeIndex));                                      
+                                }
+                            });
+
+                            optionPanel.add(retrieveArtilleryButton);
+                            optionPanel.add(retrieveCavalryButton);
+                            optionPanel.add(retrieveInfantryButton);
+                            optionFrame.setVisible(true);
+                            
+                            System.out.println(armArrayLists);
                             BuildingModeNew.nextTurn();
-    
+                            selectedShapeList.add(shape);
+                            
                             break;
                         }
 
                     }
                 }
                 else if (isInBuildingMode == false) {
-                    //running mode functions
-                    if(RunningModeNew.whichStage == "Deploy") {
-                        DeployUI deployUI = new DeployUI();
-                        deployUI.setVisible(true);
-                    }
-
+                    System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
                 }
+            }
+            
+            public void mousePressed(MouseEvent e) {
+            	
+            	Point p = MouseInfo.getPointerInfo().getLocation();
+                Point p1 = output.getLocationOnScreen();
+                
+                int x = p.x - p1.x;
+                int y = p.y - p1.y;
+                Point pointOnImage = new Point(x, y);
+                
+                if (e.getButton() == MouseEvent.BUTTON3) {
+                    System.out.println("right click is added.");
+                    if(isInBuildingMode == true) {
+                        for (Shape shape : shapeList) {
+                            if (shape.contains(pointOnImage)) {   
+                                JOptionPane.showMessageDialog(null, "Clicked!"); 
+                                numofSelectedTerritory++;
+                                if (numofSelectedTerritory==shapeList.size()) 
+                                    isEveryTerritorySelected=true;
+                                                        
+                                clickedShape = shape;
+                                setIndexColor(shapeList.indexOf(shape), Color.gray);
+        
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                
             }
         };
         output.addMouseListener(ml);
@@ -143,11 +233,7 @@ public class WorldMap {
                 if (isIncluded(new Color(bi.getRGB(xx, yy)), target, tolerance)) {
                     //if (bi.getRGB(xx,yy)==targetRGB) {
                     if (cont) {
-                        gp.lineTo(xx, yy);
-                        gp.lineTo(xx, yy + 1);
-                        gp.lineTo(xx + 1, yy + 1);
-                        gp.lineTo(xx + 1, yy);
-                        gp.lineTo(xx, yy);
+                        gp.lineTo(xx, yy); gp.lineTo(xx, yy + 1); gp.lineTo(xx + 1, yy + 1); gp.lineTo(xx + 1, yy); gp.lineTo(xx, yy);
                     } else {
                         gp.moveTo(xx, yy);
                     }
@@ -581,11 +667,40 @@ public class WorldMap {
         colorList.set(colorIndex, color);
     }
 
+    public void setShapeArmyInfantry(Shape shape, int numberOfArmy){
+        int armyIndex = shapeList.indexOf(shape);
+        armArrayLists[armyIndex][0].set(0, numberOfArmy);
+
+    }
+    public void setShapeArmyCavalry(Shape shape, int numberOfArmy){
+        int armyIndex = shapeList.indexOf(shape);
+        armArrayLists[armyIndex][1].set(0, numberOfArmy);
+    }
+    
+    public void setShapeArmyArtillery(Shape shape, int numberOfArmy){
+        int armyIndex = shapeList.indexOf(shape);
+        armArrayLists[armyIndex][2].set(0, numberOfArmy);
+    }
+
+    public int getShapeArmyInfantry(int index){
+        return (int) armArrayLists[index][0].get(0);
+    }
+
+    public int getShapeArmyCavalry(int index) {
+        return (int) armArrayLists[index][1].get(0);
+    }
+
+    public int getShapeArmyArtillery(int index) {
+        return (int) armArrayLists[index][2].get(0);
+    }
+
     public static void setIndexColor(int index, Color color) {
     	System.out.println("set index color function is called");
         colorList.set(index, color);
         refresh();
     }
+
+    
     
     public int getClickedShapeIndex() {
     	return this.clickedShapeIndex;
@@ -634,6 +749,9 @@ public class WorldMap {
         return colorList;
     }
     
+    public ArrayList<Shape> getSelectedShapes(){
+    	return this.selectedShapeList;
+    }
    
 
 	public static void main(String[] args) {

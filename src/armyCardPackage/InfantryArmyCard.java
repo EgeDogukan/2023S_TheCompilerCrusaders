@@ -1,6 +1,6 @@
-package cardPackage;
+package armyCardPackage;
 
-import RiskPackage.Player;
+import RiskPackage.PlayerNew;
 
 public class InfantryArmyCard implements IArmyCard {
 	
@@ -11,7 +11,7 @@ public class InfantryArmyCard implements IArmyCard {
 	}
 
 	@Override
-	public void action(Player player) {
+	public void action(PlayerNew player) {
 		System.out.println("Infantry cart is appended to the players army card list.");
 		
 	}

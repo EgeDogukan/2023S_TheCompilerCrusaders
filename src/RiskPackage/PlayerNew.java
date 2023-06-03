@@ -3,18 +3,36 @@ package RiskPackage;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import chanceCardPackage.IChanceCard;
+
 public class PlayerNew {
 
 	int id;
 	Color color;
-	ArrayList<Integer>shapeIndices;
+	ArrayList<Integer> shapeIndices;
+	ArrayList<Integer> chanceCards;
 	
 	public PlayerNew(int id, Color color, ArrayList<Integer> shapeIndices) {
 		this.id=id;
 		this.color=color;
 		this.shapeIndices=shapeIndices;
+		chanceCards = new ArrayList<>();
 	}
 	
+	public void addChanceCard(int chanceCardType) {
+		this.chanceCards.add(chanceCardType);
+	}
+	
+	
+	public void useCard(int chanceCardType) {
+		int index = this.chanceCards.indexOf(chanceCardType);
+		
+		if (index!=-1) {
+			this.chanceCards.remove(index);
+		}
+		else 
+			System.out.println("You don't have this card.");
+	}
 	
 	
 	

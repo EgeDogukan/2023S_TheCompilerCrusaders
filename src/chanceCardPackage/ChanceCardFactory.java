@@ -1,4 +1,4 @@
-package cardPackage;
+package chanceCardPackage;
 
 public class ChanceCardFactory {
 
@@ -6,6 +6,7 @@ public class ChanceCardFactory {
 	}
 	
 	public IChanceCard createCard(int id) {
+		
 		 if (id==0) { return new DraftChanceCard(); }
 		 else if (id==1) { return new ReinforcementsChanceCard(); }
 		 else if (id==2) { return new TradeDealChanceCard(); }
@@ -14,7 +15,4 @@ public class ChanceCardFactory {
 		 else {throw new IllegalArgumentException("Invalid card type:"); } 
 		  
 	}
-	
-	
-
 }

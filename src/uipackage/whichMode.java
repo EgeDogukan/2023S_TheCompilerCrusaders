@@ -29,7 +29,7 @@ public class whichMode extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				whichMode.status=0;
 				System.out.println(status);
-				RunningMode.databaseChooser=0;
+				RunningModeNew.databaseChooser=0;
 			}
 		});
 		
@@ -43,7 +43,7 @@ public class whichMode extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				whichMode.status=0;
 				System.out.println(status);
-				RunningMode.databaseChooser=0;
+				RunningModeNew.databaseChooser=1;
 			}
 		});
 		
@@ -58,11 +58,6 @@ public class whichMode extends JFrame {
 				System.out.println(status);
 			}
 		});
-		
-		JLabel label = new JLabel("For now, just press the building mode button.");
-		label.setSize(400,25);
-		label.setLocation(700, 200);
-		this.add(label);
 		
 	
 	}

@@ -1,6 +1,6 @@
-package cardPackage;
+package chanceCardPackage;
 
-import RiskPackage.Player;
+import RiskPackage.PlayerNew;
 
 public class RevolutionChanceCard implements IChanceCard {
 
@@ -11,7 +11,7 @@ public class RevolutionChanceCard implements IChanceCard {
 	}
 
 	@Override
-	public void action(Player player) {
+	public void action(PlayerNew player) {
 		System.out.println("Action of Revolution Card is applied.");
 		
 	}

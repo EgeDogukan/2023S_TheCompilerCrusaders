@@ -1,4 +1,4 @@
-package cardPackage;
+package armyCardPackage;
 
 public class ArmyCardFactory {
 

@@ -1,6 +1,6 @@
-package cardPackage;
+package chanceCardPackage;
 
-import RiskPackage.Player;
+import RiskPackage.PlayerNew;
 
 public class NuclearStrikeChanceCard implements IChanceCard {
 
@@ -9,12 +9,14 @@ public class NuclearStrikeChanceCard implements IChanceCard {
 		this.type=4;
 	}
 	@Override
-	public void action(Player player) {
+	public void action(PlayerNew player) {
 		System.out.println("Action of Draft Card is applied.");
 		
 	}
 	public int getType() {
 		return this.type;
 	}
+	
+	
 
 }

@@ -1,6 +1,6 @@
-package cardPackage;
+package chanceCardPackage;
 
-import RiskPackage.Player;
+import RiskPackage.PlayerNew;
 
 public class TradeDealChanceCard implements IChanceCard {
 	
@@ -11,7 +11,7 @@ public class TradeDealChanceCard implements IChanceCard {
 	}
 
 	@Override
-	public void action(Player player) {
+	public void action(PlayerNew player) {
 		System.out.println("Action of Trade Deal Card is applied.");
 		
 	}

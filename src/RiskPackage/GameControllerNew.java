@@ -10,6 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import databasePackage.ISaveLoadAdapter;
+
 //import javax.management.StringValueExp;
 
 import uipackage.*;;
@@ -18,21 +20,25 @@ public class GameControllerNew {
 	
 	private static int turnID = 0;
 	private static ArrayList<PlayerNew> playerList = new ArrayList<>();
+	private static GameControllerNew instance;
+	public static RunningModeNew g;
 	
 	private GameControllerNew() {
-		
 	}
 	
 	public static GameControllerNew getInstance() {
 		
-		GameControllerNew instance = new GameControllerNew();
+		if (instance == null) {
+			instance = new GameControllerNew();
+		}
+		
 		return instance;
 		
 	}
 	
 	
 	
-    public static void main(String[] args) throws InterruptedException {
+    public void init() throws InterruptedException {
         
     	MainMenu menu = new MainMenu();
     	menu.setVisible(true);
@@ -95,34 +101,26 @@ public class GameControllerNew {
 		    //RiskGameFrame.setLayout(null);
 		    //RiskGameFrame.setVisible(true);
 		    
+		    System.out.println("G IS NOT INITALIZED YET");
+		    
 		    IntermediaryBetweenPreBuildingAndBuilding s = new IntermediaryBetweenPreBuildingAndBuilding();
 		    
-		    for (ArrayList<Integer> indices : s.getBuildingModeNew().getShapeList()) {
-		    	System.out.println("Indices of a player "+indices);
-		    	for (Integer index : indices) {
-		    		System.out.println("Name of the territory: "+BuildingModeNew.worldMap.getShapeList().get(index));
-		    	}
-		    }
+//		    for (ArrayList<Integer> indices : s.getBuildingModeNew().getShapeList()) {
+//		    	System.out.println("Indices of a player "+indices);
+//		    	for (Integer index : indices) {
+//		    		System.out.println("Name of the territory: "+BuildingModeNew.worldMap.getShapeList().get(index));
+//		    	}
+//		    }
+		    break;
 		    
 	        
-		    
-		    playerList = BuildingModeNew.getPlayerList();
-		    System.out.println(playerList);
-	        ArrayList<ArrayList<Shape>> shapes = s.getBuildingModeNew().initalSharing(playerList);
-	        
-	        //RiskGameFrame.dispose();
-	        
-	        RunningModeNew g = new RunningModeNew(shapes, GameControllerNew.playerList, 0, 4);
-	        
-	        g.setLayout(new BorderLayout());
-	        g.setVisible(true);
-			turnID = g.getTurn() - 1;
-			s.getBuildingModeNew().dispose();
-
-			break;
-			
 			
 		}
+		else {
+			LoadMode loadMode = new LoadMode();
+			break;
+		}
+		
 		
 //		else {
 //			LoadMode RiskGameFrame = new LoadMode();
@@ -145,7 +143,10 @@ public class GameControllerNew {
 
 	}
     
-
+	public RunningModeNew getRunningModeNew() {
+		System.out.println(g);
+		return this.g;
+	}
     
 
     public static Color randomColorGenerator() {
@@ -156,80 +157,7 @@ public class GameControllerNew {
     	return new Color(r,g,b);
     }
     
-    static private ArrayList<Player> initGameLoadMode(int numberofPlayers, int numberofComp, ArrayList<Continents> continents) {
-    	ArrayList<Territory> territories = new ArrayList<Territory>();
-    	ArrayList<Player> playerList = new ArrayList<Player>();
-    	
-    	for (Continents continent : continents) {
-    		if (continent.isIncluded){
-				for (Territory territory : continent.getTerritories()){
-					territories.add(territory);
-				}
-    		}
-		}
-    	
-    	for (int i=0;i<numberofPlayers;i++) {
-    		ArrayList<Territory> currentTerritories = new ArrayList<Territory>();
-    		for (Territory territory : territories) {
-        		if (territory.getOwnerID()==i){
-        			currentTerritories.add(territory);
-        		}
-        	}
-    		playerList.add(new Player(i, randomColorGenerator(), currentTerritories));
-    	}
-    	
-    	return playerList;
-    }
     
-
-	static private ArrayList<Player> initGame(int numberofPlayers, int numberofComp, ArrayList<Continents> continents) {
-		
-		ArrayList<Territory> territories = new ArrayList<Territory>();
-		for (Continents continent : continents) {
-			if (continent.isIncluded){
-				for (Territory territory : continent.getTerritories()){
-					territories.add(territory);
-				}
-			}
-			
-		}
-		
-		int territoryPerPlayer = Math.floorDiv(territories.size(), (numberofPlayers+numberofComp));
-		System.out.println("Number of territory: "+territories.size());
-		System.out.println("Territory per player is: "+territoryPerPlayer);
-		
-		
-		ArrayList<Player> playerList = new ArrayList<Player>();
-		
-		Collections.shuffle(territories);
-		for(int j = 0; j < numberofComp + numberofPlayers; j++) {
-			
-			ArrayList<Territory> currentTerritories = new ArrayList<Territory>();
-			
-			
-			for (int i=0; i<territoryPerPlayer;i++) {
-				currentTerritories.add(territories.get(i+j*territoryPerPlayer));
-			}
-			
-			playerList.add(new Player(j, randomColorGenerator(), currentTerritories));
-			
-		
-		
-		}
-		
-		
-		System.out.println("***");
-		for (Player player : playerList) {
-			System.out.println(player.getId());
-			//System.out.println(player.getTerritories().getNames());
-			for (Territory territory : player.getTerritories())
-				System.out.println(territory.getName());
-				
-			System.out.println("***");
-		}
-		
-		return playerList;
-	}
 	
 
 
