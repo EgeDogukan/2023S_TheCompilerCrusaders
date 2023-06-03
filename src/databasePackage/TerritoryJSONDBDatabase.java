@@ -4,6 +4,7 @@ package databasePackage;
 import static com.mongodb.client.model.Filters.eq;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -35,10 +36,11 @@ import RiskPackage.Territory;
 
 public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 	
-
+	private static final String DATA_JSON_FILE_PATH = "data.json";
 	public String filePath;
 
-	public TerritoryJSONDBDatabase() {
+	public TerritoryJSONDBDatabase()  {
+		
 	}
 	
 	
@@ -121,7 +123,14 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 	
 	
 
-
+	void cleanup() {
+        // Clean up the database and delete the data.json file after each test
+        
+        File dataFile = new File(DATA_JSON_FILE_PATH);
+        if (dataFile.exists()) {
+            dataFile.delete();
+        }
+    }
 
 
 

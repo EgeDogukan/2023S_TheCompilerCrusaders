@@ -3,6 +3,8 @@ package testPackage;
 
 import databasePackage.TerritoryJSONDBDatabase;    
 import RiskPackage.*;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,33 +24,38 @@ public class TerritoryJSONDBDatabaseTest  {
 
     @BeforeEach
     void setup() throws IOException {
-        // Delete the existing data.json file if it exists
         File dataFile = new File(DATA_JSON_FILE_PATH);
         if (dataFile.exists()) {
             dataFile.delete();
         }
         
-        // Recreate an empty data.json file
+        // Recreate the file by creating a new instance of it
+        dataFile = new File(DATA_JSON_FILE_PATH);
         dataFile.createNewFile();
     }
+
+    
+
+    
 
     @Test
     public void testEmptyFile() throws IOException {
         // Prepare
-        TerritoryJSONDBDatabase  a = new TerritoryJSONDBDatabase();
+        
+        TerritoryJSONDBDatabase  emptyDB = new TerritoryJSONDBDatabase();
         // Create an empty file for testing
         
         // Act
-        ArrayList<ArrayList<ArrayList<String>>> result = a.loadAll();
+        ArrayList<ArrayList<ArrayList<String>>> resultDB = emptyDB.loadAll();
         
         // Assert
-        Assertions.assertTrue(result.isEmpty());
+        Assertions.assertTrue(resultDB.isEmpty());
     }
 
     @Test
     public void testNonEmptyFile() throws IOException {
         // Prepare
-
+        
 
         // Create a file with valid data for testing
         TerritoryJSONDBDatabase  a = new TerritoryJSONDBDatabase();
@@ -104,25 +111,25 @@ public class TerritoryJSONDBDatabaseTest  {
         // Act and Assert
         // Ensure that an IOException is thrown when the file does not exist
         Assertions.assertThrows(NullPointerException.class, () -> {
-            a.loadAll();
+            this.a.loadAll();
         });
     }
 
     @Test
-    public void testFileWithInvalidData() throws NullPointerException {
+    public void testFileWithInvalidData() throws NullPointerException, IOException {
         // Prepare
         // Create a file with a mix of valid and invalid data for testing
         TerritoryJSONDBDatabase  a = new TerritoryJSONDBDatabase();
         
         ArrayList<Territory> territoryList = new ArrayList<>();
         Continents Continent = new Continents("asia", territoryList, 0, 0, Color.CYAN);
-        Territory t1 = new Territory(96, 70, 10, 17, "ist", Color.black, null, 1);
-        Territory t2 = new Territory(16, 17, 28, 45, "londra", Color.black, Continent, 1);
+        Territory t1 = new Territory(906, 70, 10, 17, "ist", Color.black, null, 1);
+        Territory t2 = new Territory(106, 17, 28, 45, "londra", Color.black, Continent, 1);
         territoryList.add(t2);
         territoryList.add(t1);
         Player player = new Player(0, Color.GREEN, territoryList);
         Assertions.assertThrows(NullPointerException.class, () -> {
-            a.save(player);
+            this.a.save(player);
         });
         
         
@@ -135,8 +142,8 @@ public class TerritoryJSONDBDatabaseTest  {
         TerritoryJSONDBDatabase  a = new TerritoryJSONDBDatabase();
         ArrayList<Territory> territoryList = new ArrayList<>();
         Continents Continent = new Continents("asia", territoryList, 0, 0, Color.CYAN);
-        Territory t1 = new Territory(96, 70, 10, 17, "ist", Color.black, Continent, 1);
-        Territory t2 = new Territory(16, 17, 28, 45, "londra", Color.black, Continent, 2);
+        Territory t1 = new Territory(960, 70, 10, 17, "ist", Color.black, Continent, 1);
+        Territory t2 = new Territory(160, 17, 28, 45, "londra", Color.black, Continent, 2);
         territoryList.add(t1);
         territoryList.add(t2);
         Player player = new Player(0, Color.GREEN, territoryList);

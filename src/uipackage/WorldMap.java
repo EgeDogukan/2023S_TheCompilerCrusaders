@@ -255,9 +255,9 @@ public class WorldMap {
         colorList.set(index, color);
     }
 
-    public ArrayList<Color> getColorList() {
-        return colorList;
-    }
+    // public ArrayList<Color> getColorList() {
+    //     return colorList;
+    // }
 
     public static void main(String[] args) {
         Runnable r = () -> {
