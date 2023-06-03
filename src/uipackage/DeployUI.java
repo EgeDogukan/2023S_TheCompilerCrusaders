@@ -23,8 +23,8 @@ public class DeployUI extends JFrame {
 
     private JButton deployAllButton;
 
-    public DeployUI(Deploy deploy) {
-        this.deploy = deploy;
+    public DeployUI() {
+        
 
         setLayout(new GridLayout(4, 3));
 
@@ -35,7 +35,7 @@ public class DeployUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int infantryToDeploy = Integer.parseInt(amountInfantryLabel.getText());
-                deploy.setInfantryToDeploy(infantryToDeploy);
+                
                 deploy.deployInfantry();
             }
         });
@@ -47,7 +47,7 @@ public class DeployUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int cavalryToDeploy = Integer.parseInt(amountCavalryLabel.getText());
-                deploy.setCavalryToDeploy(cavalryToDeploy);
+                
                 deploy.deployCavalry();
             }
         });
@@ -59,7 +59,7 @@ public class DeployUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int artilleryToDeploy = Integer.parseInt(AmountArtilleryLabel.getText());
-                deploy.setArtilleryToDeploy(artilleryToDeploy);
+                
                 deploy.deployArtillery();
             }
         });
