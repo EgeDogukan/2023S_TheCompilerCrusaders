@@ -132,7 +132,31 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
         }
     }
 
-
+	public boolean repOk(ArrayList<ArrayList<ArrayList<String>>> data) {
+		// Check that data is not null
+		if (data == null) {
+			return false;
+		}
+	
+		// Check the representation invariant for each user's data
+		for (ArrayList<ArrayList<String>> userData : data) {
+			// Each user's data should contain at least one entry
+			if (userData.isEmpty()) {
+				return false;
+			}
+	
+			// Each entry should contain a valid number of fields
+			for (ArrayList<String> entry : userData) {
+				if (entry.size() != 8) {
+					return false;
+				}
+			}
+		}
+	
+		// All checks passed, representation invariant holds
+		return true;
+	}
+	
 
 	
 

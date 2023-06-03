@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.google.gson.JsonSyntaxException;
+
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -134,6 +136,46 @@ public class TerritoryJSONDBDatabaseTest  {
         
         
     }
+
+    @Test
+    public void testRepOk() throws IOException {
+    // Prepare
+    TerritoryJSONDBDatabase a = new TerritoryJSONDBDatabase();
+    ArrayList<Territory> territoryList = new ArrayList<>();
+    Continents continent = new Continents("asia", territoryList, 0, 0, Color.CYAN);
+    Territory t1 = new Territory(96, 70, 10, 17, "ist", Color.black, continent, 1);
+    Territory t2 = new Territory(16, 17, 28, 45, "londra", Color.black, continent, 1);
+    territoryList.add(t2);
+    territoryList.add(t1);
+    Player player = new Player(0, Color.GREEN, territoryList);
+    a.save(player);
+
+    // Act
+    ArrayList<ArrayList<ArrayList<String>>> result = a.loadAll();
+
+    // Assert
+    Assertions.assertTrue(a.repOk(result));
+    }
+
+    @Test
+    public void testCorruptedDataFile() throws IOException {
+        // Prepare
+        TerritoryJSONDBDatabase a = new TerritoryJSONDBDatabase();
+
+        // Create a corrupted data file with invalid JSON format
+        File dataFile = new File(DATA_JSON_FILE_PATH);
+        FileWriter writer = new FileWriter(dataFile);
+        writer.write("Invalid JSON data");
+        writer.close();
+        // Act and Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            // Call the method that is expected to throw the IllegalArgumentException
+            a.loadAll();
+        });
+        
+    }
+
+
 
     @Test
     public void testMultipleUsersInFile() throws IOException {
