@@ -3,12 +3,15 @@ package uipackage;
 import javax.sound.sampled.*;
 import javax.swing.*;
 
+import RiskPackage.GameManager;
+import RiskPackage.GamePanel;
+import RiskPackage.RiskBoard;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainMenu extends JFrame {
+public class MainMenuLoggedIn extends JFrame {
 
     private JButton startButton;
     private JButton loadButton;
@@ -24,8 +27,9 @@ public class MainMenu extends JFrame {
     
 	public boolean isLoginClicked;
 	
+    public static int status = -1; 
 	
-    public MainMenu() {
+    public MainMenuLoggedIn() {
         // Set up the main menu window
         super("Risk Game Main Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,16 +49,37 @@ public class MainMenu extends JFrame {
         // Create the start button and add an action listener
         startButton = new JButton("New Game");
         startButton.addActionListener(e -> {
-            
+
+            MainMenuLoggedIn.status=1;
+			System.out.println(status);
+            backgroundMusic.stop();
+
             System.out.println("Starting new game...");
         });
 
         // Create the load button and add an action listener
-        loadButton = new JButton("Load Game");
+        loadButton = new JButton("Load Game From MONGO");
         loadButton.addActionListener(e -> {
+
+            MainMenuLoggedIn.status=0;
+			System.out.println(status);
+			RunningMode.databaseChooser=0;
+            backgroundMusic.stop();
    
             System.out.println("Loading saved game...");
         });
+
+        JButton loadButton2 = new JButton("Load Game From JSON");
+        loadButton2.addActionListener(e -> {
+
+                MainMenuLoggedIn.status=0;
+				System.out.println(status);
+				RunningMode.databaseChooser=0;
+                backgroundMusic.stop();
+   
+            System.out.println("Loading saved game...");
+        });
+
 
         loginButton = new JButton("Login/Register");
         loginButton.addActionListener(e -> {
@@ -71,14 +96,15 @@ public class MainMenu extends JFrame {
         quitButton.addActionListener(e -> {
             // Stop the background music and close the main menu window
             backgroundMusic.stop();
-            dispose();
+            dispose();  
         });
 
         // Add the buttons to the main menu window
         JPanel buttonPanel = new JPanel();
-        //buttonPanel.add(startButton);
-        //buttonPanel.add(loadButton);
-        buttonPanel.add(loginButton);
+        buttonPanel.add(startButton);
+        buttonPanel.add(loadButton);
+        buttonPanel.add(loadButton2);
+        //buttonPanel.add(loginButton);
         buttonPanel.add(quitButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
@@ -141,6 +167,6 @@ public class MainMenu extends JFrame {
     }
 
     public static void main(String[] args) {
-        MainMenu mainMenu = new MainMenu();
+        MainMenuLoggedIn mainMenu = new MainMenuLoggedIn();
     }
 }
