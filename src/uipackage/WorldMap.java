@@ -211,11 +211,11 @@ public class WorldMap {
                         attackFrame.setLocationRelativeTo(null);
 
                         if(clickedShapeIndex == RunningModeNew.getTurn()) {
-                            // modify window according to friendly territory options
+                            // modify window according to friendly territory options such as deploy soldiers etc.
                             attackFrame.setTitle("Friendly Territory");
                         }
                         else if(clickedShapeIndex != RunningModeNew.getTurn()) {
-                            // modify window according to enemy territory options
+                            // modify window according to enemy territory options such as nuke card, attack button etc.
                             attackFrame.setTitle("Enemy Territory");
                         }
                 }
