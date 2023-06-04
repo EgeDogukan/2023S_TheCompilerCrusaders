@@ -20,12 +20,45 @@ import java.io.IOException;
 
 
 public class TerritoryJSONDBDatabaseTest  {
+    /* HALIL IBRAHIM AYDIN */
+
+    /*
+		Specifications for loadAll() Method:
+		Loads all the data from the JSON file and returns it as a nested ArrayList structure.
+        @return The nested ArrayList containing the loaded data.
+        @throws IOException If an error occurs while reading the JSON file.
+		
+		Requires:
+		A valid JSON file located at the filePath.
+		The existence of a valid Gson object for JSON parsing.
+		Valid usernames in the usernames array.
+				
+		Modifies:
+		
+		
+		Effects:
+		Opens a file reader for the JSON file located at the filePath.
+        Initializes an empty nested ArrayList, allArrayList, to store all the loaded data.
+        Iterates over each username in the usernames array.
+        Within each iteration, initializes an empty ArrayList, informations, to store data for a specific username.
+        Reads each line of the JSON file.
+        Parses the JSON data from each line into an ArrayList using the Gson object.
+        Filters the data based on the username, adding the filtered data to the informations ArrayList.
+        If the informations ArrayList is not empty, adds it to the allArrayList.
+        Closes the file reader.
+        Returns the allArrayList containing the loaded data.
+		
+		*/
     private TerritoryJSONDBDatabase a;
 
     private static final String DATA_JSON_FILE_PATH = "data.json";
 
     @BeforeEach
     void setup() throws IOException {
+
+        /* Requires: None.
+        Modifies: Deletes the existing data.json file and creates a new empty data.json file.
+        Effects: Sets up the initial state for each test case by ensuring that the data.json file is empty. */
         File dataFile = new File(DATA_JSON_FILE_PATH);
         if (dataFile.exists()) {
             dataFile.delete();
@@ -42,7 +75,9 @@ public class TerritoryJSONDBDatabaseTest  {
 
     @Test
     public void testEmptyFile() throws IOException {
-        // Prepare
+        /*Requires: An empty data.json file.
+        Modifies: None.
+        Effects: Tests the loadAll() method of TerritoryJSONDBDatabase class when the data.json file is empty. It verifies that the resulting database is empty. */
         
         TerritoryJSONDBDatabase  emptyDB = new TerritoryJSONDBDatabase();
         // Create an empty file for testing
@@ -56,7 +91,9 @@ public class TerritoryJSONDBDatabaseTest  {
 
     @Test
     public void testNonEmptyFile() throws IOException {
-        // Prepare
+        /*Requires: A non-empty data.json file with valid data.
+        Modifies: None.
+        Effects: Tests the loadAll() method of TerritoryJSONDBDatabase class when the data.json file contains valid data. It verifies that the resulting database matches the expected data structure. */
         
 
         // Create a file with valid data for testing
@@ -110,6 +147,9 @@ public class TerritoryJSONDBDatabaseTest  {
 
     @Test
     public void testNonExistentUser() {
+        /*Requires: A non-existent user
+        Modifies: None.
+        Effects: Tests the loadAll() method of TerritoryJSONDBDatabase class when the data.json file does not exist. It expects a NullPointerException to be thrown. */
         // Act and Assert
         // Ensure that an IOException is thrown when the file does not exist
         Assertions.assertThrows(NullPointerException.class, () -> {
@@ -119,6 +159,10 @@ public class TerritoryJSONDBDatabaseTest  {
 
     @Test
     public void testFileWithInvalidData() throws NullPointerException, IOException {
+
+        /*Requires: A data.json file with a mix of valid and invalid data.
+        Modifies: None.
+        Effects: Tests the save() method of TerritoryJSONDBDatabase class when saving invalid data to the data.json file. It expects a NullPointerException to be thrown. */
         // Prepare
         // Create a file with a mix of valid and invalid data for testing
         TerritoryJSONDBDatabase  a = new TerritoryJSONDBDatabase();
@@ -139,6 +183,9 @@ public class TerritoryJSONDBDatabaseTest  {
 
     @Test
     public void testRepOk() throws IOException {
+    /*Requires: A non-empty data.json file with valid data.
+    Modifies: None.
+    Effects: Tests the repOk() method of TerritoryJSONDBDatabase class. It verifies that the database representation is valid based on the provided data. */
     // Prepare
     TerritoryJSONDBDatabase a = new TerritoryJSONDBDatabase();
     ArrayList<Territory> territoryList = new ArrayList<>();
@@ -159,6 +206,10 @@ public class TerritoryJSONDBDatabaseTest  {
 
     @Test
     public void testCorruptedDataFile() throws IOException {
+
+        /*Requires: A corrupted data.json file with invalid JSON format.
+        Modifies: None.
+        Effects: Tests the loadAll() method of TerritoryJSONDBDatabase class when the data.json file contains invalid JSON data. It expects an IllegalArgumentException to be thrown. */
         // Prepare
         TerritoryJSONDBDatabase a = new TerritoryJSONDBDatabase();
 
@@ -179,6 +230,9 @@ public class TerritoryJSONDBDatabaseTest  {
 
     @Test
     public void testMultipleUsersInFile() throws IOException {
+        /*Requires: A data.json file with data for multiple users.
+        Modifies: None.
+        Effects: Tests the loadAll() method of TerritoryJSONDBDatabase class when the data.json file contains data for multiple users. It verifies that the resulting database contains the expected data for each user. */
         // Prepare
         // Create a file with data for multiple users for testing
         TerritoryJSONDBDatabase  a = new TerritoryJSONDBDatabase();
