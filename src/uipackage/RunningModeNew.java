@@ -164,10 +164,10 @@ public class RunningModeNew extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				turnCounter++;
-				turn.setText("Turn: Player "+players.get(turnCounter).getId());
+				turn.setText("Turn: Player "+players.get(turnCounter-1).getId());
 				if (turnCounter==numberOfAIPlayer+numberOfHumanPlayer)
 						turnCounter=0;
-						turn.setText("Turn: Player "+players.get(turnCounter).getId());
+				
 				
 				
 			}
