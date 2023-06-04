@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import RiskPackage.CreateTerritories;
 import RiskPackage.Territory;
 
 import java.util.List;
