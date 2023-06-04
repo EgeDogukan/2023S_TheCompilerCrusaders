@@ -44,7 +44,7 @@ public class WorldMap {
     public int numofSelectedTerritory = 0;
     private boolean isInBuildingMode = true;
     private ArrayList<Shape> selectedShapeList = new ArrayList<>();
-    
+    private int modeForDeployAttackFortify = 0;//0 for deploy, 1 for Attack, 2 for fortify
 
 
     public WorldMap() {
@@ -141,7 +141,7 @@ public class WorldMap {
                             optionFrame.setLocationRelativeTo(null);
                             optionFrame.setTitle("Deploy");
                             JPanel optionPanel = new JPanel();
-                            JTextField numberOfArmy = new JTextField("");
+                            JTextField numberOfArmy = new JTextField("0");
                             numberOfArmy.setPreferredSize(new Dimension(100,50));
                             optionPanel.add(numberOfArmy);
                             optionFrame.add(optionPanel);
@@ -151,7 +151,13 @@ public class WorldMap {
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
                                     setShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
-                                    System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyInfantry(clickedShapeIndex));    
+                                    System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyInfantry(clickedShapeIndex)); 
+                                    if(Integer.parseInt(numberOfArmyonarea) > 0){
+                                        optionFrame.dispose();
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(null, "Enter the amount of Infantry you wish to deploy");
+                                    }
                                 }
                             });
                             JButton retrieveCavalryButton = new JButton("Cavalry");
@@ -161,6 +167,12 @@ public class WorldMap {
                                     String numberOfArmyonarea = numberOfArmy.getText();
                                     setShapeArmyCavalry(shape, Integer.parseInt(numberOfArmyonarea));      
                                     System.out.println("Cavalry at shape index " + clickedShapeIndex + ": " + getShapeArmyCavalry(clickedShapeIndex));    
+                                    if(Integer.parseInt(numberOfArmyonarea) > 0){
+                                        optionFrame.dispose();
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(null, "Enter the amount of Cavalry you wish to deploy");
+                                    }
                                 }
                             });
                             JButton retrieveArtilleryButton = new JButton("Artillery");
@@ -170,6 +182,12 @@ public class WorldMap {
                                     String numberOfArmyonarea = numberOfArmy.getText();
                                     setShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
                                     System.out.println("Artillery at shape index " + clickedShapeIndex + ": " + getShapeArmyArtillery(clickedShapeIndex));                                      
+                                    if(Integer.parseInt(numberOfArmyonarea) > 0){
+                                        optionFrame.dispose();
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(null, "Enter the amount of Artillery you wish to deploy");
+                                    }
                                 }
                             });
 
@@ -183,16 +201,93 @@ public class WorldMap {
                             selectedShapeList.add(shape);
                             
                             break;
+                            
                         }
 
                     }
                 }
                 else if (isInBuildingMode == false) {
                     for (Shape shape : shapeList) {
-                        if (shape.contains(pointOnImage)) {   
+                        if (shape.contains(pointOnImage)) { 
+                              if(BuildingModeNew.getTurn() == WorldMap.getShapeIndex(shape)){
+                                if(modeForDeployAttackFortify == 0){//Call Deploy UI
+                                    JFrame optionFrame = new JFrame();
+                                    optionFrame.setSize(500, 100);
+                                    optionFrame.setLocationRelativeTo(null);
+                                    optionFrame.setTitle("Deploy");
+                                    JPanel optionPanel = new JPanel();
+                                    JTextField numberOfArmy = new JTextField("");
+                                    numberOfArmy.setPreferredSize(new Dimension(100,50));
+                                    optionPanel.add(numberOfArmy);
+                                    optionFrame.add(optionPanel);
+                                    JButton retrieveInfantryButton = new JButton("Infantry");
+                                    retrieveInfantryButton.addActionListener(new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            String numberOfArmyonarea = numberOfArmy.getText();
+                                            setShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
+                                            System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyInfantry(clickedShapeIndex));    
+                                            if(Integer.parseInt(numberOfArmyonarea) > 0){
+                                                optionFrame.dispose();
+                                            }
+                                            else{
+                                                JOptionPane.showMessageDialog(null, "Enter the amount of Infantry you wish to deploy");
+                                            }
+                                        }
+                                    });
+                                    JButton retrieveCavalryButton = new JButton("Cavalry");
+                                    retrieveCavalryButton.addActionListener(new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            String numberOfArmyonarea = numberOfArmy.getText();
+                                            setShapeArmyCavalry(shape, Integer.parseInt(numberOfArmyonarea));      
+                                            System.out.println("Cavalry at shape index " + clickedShapeIndex + ": " + getShapeArmyCavalry(clickedShapeIndex));    
+                                            if(Integer.parseInt(numberOfArmyonarea) > 0){
+                                                optionFrame.dispose();
+                                            }
+                                            else{
+                                                JOptionPane.showMessageDialog(null, "Enter the amount of Cavalry you wish to deploy");
+                                            }
+                                        }
+                                    });
+                                    JButton retrieveArtilleryButton = new JButton("Artillery");
+                                    retrieveArtilleryButton.addActionListener(new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            String numberOfArmyonarea = numberOfArmy.getText();
+                                            setShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
+                                            System.out.println("Artillery at shape index " + clickedShapeIndex + ": " + getShapeArmyArtillery(clickedShapeIndex));                                      
+                                            if(Integer.parseInt(numberOfArmyonarea) > 0){
+                                                optionFrame.dispose();
+                                            }
+                                            else{
+                                                JOptionPane.showMessageDialog(null, "Enter the amount of Artillery you wish to deploy");
+                                            }
+                                        }
+                                    });
+    
+                                    optionPanel.add(retrieveArtilleryButton);
+                                    optionPanel.add(retrieveCavalryButton);
+                                    optionPanel.add(retrieveInfantryButton);
+                                    optionFrame.setVisible(true);
+                                    optionFrame.addWindowListener(new WindowAdapter() {
+                                        @Override
+                                        public void windowClosing(WindowEvent e) {
+                                            modeForDeployAttackFortify = 1;
+                                            System.out.println(modeForDeployAttackFortify);
+                                            
+                                        }
+                                    });
+                              }
                             
-                            //First call Deploy UI before selecting to attack anyone in the map
-                           
+                            
+                                
+                            }
+                            else if(modeForDeployAttackFortify == 1){//Call Attack
+                            }
+                            else if(modeForDeployAttackFortify == 2){//Call Fortify
+                                
+                            }
                         }
                     }        
                     
@@ -654,10 +749,6 @@ public class WorldMap {
         neighbourList.add(row39);
         neighbourList.add(row40);
 
-
-
-
-
     }
 
     public static List<Integer> getNeighbour(int row){//Row here is the ID of the Territory
@@ -763,7 +854,7 @@ public class WorldMap {
         return isEveryTerritorySelected;
     }
     
-    public int getShapeIndex(Shape shape) {
+    public static int getShapeIndex(Shape shape) {
     	return shapeList.indexOf(shape);
     }
     
