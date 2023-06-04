@@ -227,7 +227,8 @@ public class WorldMap {
                 else if (isInBuildingMode == false) {
                     for (Shape shape : shapeList) {
 
-                        if (shape.contains(pointOnImage)) {   
+                        if (shape.contains(pointOnImage)) {  
+                            if(RunningModeNew.whichStage == "Deploy") { 
                             //JOptionPane.showMessageDialog(null, "Clicked!"); 
                             numofSelectedTerritory++;
                             if (numofSelectedTerritory==shapeList.size()) {
@@ -316,7 +317,7 @@ public class WorldMap {
                             
                             
                         }
-
+                    }
                     }
                 }
             }

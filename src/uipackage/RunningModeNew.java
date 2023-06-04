@@ -172,6 +172,37 @@ public class RunningModeNew extends JFrame {
 		JPanel turnPanel = new JPanel();
 		turnPanel.setBounds(600,700,100,100);
 		
+		stage.setLocation(100,800);
+		stage.setSize(100, 100);
+		whichStage="Deploy";
+
+		JButton nextStage = new JButton("Next Stage");
+		nextStage.setLocation(200,800);
+		nextStage.setSize(100, 100);
+		nextStage.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+
+			counter ++;
+
+			if(counter == 1){
+				stage.setText("Attack");
+				whichStage="Attack";
+
+			}
+			else if(counter==2){
+				stage.setText("Fortify");
+				whichStage="Fortify";
+			}
+			
+			else if(counter>2){
+				counter=0;
+				stage.setText("Deploy");
+				whichStage="Deploy";
+			}
+			}
+		});
+		this.add(stage);
+		this.add(nextStage);
 
 		JButton nextButton = new JButton("next turn");
 		nextButton.setBounds(500,550,100,100);
