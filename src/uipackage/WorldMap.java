@@ -206,7 +206,18 @@ public class WorldMap {
                     }
                 }
                 else if (isInBuildingMode == false) {
+                        JFrame attackFrame = new JFrame();
+                        attackFrame.setSize(400, 400);
+                        attackFrame.setLocationRelativeTo(null);
 
+                        if(clickedShapeIndex == RunningModeNew.getTurn()) {
+                            // modify window according to friendly territory options
+                            attackFrame.setTitle("Friendly Territory");
+                        }
+                        else if(clickedShapeIndex != RunningModeNew.getTurn()) {
+                            // modify window according to enemy territory options
+                            attackFrame.setTitle("Enemy Territory");
+                        }
                 }
             }
             

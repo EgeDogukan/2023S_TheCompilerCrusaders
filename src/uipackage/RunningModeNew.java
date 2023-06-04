@@ -44,7 +44,7 @@ public class RunningModeNew extends JFrame {
 	}
 	
 
-    public int getTurn() {
+    public static int getTurn() {
 		return RunningModeNew.turnCounter;
 	}
 	public Color getTurnColor(){
