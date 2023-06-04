@@ -30,8 +30,7 @@ public class WorldMap {
 
     static ArrayList<Shape> shapeList = new ArrayList<>();
     //static ArrayList<ArrayList<Integer>> armyList = new ArrayList<ArrayList<Integer>>(60);
-    static ArrayList[][] armArrayLists = new ArrayList[60][3];
-
+    public static ArrayList[][] armArrayLists = new ArrayList[60][3];
     static ArrayList<Color> colorList = new ArrayList<>();
     private Shape clickedShape;
     private MouseListener ml;
