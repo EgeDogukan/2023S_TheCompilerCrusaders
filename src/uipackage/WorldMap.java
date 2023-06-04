@@ -109,7 +109,7 @@ public class WorldMap {
         }
         
         System.out.println("boyut2:"+shapeList.size());
-        shapeList= new ArrayList<>(shapeList.subList(0, Math.min(shapeList.size(), 10)));//Change it back to 100
+        shapeList= new ArrayList<>(shapeList.subList(0, Math.min(shapeList.size(), 100)));//Change it back to 100
         System.out.println("boyut3:"+shapeList.size());
     
         ui = new JPanel(new BorderLayout(4, 4));

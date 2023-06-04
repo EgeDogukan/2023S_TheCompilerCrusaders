@@ -141,7 +141,7 @@ public class RunningModeNew extends JFrame {
 		this.add(saveButtonJSON);
 		
 		JButton pickChanceCard = new JButton("pick chance card");
-		pickChanceCard.setBounds(300, 550, 100, 100);
+		pickChanceCard.setBounds(200, 550, 100, 100);
 		pickChanceCard.addActionListener(new ActionListener() {
 			
 			@Override
@@ -160,20 +160,18 @@ public class RunningModeNew extends JFrame {
 		this.add(pickChanceCard);
 		
 		JLabel turn = new JLabel("Turn: Player "+ players.get(turnCounter).getId());
-		turn.setBounds(500, 650, 100, 100);
+		turn.setBounds(300, 650, 100, 100);
 		
 		this.add(turn);
 		
 		JPanel turnPanel = new JPanel();
 		turnPanel.setBounds(600,700,100,100);
 		
-		stage.setLocation(100,800);
-		stage.setSize(100, 100);
+		stage.setBounds(380, 620, 100, 100);
 		whichStage="Deploy";
 
 		JButton nextStage = new JButton("Next Stage");
-		nextStage.setLocation(200,800);
-		nextStage.setSize(100, 100);
+		nextStage.setBounds(350, 550, 100, 100);
 		nextStage.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 
@@ -196,6 +194,7 @@ public class RunningModeNew extends JFrame {
 			}
 			}
 		});
+		nextStage.setVisible(true);
 		this.add(stage);
 		this.add(nextStage);
 
