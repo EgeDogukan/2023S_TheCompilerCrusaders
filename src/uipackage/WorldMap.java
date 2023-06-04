@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import RiskPackage.CreateTerritories;
+import RiskPackage.Territory;
 
 import java.util.List;
 
@@ -45,6 +47,7 @@ public class WorldMap {
     private ArrayList<Shape> selectedShapeList = new ArrayList<>();
     
 
+
     public WorldMap() {
         try {
             for (int i = 0; i < 60; i++) {
@@ -69,7 +72,8 @@ public class WorldMap {
     }
 
     public final void initUI() throws Exception {
-        InitNeighbors();
+        
+        
         if (ui != null) {
             return;
         }
@@ -92,6 +96,7 @@ public class WorldMap {
         long now = System.currentTimeMillis();
         System.out.println("Time in mins: " + (now - then) / 60000d);
         shapeList2 = separateShapeIntoRegions(area);
+
         System.out.println("boyut:"+shapeList2.size());
         for(int i = 0; i < shapeList2.size(); i++){
             Shape shape =shapeList2.get(i);
@@ -100,7 +105,7 @@ public class WorldMap {
         }
         
         System.out.println("boyut2:"+shapeList.size());
-        shapeList= new ArrayList<>(shapeList.subList(0, Math.min(shapeList.size(), 100)));
+        shapeList= new ArrayList<>(shapeList.subList(0, Math.min(shapeList.size(), 10)));//Change it back to 100
         System.out.println("boyut3:"+shapeList.size());
     
         ui = new JPanel(new BorderLayout(4, 4));
@@ -110,6 +115,7 @@ public class WorldMap {
         MouseListener ml = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                
             	System.out.println("Butona basildi");
                 Point p = MouseInfo.getPointerInfo().getLocation();
                 Point p1 = output.getLocationOnScreen();
@@ -136,7 +142,7 @@ public class WorldMap {
                             optionFrame.setLocationRelativeTo(null);
                             optionFrame.setTitle("Deploy");
                             JPanel optionPanel = new JPanel();
-                            JLabel numberOfArmy = new JLabel("3");
+                            JTextField numberOfArmy = new JTextField("");
                             numberOfArmy.setPreferredSize(new Dimension(100,50));
                             optionPanel.add(numberOfArmy);
                             optionFrame.add(optionPanel);
@@ -370,6 +376,7 @@ public class WorldMap {
     }
 
     public void InitNeighbors(){
+       
         
         List<Integer> row0 = new ArrayList<Integer>();//North West Territory
         row0.add(3);
@@ -647,6 +654,10 @@ public class WorldMap {
         neighbourList.add(row38);
         neighbourList.add(row39);
         neighbourList.add(row40);
+
+
+
+
 
     }
 
