@@ -40,14 +40,19 @@ public class RunningModeNew extends JFrame {
 	public static int databaseChooser=0;
     public ArrayList<Shape> shapelist = new ArrayList<>();
 	public static boolean isInBuildingMode = true;
+
 	private int counter = 0;
 	public static JLabel stage = new JLabel("Deploy");
 	public static String whichStage= new String();
 
-	public RunningModeNew(ArrayList<PlayerNew> players) {
+	public WorldMap worldMap;
+
+
+	public RunningModeNew(ArrayList<PlayerNew> players, WorldMap worldMap) {
 		this.players=players;
 		numberOfHumanPlayer=players.size();
 		numberOfAIPlayer=0;
+		this.worldMap=worldMap;
 		initGame(players);
 	}
 	
@@ -84,11 +89,15 @@ public class RunningModeNew extends JFrame {
 		this.setLayout(null); // Use BorderLayout for the JFrame
 	
 		
-		WorldMap worldmap = BuildingModeNew.getWorldMap();
-		shapelist=worldmap.getShapeList();
+		
+		shapelist=this.worldMap.getShapeList();
+		ArrayList<JTextField> textLabels = worldMap.getTextLabels();
+		for (JTextField curField : textLabels) {
+			this.add(curField);
+		}
 		
 
-		JPanel worldPanel = (JPanel) worldmap.getUI();
+		JPanel worldPanel = (JPanel) worldMap.getUI();
 		worldPanel.setBounds(0, 0, worldPanel.getPreferredSize().width, worldPanel.getPreferredSize().height);
 		this.add(worldPanel); // Add the map panel to the center of the JFrame
 		
@@ -149,7 +158,7 @@ public class RunningModeNew extends JFrame {
 		        players.get(turnCounter).addChanceCard(randomNumber);
 				ChanceCardFactory factory = new ChanceCardFactory();
 				
-				System.out.println("card with index "+randomNumber+"which is "+factory.createCard(randomNumber).getClass().getName()+"added to the players' list with id: " +turnCounter);
+				System.out.println("card with index "+randomNumber+" which is "+factory.createCard(randomNumber).getClass().getName()+"added to the players' list with id: " +(turnCounter+1));
 				
 			}
 		});
@@ -159,6 +168,10 @@ public class RunningModeNew extends JFrame {
 		turn.setBounds(500, 650, 100, 100);
 		
 		this.add(turn);
+		
+		JPanel turnPanel = new JPanel();
+		turnPanel.setBounds(600,700,100,100);
+		
 
 		JButton nextButton = new JButton("next turn");
 		nextButton.setBounds(500,550,100,100);
@@ -167,15 +180,19 @@ public class RunningModeNew extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				turnCounter++;
-				turn.setText("Turn: Player "+players.get(turnCounter).getId());
+				turn.setText("Turn: Player "+players.get(turnCounter-1).getId());
 				if (turnCounter==numberOfAIPlayer+numberOfHumanPlayer)
 						turnCounter=0;
-						turn.setText("Turn: Player "+players.get(turnCounter).getId());
+				turnPanel.setBackground(players.get(turnCounter).getColor());
+				
 				
 				
 			}
 		});
 		this.add(nextButton);
+		this.add(turnPanel);
+
+
 		
 		String[] cardTypes = {"Draft Chance Card", "Reinforcement Card", "Trade Deal Card", "Revolution Card", "Nuclear Strike Card"};
         JComboBox<String> cardComboBox = new JComboBox<String>(cardTypes);
@@ -190,7 +207,7 @@ public class RunningModeNew extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("card with index "+cardComboBox.getSelectedIndex()+"which is "+cardComboBox.getSelectedItem()+"used by the player with id: " +turnCounter);
+				System.out.println("card with index "+cardComboBox.getSelectedIndex()+"which is "+cardComboBox.getSelectedItem()+"used by the player with id: " +(turnCounter+1));
 				
 				players.get(turnCounter).useCard(cardComboBox.getSelectedIndex());
 				
