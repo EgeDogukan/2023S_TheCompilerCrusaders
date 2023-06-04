@@ -40,7 +40,7 @@ public class WorldMap {
     private ArrayList<JTextField> textLabels = new ArrayList<>();
 
     ArrayList<ArrayList> neighbourList = new ArrayList<ArrayList>(100);
-    public static ArrayList[][] neighborList = new ArrayList[60][10];
+    public static ArrayList[][] neighborList = new ArrayList[60][2];
 
 
     
@@ -58,11 +58,13 @@ public class WorldMap {
             }
 
             for (int i = 0; i < 60; i++) {
-                for(int k = 0; k < 10; k++){
+                for(int k = 0; k < 2; k++){
                     neighborList[i][k] = new ArrayList<Integer>();
                     neighborList[i][k].add(i);
                 }    
             }
+
+            InitNeighbors();
 
 
             
@@ -522,6 +524,11 @@ public class WorldMap {
         row0.add(3);
         row0.add(7);
         row0.add(2);
+
+        neighborList[0][0].add(3);
+        neighborList[0][0].add(7);
+        neighborList[0][0].add(2);
+        System.out.println("NEIGHBORS: " + neighborList[0][0]);
         
         ArrayList<Integer> row1 = new ArrayList<Integer>(10);//Yakutsk
         row1.add(9);
