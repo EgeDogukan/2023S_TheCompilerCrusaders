@@ -2,8 +2,13 @@ package RiskPackage;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Random;
+
+import javax.swing.JTextField;
 
 import chanceCardPackage.IChanceCard;
+import uipackage.RunningModeNew;
+import uipackage.WorldMap;
 
 public class PlayerNew {
 
@@ -29,16 +34,21 @@ public class PlayerNew {
 		
 		if (index!=-1) {
 			this.chanceCards.remove(index);
+			
 		}
 		else 
 			System.out.println("You don't have this card.");
 	}
 	
-	
-	
-	
-	
+	public void useReinforcementCard(int territoryIndex) {
 
+		Random random = new Random();
+		int randomNumber = random.nextInt(3) + 1;
+		RunningModeNew.worldMap.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(territoryIndex), randomNumber);
+		System.out.println("Succesfully "+randomNumber+" added to the territory with index: "+territoryIndex);
+	
+	}
+	
 	public int getId() {
 		return id;
 	}

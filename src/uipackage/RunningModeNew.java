@@ -14,13 +14,6 @@ import javax.swing.*;
 import java.awt.*;
 import uipackage.WorldMap;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 import RiskPackage.PlayerNew;
 import chanceCardPackage.ChanceCardFactory;
@@ -40,7 +33,7 @@ public class RunningModeNew extends JFrame {
 	public static int databaseChooser=0;
     public ArrayList<Shape> shapelist = new ArrayList<>();
 	public static boolean isInBuildingMode = true;
-	public WorldMap worldMap;
+	public static WorldMap worldMap;
 
 	public RunningModeNew(ArrayList<PlayerNew> players, WorldMap worldMap) {
 		this.players=players;
@@ -204,6 +197,41 @@ public class RunningModeNew extends JFrame {
 				System.out.println("card with index "+cardComboBox.getSelectedIndex()+"which is "+cardComboBox.getSelectedItem()+"used by the player with id: " +(turnCounter+1));
 				
 				players.get(turnCounter).useCard(cardComboBox.getSelectedIndex());
+				
+				if (cardComboBox.getSelectedItem().equals("Reinforcement Card")) {
+					
+					
+					JFrame optionFrame = new JFrame();
+                    optionFrame.setSize(500, 100);
+                    optionFrame.setLocationRelativeTo(null);
+                    optionFrame.setTitle("ID Choose");
+                    JPanel optionPanel = new JPanel();
+                    JTextField ID = new JTextField();
+                    ID.setPreferredSize(new Dimension(100,50));
+                    
+                    JButton closeButton = new JButton("Close");
+                    
+                    closeButton.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							String IDonArea = ID.getText();
+							players.get(turnCounter).useReinforcementCard(Integer.parseInt(IDonArea));
+							optionFrame.dispose();
+							
+						}
+					});
+                    
+                    
+                    optionPanel.add(ID);
+                    optionPanel.add(closeButton);
+                    optionFrame.add(optionPanel);
+                    optionFrame.setVisible(true);
+					
+					
+				}
+				
+				
 				
 			}
 		});
