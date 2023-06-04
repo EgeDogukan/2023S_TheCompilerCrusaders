@@ -128,7 +128,7 @@ public class WorldMap {
                             optionFrame.setLocationRelativeTo(null);
                             optionFrame.setTitle("Deploy");
                             JPanel optionPanel = new JPanel();
-                            JLabel numberOfArmy = new JLabel("3");
+                            JTextField numberOfArmy = new JTextField();
                             numberOfArmy.setPreferredSize(new Dimension(100,50));
                             optionPanel.add(numberOfArmy);
                             optionFrame.add(optionPanel);
@@ -174,7 +174,7 @@ public class WorldMap {
                     }
                 }
                 else if (isInBuildingMode == false) {
-                    System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+                    
                 }
             }
             
