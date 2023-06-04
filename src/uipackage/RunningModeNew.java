@@ -156,6 +156,10 @@ public class RunningModeNew extends JFrame {
 		turn.setBounds(500, 650, 100, 100);
 		
 		this.add(turn);
+		
+		JPanel turnPanel = new JPanel();
+		turnPanel.setBounds(600,700,100,100);
+		
 
 		JButton nextButton = new JButton("next turn");
 		nextButton.setBounds(500,550,100,100);
@@ -167,12 +171,16 @@ public class RunningModeNew extends JFrame {
 				turn.setText("Turn: Player "+players.get(turnCounter-1).getId());
 				if (turnCounter==numberOfAIPlayer+numberOfHumanPlayer)
 						turnCounter=0;
+				turnPanel.setBackground(players.get(turnCounter).getColor());
 				
 				
 				
 			}
 		});
 		this.add(nextButton);
+		this.add(turnPanel);
+
+
 		
 		String[] cardTypes = {"Draft Chance Card", "Reinforcement Card", "Trade Deal Card", "Revolution Card", "Nuclear Strike Card"};
         JComboBox<String> cardComboBox = new JComboBox<String>(cardTypes);
