@@ -36,9 +36,13 @@ public class WorldMap {
     public int numofSelectedTerritory = 0;
     private boolean isInBuildingMode = true;
     private ArrayList<Shape> selectedShapeList = new ArrayList<>();
+    private ArrayList<JTextField> textLabels = new ArrayList<>();
     
 
     public WorldMap() {
+    	
+    	
+    	
         try {
             for (int i = 0; i < 60; i++) {
                 //armyList[0].add(new ArrayList<Integer>());
@@ -121,7 +125,18 @@ public class WorldMap {
                             }                         
                             clickedShape = shape;
                             WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
-
+                            
+                            Rectangle rectangle = clickedShape.getBounds();
+                            double centerX = rectangle.getCenterX();
+                            double centerY = rectangle.getCenterY();
+                            JTextField currentField = new JTextField();
+                            
+                            currentField.setBounds((int) centerX, (int) centerY, 40, 40);
+                            currentField.setText(Integer.toString(clickedShapeIndex));
+                            
+                            getTextLabels().add(currentField);
+                            
+                            	
                             //Deploy UI
                             JFrame optionFrame = new JFrame();
                             optionFrame.setSize(500, 100);
@@ -199,6 +214,7 @@ public class WorldMap {
                                                         
                                 clickedShape = shape;
                                 setIndexColor(shapeList.indexOf(shape), Color.gray);
+                                
         
                                 break;
                             }
@@ -209,6 +225,15 @@ public class WorldMap {
                 
             }
         };
+        
+        
+        if (isInBuildingMode) {
+        	for (JTextField currentField : getTextLabels()) {
+        		ui.add(currentField);
+        	}	
+        }
+        
+        
         output.addMouseListener(ml);
         ui.add(output);
         refresh();
@@ -240,6 +265,7 @@ public class WorldMap {
         // construct the Area from the GP & return it
         return new Area(gp);
     }
+    
 
     public static ArrayList<Shape> separateShapeIntoRegions(Shape shape) {
         ArrayList<Shape> regions = new ArrayList<>();
@@ -484,5 +510,13 @@ public class WorldMap {
             f.setVisible(true);
         };
         SwingUtilities.invokeLater(r);
-    } 
+    }
+
+	public ArrayList<JTextField> getTextLabels() {
+		return textLabels;
+	}
+
+	public void setTextLabels(ArrayList<JTextField> textLabels) {
+		this.textLabels = textLabels;
+	} 
 }

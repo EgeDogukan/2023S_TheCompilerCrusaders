@@ -40,11 +40,13 @@ public class RunningModeNew extends JFrame {
 	public static int databaseChooser=0;
     public ArrayList<Shape> shapelist = new ArrayList<>();
 	public static boolean isInBuildingMode = true;
+	public WorldMap worldMap;
 
-	public RunningModeNew(ArrayList<PlayerNew> players) {
+	public RunningModeNew(ArrayList<PlayerNew> players, WorldMap worldMap) {
 		this.players=players;
 		numberOfHumanPlayer=players.size();
 		numberOfAIPlayer=0;
+		this.worldMap=worldMap;
 		initGame(players);
 	}
 	
@@ -81,11 +83,15 @@ public class RunningModeNew extends JFrame {
 		this.setLayout(null); // Use BorderLayout for the JFrame
 	
 		
-		WorldMap worldmap = BuildingModeNew.getWorldMap();
-		shapelist=worldmap.getShapeList();
+		
+		shapelist=this.worldMap.getShapeList();
+		ArrayList<JTextField> textLabels = worldMap.getTextLabels();
+		for (JTextField curField : textLabels) {
+			this.add(curField);
+		}
 		
 
-		JPanel worldPanel = (JPanel) worldmap.getUI();
+		JPanel worldPanel = (JPanel) worldMap.getUI();
 		worldPanel.setBounds(0, 0, worldPanel.getPreferredSize().width, worldPanel.getPreferredSize().height);
 		this.add(worldPanel); // Add the map panel to the center of the JFrame
 		
@@ -146,7 +152,7 @@ public class RunningModeNew extends JFrame {
 		        players.get(turnCounter).addChanceCard(randomNumber);
 				ChanceCardFactory factory = new ChanceCardFactory();
 				
-				System.out.println("card with index "+randomNumber+"which is "+factory.createCard(randomNumber).getClass().getName()+"added to the players' list with id: " +turnCounter);
+				System.out.println("card with index "+randomNumber+" which is "+factory.createCard(randomNumber).getClass().getName()+"added to the players' list with id: " +(turnCounter+1));
 				
 			}
 		});
@@ -195,7 +201,7 @@ public class RunningModeNew extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("card with index "+cardComboBox.getSelectedIndex()+"which is "+cardComboBox.getSelectedItem()+"used by the player with id: " +turnCounter);
+				System.out.println("card with index "+cardComboBox.getSelectedIndex()+"which is "+cardComboBox.getSelectedItem()+"used by the player with id: " +(turnCounter+1));
 				
 				players.get(turnCounter).useCard(cardComboBox.getSelectedIndex());
 				
