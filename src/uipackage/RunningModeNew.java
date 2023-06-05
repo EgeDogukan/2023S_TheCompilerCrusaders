@@ -238,6 +238,63 @@ public class RunningModeNew extends JFrame {
 		this.add(useCardButton);
 		
 		
+		JButton exitButton = new JButton("Exit!");
+		exitButton.setBounds(1200, 700, 100, 100);
+		exitButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				RunningModeNew.this.dispose();
+				
+			}
+		});
+		this.add(exitButton);
+		
+		JButton pauseButton = new JButton("Pause");
+		pauseButton.setBounds(1200, 600, 100, 100);
+		pauseButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				if (pauseButton.getText().equals("Pause")){
+					pauseButton.setText("Resume");
+					exitButton.setVisible(false);
+					useCardButton.setVisible(false);
+					cardComboBox.setVisible(false);
+					saveButtonMongo.setVisible(false);
+					saveButtonJSON.setVisible(false);
+					pickChanceCard.setVisible(false);
+					turnPanel.setVisible(false);
+					nextButton.setVisible(false);
+					worldPanel.setVisible(false);
+					turn.setVisible(false);
+					for (JTextField curField : textLabels) 
+						curField.setVisible(false);
+					
+					
+				}
+				else {
+					pauseButton.setText("Pause");
+					exitButton.setVisible(true);
+					useCardButton.setVisible(true);
+					cardComboBox.setVisible(true);
+					saveButtonMongo.setVisible(true);
+					saveButtonJSON.setVisible(true);
+					pickChanceCard.setVisible(true);
+					turnPanel.setVisible(true);
+					nextButton.setVisible(true);
+					worldPanel.setVisible(true);
+					turn.setVisible(true);
+					for (JTextField curField : textLabels) 
+						curField.setVisible(true);
+				}
+				
+				
+			}
+		});
+		this.add(pauseButton);
+		
 		
 	
 		
