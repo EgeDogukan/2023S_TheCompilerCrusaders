@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import RiskPackage.GameControllerNew;
 import RiskPackage.Territory;
 
 import java.util.List;
@@ -19,6 +20,14 @@ import java.util.Collections;
 import javax.imageio.ImageIO;
 
 public class WorldMap {
+
+
+    private Image star;
+    private Image cross;
+    private double scale = 0.01;
+    private boolean isGrowing = true;
+    private boolean starVisible = false;
+    private boolean crossVisible = false;
 
     private JComponent ui = null;
     static JLabel output = new JLabel();
@@ -47,34 +56,25 @@ public class WorldMap {
 
     private ArrayList<JTextField> textLabels = new ArrayList<>();
 
-    ArrayList<ArrayList> neighbourList = new ArrayList<ArrayList>(100);
-    public static ArrayList[][] neighborList = new ArrayList[60][2];
-
+    ArrayList<ArrayList<Integer>> neighbourList = new ArrayList<ArrayList<Integer>>();
 
     private int modeForDeployAttackFortify = 0;
 
     public WorldMap() {
     	InitNeighbors();
     	
+
+
     	
         try {
-            for (int i = 0; i < 60; i++) {
-                for(int k = 0; k < 3; k++){
-                    armArrayLists[i][k] = new ArrayList<Integer>();
-                    armArrayLists[i][k].add(i);
-                }    
-            }
-
-            for (int i = 0; i < 60; i++) {
-                for(int k = 0; k < 2; k++){
-                    neighborList[i][k] = new ArrayList<Integer>();
-                    neighborList[i][k].add(i);
-                }    
-            }
-
-            InitNeighbors();
-
-
+            // for (int i = 0; i < 60; i++) {
+            //     //armyList[0].add(new ArrayList<Integer>());
+            //     for(int k = 0; k < 3; k++){
+            //         armArrayLists[i][k] = new ArrayList<Integer>();
+            //         armArrayLists[i][k].add(i);
+                    
+            //     }    
+            // }
             
             // Set each entry in armyList to 0
             for (int i = 0; i < numberOfShape ; i++) {
@@ -259,8 +259,7 @@ public class WorldMap {
                             double centerY = rectangle.getCenterY();
                             JTextField currentField = new JTextField();
                             
-                            currentField.setBounds((int) centerX, (int) centerY, 40, 40);
-                            currentField.setText(Integer.toString(clickedShapeIndex)+ " "+Integer.toString(powerOfShape(shape)));
+                            
                             
                             getTextLabels().add(currentField);
                             
@@ -322,10 +321,12 @@ public class WorldMap {
 
                                 }
                             });
-
+                            currentField.setBounds((int) centerX, (int) centerY, 40, 40);
+                            currentField.setText(Integer.toString(clickedShapeIndex)+ " "+Integer.toString(powerOfShape(shape)));
                             optionPanel.add(retrieveArtilleryButton);
                             optionPanel.add(retrieveCavalryButton);
                             optionPanel.add(retrieveInfantryButton);
+                            optionPanel.add(currentField);
                             optionFrame.setVisible(true);
                             
                             
@@ -354,8 +355,25 @@ public class WorldMap {
                             String[] stringArray = stringList.toArray(new String[0]);
 
                             JComboBox<String> neighbourCombo = new JComboBox<String>(stringArray);
-                            
-
+                            JButton attackButton = new JButton("Attack");
+                            //attackButton.setBounds(120,  120, 100, 50);
+                            attackPanel.add(attackButton);
+                            attackButton.addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mouseClicked(MouseEvent e) {
+                                    int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
+                                    Shape destinationShape = getShape(destinationIndex);
+                                    System.out.println("destination power**********: " + powerOfShape(destinationShape));
+                                    System.out.println("destination power**********: " + powerOfShape(shape));
+                                    if(powerOfShape(shape)>powerOfShape(destinationShape)){
+                                        
+                                        //**************** */
+                                        //GameControllerNew.g.createPanel();
+                                        //************************* */
+                                        setIndexColor(shapeList.indexOf(destinationShape), Color.gray);
+                                    }
+                                }
+                            });
 
                             neighbourCombo.setPreferredSize(new Dimension(100,50));
                             attackPanel.add(neighbourCombo);
@@ -555,32 +573,6 @@ public class WorldMap {
         return bi;
     }
 
-    
-    
-    
-    
-    
-
-    
-
-    
-    public void setNeighbor(Shape shape, int[] index) {
-        int neighborIndex = shapeList.indexOf(shape);
-        for(int i : index) {
-            neighborList[neighborIndex][0].add(index);
-        }
-    }
-
-    public int[] getNeighbor(int index) {
-        return (int[]) neighborList[index][0].get(0);
-    }
-
-    
-    
-
-   
-    
-   
     public void InitNeighbors(){
        
         
@@ -588,11 +580,6 @@ public class WorldMap {
         row0.add(3);
         row0.add(7);
         row0.add(2);
-
-        neighborList[0][0].add(3);
-        neighborList[0][0].add(7);
-        neighborList[0][0].add(2);
-        System.out.println("NEIGHBORS: " + neighborList[0][0]);
         
         ArrayList<Integer> row1 = new ArrayList<Integer>();//Yakutsk
         row1.add(9);
