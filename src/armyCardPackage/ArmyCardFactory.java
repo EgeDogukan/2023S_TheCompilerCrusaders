@@ -2,11 +2,9 @@ package armyCardPackage;
 
 public class ArmyCardFactory {
 
-	private int id;
 
-	public ArmyCardFactory(int id) {
-		this.id = id;
-		this.createArmyCard(id);
+	public ArmyCardFactory() {
+
 	}
 	
 	public IArmyCard createArmyCard(int id) {

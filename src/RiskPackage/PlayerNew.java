@@ -107,13 +107,7 @@ public class PlayerNew {
 			RunningModeNew.worldMap.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(sourceIndex), 0);
 			RunningModeNew.worldMap.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(sourceIndex), 0);
 			RunningModeNew.worldMap.setShapeArmyInfantry(RunningModeNew.worldMap.getShape(sourceIndex), 0);
-		}
-		
-		
-		
-		
-		
-		
+		}	
 	}
 	
 	

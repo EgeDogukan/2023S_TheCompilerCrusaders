@@ -19,10 +19,13 @@ import javax.imageio.ImageIO;
 import RiskPackage.GameControllerNew;
 import RiskPackage.PlayerNew;
 import animationPackage.CardAnimationClass;
+import armyCardPackage.ArmyCardFactory;
+import armyCardPackage.IArmyCard;
 import chanceCardPackage.ChanceCardFactory;
 import databasePackage.ISaveLoadAdapter;
 import databasePackage.TerritoryDBDatabase;
 import databasePackage.TerritoryJSONDBDatabase;
+import territoryCardPackage.TerritoryCard;
 
 
 public class RunningModeNew extends JFrame {
@@ -48,6 +51,11 @@ public class RunningModeNew extends JFrame {
 	public static WorldMap worldMap;
 	
 	public CardAnimationClass cardAnimationClass;
+	
+	public ArrayList<IArmyCard> armyCards = new ArrayList<>();
+	public ArmyCardFactory armyCardFactory = new ArmyCardFactory();
+	
+	public ArrayList<TerritoryCard> territoryCards = new ArrayList<>();
 
 
 
@@ -56,7 +64,24 @@ public class RunningModeNew extends JFrame {
 		numberOfHumanPlayer=players.size();
 		numberOfAIPlayer=0;
 		this.worldMap=worldMap;
+		this.initializeArmyCards();
+		this.initializeTerritoryCards();
 		initGame(players);
+	}
+	
+	public void initializeArmyCards() {
+		for (int i=0;i<players.size();i++) {
+			
+			for (int j=0;j<3;j++) {armyCards.add(armyCardFactory.createArmyCard(1));}
+			for (int j=0;j<2;j++) {armyCards.add(armyCardFactory.createArmyCard(2));}
+			for (int j=0;j<1;j++) {armyCards.add(armyCardFactory.createArmyCard(3));}
+		}
+	}
+	
+	public void initializeTerritoryCards() {
+		for (Shape shape : worldMap.shapeList) {
+			territoryCards.add(new TerritoryCard(worldMap.getShapeIndex(shape)));
+		}
 	}
 	
 
