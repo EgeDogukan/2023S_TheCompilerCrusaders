@@ -27,10 +27,12 @@ public class WorldMap {
     static Area area;
     ArrayList<Shape> shapeList2=null;
 
-
+    int numberOfShape = 5;
     static ArrayList<Shape> shapeList = new ArrayList<>();
-    //static ArrayList<ArrayList<Integer>> armyList = new ArrayList<ArrayList<Integer>>(60);
-    public static ArrayList[][] armArrayLists = new ArrayList[60][3];
+    //static ArrayList<ArrayList<Integer>> armyList = new ArrayList<ArrayList<Integer>>(200);
+    //public static int[][] armArrayLists = new ArrayList[60][3];
+    public static int[][] armyList = new int[60][3];
+
     static ArrayList<Color> colorList = new ArrayList<>();
     private Shape clickedShape;
     private MouseListener ml;
@@ -54,21 +56,25 @@ public class WorldMap {
     	
     	
         try {
-            for (int i = 0; i < 60; i++) {
-                //armyList[0].add(new ArrayList<Integer>());
-                for(int k = 0; k < 3; k++){
-                    armArrayLists[i][k] = new ArrayList<Integer>();
-                    armArrayLists[i][k].add(i);
-                }    
-            }
+            // for (int i = 0; i < 60; i++) {
+            //     //armyList[0].add(new ArrayList<Integer>());
+            //     for(int k = 0; k < 3; k++){
+            //         armArrayLists[i][k] = new ArrayList<Integer>();
+            //         armArrayLists[i][k].add(i);
+                    
+            //     }    
+            // }
             
-            /*// Set each entry in armyList to 0
-            for (int i = 0; i < armyList.size(); i++) {
-                ArrayList<Integer> innerList = armyList.get(i);
-                for (int j = 0; j < innerList.size(); j++) {
-                    innerList.set(j, 0);
+            // Set each entry in armyList to 0
+            for (int i = 0; i < numberOfShape ; i++) {
+
+                int[] innerList = new int[3];
+                
+                for (int j = 0; j < 3; j++) {
+                    innerList[j]=0;
                 }
-            }*/
+                armyList[i]=innerList;
+            }
             initUI();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -109,7 +115,7 @@ public class WorldMap {
         }
         
         System.out.println("boyut2:"+shapeList.size());
-        shapeList= new ArrayList<>(shapeList.subList(0, Math.min(shapeList.size(), 100)));//Change it back to 100
+        shapeList= new ArrayList<>(shapeList.subList(0, Math.min(shapeList.size(), numberOfShape)));//Change it back to 100
         System.out.println("boyut3:"+shapeList.size());
     
         ui = new JPanel(new BorderLayout(4, 4));
@@ -146,7 +152,8 @@ public class WorldMap {
                             JTextField currentField = new JTextField();
                             
                             currentField.setBounds((int) centerX, (int) centerY, 40, 40);
-                            currentField.setText(Integer.toString(clickedShapeIndex));
+                            System.out.println(clickedShape);
+                            currentField.setText(Integer.toString(clickedShapeIndex)+ " "+Integer.toString(powerOfShape(shape)));
                             
                             getTextLabels().add(currentField);
                             
@@ -155,7 +162,7 @@ public class WorldMap {
                             JFrame optionFrame = new JFrame();
                             optionFrame.setSize(500, 100);
                             optionFrame.setLocationRelativeTo(null);
-                            optionFrame.setTitle("Deploy");
+                            optionFrame.setTitle("buildingmodeDeploy");
                             JPanel optionPanel = new JPanel();
                             JTextField numberOfArmy = new JTextField("0");
                             numberOfArmy.setPreferredSize(new Dimension(100,50));
@@ -242,7 +249,7 @@ public class WorldMap {
                             JTextField currentField = new JTextField();
                             
                             currentField.setBounds((int) centerX, (int) centerY, 40, 40);
-                            currentField.setText(Integer.toString(clickedShapeIndex));
+                            currentField.setText(Integer.toString(clickedShapeIndex)+ " "+Integer.toString(powerOfShape(shape)));
                             
                             getTextLabels().add(currentField);
                             
@@ -251,7 +258,7 @@ public class WorldMap {
                             JFrame optionFrame = new JFrame();
                             optionFrame.setSize(500, 100);
                             optionFrame.setLocationRelativeTo(null);
-                            optionFrame.setTitle("Deploy");
+                            optionFrame.setTitle("RunningModedeploy");
                             JPanel optionPanel = new JPanel();
                             JTextField numberOfArmy = new JTextField("0");
                             numberOfArmy.setPreferredSize(new Dimension(100,50));
@@ -316,6 +323,36 @@ public class WorldMap {
                             
                             
                         }
+
+                        if(RunningModeNew.whichStage == "Attack") { 
+                            JFrame attackFrame = new JFrame("attack");
+                            JPanel attackPanel = new JPanel();
+                            
+                            attackFrame.setSize(500, 100);
+                            attackFrame.setLocationRelativeTo(null);
+                            attackFrame.setTitle("RunningModedeploy");
+                            
+
+                            ArrayList<Integer> integerList = neighbourList.get(getShapeIndex(shape));
+                            ArrayList<String> stringList = new ArrayList<>();
+
+                            for (Integer number : integerList) {
+                                if(number<shapeList.size())
+                                    stringList.add(String.valueOf(number));
+                            }
+                            String[] stringArray = stringList.toArray(new String[0]);
+
+                            JComboBox<String> neighbourCombo = new JComboBox<String>(stringArray);
+                            
+
+
+                            neighbourCombo.setPreferredSize(new Dimension(100,50));
+                            attackPanel.add(neighbourCombo);
+                            attackFrame.add(attackPanel);
+                            
+                            attackFrame.setVisible(true);
+                        }
+
                     }
                     }
                 }
@@ -822,29 +859,30 @@ public class WorldMap {
 
     public void setShapeArmyInfantry(Shape shape, int numberOfArmy){
         int armyIndex = shapeList.indexOf(shape);
-        armArrayLists[armyIndex][0].set(0, numberOfArmy);
+        armyList[armyIndex][0]= numberOfArmy;
+        
 
     }
     public void setShapeArmyCavalry(Shape shape, int numberOfArmy){
         int armyIndex = shapeList.indexOf(shape);
-        armArrayLists[armyIndex][1].set(0, numberOfArmy);
+        armyList[armyIndex][1]= numberOfArmy;
     }
     
     public void setShapeArmyArtillery(Shape shape, int numberOfArmy){
         int armyIndex = shapeList.indexOf(shape);
-        armArrayLists[armyIndex][2].set(0, numberOfArmy);
+        armyList[armyIndex][2]= numberOfArmy;
     }
 
     public int getShapeArmyInfantry(int index){
-        return (int) armArrayLists[index][0].get(0);
+        return armyList[index][0];
     }
 
     public int getShapeArmyCavalry(int index) {
-        return (int) armArrayLists[index][1].get(0);
+        return armyList[index][1];
     }
 
     public int getShapeArmyArtillery(int index) {
-        return (int) armArrayLists[index][2].get(0);
+        return armyList[index][2];
     }
 
     public static void setIndexColor(int index, Color color) {
@@ -941,4 +979,14 @@ public class WorldMap {
 	public void setTextLabels(ArrayList<JTextField> textLabels) {
 		this.textLabels = textLabels;
 	} 
+
+    public int powerOfShape(Shape shape){
+        int index = getShapeIndex(shape);
+        
+        //int power = Integer.parseInt(armArrayLists[index][0].toString()) + 5 * Integer.parseInt(armArrayLists[index][1].toString()) + 10 * Integer.parseInt(armArrayLists[index][2].toString());
+       
+        int power = getShapeArmyArtillery(index)+ 5 * getShapeArmyCavalry(index) + 10 * getShapeArmyInfantry(index) ;
+        System.out.println("result is  "+ power);
+        return power;
+    }
 }
