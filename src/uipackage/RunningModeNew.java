@@ -234,7 +234,7 @@ public class RunningModeNew extends JFrame {
 
 
 		
-		String[] cardTypes = {"Draft Chance Card", "Reinforcement Card", "Coup Card", "Revolution Card", "Nuclear Strike Card"};
+		String[] cardTypes = {"Revolt Card", "Reinforcement Card", "Coup Card", "Revolution Card", "Nuclear Strike Card"};
         JComboBox<String> cardComboBox = new JComboBox<String>(cardTypes);
         cardComboBox.setBounds(900,550, 100, 100);
         this.add(cardComboBox);
@@ -323,6 +323,50 @@ public class RunningModeNew extends JFrame {
 					
 					
 				}
+				
+				
+				else if (cardComboBox.getSelectedItem().equals("Revolt Card")) {
+					
+
+					JFrame optionFrame = new JFrame();
+                    optionFrame.setSize(500, 100);
+                    optionFrame.setLocationRelativeTo(null);
+                    optionFrame.setTitle("ID Choose");
+                    JPanel optionPanel = new JPanel();
+                    
+                    JTextField ID = new JTextField();
+                    ID.setPreferredSize(new Dimension(100,50));
+                    
+                    JTextField ID2 = new JTextField();
+                    ID2.setPreferredSize(new Dimension(100,50));
+                    
+                    JButton closeButton = new JButton("Close");
+                    
+                    closeButton.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							String IDonArea = ID.getText();
+							String IDonArea2 = ID2.getText();
+							players.get(turnCounter).useRevoltCard(Integer.parseInt(IDonArea), Integer.parseInt(IDonArea2));
+							optionFrame.dispose();
+							
+						}
+					});
+                    
+                    
+                    optionPanel.add(ID);
+                    optionPanel.add(ID2);
+                    optionPanel.add(closeButton);
+                    optionFrame.add(optionPanel);
+                    optionFrame.setVisible(true);
+					
+					
+					
+				}
+				
+				
+				
 				
 				else if (cardComboBox.getSelectedItem().equals("Revolution Card")) {
 					

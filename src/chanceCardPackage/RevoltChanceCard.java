@@ -2,17 +2,17 @@ package chanceCardPackage;
 
 import RiskPackage.PlayerNew;
 
-public class DraftChanceCard implements IChanceCard {
+public class RevoltChanceCard implements IChanceCard {
 	
 	public int type;
 
-	public DraftChanceCard() {
+	public RevoltChanceCard() {
 		this.type=0;
 	}
 
 	@Override
 	public void action(PlayerNew player) {
-		System.out.println("Action of Draft Card is applied.");
+		System.out.println("Action of Revolt Card is applied.");
 		
 	}
 	public int getType() {

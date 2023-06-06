@@ -72,19 +72,49 @@ public class PlayerNew {
 	
 
 	public void useRevolutionCard(int territoryIndex) {
-		RunningModeNew.players.get(RunningModeNew.getTurn()).shapeIndices.add(territoryIndex);
+		if (this.cardUsable)
+			RunningModeNew.players.get(RunningModeNew.getTurn()).shapeIndices.add(territoryIndex);
 	}
 	
 	public void useCoupCard(int territoryIndex) {
 		
-		RunningModeNew.players.get(RunningModeNew.getTurn()).shapeIndices.add(territoryIndex);
-		
-		RunningModeNew.worldMap.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(territoryIndex), 0);
-		RunningModeNew.worldMap.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(territoryIndex), 0);
-		RunningModeNew.worldMap.setShapeArmyInfantry(RunningModeNew.worldMap.getShape(territoryIndex), 0);
+		if (this.cardUsable) {
+			RunningModeNew.players.get(RunningModeNew.getTurn()).shapeIndices.add(territoryIndex);
+			
+			RunningModeNew.worldMap.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(territoryIndex), 0);
+			RunningModeNew.worldMap.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(territoryIndex), 0);
+			RunningModeNew.worldMap.setShapeArmyInfantry(RunningModeNew.worldMap.getShape(territoryIndex), 0);
+		}
 		
 	}
 	
+	public void useRevoltCard(int sourceIndex, int targetIndex) {
+		
+		if (this.cardUsable) {
+			int artillery1 = RunningModeNew.worldMap.getShapeArmyArtillery(sourceIndex);
+			int cavalry1 = RunningModeNew.worldMap.getShapeArmyCavalry(sourceIndex);
+			int infantry1 = RunningModeNew.worldMap.getShapeArmyInfantry(sourceIndex);
+			
+			int artillery2 = RunningModeNew.worldMap.getShapeArmyArtillery(targetIndex);
+			int cavalry2 = RunningModeNew.worldMap.getShapeArmyCavalry(targetIndex);
+			int infantry2 = RunningModeNew.worldMap.getShapeArmyInfantry(targetIndex);
+			
+			
+			RunningModeNew.worldMap.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(targetIndex), artillery1+artillery2);
+			RunningModeNew.worldMap.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(targetIndex), cavalry1+cavalry2);
+			RunningModeNew.worldMap.setShapeArmyInfantry(RunningModeNew.worldMap.getShape(targetIndex), infantry1+infantry2);
+			
+			RunningModeNew.worldMap.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(sourceIndex), 0);
+			RunningModeNew.worldMap.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(sourceIndex), 0);
+			RunningModeNew.worldMap.setShapeArmyInfantry(RunningModeNew.worldMap.getShape(sourceIndex), 0);
+		}
+		
+		
+		
+		
+		
+		
+	}
 	
 	
 	
