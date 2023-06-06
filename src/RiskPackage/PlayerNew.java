@@ -49,6 +49,8 @@ public class PlayerNew {
 	
 	}
 	
+	
+	
 	public int getId() {
 		return id;
 	}

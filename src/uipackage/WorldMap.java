@@ -47,7 +47,9 @@ public class WorldMap {
 
     private ArrayList<JTextField> textLabels = new ArrayList<>();
 
-    ArrayList<ArrayList<Integer>> neighbourList = new ArrayList<ArrayList<Integer>>();
+    ArrayList<ArrayList> neighbourList = new ArrayList<ArrayList>(100);
+    public static ArrayList[][] neighborList = new ArrayList[60][2];
+
 
     private int modeForDeployAttackFortify = 0;
 
@@ -56,14 +58,23 @@ public class WorldMap {
     	
     	
         try {
-            // for (int i = 0; i < 60; i++) {
-            //     //armyList[0].add(new ArrayList<Integer>());
-            //     for(int k = 0; k < 3; k++){
-            //         armArrayLists[i][k] = new ArrayList<Integer>();
-            //         armArrayLists[i][k].add(i);
-                    
-            //     }    
-            // }
+            for (int i = 0; i < 60; i++) {
+                for(int k = 0; k < 3; k++){
+                    armArrayLists[i][k] = new ArrayList<Integer>();
+                    armArrayLists[i][k].add(i);
+                }    
+            }
+
+            for (int i = 0; i < 60; i++) {
+                for(int k = 0; k < 2; k++){
+                    neighborList[i][k] = new ArrayList<Integer>();
+                    neighborList[i][k].add(i);
+                }    
+            }
+
+            InitNeighbors();
+
+
             
             // Set each entry in armyList to 0
             for (int i = 0; i < numberOfShape ; i++) {
@@ -544,6 +555,32 @@ public class WorldMap {
         return bi;
     }
 
+    
+    
+    
+    
+    
+
+    
+
+    
+    public void setNeighbor(Shape shape, int[] index) {
+        int neighborIndex = shapeList.indexOf(shape);
+        for(int i : index) {
+            neighborList[neighborIndex][0].add(index);
+        }
+    }
+
+    public int[] getNeighbor(int index) {
+        return (int[]) neighborList[index][0].get(0);
+    }
+
+    
+    
+
+   
+    
+   
     public void InitNeighbors(){
        
         
@@ -551,6 +588,11 @@ public class WorldMap {
         row0.add(3);
         row0.add(7);
         row0.add(2);
+
+        neighborList[0][0].add(3);
+        neighborList[0][0].add(7);
+        neighborList[0][0].add(2);
+        System.out.println("NEIGHBORS: " + neighborList[0][0]);
         
         ArrayList<Integer> row1 = new ArrayList<Integer>();//Yakutsk
         row1.add(9);
