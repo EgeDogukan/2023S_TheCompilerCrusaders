@@ -47,7 +47,6 @@ public class GameControllerNew {
     	
     	while(true) {
     	if (menu.isLoginClicked==false) {
-    		
             loginPage.frame.setVisible(false);
     	}
     	
@@ -55,10 +54,11 @@ public class GameControllerNew {
     		menu.dispose();
     		loginPage.frame.setVisible(true);
     		
+    		
 
 
         do {                                                        //waiting until login phase completed
-            System.out.println(loginPage.getLoginStatus());
+            Thread.sleep(10);
             
         } while (loginPage.getLoginStatus() == false);
 		loginPage.frame.dispose();
@@ -67,7 +67,7 @@ public class GameControllerNew {
 		modeSelection.setVisible(true);
 		
 		do {                                                        //waiting until login phase completed
-            System.out.println(modeSelection.status);
+			Thread.sleep(10);
             
         } while (modeSelection.status == -1);
 		modeSelection.dispose();
@@ -82,7 +82,7 @@ public class GameControllerNew {
 		    
 		    
 		    do {                                                        //waiting until login phase completed
-	            System.out.println(loginPage.getLoginStatus());
+		    	Thread.sleep(10);
 	            
 	        } while (loginPage.getLoginStatus() == false);
 			loginPage.frame.dispose();
