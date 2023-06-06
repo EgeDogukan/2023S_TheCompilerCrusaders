@@ -9,7 +9,7 @@ public class ChanceCardFactory {
 		
 		 if (id==0) { return new DraftChanceCard(); }
 		 else if (id==1) { return new ReinforcementsChanceCard(); }
-		 else if (id==2) { return new TradeDealChanceCard(); }
+		 else if (id==2) { return new CoupChanceCard(); }
 		 else if (id==3) { return new RevolutionChanceCard(); }
 		 else if (id==4) { return new NuclearStrikeChanceCard(); }
 		 else {throw new IllegalArgumentException("Invalid card type:"); } 

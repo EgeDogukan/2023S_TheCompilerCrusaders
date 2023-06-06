@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import RiskPackage.GameControllerNew;
 import RiskPackage.Territory;
+import animationPackage.StarAnimationClass;
 
 import java.util.List;
 
@@ -28,6 +29,8 @@ public class WorldMap {
     private boolean isGrowing = true;
     private boolean starVisible = false;
     private boolean crossVisible = false;
+    
+    JFrame animationFrame;
 
     private JComponent ui = null;
     static JLabel output = new JLabel();
@@ -337,49 +340,58 @@ public class WorldMap {
                         }
 
                         if(RunningModeNew.whichStage == "Attack") { 
-                            JFrame attackFrame = new JFrame("attack");
-                            JPanel attackPanel = new JPanel();
-                            
-                            attackFrame.setSize(500, 100);
-                            attackFrame.setLocationRelativeTo(null);
-                            attackFrame.setTitle("RunningModedeploy");
-                            
+                        	Color curColor = colorList.get(getShapeIndex(shape));
+                        	Color playerColor = BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getColor();
+                        	
+                        	if (curColor.getRed()==playerColor.getRed() && curColor.getGreen()==playerColor.getGreen() && curColor.getBlue()==playerColor.getBlue()) {
+                        		JFrame attackFrame = new JFrame("attack");
+                                JPanel attackPanel = new JPanel();
+                                
+                                attackFrame.setSize(500, 100);
+                                attackFrame.setLocationRelativeTo(null);
+                                attackFrame.setTitle("RunningModedeploy");
+                                
 
-                            ArrayList<Integer> integerList = neighbourList.get(getShapeIndex(shape));
-                            ArrayList<String> stringList = new ArrayList<>();
+                                ArrayList<Integer> integerList = neighbourList.get(getShapeIndex(shape));
+                                ArrayList<String> stringList = new ArrayList<>();
 
-                            for (Integer number : integerList) {
-                                if(number<shapeList.size())
-                                    stringList.add(String.valueOf(number));
-                            }
-                            String[] stringArray = stringList.toArray(new String[0]);
-
-                            JComboBox<String> neighbourCombo = new JComboBox<String>(stringArray);
-                            JButton attackButton = new JButton("Attack");
-                            //attackButton.setBounds(120,  120, 100, 50);
-                            attackPanel.add(attackButton);
-                            attackButton.addMouseListener(new MouseAdapter() {
-                                @Override
-                                public void mouseClicked(MouseEvent e) {
-                                    int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
-                                    Shape destinationShape = getShape(destinationIndex);
-                                    System.out.println("destination power**********: " + powerOfShape(destinationShape));
-                                    System.out.println("destination power**********: " + powerOfShape(shape));
-                                    if(powerOfShape(shape)>powerOfShape(destinationShape)){
-                                        
-                                        //**************** */
-                                        //GameControllerNew.g.createPanel();
-                                        //************************* */
-                                        setIndexColor(shapeList.indexOf(destinationShape), Color.gray);
-                                    }
+                                for (Integer number : integerList) {
+                                    if(number<shapeList.size())
+                                        stringList.add(String.valueOf(number));
                                 }
-                            });
+                                String[] stringArray = stringList.toArray(new String[0]);
 
-                            neighbourCombo.setPreferredSize(new Dimension(100,50));
-                            attackPanel.add(neighbourCombo);
-                            attackFrame.add(attackPanel);
+                                JComboBox<String> neighbourCombo = new JComboBox<String>(stringArray);
+                                JButton attackButton = new JButton("Attack");
+                                attackPanel.add(attackButton);
+                                attackButton.addMouseListener(new MouseAdapter() {
+                                    @Override
+                                    public void mouseClicked(MouseEvent e) {
+                                        int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
+                                        Shape destinationShape = getShape(destinationIndex);
+                                        System.out.println("destination power**********: " + powerOfShape(destinationShape));
+                                        System.out.println("destination power**********: " + powerOfShape(shape));
+                                        if(powerOfShape(shape)>powerOfShape(destinationShape)){
+                                            
+                                            //**************** */
+                                            animationFrame = new StarAnimationClass(0);
+                                            //************************* */
+                                            setIndexColor(shapeList.indexOf(destinationShape), Color.gray);
+                                        }
+                                        else {
+                                        	animationFrame = new StarAnimationClass(1);
+                                        }
+                                    }
+                                });
+
+                                neighbourCombo.setPreferredSize(new Dimension(100,50));
+                                attackPanel.add(neighbourCombo);
+                                attackFrame.add(attackPanel);
+                                
+                                attackFrame.setVisible(true);
+                        	}
+                        	
                             
-                            attackFrame.setVisible(true);
                         }
 
                     }

@@ -2,17 +2,17 @@ package chanceCardPackage;
 
 import RiskPackage.PlayerNew;
 
-public class TradeDealChanceCard implements IChanceCard {
+public class CoupChanceCard implements IChanceCard {
 	
 	public int type;
 
-	public TradeDealChanceCard() {
+	public CoupChanceCard() {
 		this.type=2;
 	}
 
 	@Override
 	public void action(PlayerNew player) {
-		System.out.println("Action of Trade Deal Card is applied.");
+		System.out.println("Action of Coup Card is applied.");
 		
 	}
 	public int getType() {

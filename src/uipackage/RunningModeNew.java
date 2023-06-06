@@ -18,6 +18,7 @@ import javax.imageio.ImageIO;
 
 import RiskPackage.GameControllerNew;
 import RiskPackage.PlayerNew;
+import animationPackage.CardAnimationClass;
 import chanceCardPackage.ChanceCardFactory;
 import databasePackage.ISaveLoadAdapter;
 import databasePackage.TerritoryDBDatabase;
@@ -27,21 +28,9 @@ import databasePackage.TerritoryJSONDBDatabase;
 public class RunningModeNew extends JFrame {
 
 
-	//************* */
-	private Image star;
-    private Image cross;
-    private double scale = 0.01;
-    private boolean isGrowing = true;
-    private boolean starVisible = false;
-    private boolean crossVisible = false;
-    private static JPanel territoryPromptJPanel;
-	private static final int FRAME_WIDTH = 800;
-    private static final int FRAME_HEIGHT = 600;
-    private static final int DELAY = 20;
 
-	//*********** */
 
-    public ArrayList<PlayerNew> players;
+    public static ArrayList<PlayerNew> players;
 	private static JButton turn = new JButton();
 	int numberOfAIPlayer;
 	int numberOfHumanPlayer;
@@ -57,6 +46,8 @@ public class RunningModeNew extends JFrame {
 
 
 	public static WorldMap worldMap;
+	
+	public CardAnimationClass cardAnimationClass;
 
 
 
@@ -94,74 +85,7 @@ public class RunningModeNew extends JFrame {
 		return isInBuildingMode;
 	}
 
-	public void createPanel() {
-		String cwd = System.getProperty("user.dir");
-        star = Toolkit.getDefaultToolkit().getImage(cwd + "/Star.png");
-        cross = Toolkit.getDefaultToolkit().getImage(cwd +"/Cross.png");
 
-        JPanel territoryPromptJPanel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                if (starVisible) {
-                    Graphics2D g2d = (Graphics2D) g.create();
-                    int x = (getWidth() - (int)(star.getWidth(null) * scale)) / 2;
-                    int y = (getHeight() - (int)(star.getHeight(null) * scale)) / 2;
-                    AffineTransform at = AffineTransform.getTranslateInstance(x, y);
-                    at.scale(scale, scale);
-                    g2d.drawImage(star, at, null);
-                    g2d.dispose();
-                } else if (crossVisible) {
-                    Graphics2D g2d = (Graphics2D) g.create();
-                    int x = (getWidth() - (int)(cross.getWidth(null) * scale)) / 2;
-                    int y = (getHeight() - (int)(cross.getHeight(null) * scale)) / 2;
-                    AffineTransform at = AffineTransform.getTranslateInstance(x, y);
-                    at.scale(scale, scale);
-                    g2d.drawImage(cross, at, null);
-                    g2d.dispose();
-                }
-            }
-        };
-        territoryPromptJPanel.setBounds(0, 0, 600, 600);
-        territoryPromptJPanel.setBackground(Color.green);
-        
-
-		starVisible = true;
-		Timer timer = new Timer(DELAY, null);
-		timer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (isGrowing) {
-					scale += 0.03;
-					if (scale > 0.3) {
-						isGrowing = false;
-					}
-				} else {
-					scale -= 0.03;
-					if (scale < 0) {
-						scale = 0.01;
-						isGrowing = true;
-						starVisible = false;
-						((Timer) e.getSource()).stop();
-					}
-				}
-				territoryPromptJPanel.repaint();
-			}
-		});
-		timer.start();
-		this.add(territoryPromptJPanel);
-    }
-
-	public static void getTerritoryPromptJPanel() {
-        
-    }
-
-    public static void triggerTerritoryPromptJPanel() {
-		if(territoryPromptJPanel == null){
-			GameControllerNew.g.createPanel();
-			//createPanel();
-		}
-        territoryPromptJPanel.repaint();
-    }
 
 	public void initGame(ArrayList<PlayerNew> players){
 		
@@ -170,7 +94,6 @@ public class RunningModeNew extends JFrame {
 		this.setLayout(null); // Use BorderLayout for the JFrame
 	
 		
-		this.createPanel();
 		shapelist=this.worldMap.getShapeList();
 		ArrayList<JTextField> textLabels = worldMap.getTextLabels();
 		for (JTextField curField : textLabels) {
@@ -240,7 +163,7 @@ public class RunningModeNew extends JFrame {
 				ChanceCardFactory factory = new ChanceCardFactory();
 				
 				System.out.println("card with index "+randomNumber+" which is "+factory.createCard(randomNumber).getClass().getName()+"added to the players' list with id: " +(turnCounter+1));
-				
+				cardAnimationClass = new CardAnimationClass();
 			}
 		});
 		this.add(pickChanceCard);
@@ -311,7 +234,7 @@ public class RunningModeNew extends JFrame {
 
 
 		
-		String[] cardTypes = {"Draft Chance Card", "Reinforcement Card", "Trade Deal Card", "Revolution Card", "Nuclear Strike Card"};
+		String[] cardTypes = {"Draft Chance Card", "Reinforcement Card", "Coup Card", "Revolution Card", "Nuclear Strike Card"};
         JComboBox<String> cardComboBox = new JComboBox<String>(cardTypes);
         cardComboBox.setBounds(900,550, 100, 100);
         this.add(cardComboBox);
@@ -357,6 +280,115 @@ public class RunningModeNew extends JFrame {
                     optionPanel.add(closeButton);
                     optionFrame.add(optionPanel);
                     optionFrame.setVisible(true);
+					
+					
+				}
+				
+				else if (cardComboBox.getSelectedItem().equals("Nuclear Strike Card")) {
+					
+
+					JFrame optionFrame = new JFrame();
+                    optionFrame.setSize(500, 100);
+                    optionFrame.setLocationRelativeTo(null);
+                    optionFrame.setTitle("ID Choose");
+                    JPanel optionPanel = new JPanel();
+                    
+                    JTextField ID = new JTextField();
+                    ID.setPreferredSize(new Dimension(100,50));
+                    
+                    JTextField ID2 = new JTextField();
+                    ID2.setPreferredSize(new Dimension(100,50));
+                    
+                    JButton closeButton = new JButton("Close");
+                    
+                    closeButton.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							String IDonArea = ID.getText();
+							String IDonArea2 = ID2.getText();
+							players.get(turnCounter).useNuclearStrikeCard(Integer.parseInt(IDonArea), Integer.parseInt(IDonArea2));
+							optionFrame.dispose();
+							
+						}
+					});
+                    
+                    
+                    optionPanel.add(ID);
+                    optionPanel.add(ID2);
+                    optionPanel.add(closeButton);
+                    optionFrame.add(optionPanel);
+                    optionFrame.setVisible(true);
+					
+					
+					
+				}
+				
+				else if (cardComboBox.getSelectedItem().equals("Revolution Card")) {
+					
+
+					JFrame optionFrame = new JFrame();
+                    optionFrame.setSize(500, 100);
+                    optionFrame.setLocationRelativeTo(null);
+                    optionFrame.setTitle("ID Choose");
+                    JPanel optionPanel = new JPanel();
+                    
+                    JTextField ID = new JTextField();
+                    ID.setPreferredSize(new Dimension(100,50));
+                    
+                    JButton closeButton = new JButton("Close");
+                    
+                    closeButton.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							String IDonArea = ID.getText();
+							players.get(turnCounter).useRevolutionCard(Integer.parseInt(IDonArea));
+							optionFrame.dispose();
+							
+						}
+					});
+                    
+                    
+                    optionPanel.add(ID);
+                    optionPanel.add(closeButton);
+                    optionFrame.add(optionPanel);
+                    optionFrame.setVisible(true);
+					
+					
+					
+				}
+				
+				else if (cardComboBox.getSelectedItem().equals("Coup Card")) {
+					
+
+					JFrame optionFrame = new JFrame();
+                    optionFrame.setSize(500, 100);
+                    optionFrame.setLocationRelativeTo(null);
+                    optionFrame.setTitle("ID Choose");
+                    JPanel optionPanel = new JPanel();
+                    
+                    JTextField ID = new JTextField();
+                    ID.setPreferredSize(new Dimension(100,50));
+                    
+                    JButton closeButton = new JButton("Close");
+                    
+                    closeButton.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							String IDonArea = ID.getText();
+							players.get(turnCounter).useCoupCard(Integer.parseInt(IDonArea));
+							optionFrame.dispose();
+							
+						}
+					});
+                    
+                    optionPanel.add(ID);
+                    optionPanel.add(closeButton);
+                    optionFrame.add(optionPanel);
+                    optionFrame.setVisible(true);
+					
 					
 					
 				}
