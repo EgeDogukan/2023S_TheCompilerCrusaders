@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import RiskPackage.GameControllerNew;
 import RiskPackage.Territory;
+import animationPackage.DiceRollingFrame;
 import animationPackage.StarAnimationClass;
 import armyCardPackage.IArmyCard;
 
@@ -32,6 +33,13 @@ public class WorldMap {
     private boolean crossVisible = false;
     
     JFrame animationFrame;
+
+    
+
+    private Random random = new Random();
+
+    int defenderDiceResult;
+    int attackerDiceResult;
 
     private JComponent ui = null;
     static JLabel output = new JLabel();
@@ -376,6 +384,7 @@ public class WorldMap {
                                 attackButton.addMouseListener(new MouseAdapter() {
                                     @Override
                                     public void mouseClicked(MouseEvent e) {
+<<<<<<< HEAD
                                     	if (BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getShapeIndices().contains(clickedShapeIndex)) {
                                     		int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
                                             Shape destinationShape = getShape(destinationIndex);
@@ -411,6 +420,29 @@ public class WorldMap {
                                             	animationFrame = new StarAnimationClass(1);
                                             }
                                     	}
+=======
+                                        int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
+                                        Shape destinationShape = getShape(destinationIndex);
+                                        System.out.println("destination power**********: " + powerOfShape(destinationShape));
+                                        System.out.println("destination power**********: " + powerOfShape(shape));
+                                        DiceRollingFrame myFrame = new DiceRollingFrame();
+                                        myFrame.setOnFrameClosedListener(new DiceRollingFrame.OnFrameClosedListener() {
+                                            @Override
+                                            public void onFrameClosed() {
+                                                // This code will be run when the DiceRollingFrame is closed
+                                                if (powerOfShape(shape) > powerOfShape(destinationShape) && DiceRollingFrame.defenderDiceResult < DiceRollingFrame.attackerDiceResult) {
+                                                    //**************** */
+                                                    animationFrame = new StarAnimationClass(0);
+                                                    //************************* */
+                                                    setIndexColor(shapeList.indexOf(destinationShape), Color.gray);
+                                                } else {
+                                                    animationFrame = new StarAnimationClass(1);
+                                                }
+                                            }
+                                        });
+                                        myFrame.showFrame();
+                                        
+>>>>>>> origin/DiceRollingAnimation
                                         
                                     }
                                 });
@@ -907,7 +939,7 @@ public class WorldMap {
         return ui;
     }
 
-    
+
     private void removeMouseListener() {
         output.removeMouseListener(ml);
     }
