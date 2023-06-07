@@ -32,8 +32,6 @@ import territoryCardPackage.TerritoryCard;
 public class RunningModeNew extends JFrame {
 
 
-
-
     public static ArrayList<PlayerNew> players;
 	private static JButton turn = new JButton();
 	int numberOfAIPlayer;
@@ -47,8 +45,7 @@ public class RunningModeNew extends JFrame {
 	private int counter = 0;
 	public static JLabel stage = new JLabel("Deploy");
 	public static String whichStage= new String();
-
-
+	
 	public static WorldMap worldMap;
 	
 	public CardAnimationClass cardAnimationClass;
@@ -67,8 +64,11 @@ public class RunningModeNew extends JFrame {
 		this.worldMap=worldMap;
 		this.initializeArmyCards();
 		this.initializeTerritoryCards();
+		this.initializeTerritoryCards();
 		initGame(players);
 	}
+	
+
 	
 	public void initializeArmyCards() {
 		for (int i=0;i<players.size();i++) {

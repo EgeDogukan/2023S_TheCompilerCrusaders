@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import armyCardPackage.ArmyCardFactory;
 import armyCardPackage.IArmyCard;
 import chanceCardPackage.IChanceCard;
+import territoryCardPackage.TerritoryCard;
 import uipackage.RunningModeNew;
 import uipackage.WorldMap;
 
@@ -20,6 +21,7 @@ public class PlayerNew {
 	ArrayList<Integer> chanceCards;
 	boolean cardUsable=false;
 	ArrayList<IArmyCard> armyCards;
+	ArrayList<Integer> territoryCards;
 	ArmyCardFactory cardFactory = new ArmyCardFactory();
 
 	
@@ -29,6 +31,7 @@ public class PlayerNew {
 		this.shapeIndices=shapeIndices;
 		chanceCards = new ArrayList<>();
 		armyCards = new ArrayList<>();
+		territoryCards = new ArrayList<>();
 	}
 	
 	public void addChanceCard(int chanceCardType) {
@@ -39,6 +42,10 @@ public class PlayerNew {
 		for(int j = 0; j<numberOfCard;j++){
 			armyCards.add(cardFactory.createArmyCard(ArmyCardType));
 		}
+	}
+	
+	public void addTerritoryCard(int territoryCardIndex) {
+		this.territoryCards.add(territoryCardIndex);
 	}
 
 	public ArrayList<Integer> getArmyCardsInfo(){
