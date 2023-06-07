@@ -107,7 +107,7 @@ public class LoadMode extends JFrame {
         	players.add(new PlayerNew(i, colors.get(i), informations.get(i)));
         }
         
-        new RunningModeNew(players, worldMap);
+        new RunningModeNew(players, worldMap, 1);
         
         /*
         JPanel worldPanel = (JPanel) worldMap.getUI();

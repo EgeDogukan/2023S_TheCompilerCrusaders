@@ -35,6 +35,7 @@ public class BuildingModeNew extends JFrame {
 	}
 
 	public static int numberOfPlayer;
+	public static int numberOfCompPlayer;
 	public static int turn;
 	public static WorldMap worldMap;
 	public MouseListener mouseListener;
@@ -48,7 +49,7 @@ public class BuildingModeNew extends JFrame {
 	JComboBox<String> numberOfPlayerComboBox;
 	JComboBox<String> numberOfCompComboBox;
 	
-	public BuildingModeNew(int numberOfPlayer) {
+	public BuildingModeNew(int numberOfPlayer, int numberOfCompPlayer) {
 		super("Building Mode New");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(new Dimension(1920, 1080));
@@ -56,9 +57,11 @@ public class BuildingModeNew extends JFrame {
 	
 		turn = 1;
 		this.numberOfPlayer = numberOfPlayer;
+		this.numberOfCompPlayer = numberOfCompPlayer;
 	
 		ArrayList<Integer> indices = new ArrayList<>();
-		for (int i = 1; i < numberOfPlayer + 1; i++) {
+		System.out.println("number of comp player kerem added:" +numberOfCompPlayer);
+		for (int i = 1; i < numberOfPlayer+numberOfCompPlayer + 1; i++) {
 			playerList.add(new PlayerNew(i, generateRandomColor(), indices));
 			this.shapeList.add(indices);
 		}
@@ -80,9 +83,14 @@ public class BuildingModeNew extends JFrame {
 				worldMap.setIsInBuildingMode(false);
 				BuildingModeNew.this.dispose();
 				
-				RunningModeNew runningModeNew = new RunningModeNew(playerList, worldMap);
-				
-
+				if (BuildingModeNew.numberOfCompPlayer==1) {
+					System.out.println("Running mode started with 1 Computer Player");
+					RunningModeNew runningModeNew = new RunningModeNew(playerList, worldMap, 1);
+				}
+				else {
+					System.out.println("Running mode started with 2 Computer Player");
+					RunningModeNew runningModeNew = new RunningModeNew(playerList, worldMap, 2);
+				}
 			}
 		});
 		nextButton.setVisible(false);
@@ -132,9 +140,6 @@ public class BuildingModeNew extends JFrame {
 		this.mouseListener = mouseListener;
 	}
 
-
-
-
 	public JComboBox<String> getNumberOfPlayerComboBox() {
 		return numberOfPlayerComboBox;
 	}
@@ -162,9 +167,6 @@ public class BuildingModeNew extends JFrame {
 	}
 
 	
-	
-	
-	
 	private Color generateRandomColor() {
 	    int red = (int) (Math.random() * 256);
 	    int green = (int) (Math.random() * 256);
@@ -185,7 +187,7 @@ public class BuildingModeNew extends JFrame {
 		worldMap.setIndexColor(clicked, playerList.get(turn-1).getColor());	
 		turn++;
 		
-		if(turn==numberOfPlayer+1) {
+		if(turn==numberOfPlayer+numberOfCompPlayer+1) {
 			turn=1;
 		}	
 		
