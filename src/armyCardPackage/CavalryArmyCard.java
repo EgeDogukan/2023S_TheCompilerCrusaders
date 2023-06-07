@@ -8,7 +8,7 @@ public class CavalryArmyCard implements IArmyCard{
 	
 	public int type; 
 	public CavalryArmyCard() {
-		this.type=2;
+		this.type=1;
 	}
 
 	@Override

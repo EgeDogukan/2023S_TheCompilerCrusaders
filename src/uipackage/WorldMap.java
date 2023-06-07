@@ -377,11 +377,14 @@ public class WorldMap {
                                             int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
 
                                             // Retrieve and store the object at the random index
-                                            IArmyCard randomCard = RunningModeNew.armyCards.get(randomIndex);
-
+                                            IArmyCard randomCard = RunningModeNew.armyCards.get(0);
+                                            IArmyCard randomCard1 = RunningModeNew.armyCards.get(1);
+                                            IArmyCard randomCard2 = RunningModeNew.armyCards.get(2);
                                             // Remove the object at the random index
                                             RunningModeNew.armyCards.remove(randomIndex);
-                                            BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(randomCard.getType(), 17);
+                                            BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(0, 17);
+                                            BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(2, 17);
+                                            BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(1, 17);
                                             //**************** */
                                             animationFrame = new StarAnimationClass(0);
                                             //************************* */

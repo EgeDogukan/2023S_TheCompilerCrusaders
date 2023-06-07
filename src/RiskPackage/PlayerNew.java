@@ -42,7 +42,7 @@ public class PlayerNew {
 	}
 
 	public ArrayList<Integer> getArmyCardsInfo(){
-		ArrayList<Integer> info = new ArrayList<>(3);
+		ArrayList<Integer> info = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {
             info.add(0);
         }
@@ -50,10 +50,10 @@ public class PlayerNew {
 			if(cards.getType()==0){
 				info.set(0, info.get(0)+1);
 			}
-			else if(cards.getType()==1){
+			if(cards.getType()==1){
 				info.set(1, info.get(1)+1);
 			}
-			else{
+			if(cards.getType()==2){
 				info.set(2, info.get(2)+1);
 			}
 

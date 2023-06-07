@@ -6,7 +6,7 @@ public class ArtillaryArmyCard implements IArmyCard {
 	
 	public int type;
 	public ArtillaryArmyCard() {
-		this.type=1;
+		this.type=0;
 	}
 
 	@Override

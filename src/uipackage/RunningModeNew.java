@@ -188,26 +188,137 @@ public class RunningModeNew extends JFrame {
 				attackFrame.setTitle("RunningModedeploy");
 
 				ArrayList<Integer> armyCardsInfo = BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getArmyCardsInfo();
-				System.out.println(armyCardsInfo.size());
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
-				for (int i = 0; i < armyCardsInfo.size(); i++) {
-					System.out.println(":" + armyCardsInfo.get(i));
-				}
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
 
 				attackPanel.add(new JLabel("Infantry"));
 				attackPanel.add(new JLabel("Cavalry"));
 				attackPanel.add(new JLabel("Artillery"));
 
-				// Create a JComboBox to display the army card information
-				JComboBox<Integer> comboBox = new JComboBox<>(armyCardsInfo.toArray(new Integer[0]));
-				attackPanel.add(comboBox); // Add the JComboBox to the panel
+				// Create two JComboBoxes to allow the player to select two items
+				JComboBox<Integer> comboBox1 = new JComboBox<>(armyCardsInfo.toArray(new Integer[0]));
+				JComboBox<Integer> comboBox2 = new JComboBox<>(armyCardsInfo.toArray(new Integer[0]));
+				attackPanel.add(comboBox1); // Add the JComboBoxes to the panel
+				attackPanel.add(comboBox2);
 
 				attackFrame.getContentPane().add(attackPanel); // Add the panel to the frame
 				attackFrame.setVisible(true); // Make the frame visible
+
+				
+				
+
+				/******************************* */
+				JButton tradeButton = new JButton("Trade");
+				attackPanel.add(tradeButton);
+				tradeButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Integer selectedItem1 = (Integer) comboBox1.getSelectedItem();
+					Integer selectedItem2 = (Integer) comboBox2.getSelectedItem();
+					
+					// Get the current counts of cards
+					int infantryCount = armyCardsInfo.get(0);
+					int cavalryCount = armyCardsInfo.get(1);
+					int artilleryCount = armyCardsInfo.get(2);
+					
+					// Check the selected options and perform the trades
+					if (selectedItem1 == 3 && selectedItem2 == 0 && infantryCount >= 3) {
+						infantryCount -= 3;
+						cavalryCount += 1;
+					} else if (selectedItem1 == 2 && selectedItem2 == 1 && infantryCount >= 2 && cavalryCount >= 1) {
+						infantryCount -= 2;
+						cavalryCount += 1;
+					} else if (selectedItem1 == 2 && selectedItem2 == 2 && infantryCount >= 2 && artilleryCount >= 1) {
+						infantryCount -= 2;
+						artilleryCount += 2;
+					} else if (selectedItem1 == 1 && selectedItem2 == 1 && infantryCount >= 1 && cavalryCount >= 2) {
+						infantryCount -= 1;
+						cavalryCount -= 1;
+						artilleryCount += 1;
+					} else if (selectedItem1 == 2 && selectedItem2 == 2 && artilleryCount >= 1 && cavalryCount >= 2) {
+						artilleryCount += 3;
+						cavalryCount -= 2;
+					} else {
+						// Invalid trade, handle as needed
+						System.out.println("Invalid trade, please select again");
+						infantryCount += 8;
+						cavalryCount += 9;
+						artilleryCount += 7;
+					}
+					
+					// Update armyCardsInfo
+					armyCardsInfo.set(0, infantryCount);
+					armyCardsInfo.set(1, cavalryCount);
+					armyCardsInfo.set(2, artilleryCount);
+					for(int i = 0; i< 3;i++){
+						System.out.println(armyCardsInfo.get(i));
+					}
+					
+					// Refresh the combo boxes
+					comboBox1.setSelectedIndex(0);
+					comboBox2.setSelectedIndex(0);
+					
+					// Refresh the armyCardsInfo on the UI, if needed
+				}
+			});
+
+				/******************************** */
+				attackFrame.pack();
+        		attackFrame.setVisible(true);
 			}
 		});
 		this.add(pickArmyCard);
+
+		// JButton pickArmyCard = new JButton("trade army card");
+		// pickArmyCard.setBounds(1300, 600, 100, 100);
+		// pickArmyCard.addActionListener(new ActionListener() {
+		// 	@Override
+		// 	public void actionPerformed(ActionEvent e) {
+		// 		JFrame tradeFrame = new JFrame("Trade");
+		// 		JPanel tradePanel = new JPanel();
+		// 		tradePanel.setLayout(new GridLayout(5, 1));
+
+		// 		tradeFrame.setSize(500, 300);
+		// 		tradeFrame.setLocationRelativeTo(null);
+		// 		tradeFrame.setTitle("Trade");
+		// 		ArrayList<Integer> armyCardsInfo = BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getArmyCardsInfo();
+		// 		// Define your card lists here
+		// 		int  numberOfinfantryCards =  armyCardsInfo.get(0);// should contain infantry card ids
+		// 		int  numberOfcavalryCards = armyCardsInfo.get(1); // should contain cavalry card ids
+		// 		int numberOfartilleryCards = armyCardsInfo.get(2); // should contain artillery card ids
+
+		// 		// Create combo boxes for each card type
+		// 		JComboBox<Integer> comboBoxInfantry = new JComboBox<>(infantryCards.toArray(new Integer[0]));
+		// 		JComboBox<Integer> comboBoxCavalry = new JComboBox<>(cavalryCards.toArray(new Integer[0]));
+		// 		JComboBox<Integer> comboBoxArtillery = new JComboBox<>(artilleryCards.toArray(new Integer[0]));
+
+		// 		JLabel resultLabel = new JLabel("Result: ");
+		// 		JButton tradeButton = new JButton("Trade");
+		// 		tradeButton.addActionListener(new ActionListener() {
+		// 			@Override
+		// 			public void actionPerformed(ActionEvent e) {
+		// 				// Calculate trade result here based on the selected cards
+		// 				// Update the resultLabel with the result
+		// 			}
+		// 		});
+
+		// 		// Add labels and combo boxes to the panel
+		// 		tradePanel.add(new JLabel("Infantry"));
+		// 		tradePanel.add(comboBoxInfantry);
+		// 		tradePanel.add(new JLabel("Cavalry"));
+		// 		tradePanel.add(comboBoxCavalry);
+		// 		tradePanel.add(new JLabel("Artillery"));
+		// 		tradePanel.add(comboBoxArtillery);
+
+		// 		// Add trade button and result label to the panel
+		// 		tradePanel.add(tradeButton);
+		// 		tradePanel.add(resultLabel);
+
+		// 		tradeFrame.getContentPane().add(tradePanel); // Add the panel to the frame
+		// 		tradeFrame.setVisible(true); // Make the frame visible
+		// 	}
+		// });
+
+		// this.add(pickArmyCard);
+		
 
 
 

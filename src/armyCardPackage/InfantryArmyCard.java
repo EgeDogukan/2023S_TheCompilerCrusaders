@@ -7,7 +7,7 @@ public class InfantryArmyCard implements IArmyCard {
 	public int type;
 
 	public InfantryArmyCard() {
-		this.type=3;
+		this.type=2;
 	}
 
 	@Override
