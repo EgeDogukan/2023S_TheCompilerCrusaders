@@ -14,9 +14,10 @@ import javax.swing.border.EmptyBorder;
 import RiskPackage.GameControllerNew;
 import RiskPackage.Territory;
 import animationPackage.StarAnimationClass;
+import armyCardPackage.IArmyCard;
 
 import java.util.List;
-
+import java.util.Random;
 import java.util.Collections;
 import javax.imageio.ImageIO;
 
@@ -372,7 +373,15 @@ public class WorldMap {
                                         System.out.println("destination power**********: " + powerOfShape(destinationShape));
                                         System.out.println("destination power**********: " + powerOfShape(shape));
                                         if(powerOfShape(shape)>powerOfShape(destinationShape)){
-                                            
+                                            Random random = new Random();
+                                            int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
+
+                                            // Retrieve and store the object at the random index
+                                            IArmyCard randomCard = RunningModeNew.armyCards.get(randomIndex);
+
+                                            // Remove the object at the random index
+                                            RunningModeNew.armyCards.remove(randomIndex);
+                                            BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(randomCard.getType(), 17);
                                             //**************** */
                                             animationFrame = new StarAnimationClass(0);
                                             //************************* */

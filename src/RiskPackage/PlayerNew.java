@@ -6,6 +6,8 @@ import java.util.Random;
 
 import javax.swing.JTextField;
 
+import armyCardPackage.ArmyCardFactory;
+import armyCardPackage.IArmyCard;
 import chanceCardPackage.IChanceCard;
 import uipackage.RunningModeNew;
 import uipackage.WorldMap;
@@ -17,16 +19,47 @@ public class PlayerNew {
 	ArrayList<Integer> shapeIndices;
 	ArrayList<Integer> chanceCards;
 	boolean cardUsable=false;
+	ArrayList<IArmyCard> armyCards;
+	ArmyCardFactory cardFactory = new ArmyCardFactory();
+
 	
 	public PlayerNew(int id, Color color, ArrayList<Integer> shapeIndices) {
 		this.id=id;
 		this.color=color;
 		this.shapeIndices=shapeIndices;
 		chanceCards = new ArrayList<>();
+		armyCards = new ArrayList<>();
 	}
 	
 	public void addChanceCard(int chanceCardType) {
 		this.chanceCards.add(chanceCardType);
+	}
+
+	public void addArmyCard(int ArmyCardType, int numberOfCard){
+		for(int j = 0; j<numberOfCard;j++){
+			armyCards.add(cardFactory.createArmyCard(ArmyCardType));
+		}
+	}
+
+	public ArrayList<Integer> getArmyCardsInfo(){
+		ArrayList<Integer> info = new ArrayList<>(3);
+		for (int i = 0; i < 3; i++) {
+            info.add(0);
+        }
+		for(IArmyCard cards: armyCards){
+			if(cards.getType()==0){
+				info.set(0, info.get(0)+1);
+			}
+			else if(cards.getType()==1){
+				info.set(1, info.get(1)+1);
+			}
+			else{
+				info.set(2, info.get(2)+1);
+			}
+
+
+		}
+		return info;
 	}
 	
 	

@@ -21,6 +21,7 @@ import RiskPackage.PlayerNew;
 import animationPackage.CardAnimationClass;
 import armyCardPackage.ArmyCardFactory;
 import armyCardPackage.IArmyCard;
+import armyCardPackage.InfantryArmyCard;
 import chanceCardPackage.ChanceCardFactory;
 import databasePackage.ISaveLoadAdapter;
 import databasePackage.TerritoryDBDatabase;
@@ -52,7 +53,7 @@ public class RunningModeNew extends JFrame {
 	
 	public CardAnimationClass cardAnimationClass;
 	
-	public ArrayList<IArmyCard> armyCards = new ArrayList<>();
+	public static ArrayList<IArmyCard> armyCards = new ArrayList<>();
 	public ArmyCardFactory armyCardFactory = new ArmyCardFactory();
 	
 	public ArrayList<TerritoryCard> territoryCards = new ArrayList<>();
@@ -72,9 +73,9 @@ public class RunningModeNew extends JFrame {
 	public void initializeArmyCards() {
 		for (int i=0;i<players.size();i++) {
 			
-			for (int j=0;j<3;j++) {armyCards.add(armyCardFactory.createArmyCard(1));}
-			for (int j=0;j<2;j++) {armyCards.add(armyCardFactory.createArmyCard(2));}
-			for (int j=0;j<1;j++) {armyCards.add(armyCardFactory.createArmyCard(3));}
+			for (int j=0;j<3;j++) {armyCards.add(armyCardFactory.createArmyCard(0));}
+			for (int j=0;j<2;j++) {armyCards.add(armyCardFactory.createArmyCard(1));}
+			for (int j=0;j<1;j++) {armyCards.add(armyCardFactory.createArmyCard(2));}
 		}
 	}
 	
@@ -173,6 +174,44 @@ public class RunningModeNew extends JFrame {
 			}
 		});
 		this.add(saveButtonJSON);
+
+		JButton pickArmyCard = new JButton("trade army card");
+		pickArmyCard.setBounds(1300, 600, 100, 100);
+		pickArmyCard.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame attackFrame = new JFrame("attack");
+				JPanel attackPanel = new JPanel();
+
+				attackFrame.setSize(500, 100);
+				attackFrame.setLocationRelativeTo(null);
+				attackFrame.setTitle("RunningModedeploy");
+
+				ArrayList<Integer> armyCardsInfo = BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getArmyCardsInfo();
+				System.out.println(armyCardsInfo.size());
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
+				for (int i = 0; i < armyCardsInfo.size(); i++) {
+					System.out.println(":" + armyCardsInfo.get(i));
+				}
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
+
+				attackPanel.add(new JLabel("Infantry"));
+				attackPanel.add(new JLabel("Cavalry"));
+				attackPanel.add(new JLabel("Artillery"));
+
+				// Create a JComboBox to display the army card information
+				JComboBox<Integer> comboBox = new JComboBox<>(armyCardsInfo.toArray(new Integer[0]));
+				attackPanel.add(comboBox); // Add the JComboBox to the panel
+
+				attackFrame.getContentPane().add(attackPanel); // Add the panel to the frame
+				attackFrame.setVisible(true); // Make the frame visible
+			}
+		});
+		this.add(pickArmyCard);
+
+
+
+		
 		
 		JButton pickChanceCard = new JButton("pick chance card");
 		pickChanceCard.setBounds(200, 550, 100, 100);

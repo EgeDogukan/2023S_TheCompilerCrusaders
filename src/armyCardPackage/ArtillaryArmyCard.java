@@ -14,4 +14,10 @@ public class ArtillaryArmyCard implements IArmyCard {
 		System.out.println("Artillery cart is appended to the players army card list.");
 	}
 
+	@Override
+	public int getType() {
+		// TODO Auto-generated method stub
+		return this.type;
+	}
+
 }

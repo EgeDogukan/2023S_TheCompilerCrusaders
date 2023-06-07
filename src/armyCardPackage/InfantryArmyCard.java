@@ -16,4 +16,10 @@ public class InfantryArmyCard implements IArmyCard {
 		
 	}
 
+	@Override
+	public int getType() {
+		// TODO Auto-generated method stub
+		return this.type;
+	}
+
 }
