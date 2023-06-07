@@ -32,7 +32,7 @@ public class StarAnimationClass extends JFrame{
 	public StarAnimationClass(int chooser)  {
 		this.setSize(FRAME_WIDTH, FRAME_WIDTH);
 		this.setLayout(null);
-		this.setLocation(FRAME_WIDTH/2, FRAME_WIDTH/2);
+		this.setLocationRelativeTo(null);
 		this.chooser=chooser;
 		this.createPanel();
 		
