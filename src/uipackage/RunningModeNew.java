@@ -59,7 +59,7 @@ public class RunningModeNew extends JFrame {
 
 	public RunningModeNew(ArrayList<PlayerNew> players, WorldMap worldMap, int numberOfCompPlayer) {
 		this.players=players;
-		numberOfHumanPlayer=players.size();
+		numberOfHumanPlayer=players.size()-numberOfCompPlayer;
 		numberOfAIPlayer=numberOfCompPlayer;
 		this.worldMap=worldMap;
 		this.initializeArmyCards();
@@ -267,57 +267,7 @@ public class RunningModeNew extends JFrame {
 		});
 		this.add(pickArmyCard);
 
-		// JButton pickArmyCard = new JButton("trade army card");
-		// pickArmyCard.setBounds(1300, 600, 100, 100);
-		// pickArmyCard.addActionListener(new ActionListener() {
-		// 	@Override
-		// 	public void actionPerformed(ActionEvent e) {
-		// 		JFrame tradeFrame = new JFrame("Trade");
-		// 		JPanel tradePanel = new JPanel();
-		// 		tradePanel.setLayout(new GridLayout(5, 1));
-
-		// 		tradeFrame.setSize(500, 300);
-		// 		tradeFrame.setLocationRelativeTo(null);
-		// 		tradeFrame.setTitle("Trade");
-		// 		ArrayList<Integer> armyCardsInfo = BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getArmyCardsInfo();
-		// 		// Define your card lists here
-		// 		int  numberOfinfantryCards =  armyCardsInfo.get(0);// should contain infantry card ids
-		// 		int  numberOfcavalryCards = armyCardsInfo.get(1); // should contain cavalry card ids
-		// 		int numberOfartilleryCards = armyCardsInfo.get(2); // should contain artillery card ids
-
-		// 		// Create combo boxes for each card type
-		// 		JComboBox<Integer> comboBoxInfantry = new JComboBox<>(infantryCards.toArray(new Integer[0]));
-		// 		JComboBox<Integer> comboBoxCavalry = new JComboBox<>(cavalryCards.toArray(new Integer[0]));
-		// 		JComboBox<Integer> comboBoxArtillery = new JComboBox<>(artilleryCards.toArray(new Integer[0]));
-
-		// 		JLabel resultLabel = new JLabel("Result: ");
-		// 		JButton tradeButton = new JButton("Trade");
-		// 		tradeButton.addActionListener(new ActionListener() {
-		// 			@Override
-		// 			public void actionPerformed(ActionEvent e) {
-		// 				// Calculate trade result here based on the selected cards
-		// 				// Update the resultLabel with the result
-		// 			}
-		// 		});
-
-		// 		// Add labels and combo boxes to the panel
-		// 		tradePanel.add(new JLabel("Infantry"));
-		// 		tradePanel.add(comboBoxInfantry);
-		// 		tradePanel.add(new JLabel("Cavalry"));
-		// 		tradePanel.add(comboBoxCavalry);
-		// 		tradePanel.add(new JLabel("Artillery"));
-		// 		tradePanel.add(comboBoxArtillery);
-
-		// 		// Add trade button and result label to the panel
-		// 		tradePanel.add(tradeButton);
-		// 		tradePanel.add(resultLabel);
-
-		// 		tradeFrame.getContentPane().add(tradePanel); // Add the panel to the frame
-		// 		tradeFrame.setVisible(true); // Make the frame visible
-		// 	}
-		// });
-
-		// this.add(pickArmyCard);
+		
 		
 
 
@@ -397,7 +347,7 @@ public class RunningModeNew extends JFrame {
 				turnCounter++;
 				turn.setText("Turn: Player "+players.get(turnCounter-1).getId());
 				if (turnCounter==numberOfAIPlayer+numberOfHumanPlayer)
-						turnCounter=0;
+						turnCounter=1;
 				turnPanel.setBackground(players.get(turnCounter).getColor());
 				
 				

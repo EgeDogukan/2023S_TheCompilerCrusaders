@@ -159,6 +159,7 @@ public class WorldMap {
                 
                 if(isInBuildingMode == true) {
                     for (Shape shape : shapeList) {
+
                         if (shape.contains(pointOnImage)) {   
                             //JOptionPane.showMessageDialog(null, "Clicked!"); 
                             numofSelectedTerritory++;
@@ -289,56 +290,47 @@ public class WorldMap {
                             retrieveInfantryButton.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
-                                	if (BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getShapeIndices().contains(clickedShapeIndex)) {
-                                		String numberOfArmyonarea = numberOfArmy.getText();
-                                        setShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
-                                        System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyInfantry(clickedShapeIndex));    
-                                        if(Integer.parseInt(numberOfArmyonarea) > 0){
-                                            optionFrame.dispose();
-                                        }
-                                        else{
-                                            JOptionPane.showMessageDialog(null, "Enter the amount of Infantry you wish to deploy");
-                                        }
-                                	}
-                                    
+                                    String numberOfArmyonarea = numberOfArmy.getText();
+                                    setShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyInfantry(clickedShapeIndex));    
+                                    if(Integer.parseInt(numberOfArmyonarea) > 0){
+                                        optionFrame.dispose();
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(null, "Enter the amount of Infantry you wish to deploy");
+                                    }
                                 }
                             });
                             JButton retrieveCavalryButton = new JButton("Cavalry");
                             retrieveCavalryButton.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
-                                	if (BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getShapeIndices().contains(clickedShapeIndex)) {
-                                		String numberOfArmyonarea = numberOfArmy.getText();
-                                        setShapeArmyCavalry(shape, Integer.parseInt(numberOfArmyonarea));   
-                                        System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyCavalry(clickedShapeIndex));    
-                                        if(Integer.parseInt(numberOfArmyonarea) > 0){
-                                            optionFrame.dispose();
-                                        }
-                                        else{
-                                            JOptionPane.showMessageDialog(null, "Enter the amount of Infantry you wish to deploy");
-                                        }
-                                	}
-                                    
+                                    String numberOfArmyonarea = numberOfArmy.getText();
+                                    setShapeArmyCavalry(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyCavalry(clickedShapeIndex));    
+                                    if(Integer.parseInt(numberOfArmyonarea) > 0){
+                                        optionFrame.dispose();
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(null, "Enter the amount of Infantry you wish to deploy");
+                                    }
                                 }
                             });
                             JButton retrieveArtilleryButton = new JButton("Artillery");
                             retrieveArtilleryButton.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
-                                	if (BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getShapeIndices().contains(clickedShapeIndex)) {
-                                		String numberOfArmyonarea = numberOfArmy.getText();
-                                        setShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
-                                        
-                                        if(Integer.parseInt(numberOfArmyonarea) > 0){
-                                            optionFrame.dispose();
-                                        }
-                                        else{
-                                            JOptionPane.showMessageDialog(null, "Enter the amount of Artillery you wish to deploy");
-                                        }
-                                        System.out.println("Artillery at shape index " + clickedShapeIndex + ": " + getShapeArmyArtillery(clickedShapeIndex));
-
-                                	}
+                                    String numberOfArmyonarea = numberOfArmy.getText();
+                                    setShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
                                     
+                                    if(Integer.parseInt(numberOfArmyonarea) > 0){
+                                        optionFrame.dispose();
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(null, "Enter the amount of Artillery you wish to deploy");
+                                    }
+                                    System.out.println("Artillery at shape index " + clickedShapeIndex + ": " + getShapeArmyArtillery(clickedShapeIndex));
+
                                 }
                             });
                             currentField.setBounds((int) centerX, (int) centerY, 40, 40);
@@ -384,43 +376,6 @@ public class WorldMap {
                                 attackButton.addMouseListener(new MouseAdapter() {
                                     @Override
                                     public void mouseClicked(MouseEvent e) {
-<<<<<<< HEAD
-                                    	if (BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getShapeIndices().contains(clickedShapeIndex)) {
-                                    		int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
-                                            Shape destinationShape = getShape(destinationIndex);
-                                            System.out.println("destination power**********: " + powerOfShape(destinationShape));
-                                            System.out.println("destination power**********: " + powerOfShape(shape));
-                                            if(powerOfShape(shape)>powerOfShape(destinationShape)){
-                                                
-                                            	Random random = new Random();
-                                                
-                                                if (random.nextInt(2)==1) {
-                                                	int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
-
-                                                    // Retrieve and store the object at the random index
-                                                    IArmyCard randomCard = RunningModeNew.armyCards.get(randomIndex);
-
-                                                    // Remove the object at the random index
-                                                    RunningModeNew.armyCards.remove(randomIndex);
-                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(randomCard.getType(), 1);
-                                                }
-                                                else {
-                                                	BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addTerritoryCard(clickedShapeIndex);
-                                                    
-                                                }
-                                                
-                                                
-                                                
-                                                //**************** */
-                                                animationFrame = new StarAnimationClass(0);
-                                                //************************* */
-                                                setIndexColor(shapeList.indexOf(destinationShape), Color.gray);
-                                            }
-                                            else {
-                                            	animationFrame = new StarAnimationClass(1);
-                                            }
-                                    	}
-=======
                                         int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
                                         Shape destinationShape = getShape(destinationIndex);
                                         System.out.println("destination power**********: " + powerOfShape(destinationShape));
@@ -433,6 +388,22 @@ public class WorldMap {
                                                 if (powerOfShape(shape) > powerOfShape(destinationShape) && DiceRollingFrame.defenderDiceResult < DiceRollingFrame.attackerDiceResult) {
                                                     //**************** */
                                                     animationFrame = new StarAnimationClass(0);
+                                                    Random random = new Random();
+                                                    int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
+
+                                                    // Retrieve and store the object at the random index
+                                                    IArmyCard randomCard = RunningModeNew.armyCards.get(0);
+                                                    IArmyCard randomCard1 = RunningModeNew.armyCards.get(1);
+                                                    IArmyCard randomCard2 = RunningModeNew.armyCards.get(2);
+                                                    // Remove the object at the random index
+                                                    RunningModeNew.armyCards.remove(randomIndex);
+                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(0, 17);
+                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(2, 17);
+                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(1, 17);
+                                            //**************** */
+                                            
+                                            //************************* */
+                                            setIndexColor(shapeList.indexOf(destinationShape), Color.gray);
                                                     //************************* */
                                                     setIndexColor(shapeList.indexOf(destinationShape), Color.gray);
                                                 } else {
@@ -442,7 +413,6 @@ public class WorldMap {
                                         });
                                         myFrame.showFrame();
                                         
->>>>>>> origin/DiceRollingAnimation
                                         
                                     }
                                 });
@@ -939,7 +909,7 @@ public class WorldMap {
         return ui;
     }
 
-
+    
     private void removeMouseListener() {
         output.removeMouseListener(ml);
     }
