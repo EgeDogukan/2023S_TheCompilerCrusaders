@@ -382,15 +382,26 @@ public class WorldMap {
                                             System.out.println("destination power**********: " + powerOfShape(destinationShape));
                                             System.out.println("destination power**********: " + powerOfShape(shape));
                                             if(powerOfShape(shape)>powerOfShape(destinationShape)){
-                                                Random random = new Random();
-                                                int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
+                                                
+                                            	Random random = new Random();
+                                                
+                                                if (random.nextInt(2)==1) {
+                                                	int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
 
-                                                // Retrieve and store the object at the random index
-                                                IArmyCard randomCard = RunningModeNew.armyCards.get(randomIndex);
+                                                    // Retrieve and store the object at the random index
+                                                    IArmyCard randomCard = RunningModeNew.armyCards.get(randomIndex);
 
-                                                // Remove the object at the random index
-                                                RunningModeNew.armyCards.remove(randomIndex);
-                                                BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(randomCard.getType(), 17);
+                                                    // Remove the object at the random index
+                                                    RunningModeNew.armyCards.remove(randomIndex);
+                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(randomCard.getType(), 1);
+                                                }
+                                                else {
+                                                	BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addTerritoryCard(clickedShapeIndex);
+                                                    
+                                                }
+                                                
+                                                
+                                                
                                                 //**************** */
                                                 animationFrame = new StarAnimationClass(0);
                                                 //************************* */
