@@ -45,9 +45,9 @@ public class IntermediaryBetweenPreBuildingAndBuilding {
 			
 			@Override
 			public void windowClosed(WindowEvent e) {
-				buildingModeNew = new BuildingModeNew(preBuildingMode.getNumberOfPlayer());
+				buildingModeNew = new BuildingModeNew(preBuildingMode.getNumberOfPlayer(),preBuildingMode.getNumberOfCompPlayer());
 				
-				System.out.println(preBuildingMode.getNumberOfPlayer());
+				System.out.println(preBuildingMode.getNumberOfPlayer()+preBuildingMode.getNumberOfCompPlayer());
 				
 				
 				buildingModeNew.setVisible(true);

@@ -57,10 +57,10 @@ public class RunningModeNew extends JFrame {
 
 
 
-	public RunningModeNew(ArrayList<PlayerNew> players, WorldMap worldMap) {
+	public RunningModeNew(ArrayList<PlayerNew> players, WorldMap worldMap, int numberOfCompPlayer) {
 		this.players=players;
 		numberOfHumanPlayer=players.size();
-		numberOfAIPlayer=0;
+		numberOfAIPlayer=numberOfCompPlayer;
 		this.worldMap=worldMap;
 		this.initializeArmyCards();
 		this.initializeTerritoryCards();

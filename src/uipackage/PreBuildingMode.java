@@ -60,10 +60,7 @@ public class PreBuildingMode extends JFrame {
 		this.add(nextButton);
 		this.setVisible(true);
 	}
-	public static void main(String[] args) {
-		PreBuildingMode preBuildingMode = new PreBuildingMode();
-		
-	}
+
 	
 	
 	public int getNumberOfPlayer() {
