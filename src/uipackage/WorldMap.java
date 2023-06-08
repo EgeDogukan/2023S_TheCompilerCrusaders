@@ -380,8 +380,8 @@ public class WorldMap {
                                         Shape destinationShape = getShape(destinationIndex);
                                         System.out.println("destination power**********: " + powerOfShape(destinationShape));
                                         System.out.println("destination power**********: " + powerOfShape(shape));
-                                        DiceRollingFrame myFrame = new DiceRollingFrame();
-                                        myFrame.setOnFrameClosedListener(new DiceRollingFrame.OnFrameClosedListener() {
+                                        DiceRollingFrame FrameDiceRolling = new DiceRollingFrame();
+                                        FrameDiceRolling.setOnFrameClosedListener(new DiceRollingFrame.OnFrameClosedListener() {
                                             @Override
                                             public void onFrameClosed() {
                                                 // This code will be run when the DiceRollingFrame is closed
@@ -403,7 +403,7 @@ public class WorldMap {
                                             //**************** */
                                             
                                             //************************* */
-                                            setIndexColor(shapeList.indexOf(destinationShape), Color.gray);
+                                            setIndexColor(shapeList.indexOf(destinationShape), colorList.get(colorList.indexOf(shape)));
                                                     //************************* */
                                                     setIndexColor(shapeList.indexOf(destinationShape), Color.gray);
                                                 } else {
@@ -411,7 +411,7 @@ public class WorldMap {
                                                 }
                                             }
                                         });
-                                        myFrame.showFrame();
+                                        FrameDiceRolling.showFrame();
                                         
                                         
                                     }
