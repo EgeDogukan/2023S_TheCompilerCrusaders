@@ -347,7 +347,7 @@ public class RunningModeNew extends JFrame {
 				turnCounter++;
 				turn.setText("Turn: Player "+players.get(turnCounter-1).getId());
 				if (turnCounter==numberOfAIPlayer+numberOfHumanPlayer)
-						turnCounter=1;
+						turnCounter=0;
 				turnPanel.setBackground(players.get(turnCounter).getColor());
 				
 				
