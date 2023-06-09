@@ -455,11 +455,11 @@ public class WorldMap {
                                                                         decreasePowerOfShapeArtillery(shape, 1);
 
                                                                     }    
-                                                                    if(getShapeArmyCavalry(currTerr)>0){
+                                                                    else if(getShapeArmyCavalry(currTerr)>0){
                                                                         decreaseShapeArmyCavalary(shape, 1);
                                                                         decreasePowerOfShapeCavalary(shape, 1);
                                                                     }
-                                                                    if(getShapeArmyInfantry(currTerr)>0){
+                                                                    else if(getShapeArmyInfantry(currTerr)>0){
                                                                         decreaseShapeArmyInfantry(shape, 1);
                                                                         decreasePowerOfShapeInfantry(shape, 1);
                                                                     }
@@ -513,7 +513,7 @@ public class WorldMap {
 
                                 fortifyFrame.setSize(500, 200);
                                 fortifyFrame.setLocationRelativeTo(null);
-                                fortifyFrame.setTitle("RunningModeFortify");
+                                fortifyFrame.setTitle("Fortify");
 
 
                                 
@@ -577,21 +577,18 @@ public class WorldMap {
                                         Shape destinationShape = getShape(destinationIndex);
                                         if(powerOfShape(shape)>1){
                                             if(((Color) colorList.get(selected)).getRed() == playerColor.getRed()&& ((Color) colorList.get(selected)).getGreen() == playerColor.getGreen() && ((Color) colorList.get(selected)).getBlue() == playerColor.getBlue()){
-                                                if(fortifyAmountArtilarry<=getShapeArmyArtillery(currTerr)&&fortifyAmountCavalary<= getShapeArmyCavalry(currTerr)&&fortifyAmountInfantry<= getShapeArmyInfantry(currTerr)){
-                                                    JOptionPane.showMessageDialog(null, "Fortifiying");
-
-                                                }
+                                                
 
                                                 try {
-                                                    if(fortifyAmountArtilarry > getShapeArmyArtillery(currTerr)) {
+                                                    if(fortifyAmountArtilarry >= getShapeArmyArtillery(currTerr)&&fortifyAmountArtilarry !=0) {
                                                         throw new Exception("You do not have that amount of artilarries");
                                                     }
 
-                                                    if(fortifyAmountCavalary > getShapeArmyCavalry(currTerr)) {
+                                                    if(fortifyAmountCavalary >= getShapeArmyCavalry(currTerr)&&fortifyAmountCavalary != 0) {
                                                         throw new Exception("You do not have that amount of cavalaries");
                                                     }
 
-                                                    if(fortifyAmountInfantry > getShapeArmyInfantry(currTerr)) {
+                                                    if(fortifyAmountInfantry >= getShapeArmyInfantry(currTerr)&& fortifyAmountInfantry != 0) {
                                                         throw new Exception("You do not have that amount of infantries");
                                                     }
 
@@ -607,6 +604,8 @@ public class WorldMap {
                                                     // Adding inputed amount of infantries and decreasing it from territory
                                                     addShapeArmyInfantry(destinationShape, fortifyAmountInfantry);
                                                     decreaseShapeArmyInfantry(clickedShape, fortifyAmountInfantry);
+                                                    JOptionPane.showMessageDialog(null, "Fortifiyed");
+
 
                                                 } catch (Exception e1) {
                                                     JOptionPane.showMessageDialog(null, e1.getMessage());
