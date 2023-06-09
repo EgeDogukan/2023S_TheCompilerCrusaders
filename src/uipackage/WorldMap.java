@@ -361,7 +361,7 @@ public class WorldMap {
                                 
                                 attackFrame.setSize(500, 100);
                                 attackFrame.setLocationRelativeTo(null);
-                                attackFrame.setTitle("Choose Neighbor To Attack");
+                                attackFrame.setTitle("Choose Neighbour To Attack");
                                 
 
                                 ArrayList<Integer> integerList = neighbourList.get(getShapeIndex(shape));
@@ -406,9 +406,10 @@ public class WorldMap {
                                             //**************** */
                                             
                                             //************************* */
-                                            setIndexColor(shapeList.indexOf(destinationShape), colorList.get(colorList.indexOf(shape)));
+                                                    if(powerOfShape(destinationShape) <= 0){
+                                                        setIndexColor(shapeList.indexOf(destinationShape), colorList.get(colorList.indexOf(shape)));
+                                                    }
                                                     //************************* */
-                                                    setIndexColor(shapeList.indexOf(destinationShape), Color.gray);
                                                 } else {
                                                     animationFrame = new StarAnimationClass(1);
                                                 }

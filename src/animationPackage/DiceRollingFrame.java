@@ -1,9 +1,5 @@
 package animationPackage;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 import RiskPackage.DiceRoller;
 
 import javax.swing.*;
@@ -23,12 +19,14 @@ public class DiceRollingFrame extends JFrame {
     public static int attackerDiceResult;
     public static int defenderDiceResult;
     public static boolean DiceRollingFrameClosed = false;
+    private boolean animationFinished = false;
     public interface OnFrameClosedListener {
         void onFrameClosed();
     }
     private OnFrameClosedListener onFrameClosedListener;
 
     public DiceRollingFrame() {
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setSize(500, 500);
         setLayout(new FlowLayout());
         setLocationRelativeTo(null);
@@ -78,11 +76,37 @@ public class DiceRollingFrame extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                if (onFrameClosedListener != null) {
+                if (animationFinished && onFrameClosedListener != null) {
                     onFrameClosedListener.onFrameClosed();
                 }
             }
         });
+
+        // When the animation is done, allow the frame to be closed
+        PropertyChangeListener listenerClose = new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (DiceRoller.TIMER_STOPPED_PROPERTY.equals(evt.getPropertyName())) {
+                    if (!diceRoller1.isRolling() && !diceRoller2.isRolling()) {
+                        animationFinished = true;
+                        // Wait 1 second before closing the frame
+                        new Timer(1000, new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                ((Timer) e.getSource()).stop();
+                                if (onFrameClosedListener != null) {
+                                    onFrameClosedListener.onFrameClosed();
+                                }
+                                dispose();  // This will close the JFrame
+                            }
+                        }).start();
+                    }
+                }
+            }
+        };
+        diceRoller1.addPropertyChangeListener(listenerClose);
+        diceRoller2.addPropertyChangeListener(listenerClose);
+
     }
     public void setOnFrameClosedListener(OnFrameClosedListener onFrameClosedListener) {
         this.onFrameClosedListener = onFrameClosedListener;
