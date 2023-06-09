@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.OptionPaneUI;
+import javax.swing.text.html.Option;
 
 import RiskPackage.Cavalry;
 import RiskPackage.GameControllerNew;
@@ -374,56 +376,92 @@ public class WorldMap {
                                 String[] stringArray = stringList.toArray(new String[0]);
 
                                 JComboBox<String> neighbourCombo = new JComboBox<String>(stringArray);
+
                                 JButton attackButton = new JButton("Attack");
                                 attackPanel.add(attackButton);
                                 attackButton.addMouseListener(new MouseAdapter() {
                                     @Override
                                     public void mouseClicked(MouseEvent e) {
-                                        int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
-                                        Shape destinationShape = getShape(destinationIndex);
-                                        System.out.println("destination power**********: " + powerOfShape(destinationShape));
-                                        System.out.println("destination power**********: " + powerOfShape(shape));
-                                        DiceRollingFrame FrameDiceRolling = new DiceRollingFrame();
-                                        FrameDiceRolling.setOnFrameClosedListener(new DiceRollingFrame.OnFrameClosedListener() {
-                                            @Override
-                                            public void onFrameClosed() {
-                                                // This code will be run when the DiceRollingFrame is closed
-                                                try{
-                                                    if (powerOfShape(shape) > powerOfShape(destinationShape) && DiceRollingFrame.defenderDiceResult < DiceRollingFrame.attackerDiceResult) {
-                                                        //**************** */
-                                                        animationFrame = new StarAnimationClass(0);
-                                                        Random random = new Random();
-                                                        int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
+                                        if(powerOfShape(shape) >1){
+                                            int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
+                                            Shape destinationShape = getShape(destinationIndex);
+                                            System.out.println("destination power**********: " + powerOfShape(destinationShape));
+                                            System.out.println("destination power**********: " + powerOfShape(shape));
+                                            String selectedItem = (String) neighbourCombo.getSelectedItem();
+                                            Integer selected = Integer.parseInt(selectedItem);
 
-                                                        // Retrieve and store the object at the random index
-                                                        IArmyCard randomCard = RunningModeNew.armyCards.get(0);
-                                                        IArmyCard randomCard1 = RunningModeNew.armyCards.get(1);
-                                                        IArmyCard randomCard2 = RunningModeNew.armyCards.get(2);
-                                                        // Remove the object at the random index
-                                                        RunningModeNew.armyCards.remove(randomIndex);
-                                                        BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(0, 17);
-                                                        BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(2, 17);
-                                                        BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(1, 17);
-                                            
-                                                        if(powerOfShape(destinationShape) <= 0){
-                                                            setIndexColor(shapeList.indexOf(destinationShape), colorList.get(clickedShapeIndex));
-                                                        }
-                                                   
-                                                    } 
-                                                    else {
-                                                        animationFrame = new StarAnimationClass(1);
+                                            if(((Color) colorList.get(selected)).getRed() != playerColor.getRed()&& ((Color) colorList.get(selected)).getGreen() != playerColor.getGreen() && ((Color) colorList.get(selected)).getBlue() != playerColor.getBlue()){
+                                                DiceRollingFrame FrameDiceRolling = new DiceRollingFrame();
+                                                FrameDiceRolling.setOnFrameClosedListener(new DiceRollingFrame.OnFrameClosedListener() {
+                                                @Override
+                                                public void onFrameClosed() {
+
+                                                    // This code will be run when the DiceRollingFrame is closed
+                                                    try{
+                                                        
+                                                            if (powerOfShape(shape) > powerOfShape(destinationShape) && DiceRollingFrame.defenderDiceResult < DiceRollingFrame.attackerDiceResult) {
+                                                                //**************** */
+                                                                
+                                                                int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
+
+                                                                    animationFrame = new StarAnimationClass(0);
+                                                                    if(powerOfShape(destinationShape) != 0){
+                                                                        if(getShapeArmyArtillery(destinationIndex) < 0){
+                                                                            decreaseShapeArmyArtillery(destinationShape, 1);
+                                                                            decreasePowerOfShapeArtillery(destinationShape, 1);//Bunları test et hangisi lazım
+                                                                        }
+                                                                    }
+
+                                                                    Random random = new Random();
+                                                                    int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
+
+                                                                    // Retrieve and store the object at the random index
+                                                                    IArmyCard randomCard = RunningModeNew.armyCards.get(0);
+                                                                    IArmyCard randomCard1 = RunningModeNew.armyCards.get(1);
+                                                                    IArmyCard randomCard2 = RunningModeNew.armyCards.get(2);
+                                                                    // Remove the object at the random index
+                                                                    RunningModeNew.armyCards.remove(randomIndex);
+                                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(0, 17);
+                                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(2, 17);
+                                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(1, 17);
+                                                        
+                                                                    if(powerOfShape(destinationShape) <= 0){
+                                                                        setIndexColor(shapeList.indexOf(destinationShape), colorList.get(clickedShapeIndex));
+                                                                        setShapeArmyInfantry(destinationShape, 1);
+                                                                        decreasePowerOfShapeInfantry(shape, 1);
+                                                                    }
+                                                                
+                                                                
+                                                                
+                                                                
+                                                        
+                                                            } 
+                                                            else {
+                                                                animationFrame = new StarAnimationClass(1);
+                                                            }
+                                                        
+                                                    }
+                                                    catch (Exception e){
+                                                        e.printStackTrace();
                                                     }
                                                 }
-                                                catch (Exception e){
-                                                    e.printStackTrace();
-                                                }
+                                                    
+                                            });
+                                            FrameDiceRolling.showFrame();
                                             }
-                                                
-                                        });
-                                        FrameDiceRolling.showFrame();
-                                        
+                                            else{
+                                                JOptionPane.showMessageDialog( null, "You already own this territory");
+                                            }
+
+                                            
+                                            
+                                        }
+                                        else{
+                                            JOptionPane.showMessageDialog( null, "You do not have enough power to attack");
+                                        }
                                         
                                     }
+                                    
                                 });
 
                                 neighbourCombo.setPreferredSize(new Dimension(100,50));
@@ -1099,7 +1137,7 @@ public class WorldMap {
     }
     public void decreaseShapeArmyArtillery(Shape shape, int numberOfArmy){
         int armyIndex = shapeList.indexOf(shape);
-        armyList[armyIndex][2] += numberOfArmy;
+        armyList[armyIndex][2] -= numberOfArmy;
     }
 
 
