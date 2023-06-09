@@ -356,7 +356,7 @@ public class WorldMap {
                             WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
                         	Color curColor = colorList.get(getShapeIndex(shape));
                         	Color playerColor = BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getColor();
-                        	
+                        	int currTerr = shapeList.indexOf(shape);
                         	if (curColor.getRed()==playerColor.getRed() && curColor.getGreen()==playerColor.getGreen() && curColor.getBlue()==playerColor.getBlue()) {
                         		JFrame attackFrame = new JFrame("attack");
                                 JPanel attackPanel = new JPanel();
@@ -406,9 +406,18 @@ public class WorldMap {
 
                                                                     animationFrame = new StarAnimationClass(0);
                                                                     if(powerOfShape(destinationShape) != 0){
-                                                                        if(getShapeArmyArtillery(destinationIndex) < 0){
+                                                                        if(getShapeArmyArtillery(destinationIndex) > 0){
                                                                             decreaseShapeArmyArtillery(destinationShape, 1);
-                                                                            decreasePowerOfShapeArtillery(destinationShape, 1);//Bunları test et hangisi lazım
+                                                                            decreasePowerOfShapeArtillery(destinationShape, 1);
+
+                                                                        }
+                                                                        if(getShapeArmyCavalry(destinationIndex)>0){
+                                                                            decreaseShapeArmyCavalary(destinationShape, 1);
+                                                                            decreasePowerOfShapeCavalary(destinationShape, 1);
+                                                                        }
+                                                                        if(getShapeArmyInfantry(destinationIndex)>0){
+                                                                            decreaseShapeArmyInfantry(destinationShape, 1);
+                                                                            decreasePowerOfShapeInfantry(destinationShape, 1);
                                                                         }
                                                                     }
 
@@ -428,7 +437,9 @@ public class WorldMap {
                                                                     if(powerOfShape(destinationShape) <= 0){
                                                                         setIndexColor(shapeList.indexOf(destinationShape), colorList.get(clickedShapeIndex));
                                                                         setShapeArmyInfantry(destinationShape, 1);
+
                                                                         decreasePowerOfShapeInfantry(shape, 1);
+                                                                        decreaseShapeArmyInfantry(shape, 1);
                                                                     }
                                                                 
                                                                 
@@ -438,6 +449,21 @@ public class WorldMap {
                                                             } 
                                                             else {
                                                                 animationFrame = new StarAnimationClass(1);
+                                                                if(powerOfShape(shape)!= 0){
+                                                                    if(getShapeArmyArtillery(currTerr) > 0){
+                                                                        decreaseShapeArmyArtillery(shape, 1);
+                                                                        decreasePowerOfShapeArtillery(shape, 1);
+
+                                                                    }    
+                                                                    if(getShapeArmyCavalry(currTerr)>0){
+                                                                        decreaseShapeArmyCavalary(shape, 1);
+                                                                        decreasePowerOfShapeCavalary(shape, 1);
+                                                                    }
+                                                                    if(getShapeArmyInfantry(currTerr)>0){
+                                                                        decreaseShapeArmyInfantry(shape, 1);
+                                                                        decreasePowerOfShapeInfantry(shape, 1);
+                                                                    }
+                                                                }
                                                             }
                                                         
                                                     }
@@ -480,7 +506,7 @@ public class WorldMap {
                         	Color playerColor = BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getColor();
                             int currTerr = shapeList.indexOf(shape);
                             if (curColor.getRed()==playerColor.getRed() && curColor.getGreen()==playerColor.getGreen() && curColor.getBlue()==playerColor.getBlue()) {
-                                JFrame fortifyFrame = new JFrame("fortify");
+                                JFrame fortifyFrame = new JFrame("Fortify");
                                 JPanel fortPanel = new JPanel(new GridLayout(4,1));
 
                                 
@@ -549,35 +575,54 @@ public class WorldMap {
 
                                         Integer selected = (Integer) neighbourCombo.getSelectedItem();
                                         Shape destinationShape = getShape(destinationIndex);
-                                        if(((Color) colorList.get(selected)).getRed() == playerColor.getRed()&& ((Color) colorList.get(selected)).getGreen() == playerColor.getGreen() && ((Color) colorList.get(selected)).getBlue() == playerColor.getBlue()){
-                                            if(fortifyAmountArtilarry<=getShapeArmyArtillery(currTerr)){
-                                                
-                                                JOptionPane.showMessageDialog(null, "adding");
-                                                //Addiny inputed amount
-                                                addShapeArmyArtillery(destinationShape, fortifyAmountArtilarry);
+                                        if(powerOfShape(shape)>1){
+                                            if(((Color) colorList.get(selected)).getRed() == playerColor.getRed()&& ((Color) colorList.get(selected)).getGreen() == playerColor.getGreen() && ((Color) colorList.get(selected)).getBlue() == playerColor.getBlue()){
+                                                if(fortifyAmountArtilarry<=getShapeArmyArtillery(currTerr)&&fortifyAmountCavalary<= getShapeArmyCavalry(currTerr)&&fortifyAmountInfantry<= getShapeArmyInfantry(currTerr)){
+                                                    JOptionPane.showMessageDialog(null, "Fortifiying");
 
-                                                //Decreasing the army from territory
-                                                decreaseShapeArmyArtillery(clickedShape, fortifyAmountArtilarry);
+                                                }
+
+                                                try {
+                                                    if(fortifyAmountArtilarry > getShapeArmyArtillery(currTerr)) {
+                                                        throw new Exception("You do not have that amount of artilarries");
+                                                    }
+
+                                                    if(fortifyAmountCavalary > getShapeArmyCavalry(currTerr)) {
+                                                        throw new Exception("You do not have that amount of cavalaries");
+                                                    }
+
+                                                    if(fortifyAmountInfantry > getShapeArmyInfantry(currTerr)) {
+                                                        throw new Exception("You do not have that amount of infantries");
+                                                    }
+
+
+                                                    // Adding inputed amount of artilarries and decreasing it from territory
+                                                    addShapeArmyArtillery(destinationShape, fortifyAmountArtilarry);
+                                                    decreaseShapeArmyArtillery(clickedShape, fortifyAmountArtilarry);
+
+                                                    // Adding inputed amount of cavalaries and decreasing it from territory
+                                                    addShapeArmyCavalary(destinationShape, fortifyAmountCavalary);
+                                                    decreaseShapeArmyCavalary(clickedShape, fortifyAmountCavalary);
+
+                                                    // Adding inputed amount of infantries and decreasing it from territory
+                                                    addShapeArmyInfantry(destinationShape, fortifyAmountInfantry);
+                                                    decreaseShapeArmyInfantry(clickedShape, fortifyAmountInfantry);
+
+                                                } catch (Exception e1) {
+                                                    JOptionPane.showMessageDialog(null, e1.getMessage());
+                                                }
+
+    
+
+                                            } 
+                                            else {
+                                                JOptionPane.showMessageDialog(null, "You do not own this neighbor");
                                             }
-                                            if(fortifyAmountCavalary<= getShapeArmyCavalry(currTerr)){
-                                                addShapeArmyCavalary(destinationShape, fortifyAmountCavalary);
-                                                decreaseShapeArmyCavalary(clickedShape, fortifyAmountCavalary);
-
-                                            }
-                                            if(fortifyAmountInfantry<= getShapeArmyInfantry(currTerr)){
-                                                addShapeArmyInfantry(destinationShape, fortifyAmountInfantry);
-                                                decreaseShapeArmyInfantry(clickedShape, fortifyAmountInfantry);
-
-                                            }
-
-                                            else{
-                                                JOptionPane.showMessageDialog( null, "You do not have that amount of soilders");
-                                            }
-                                            
-
-                                        } else {
-                                            JOptionPane.showMessageDialog(null, "You do not own this neighbor\n" + "Looser");
                                         }
+                                        else{
+                                            JOptionPane.showMessageDialog(null, "You don't have enough power to fortify from this territory");
+                                        }
+                                        
                                         System.out.println("");
                                     }
                                     
