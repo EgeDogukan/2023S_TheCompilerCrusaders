@@ -388,32 +388,37 @@ public class WorldMap {
                                             @Override
                                             public void onFrameClosed() {
                                                 // This code will be run when the DiceRollingFrame is closed
-                                                if (powerOfShape(shape) > powerOfShape(destinationShape) && DiceRollingFrame.defenderDiceResult < DiceRollingFrame.attackerDiceResult) {
-                                                    //**************** */
-                                                    animationFrame = new StarAnimationClass(0);
-                                                    Random random = new Random();
-                                                    int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
+                                                try{
+                                                    if (powerOfShape(shape) > powerOfShape(destinationShape) && DiceRollingFrame.defenderDiceResult < DiceRollingFrame.attackerDiceResult) {
+                                                        //**************** */
+                                                        animationFrame = new StarAnimationClass(0);
+                                                        Random random = new Random();
+                                                        int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
 
-                                                    // Retrieve and store the object at the random index
-                                                    IArmyCard randomCard = RunningModeNew.armyCards.get(0);
-                                                    IArmyCard randomCard1 = RunningModeNew.armyCards.get(1);
-                                                    IArmyCard randomCard2 = RunningModeNew.armyCards.get(2);
-                                                    // Remove the object at the random index
-                                                    RunningModeNew.armyCards.remove(randomIndex);
-                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(0, 17);
-                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(2, 17);
-                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(1, 17);
-                                            //**************** */
+                                                        // Retrieve and store the object at the random index
+                                                        IArmyCard randomCard = RunningModeNew.armyCards.get(0);
+                                                        IArmyCard randomCard1 = RunningModeNew.armyCards.get(1);
+                                                        IArmyCard randomCard2 = RunningModeNew.armyCards.get(2);
+                                                        // Remove the object at the random index
+                                                        RunningModeNew.armyCards.remove(randomIndex);
+                                                        BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(0, 17);
+                                                        BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(2, 17);
+                                                        BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(1, 17);
                                             
-                                            //************************* */
-                                                    if(powerOfShape(destinationShape) <= 0){
-                                                        setIndexColor(shapeList.indexOf(destinationShape), colorList.get(colorList.indexOf(shape)));
+                                                        if(powerOfShape(destinationShape) <= 0){
+                                                            setIndexColor(shapeList.indexOf(destinationShape), colorList.get(clickedShapeIndex));
+                                                        }
+                                                   
+                                                    } 
+                                                    else {
+                                                        animationFrame = new StarAnimationClass(1);
                                                     }
-                                                    //************************* */
-                                                } else {
-                                                    animationFrame = new StarAnimationClass(1);
+                                                }
+                                                catch (Exception e){
+                                                    e.printStackTrace();
                                                 }
                                             }
+                                                
                                         });
                                         FrameDiceRolling.showFrame();
                                         
