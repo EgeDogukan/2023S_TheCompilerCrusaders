@@ -350,6 +350,8 @@ public class WorldMap {
                         }
 
                         if(RunningModeNew.whichStage == "Attack") { 
+                            clickedShape = shape;
+                            WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
                         	Color curColor = colorList.get(getShapeIndex(shape));
                         	Color playerColor = BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getColor();
                         	
@@ -359,7 +361,7 @@ public class WorldMap {
                                 
                                 attackFrame.setSize(500, 100);
                                 attackFrame.setLocationRelativeTo(null);
-                                attackFrame.setTitle("RunningModedeploy");
+                                attackFrame.setTitle("Choose Neighbor To Attack");
                                 
 
                                 ArrayList<Integer> integerList = neighbourList.get(getShapeIndex(shape));
@@ -428,6 +430,8 @@ public class WorldMap {
                             
                         }
                         if(RunningModeNew.whichStage == "Fortify"){
+                            clickedShape = shape;
+                            WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
                             Color curColor = colorList.get(getShapeIndex(shape));
                         	Color playerColor = BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getColor();
                             int currTerr = shapeList.indexOf(shape);
