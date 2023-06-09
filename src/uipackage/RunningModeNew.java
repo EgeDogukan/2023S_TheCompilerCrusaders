@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.*;
+import javax.xml.namespace.QName;
+
 import java.awt.*;
 import uipackage.WorldMap;
 import javax.imageio.ImageIO;
@@ -54,6 +56,8 @@ public class RunningModeNew extends JFrame {
 	public ArmyCardFactory armyCardFactory = new ArmyCardFactory();
 	
 	public ArrayList<TerritoryCard> territoryCards = new ArrayList<>();
+
+	JPanel panel = new JPanel();
 
 
 
@@ -123,13 +127,24 @@ public class RunningModeNew extends JFrame {
 		shapelist=this.worldMap.getShapeList();
 		ArrayList<JTextField> textLabels = worldMap.getTextLabels();
 		for (JTextField curField : textLabels) {
-			this.add(curField);
+			panel.add(curField);
 		}
+
+		this.setExtendedState(Frame.MAXIMIZED_BOTH);
+        this.setUndecorated(true); 
+
+		panel.setBounds(0, 0, 1920, 1080);
 		
+		JLayeredPane layeredPane = new JLayeredPane();
+
+		ImageIcon imageIcon = new ImageIcon("running.png");
+        JLabel imageLabel = new JLabel(imageIcon);
+        imageLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
+        layeredPane.add(imageLabel, 0);
 
 		JPanel worldPanel = (JPanel) worldMap.getUI();
 		worldPanel.setBounds(0, 0, worldPanel.getPreferredSize().width, worldPanel.getPreferredSize().height);
-		this.add(worldPanel); // Add the map panel to the center of the JFrame
+		panel.add(worldPanel,CENTER_ALIGNMENT); // Add the map panel to the center of the JFrame
 		
 		
 		JButton saveButtonMongo = new JButton("SAVE MONGO");
@@ -150,7 +165,7 @@ public class RunningModeNew extends JFrame {
 				}
 			}
 		});
-		this.add(saveButtonMongo);
+		panel.add(saveButtonMongo);
 		
 		
 		JButton saveButtonJSON = new JButton("SAVE JSON");
@@ -173,7 +188,7 @@ public class RunningModeNew extends JFrame {
 				
 			}
 		});
-		this.add(saveButtonJSON);
+		panel.add(saveButtonJSON);
 
 		JButton pickArmyCard = new JButton("trade army card");
 		pickArmyCard.setBounds(1300, 600, 100, 100);
@@ -265,7 +280,7 @@ public class RunningModeNew extends JFrame {
         		attackFrame.setVisible(true);
 			}
 		});
-		this.add(pickArmyCard);
+		panel.add(pickArmyCard);
 
 		
 		
@@ -291,12 +306,12 @@ public class RunningModeNew extends JFrame {
 				cardAnimationClass = new CardAnimationClass();
 			}
 		});
-		this.add(pickChanceCard);
+		panel.add(pickChanceCard);
 		
 		JLabel turn = new JLabel("Turn: Player "+ players.get(turnCounter).getId());
 		turn.setBounds(300, 650, 100, 100);
 		
-		this.add(turn);
+		panel.add(turn);
 		
 		JPanel turnPanel = new JPanel();
 		turnPanel.setBounds(600,700,100,100);
@@ -335,8 +350,8 @@ public class RunningModeNew extends JFrame {
 		//********************************************************************* */
 		
 		nextStage.setVisible(true);
-		this.add(stage);
-		this.add(nextStage);
+		panel.add(stage);
+		panel.add(nextStage);
 
 		JButton nextButton = new JButton("next turn");
 		nextButton.setBounds(500,550,100,100);
@@ -354,15 +369,15 @@ public class RunningModeNew extends JFrame {
 				
 			}
 		});
-		this.add(nextButton);
-		this.add(turnPanel);
+		panel.add(nextButton);
+		panel.add(turnPanel);
 
 
 		
 		String[] cardTypes = {"Revolt Card", "Reinforcement Card", "Coup Card", "Revolution Card", "Nuclear Strike Card"};
         JComboBox<String> cardComboBox = new JComboBox<String>(cardTypes);
         cardComboBox.setBounds(900,550, 100, 100);
-        this.add(cardComboBox);
+        panel.add(cardComboBox);
         
 		
         
@@ -566,7 +581,7 @@ public class RunningModeNew extends JFrame {
 				
 			}
 		});
-		this.add(useCardButton);
+		panel.add(useCardButton);
 		
 		
 		JButton exitButton = new JButton("Exit!");
@@ -579,7 +594,7 @@ public class RunningModeNew extends JFrame {
 				
 			}
 		});
-		this.add(exitButton);
+		panel.add(exitButton);
 		
 		JButton pauseButton = new JButton("Pause");
 		pauseButton.setBounds(1200, 600, 100, 100);
@@ -624,13 +639,13 @@ public class RunningModeNew extends JFrame {
 				
 			}
 		});
-		this.add(pauseButton);
+		panel.add(pauseButton);
 		
-		
-	
-		
-		
-		
+		panel.setVisible(true);
+		layeredPane.setVisible(true);
+		layeredPane.add(panel,1);
+
+		this.add(layeredPane);
 		
 	
 		pack();
