@@ -34,6 +34,7 @@ public class WorldMap {
     private boolean isGrowing = true;
     private boolean starVisible = false;
     private boolean crossVisible = false;
+    private boolean isGameOver=false;
     
     JFrame animationFrame;
 
@@ -51,7 +52,7 @@ public class WorldMap {
     static Area area;
     ArrayList<Shape> shapeList2=null;
 
-    int numberOfShape = 5;
+    int numberOfShape = 7;
     static ArrayList<Shape> shapeList = new ArrayList<>();
     //static ArrayList<ArrayList<Integer>> armyList = new ArrayList<ArrayList<Integer>>(200);
     //public static int[][] armArrayLists = new ArrayList[60][3];
@@ -66,7 +67,7 @@ public class WorldMap {
     final int areaThreshold = 450;
     public static boolean isEveryTerritorySelected = false;
     public int numofSelectedTerritory = 0;
-    private boolean isInBuildingMode = true;
+    static boolean isInBuildingMode = true;
     private ArrayList<Shape> selectedShapeList = new ArrayList<>();
 
     private ArrayList<JTextField> textLabels = new ArrayList<>();
@@ -247,7 +248,7 @@ public class WorldMap {
                             optionPanel.add(retrieveInfantryButton);
                             optionFrame.setVisible(true);
                             
-                            BuildingModeNew.nextTurn();
+                            BuildingModeNew.nextTurn(WorldMap.this);
                             selectedShapeList.add(shape);
                             
                             break;
@@ -424,15 +425,17 @@ public class WorldMap {
                                                                     Random random = new Random();
                                                                     int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
 
-                                                                    // Retrieve and store the object at the random index
-                                                                    IArmyCard randomCard = RunningModeNew.armyCards.get(0);
-                                                                    IArmyCard randomCard1 = RunningModeNew.armyCards.get(1);
-                                                                    IArmyCard randomCard2 = RunningModeNew.armyCards.get(2);
-                                                                    // Remove the object at the random index
-                                                                    RunningModeNew.armyCards.remove(randomIndex);
-                                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(0, 17);
-                                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(2, 17);
-                                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(1, 17);
+                                                                    int chance = random.nextInt(1)+1;
+                                                                    if (chance==1){
+                                                                    	RunningModeNew.armyCards.remove(randomIndex);
+                                                                        BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(randomIndex, 1);
+                                                                        System.out.println("Infantry army card is added to the list.");
+                                                					}
+                                                                    else {
+                                                                    	int randomIndex2 = random.nextInt(RunningModeNew.territoryCards.size());
+                                                                    	BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addTerritoryCard(randomIndex2);
+                                                                    }
+                                                                    
                                                         
                                                                     if(powerOfShape(destinationShape) <= 0){
                                                                         setIndexColor(shapeList.indexOf(destinationShape), colorList.get(clickedShapeIndex));
@@ -441,7 +444,11 @@ public class WorldMap {
                                                                         decreasePowerOfShapeInfantry(shape, 1);
                                                                         decreaseShapeArmyInfantry(shape, 1);
                                                                     }
-                                                                
+                                                                    areAllColorsSame();
+                                                                    if (isGameOver) {
+                                                                    	System.out.println("Player"+BuildingModeNew.playerList.get(RunningModeNew.getTurn())+"win the game.");
+                                                                    	
+                                                                    }
                                                                 
                                                                 
                                                                 
@@ -919,6 +926,7 @@ public class WorldMap {
         row14.add(4);
         row14.add(8);
         row14.add(15);
+        row14.add(10);
         row14.add(23);
         row14.add(18);
 
@@ -1330,5 +1338,14 @@ public class WorldMap {
         int power = getShapeArmyArtillery(index)+ 5 * getShapeArmyCavalry(index) + 10 * getShapeArmyInfantry(index);
         power -= 5*amount;
         return power;
+    }
+    
+    public void areAllColorsSame() {
+    	boolean gameOver=true;
+    	for (int i=0;i<colorList.size()-1;i++) {
+    		if (colorList.get(i).getRed()!=colorList.get(i+1).getRed() || colorList.get(i).getBlue()!=colorList.get(i+1).getBlue() || colorList.get(i).getGreen()!=colorList.get(i+1).getGreen())
+    			gameOver=false;
+    	}
+    	isGameOver=gameOver;
     }
 }

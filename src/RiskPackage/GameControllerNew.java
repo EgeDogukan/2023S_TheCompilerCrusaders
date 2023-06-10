@@ -21,15 +21,19 @@ public class GameControllerNew {
 	private static int turnID = 0;
 	private static ArrayList<PlayerNew> playerList = new ArrayList<>();
 	private static GameControllerNew instance;
+	private static Object lock = new Object();
 	public static RunningModeNew g;
 	
 	private GameControllerNew() {
 	}
 	
 	public static GameControllerNew getInstance() {
-		
 		if (instance == null) {
-			instance = new GameControllerNew();
+			synchronized (lock) {
+				if (instance == null) {
+					instance = new GameControllerNew();
+				}
+			}
 		}
 		
 		return instance;

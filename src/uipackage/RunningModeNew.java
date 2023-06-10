@@ -42,7 +42,7 @@ public class RunningModeNew extends JFrame {
     public ArrayList<Shape> shapelist = new ArrayList<>();
 	public static boolean isInBuildingMode = true;
 
-	private int counter = 0;
+	//private int counter = 0;
 	public static JLabel stage = new JLabel("Deploy");
 	public static String whichStage= new String();
 	
@@ -53,7 +53,8 @@ public class RunningModeNew extends JFrame {
 	public static ArrayList<IArmyCard> armyCards = new ArrayList<>();
 	public ArmyCardFactory armyCardFactory = new ArmyCardFactory();
 	
-	public ArrayList<TerritoryCard> territoryCards = new ArrayList<>();
+	public static ArrayList<TerritoryCard> territoryCards = new ArrayList<>();
+	public static boolean isGameOver=false;
 
 
 
@@ -309,20 +310,20 @@ public class RunningModeNew extends JFrame {
 		nextStage.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 
-			counter ++;
+			turnCounter ++;
 
-			if(counter == 1){
+			if(turnCounter == 1){
 				stage.setText("Attack");
 				whichStage="Attack";
 
 			}
-			else if(counter==2){
+			else if(turnCounter==2){
 				stage.setText("Fortify");
 				whichStage="Fortify";
 			}
 			
-			else if(counter>2){
-				counter=0;
+			else if(turnCounter>2){
+				turnCounter=0;
 				stage.setText("Deploy");
 				whichStage="Deploy";
 			}
@@ -599,6 +600,8 @@ public class RunningModeNew extends JFrame {
 					turnPanel.setVisible(false);
 					nextButton.setVisible(false);
 					worldPanel.setVisible(false);
+					nextStage.setVisible(false);
+					pickArmyCard.setVisible(false);
 					turn.setVisible(false);
 					for (JTextField curField : textLabels) 
 						curField.setVisible(false);
@@ -617,6 +620,8 @@ public class RunningModeNew extends JFrame {
 					nextButton.setVisible(true);
 					worldPanel.setVisible(true);
 					turn.setVisible(true);
+					nextStage.setVisible(true);
+					pickArmyCard.setVisible(true);
 					for (JTextField curField : textLabels) 
 						curField.setVisible(true);
 				}
@@ -626,16 +631,14 @@ public class RunningModeNew extends JFrame {
 		});
 		this.add(pauseButton);
 		
-		
-	
-		
-		
-		
-		
 	
 		pack();
 		setLocationRelativeTo(null); // Center the JFrame on the screen
 		setVisible(true);
 	}
+	
+	
+	
+	
 }
 

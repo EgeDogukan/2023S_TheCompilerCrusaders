@@ -95,12 +95,10 @@ public class BuildingModeNew extends JFrame {
 		});
 		nextButton.setVisible(false);
 		this.add(nextButton);
+		if (turnPanel!=null)
+			this.add(turnPanel);
 		
 		
-		turnPanel = new JPanel();
-		turnPanel.setBounds(1400, 300, 100, 100);
-		turnPanel.setVisible(false);
-		this.add(turnPanel);
 
 	
 		pack();
@@ -176,7 +174,13 @@ public class BuildingModeNew extends JFrame {
 	}
 	
 
-	public static void nextTurn() {
+	public static void nextTurn(WorldMap worldMap) {
+		
+		turnPanel = new JPanel();
+		turnPanel.setBounds(1400, 300, 100, 100);
+		turnPanel.setVisible(false);
+		
+		
 		int clicked = WorldMap.clickedShapeIndex;
 		PlayerNew player = playerList.get(turn - 1);
 		System.out.println(clicked);
@@ -191,7 +195,8 @@ public class BuildingModeNew extends JFrame {
 			turn=1;
 		}	
 		
-		turnPanel.setVisible(true);
+		
+		
 		BuildingModeNew.turnPanel.setBackground(playerList.get(turn-1).getColor());
 		if (worldMap.getIsAllSelected()) {
 			BuildingModeNew.nextButton.setVisible(true);

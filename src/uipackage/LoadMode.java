@@ -73,6 +73,7 @@ public class LoadMode extends JFrame {
         WorldMap worldMap = new WorldMap();
         
         ArrayList<Color> colors = new ArrayList<>();
+        System.out.println(this.informations);
         
         for (ArrayList<Integer> arr : this.informations){
         	Color curColor = new Color(arr.get(1), arr.get(2), arr.get(3));
@@ -100,12 +101,26 @@ public class LoadMode extends JFrame {
             }
         }
         
-        
+        System.out.println("informations");
+        System.out.println("********");
+        System.out.println(informations);
+        System.out.println("**********");
         System.out.println("colors.size() is "+colors.size());
-        for (int i=0;i<colors.size();i++) {
+        
+        for (int i=1;i<colors.size()+1;i++) {
         	
-        	players.add(new PlayerNew(i, colors.get(i), informations.get(i)));
+        	players.add(new PlayerNew(i, colors.get(i-1), informations.get(i-1)));
         }
+        
+        RunningModeNew.turnCounter=1;
+        BuildingModeNew.turn=1;
+        
+        for(PlayerNew playerNew : players) {
+        	System.out.println(playerNew);
+        }
+        
+        BuildingModeNew.playerList=players;
+        WorldMap.isInBuildingMode=false;
         
         new RunningModeNew(players, worldMap, 1);
         
