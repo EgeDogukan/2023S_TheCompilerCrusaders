@@ -144,6 +144,8 @@ public class MainMenu extends JFrame {
 
     private void proceedToLogin() {
         UIController uiController = UIController.getUiController();
+        this.dispose();
+        uiController.initLogin();
     }
 
     public static void main(String[] args) {

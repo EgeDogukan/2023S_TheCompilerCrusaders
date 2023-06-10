@@ -9,8 +9,13 @@ public class UIController {
     private MainMenu menu;
     private login loginScreen;
     private MainMenuLoggedIn mainMenuLoggedIn;
+    private LoadMode loadMode;
+    private IntermediaryBetweenPreBuildingAndBuilding k;
 
     public UIController() {
+    }
+
+    public void initGameUI() {
         initMainMenu();
     }
 
@@ -27,15 +32,26 @@ public class UIController {
     }
 
     public void initLogin() {
-        this.menu.dispose();
+        //this.menu.dispose();
         this.loginScreen = new login();
         loginScreen.frame.setVisible(true);
     }
 
     public void initLoggedIn() {
         this.loginScreen.frame.dispose();
-        mainMenuLoggedIn = new MainMenuLoggedIn();
+        this.mainMenuLoggedIn = new MainMenuLoggedIn();
         mainMenuLoggedIn.setVisible(true);
+    }
+
+    public void initLoadMode() {
+        this.loadMode = new LoadMode();
+        loadMode.setVisible(true);
+        this.mainMenuLoggedIn.dispose();
+    }
+
+    public void initNewMode() {
+        this.k = new IntermediaryBetweenPreBuildingAndBuilding();
+        this.mainMenuLoggedIn.dispose();
     }
     
      public void init() throws InterruptedException {
@@ -110,7 +126,7 @@ public class UIController {
 			
 		}
 		else {
-			LoadMode loadMode = new LoadMode();
+			LoadMode loadMode1 = new LoadMode();
 			break;
 		}
 		

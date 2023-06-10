@@ -233,6 +233,7 @@ public class login extends JFrame {
 
     private void proceed() {
         UIController uiController = UIController.getUiController();
+        this.dispose();
         uiController.initLoggedIn();
     }
 

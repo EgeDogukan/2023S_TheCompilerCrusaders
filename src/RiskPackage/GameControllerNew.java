@@ -15,7 +15,7 @@ import uipackage.UIController;
 
 //import javax.management.StringValueExp;
 
-import uipackage.*;;
+import uipackage.*;
 
 public class GameControllerNew {
 	
@@ -24,10 +24,9 @@ public class GameControllerNew {
 	private static GameControllerNew instance;
 	private static Object lock = new Object();
 	public static RunningModeNew g;
+	private static UIController uiController;
 	
 	private GameControllerNew() {
-		UIController uiController = new UIController();
-
 	}
 	
 	public static GameControllerNew getInstance() {
@@ -43,6 +42,10 @@ public class GameControllerNew {
 		
 	}
 	
+	public void initGame() {
+		this.uiController = new UIController();
+		uiController.initGameUI();
+	}
 	
 	
     public void init() throws InterruptedException {

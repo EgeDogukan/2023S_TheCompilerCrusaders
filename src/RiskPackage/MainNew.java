@@ -12,8 +12,8 @@ public class MainNew {
         
     	GameControllerNew instance = GameControllerNew.getInstance();
     	try {
-			instance.init();
-		} catch (InterruptedException e) {
+			instance.initGame();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}   
     }
