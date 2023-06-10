@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import databasePackage.ISaveLoadAdapter;
+import uipackage.UIController;
 
 //import javax.management.StringValueExp;
 
@@ -25,6 +26,8 @@ public class GameControllerNew {
 	public static RunningModeNew g;
 	
 	private GameControllerNew() {
+		UIController uiController = new UIController();
+
 	}
 	
 	public static GameControllerNew getInstance() {
