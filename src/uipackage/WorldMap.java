@@ -53,7 +53,7 @@ public class WorldMap {
     ArrayList<Shape> shapeList2=null;
 
     int numberOfShape = 7;
-    static ArrayList<Shape> shapeList = new ArrayList<>();
+    public static ArrayList<Shape> shapeList = new ArrayList<>();
     //static ArrayList<ArrayList<Integer>> armyList = new ArrayList<ArrayList<Integer>>(200);
     //public static int[][] armArrayLists = new ArrayList[60][3];
     public static int[][] armyList = new int[60][3];
@@ -1151,7 +1151,7 @@ public class WorldMap {
         return clickedShape;
     }
 
-    public void setShapeColor(Shape shape, Color color) {
+    public static void setShapeColor(Shape shape, Color color) {
         int colorIndex = shapeList.indexOf(shape);
         colorList.set(colorIndex, color);
     }
