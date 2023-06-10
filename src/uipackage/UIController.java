@@ -45,7 +45,6 @@ public class UIController {
 
     public void initLoadMode() {
         this.loadMode = new LoadMode();
-        loadMode.setVisible(true);
         this.mainMenuLoggedIn.dispose();
     }
 
