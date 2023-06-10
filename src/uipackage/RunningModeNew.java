@@ -57,7 +57,7 @@ public class RunningModeNew extends JFrame {
 	
 	public ArrayList<TerritoryCard> territoryCards = new ArrayList<>();
 
-	JPanel panel = new JPanel();
+	//JPanel panel = new JPanel();
 
 
 
@@ -119,6 +119,15 @@ public class RunningModeNew extends JFrame {
 
 	public void initGame(ArrayList<PlayerNew> players){
 		
+		JLayeredPane layeredPane = new JLayeredPane();
+
+		String cwd = System.getProperty("user.dir");
+		ImageIcon imageIcon = new ImageIcon(cwd + "/src/uipackage/running.png");
+        JLabel panel = new JLabel(imageIcon);
+        panel.setBounds(-160, -90, 1920, 1080);
+		
+        //layeredPane.add(panel, 0);
+
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(new Dimension(1920, 1080));
 		this.setLayout(null); // Use BorderLayout for the JFrame
@@ -133,22 +142,15 @@ public class RunningModeNew extends JFrame {
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
         this.setUndecorated(true); 
 
-		panel.setBounds(0, 0, 1920, 1080);
+		//panel.setBounds(0, 0, 1920, 1080);
 		
-		JLayeredPane layeredPane = new JLayeredPane();
-
-		ImageIcon imageIcon = new ImageIcon("running.png");
-        JLabel imageLabel = new JLabel(imageIcon);
-        imageLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
-        layeredPane.add(imageLabel, 0);
-
 		JPanel worldPanel = (JPanel) worldMap.getUI();
-		worldPanel.setBounds(0, 0, worldPanel.getPreferredSize().width, worldPanel.getPreferredSize().height);
-		panel.add(worldPanel,CENTER_ALIGNMENT); // Add the map panel to the center of the JFrame
+		worldPanel.setBounds(450, 200, worldPanel.getPreferredSize().width, worldPanel.getPreferredSize().height);
+		panel.add(worldPanel); // Add the map panel to the center of the JFrame
 		
 		
 		JButton saveButtonMongo = new JButton("SAVE MONGO");
-		saveButtonMongo.setBounds(1100, 300, 100, 100);
+		saveButtonMongo.setBounds(1300, 800, 100, 50);
 		saveButtonMongo.addActionListener(new ActionListener() {
 			
 			@Override
@@ -169,7 +171,7 @@ public class RunningModeNew extends JFrame {
 		
 		
 		JButton saveButtonJSON = new JButton("SAVE JSON");
-		saveButtonJSON.setBounds(1300, 300, 100, 100);
+		saveButtonJSON.setBounds(1400, 800, 100, 50);
 		saveButtonJSON.addActionListener(new ActionListener() {
 			
 			@Override
@@ -191,7 +193,7 @@ public class RunningModeNew extends JFrame {
 		panel.add(saveButtonJSON);
 
 		JButton pickArmyCard = new JButton("trade army card");
-		pickArmyCard.setBounds(1300, 600, 100, 100);
+		pickArmyCard.setBounds(1300, 900, 100, 50);
 		pickArmyCard.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -290,7 +292,7 @@ public class RunningModeNew extends JFrame {
 		
 		
 		JButton pickChanceCard = new JButton("pick chance card");
-		pickChanceCard.setBounds(200, 550, 100, 100);
+		pickChanceCard.setBounds(200, 750, 100, 50);
 		pickChanceCard.addActionListener(new ActionListener() {
 			
 			@Override
@@ -309,18 +311,18 @@ public class RunningModeNew extends JFrame {
 		panel.add(pickChanceCard);
 		
 		JLabel turn = new JLabel("Turn: Player "+ players.get(turnCounter).getId());
-		turn.setBounds(300, 650, 100, 100);
+		turn.setBounds(300, 850, 100, 100);
 		
 		panel.add(turn);
 		
 		JPanel turnPanel = new JPanel();
-		turnPanel.setBounds(600,700,100,100);
+		turnPanel.setBounds(600,900,100,100);
 		
-		stage.setBounds(380, 620, 100, 100);
+		stage.setBounds(380, 820, 100, 100);
 		whichStage="Deploy";
 
 		JButton nextStage = new JButton("Next Stage");
-		nextStage.setBounds(350, 550, 100, 100);
+		nextStage.setBounds(350, 750, 100, 50);
 		nextStage.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 
@@ -354,7 +356,7 @@ public class RunningModeNew extends JFrame {
 		panel.add(nextStage);
 
 		JButton nextButton = new JButton("next turn");
-		nextButton.setBounds(500,550,100,100);
+		nextButton.setBounds(500,750,100,50);
 		nextButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -376,13 +378,13 @@ public class RunningModeNew extends JFrame {
 		
 		String[] cardTypes = {"Revolt Card", "Reinforcement Card", "Coup Card", "Revolution Card", "Nuclear Strike Card"};
         JComboBox<String> cardComboBox = new JComboBox<String>(cardTypes);
-        cardComboBox.setBounds(900,550, 100, 100);
+        cardComboBox.setBounds(900,750, 100, 50);
         panel.add(cardComboBox);
         
 		
         
 		JButton useCardButton = new JButton("use card");
-		useCardButton.setBounds(700, 550, 100, 100);
+		useCardButton.setBounds(700, 750, 100, 50);
 		useCardButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -585,7 +587,7 @@ public class RunningModeNew extends JFrame {
 		
 		
 		JButton exitButton = new JButton("Exit!");
-		exitButton.setBounds(1200, 700, 100, 100);
+		exitButton.setBounds(1200, 900, 100, 50);
 		exitButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -597,7 +599,7 @@ public class RunningModeNew extends JFrame {
 		panel.add(exitButton);
 		
 		JButton pauseButton = new JButton("Pause");
-		pauseButton.setBounds(1200, 600, 100, 100);
+		pauseButton.setBounds(1200, 800, 100, 50);
 		pauseButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -642,11 +644,12 @@ public class RunningModeNew extends JFrame {
 		panel.add(pauseButton);
 		
 		panel.setVisible(true);
-		layeredPane.setVisible(true);
-		layeredPane.add(panel,1);
+		//layeredPane.setVisible(true);
+		//layeredPane.add(panel,1);
+		//layeredPane.setBounds(0, 0, 1920, 1080);
 
-		this.add(layeredPane);
-		
+		//this.add(layeredPane);
+		this.add(panel);
 	
 		pack();
 		setLocationRelativeTo(null); // Center the JFrame on the screen
