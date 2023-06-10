@@ -10,7 +10,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.OptionPaneUI;
+import javax.swing.text.html.Option;
 
+import RiskPackage.Cavalry;
 import RiskPackage.GameControllerNew;
 import RiskPackage.Territory;
 import animationPackage.DiceRollingFrame;
@@ -31,6 +34,7 @@ public class WorldMap {
     private boolean isGrowing = true;
     private boolean starVisible = false;
     private boolean crossVisible = false;
+    private boolean isGameOver=false;
     
     JFrame animationFrame;
 
@@ -48,8 +52,8 @@ public class WorldMap {
     static Area area;
     ArrayList<Shape> shapeList2=null;
 
-    int numberOfShape = 5;
-    static ArrayList<Shape> shapeList = new ArrayList<>();
+    int numberOfShape = 7;
+    public static ArrayList<Shape> shapeList = new ArrayList<>();
     //static ArrayList<ArrayList<Integer>> armyList = new ArrayList<ArrayList<Integer>>(200);
     //public static int[][] armArrayLists = new ArrayList[60][3];
     public static int[][] armyList = new int[60][3];
@@ -63,7 +67,7 @@ public class WorldMap {
     final int areaThreshold = 450;
     public static boolean isEveryTerritorySelected = false;
     public int numofSelectedTerritory = 0;
-    private boolean isInBuildingMode = true;
+    static boolean isInBuildingMode = true;
     private ArrayList<Shape> selectedShapeList = new ArrayList<>();
 
     private ArrayList<JTextField> textLabels = new ArrayList<>();
@@ -196,7 +200,7 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    setShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    addShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
                                     System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyInfantry(clickedShapeIndex));    
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
@@ -211,7 +215,7 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    setShapeArmyCavalry(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    addShapeArmyCavalary(shape, Integer.parseInt(numberOfArmyonarea));   
                                     System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyCavalry(clickedShapeIndex));    
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
@@ -226,7 +230,7 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    setShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
+                                    addShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
                                     
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
@@ -244,7 +248,7 @@ public class WorldMap {
                             optionPanel.add(retrieveInfantryButton);
                             optionFrame.setVisible(true);
                             
-                            BuildingModeNew.nextTurn();
+                            BuildingModeNew.nextTurn(WorldMap.this);
                             selectedShapeList.add(shape);
                             
                             break;
@@ -291,7 +295,7 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    setShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    addShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
                                     System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyInfantry(clickedShapeIndex));    
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
@@ -306,7 +310,7 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    setShapeArmyCavalry(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    addShapeArmyCavalary(shape, Integer.parseInt(numberOfArmyonarea));   
                                     System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyCavalry(clickedShapeIndex));    
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
@@ -321,7 +325,7 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    setShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
+                                    addShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
                                     
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
@@ -349,16 +353,19 @@ public class WorldMap {
                         }
 
                         if(RunningModeNew.whichStage == "Attack") { 
+                        	System.out.println("ATTACAK GIRDI");
+                            clickedShape = shape;
+                            WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
                         	Color curColor = colorList.get(getShapeIndex(shape));
                         	Color playerColor = BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getColor();
-                        	
+                        	int currTerr = shapeList.indexOf(shape);
                         	if (curColor.getRed()==playerColor.getRed() && curColor.getGreen()==playerColor.getGreen() && curColor.getBlue()==playerColor.getBlue()) {
                         		JFrame attackFrame = new JFrame("attack");
                                 JPanel attackPanel = new JPanel();
                                 
                                 attackFrame.setSize(500, 100);
                                 attackFrame.setLocationRelativeTo(null);
-                                attackFrame.setTitle("RunningModedeploy");
+                                attackFrame.setTitle("Choose Neighbour To Attack");
                                 
 
                                 ArrayList<Integer> integerList = neighbourList.get(getShapeIndex(shape));
@@ -371,50 +378,124 @@ public class WorldMap {
                                 String[] stringArray = stringList.toArray(new String[0]);
 
                                 JComboBox<String> neighbourCombo = new JComboBox<String>(stringArray);
+
                                 JButton attackButton = new JButton("Attack");
                                 attackPanel.add(attackButton);
                                 attackButton.addMouseListener(new MouseAdapter() {
                                     @Override
                                     public void mouseClicked(MouseEvent e) {
-                                        int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
-                                        Shape destinationShape = getShape(destinationIndex);
-                                        System.out.println("destination power**********: " + powerOfShape(destinationShape));
-                                        System.out.println("destination power**********: " + powerOfShape(shape));
-                                        DiceRollingFrame FrameDiceRolling = new DiceRollingFrame();
-                                        FrameDiceRolling.setOnFrameClosedListener(new DiceRollingFrame.OnFrameClosedListener() {
-                                            @Override
-                                            public void onFrameClosed() {
-                                                // This code will be run when the DiceRollingFrame is closed
-                                                if (powerOfShape(shape) > powerOfShape(destinationShape) && DiceRollingFrame.defenderDiceResult < DiceRollingFrame.attackerDiceResult) {
-                                                    //**************** */
-                                                    animationFrame = new StarAnimationClass(0);
-                                                    Random random = new Random();
-                                                    int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
+                                        if(powerOfShape(shape) >1){
+                                            int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
+                                            Shape destinationShape = getShape(destinationIndex);
+                                            System.out.println("destination power**********: " + powerOfShape(destinationShape));
+                                            System.out.println("destination power**********: " + powerOfShape(shape));
+                                            String selectedItem = (String) neighbourCombo.getSelectedItem();
+                                            Integer selected = Integer.parseInt(selectedItem);
 
-                                                    // Retrieve and store the object at the random index
-                                                    IArmyCard randomCard = RunningModeNew.armyCards.get(0);
-                                                    IArmyCard randomCard1 = RunningModeNew.armyCards.get(1);
-                                                    IArmyCard randomCard2 = RunningModeNew.armyCards.get(2);
-                                                    // Remove the object at the random index
-                                                    RunningModeNew.armyCards.remove(randomIndex);
-                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(0, 17);
-                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(2, 17);
-                                                    BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(1, 17);
-                                            //**************** */
-                                            
-                                            //************************* */
-                                            setIndexColor(shapeList.indexOf(destinationShape), colorList.get(colorList.indexOf(shape)));
-                                                    //************************* */
-                                                    setIndexColor(shapeList.indexOf(destinationShape), Color.gray);
-                                                } else {
-                                                    animationFrame = new StarAnimationClass(1);
+                                            if(((Color) colorList.get(selected)).getRed() != playerColor.getRed()&& ((Color) colorList.get(selected)).getGreen() != playerColor.getGreen() && ((Color) colorList.get(selected)).getBlue() != playerColor.getBlue()){
+                                                DiceRollingFrame FrameDiceRolling = new DiceRollingFrame();
+                                                FrameDiceRolling.setOnFrameClosedListener(new DiceRollingFrame.OnFrameClosedListener() {
+                                                @Override
+                                                public void onFrameClosed() {
+
+                                                    // This code will be run when the DiceRollingFrame is closed
+                                                    try{
+                                                        
+                                                            if (powerOfShape(shape) > powerOfShape(destinationShape) && DiceRollingFrame.defenderDiceResult < DiceRollingFrame.attackerDiceResult) {
+                                                                //**************** */
+                                                                
+                                                                int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
+
+                                                                    animationFrame = new StarAnimationClass(0);
+                                                                    if(powerOfShape(destinationShape) != 0){
+                                                                        if(getShapeArmyArtillery(destinationIndex) > 0){
+                                                                            decreaseShapeArmyArtillery(destinationShape, 1);
+                                                                            decreasePowerOfShapeArtillery(destinationShape, 1);
+
+                                                                        }
+                                                                        if(getShapeArmyCavalry(destinationIndex)>0){
+                                                                            decreaseShapeArmyCavalary(destinationShape, 1);
+                                                                            decreasePowerOfShapeCavalary(destinationShape, 1);
+                                                                        }
+                                                                        if(getShapeArmyInfantry(destinationIndex)>0){
+                                                                            decreaseShapeArmyInfantry(destinationShape, 1);
+                                                                            decreasePowerOfShapeInfantry(destinationShape, 1);
+                                                                        }
+                                                                    }
+
+                                                                    Random random = new Random();
+                                                                    int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
+
+                                                                    int chance = random.nextInt(1)+1;
+                                                                    if (chance==1){
+                                                                    	RunningModeNew.armyCards.remove(randomIndex);
+                                                                        BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(randomIndex, 1);
+                                                                        System.out.println("Infantry army card is added to the list.");
+                                                					}
+                                                                    else {
+                                                                    	int randomIndex2 = random.nextInt(RunningModeNew.territoryCards.size());
+                                                                    	BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addTerritoryCard(randomIndex2);
+                                                                    }
+                                                                    
+                                                        
+                                                                    if(powerOfShape(destinationShape) <= 0){
+                                                                        setIndexColor(shapeList.indexOf(destinationShape), colorList.get(clickedShapeIndex));
+                                                                        setShapeArmyInfantry(destinationShape, 1);
+
+                                                                        decreasePowerOfShapeInfantry(shape, 1);
+                                                                        decreaseShapeArmyInfantry(shape, 1);
+                                                                    }
+                                                                    areAllColorsSame();
+                                                                    if (isGameOver) {
+                                                                    	System.out.println("Player"+BuildingModeNew.playerList.get(RunningModeNew.getTurn())+"win the game.");
+                                                                    	
+                                                                    }
+                                                                
+                                                                
+                                                                
+                                                        
+                                                            } 
+                                                            else {
+                                                                animationFrame = new StarAnimationClass(1);
+                                                                if(powerOfShape(shape)!= 0){
+                                                                    if(getShapeArmyArtillery(currTerr) > 0){
+                                                                        decreaseShapeArmyArtillery(shape, 1);
+                                                                        decreasePowerOfShapeArtillery(shape, 1);
+
+                                                                    }    
+                                                                    else if(getShapeArmyCavalry(currTerr)>0){
+                                                                        decreaseShapeArmyCavalary(shape, 1);
+                                                                        decreasePowerOfShapeCavalary(shape, 1);
+                                                                    }
+                                                                    else if(getShapeArmyInfantry(currTerr)>0){
+                                                                        decreaseShapeArmyInfantry(shape, 1);
+                                                                        decreasePowerOfShapeInfantry(shape, 1);
+                                                                    }
+                                                                }
+                                                            }
+                                                        
+                                                    }
+                                                    catch (Exception e){
+                                                        e.printStackTrace();
+                                                    }
                                                 }
+                                                    
+                                            });
+                                            FrameDiceRolling.showFrame();
                                             }
-                                        });
-                                        FrameDiceRolling.showFrame();
-                                        
+                                            else{
+                                                JOptionPane.showMessageDialog( null, "You already own this territory");
+                                            }
+
+                                            
+                                            
+                                        }
+                                        else{
+                                            JOptionPane.showMessageDialog( null, "You do not have enough power to attack");
+                                        }
                                         
                                     }
+                                    
                                 });
 
                                 neighbourCombo.setPreferredSize(new Dimension(100,50));
@@ -425,6 +506,150 @@ public class WorldMap {
                         	}
                         	
                             
+                        }
+                        if(RunningModeNew.whichStage == "Fortify"){
+                            clickedShape = shape;
+                            WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
+                            Color curColor = colorList.get(getShapeIndex(shape));
+                        	Color playerColor = BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getColor();
+                            int currTerr = shapeList.indexOf(shape);
+                            if (curColor.getRed()==playerColor.getRed() && curColor.getGreen()==playerColor.getGreen() && curColor.getBlue()==playerColor.getBlue()) {
+                                JFrame fortifyFrame = new JFrame("Fortify");
+                                JPanel fortPanel = new JPanel(new GridLayout(4,1));
+
+                                
+
+                                fortifyFrame.setSize(500, 200);
+                                fortifyFrame.setLocationRelativeTo(null);
+                                fortifyFrame.setTitle("Fortify");
+
+
+                                
+                                ArrayList<Integer> neighborsList = neighbourList.get(getShapeIndex(shape));
+                               
+
+                                
+                                JComboBox<Integer> neighbourCombo = new JComboBox<>();
+                                for( int i: neighborsList){
+                                    neighbourCombo.addItem(i);
+                                }
+                                // Infantry label and text field
+                                JPanel infantryPanel = new JPanel();
+                                infantryPanel.setLayout(new BoxLayout(infantryPanel, BoxLayout.PAGE_AXIS));
+                                JLabel infantryLabel = new JLabel("Infantry");
+                                JTextField infantryTextField = new JTextField("0");
+                                infantryPanel.add(infantryLabel);
+                                infantryPanel.add(infantryTextField);
+                                fortPanel.add(infantryPanel);
+
+                                // Cavalary label and text field
+                                JPanel cavalaryPanel = new JPanel();
+                                cavalaryPanel.setLayout(new BoxLayout(cavalaryPanel, BoxLayout.PAGE_AXIS));
+                                JLabel cavalaryLabel = new JLabel("Cavalary");
+                                JTextField cavalaryTextField = new JTextField("0");
+                                cavalaryPanel.add(cavalaryLabel);
+                                cavalaryPanel.add(cavalaryTextField);
+                                fortPanel.add(cavalaryPanel);
+
+                                // Artilarry label and text field
+                                JPanel artilarryPanel = new JPanel();
+                                artilarryPanel.setLayout(new BoxLayout(artilarryPanel, BoxLayout.PAGE_AXIS));
+                                JLabel artilarryLabel = new JLabel("Artilarry");
+                                JTextField artilarryTextField = new JTextField("0");
+                                artilarryPanel.add(artilarryLabel);
+                                artilarryPanel.add(artilarryTextField);
+                                fortPanel.add(artilarryPanel);
+
+                                                                
+                                JButton fortifyButton = new JButton("Fortify");
+                                fortPanel.add(fortifyButton);
+                                fortifyButton.addMouseListener(new MouseAdapter() {
+                                    @Override
+                                    public void mouseClicked(MouseEvent e) {
+                                        int fortifyAmountArtilarry = 0;
+                                        int fortifyAmountInfantry = 0;
+                                        int fortifyAmountCavalary = 0;
+
+                                        fortifyAmountArtilarry = Integer.parseInt(artilarryTextField.getText());
+
+                                        fortifyAmountInfantry = Integer.parseInt(infantryTextField.getText());
+
+                                        fortifyAmountCavalary = Integer.parseInt(cavalaryTextField.getText());
+
+
+
+
+                                        int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
+
+                                        Integer selected = (Integer) neighbourCombo.getSelectedItem();
+                                        Shape destinationShape = getShape(destinationIndex);
+                                        if(powerOfShape(shape)>1){
+                                            if(((Color) colorList.get(selected)).getRed() == playerColor.getRed()&& ((Color) colorList.get(selected)).getGreen() == playerColor.getGreen() && ((Color) colorList.get(selected)).getBlue() == playerColor.getBlue()){
+                                                
+
+                                                try {
+                                                    if(fortifyAmountArtilarry >= getShapeArmyArtillery(currTerr)&&fortifyAmountArtilarry !=0) {
+                                                        throw new Exception("You do not have that amount of artilarries");
+                                                    }
+
+                                                    if(fortifyAmountCavalary >= getShapeArmyCavalry(currTerr)&&fortifyAmountCavalary != 0) {
+                                                        throw new Exception("You do not have that amount of cavalaries");
+                                                    }
+
+                                                    if(fortifyAmountInfantry >= getShapeArmyInfantry(currTerr)&& fortifyAmountInfantry != 0) {
+                                                        throw new Exception("You do not have that amount of infantries");
+                                                    }
+
+
+                                                    // Adding inputed amount of artilarries and decreasing it from territory
+                                                    addShapeArmyArtillery(destinationShape, fortifyAmountArtilarry);
+                                                    decreaseShapeArmyArtillery(clickedShape, fortifyAmountArtilarry);
+
+                                                    // Adding inputed amount of cavalaries and decreasing it from territory
+                                                    addShapeArmyCavalary(destinationShape, fortifyAmountCavalary);
+                                                    decreaseShapeArmyCavalary(clickedShape, fortifyAmountCavalary);
+
+                                                    // Adding inputed amount of infantries and decreasing it from territory
+                                                    addShapeArmyInfantry(destinationShape, fortifyAmountInfantry);
+                                                    decreaseShapeArmyInfantry(clickedShape, fortifyAmountInfantry);
+                                                    JOptionPane.showMessageDialog(null, "Fortifiyed");
+
+
+                                                } catch (Exception e1) {
+                                                    JOptionPane.showMessageDialog(null, e1.getMessage());
+                                                }
+
+    
+
+                                            } 
+                                            else {
+                                                JOptionPane.showMessageDialog(null, "You do not own this neighbor");
+                                            }
+                                        }
+                                        else{
+                                            JOptionPane.showMessageDialog(null, "You don't have enough power to fortify from this territory");
+                                        }
+                                        
+                                        System.out.println("");
+                                    }
+                                    
+                                });
+                               
+                                JLabel currentField = new JLabel();
+
+                                
+                                currentField.setText("ID: "+Integer.toString(clickedShapeIndex)+ " Total power: "+Integer.toString(powerOfShape(shape)));
+
+                                
+                                fortPanel.add(currentField);
+                                neighbourCombo.setPreferredSize(new Dimension(100,50));
+                                fortPanel.add(neighbourCombo);
+
+                                fortifyFrame.add(fortPanel);
+                                fortifyFrame.setVisible(true);
+                            }
+
+
                         }
 
                     }
@@ -702,6 +927,7 @@ public class WorldMap {
         row14.add(4);
         row14.add(8);
         row14.add(15);
+        row14.add(10);
         row14.add(23);
         row14.add(18);
 
@@ -926,7 +1152,7 @@ public class WorldMap {
         return clickedShape;
     }
 
-    public void setShapeColor(Shape shape, Color color) {
+    public static void setShapeColor(Shape shape, Color color) {
         int colorIndex = shapeList.indexOf(shape);
         colorList.set(colorIndex, color);
     }
@@ -937,6 +1163,37 @@ public class WorldMap {
         
 
     }
+
+
+    public void addShapeArmyInfantry(Shape shape, int numberOfArmy){
+        int armyIndex = shapeList.indexOf(shape);
+        armyList[armyIndex][0] += numberOfArmy;
+    }
+    public void addShapeArmyCavalary(Shape shape, int numberOfArmy){
+        int armyIndex = shapeList.indexOf(shape);
+        armyList[armyIndex][1] += numberOfArmy;
+    }
+    public void addShapeArmyArtillery(Shape shape, int numberOfArmy){
+        int armyIndex = shapeList.indexOf(shape);
+        armyList[armyIndex][2] += numberOfArmy;
+    }
+
+
+
+    public void decreaseShapeArmyInfantry(Shape shape, int numberOfArmy){
+        int armyIndex = shapeList.indexOf(shape);
+        armyList[armyIndex][0] -= numberOfArmy;
+    }
+    public void decreaseShapeArmyCavalary(Shape shape, int numberOfArmy){
+        int armyIndex = shapeList.indexOf(shape);
+        armyList[armyIndex][1] -= numberOfArmy;
+    }
+    public void decreaseShapeArmyArtillery(Shape shape, int numberOfArmy){
+        int armyIndex = shapeList.indexOf(shape);
+        armyList[armyIndex][2] -= numberOfArmy;
+    }
+
+
     public void setShapeArmyCavalry(Shape shape, int numberOfArmy){
         int armyIndex = shapeList.indexOf(shape);
         armyList[armyIndex][1]= numberOfArmy;
@@ -1059,8 +1316,37 @@ public class WorldMap {
         
         //int power = Integer.parseInt(armArrayLists[index][0].toString()) + 5 * Integer.parseInt(armArrayLists[index][1].toString()) + 10 * Integer.parseInt(armArrayLists[index][2].toString());
        
-        int power = getShapeArmyArtillery(index)+ 5 * getShapeArmyCavalry(index) + 10 * getShapeArmyInfantry(index) ;
+        int power = getShapeArmyArtillery(index)*10+ 5 * getShapeArmyCavalry(index) + getShapeArmyInfantry(index) ;
         System.out.println("result is  "+ power);
         return power;
+    }
+
+    public int decreasePowerOfShapeArtillery(Shape shape, int amount){
+        int index = getShapeIndex(shape);
+        int power = getShapeArmyArtillery(index)+ 5 * getShapeArmyCavalry(index) + 10 * getShapeArmyInfantry(index);
+        power -= amount;
+        return power;
+    }
+
+    public int decreasePowerOfShapeInfantry(Shape shape, int amount){
+        int index = getShapeIndex(shape);
+        int power = getShapeArmyArtillery(index)+ 5 * getShapeArmyCavalry(index) + 10 * getShapeArmyInfantry(index);
+        power -= 10*amount;
+        return power;
+    }
+    public int decreasePowerOfShapeCavalary(Shape shape, int amount){
+        int index = getShapeIndex(shape);
+        int power = getShapeArmyArtillery(index)+ 5 * getShapeArmyCavalry(index) + 10 * getShapeArmyInfantry(index);
+        power -= 5*amount;
+        return power;
+    }
+    
+    public void areAllColorsSame() {
+    	boolean gameOver=true;
+    	for (int i=0;i<colorList.size()-1;i++) {
+    		if (colorList.get(i).getRed()!=colorList.get(i+1).getRed() || colorList.get(i).getBlue()!=colorList.get(i+1).getBlue() || colorList.get(i).getGreen()!=colorList.get(i+1).getGreen())
+    			gameOver=false;
+    	}
+    	isGameOver=gameOver;
     }
 }

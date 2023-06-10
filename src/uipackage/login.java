@@ -215,6 +215,7 @@ public class login extends JFrame {
                     System.out.println("BURADAYIZ");
 
                     setLoginStatus(true);
+                    proceed();
                 } else {
                     JOptionPane.showMessageDialog(null, "Login failed. Please try again.");
                 }
@@ -228,6 +229,12 @@ public class login extends JFrame {
 
     public void setLoginStatus(boolean newStatus) {
         this.isSuccessful = true;
+    }
+
+    private void proceed() {
+        UIController uiController = UIController.getUiController();
+        this.dispose();
+        uiController.initLoggedIn();
     }
 
     public static void main(String[] args) throws InterruptedException {

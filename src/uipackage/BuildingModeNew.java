@@ -43,7 +43,7 @@ public class BuildingModeNew extends JFrame {
 	public ArrayList<ArrayList<Integer>> shapeList = new ArrayList<>();
 	private boolean isInBuildingMode = true;
 	public static ArrayList<ArrayList<Integer>> playerShapes = new ArrayList<ArrayList<Integer>>(100);
-	public static JPanel turnPanel;
+	public static JPanel turnPanel = new JPanel();
 	public static JButton nextButton;
 	
 	JComboBox<String> numberOfPlayerComboBox;
@@ -95,12 +95,10 @@ public class BuildingModeNew extends JFrame {
 		});
 		nextButton.setVisible(false);
 		this.add(nextButton);
-		
-		
-		turnPanel = new JPanel();
-		turnPanel.setBounds(1400, 300, 100, 100);
-		turnPanel.setVisible(false);
+
 		this.add(turnPanel);
+		
+		
 
 	
 		pack();
@@ -176,7 +174,12 @@ public class BuildingModeNew extends JFrame {
 	}
 	
 
-	public static void nextTurn() {
+	public static void nextTurn(WorldMap worldMap) {
+		
+		turnPanel.setBounds(1400, 300, 100, 100);
+		turnPanel.setVisible(true);
+		
+		
 		int clicked = WorldMap.clickedShapeIndex;
 		PlayerNew player = playerList.get(turn - 1);
 		System.out.println(clicked);
@@ -191,7 +194,8 @@ public class BuildingModeNew extends JFrame {
 			turn=1;
 		}	
 		
-		turnPanel.setVisible(true);
+		
+		
 		BuildingModeNew.turnPanel.setBackground(playerList.get(turn-1).getColor());
 		if (worldMap.getIsAllSelected()) {
 			BuildingModeNew.nextButton.setVisible(true);

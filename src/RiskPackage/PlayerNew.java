@@ -112,8 +112,11 @@ public class PlayerNew {
 	
 
 	public void useRevolutionCard(int territoryIndex) {
-		if (this.cardUsable)
+		if (this.cardUsable){
 			RunningModeNew.players.get(RunningModeNew.getTurn()).shapeIndices.add(territoryIndex);
+			WorldMap.setShapeColor(WorldMap.shapeList.get(territoryIndex), RunningModeNew.players.get(RunningModeNew.getTurn()).getColor());
+
+		}
 	}
 	
 	public void useCoupCard(int territoryIndex) {

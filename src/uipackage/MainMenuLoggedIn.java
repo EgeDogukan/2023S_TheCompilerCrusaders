@@ -26,6 +26,8 @@ public class MainMenuLoggedIn extends JFrame {
 	public boolean isLoginClicked;
 	
     public static int status = -1; 
+
+    private UIController uiController = UIController.getUiController();
 	
     public MainMenuLoggedIn() {
         // Set up the main menu window
@@ -53,6 +55,7 @@ public class MainMenuLoggedIn extends JFrame {
             backgroundMusic.stop();
 
             System.out.println("Starting new game...");
+            proceedNewGame();
         });
 
         // Create the load button and add an action listener
@@ -61,10 +64,11 @@ public class MainMenuLoggedIn extends JFrame {
 
             MainMenuLoggedIn.status=0;
 			System.out.println(status);
-			RunningModeNew.databaseChooser=0;
+			RunningModeNew.databaseChooser=1;
             backgroundMusic.stop();
    
             System.out.println("Loading saved game...");
+            proceedLoadMode();
         });
 
         JButton loadButton2 = new JButton("Load Game From JSON");
@@ -76,6 +80,7 @@ public class MainMenuLoggedIn extends JFrame {
                 backgroundMusic.stop();
    
             System.out.println("Loading saved game...");
+            proceedLoadMode();
         });
 
 
@@ -162,6 +167,14 @@ public class MainMenuLoggedIn extends JFrame {
         // Show the main menu window and start the background music
         setVisible(true);
         backgroundMusic.start();
+    }
+
+    public void proceedLoadMode() {
+        uiController.initLoadMode();
+    }
+
+    public void proceedNewGame() {
+        uiController.initNewMode();
     }
 
     public static void main(String[] args) {

@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 public class whichMode extends JFrame {
 	
 	public static int status = -1; 
+	public static int databaseChooser = 0;
 
 	public whichMode() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,7 +30,7 @@ public class whichMode extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				whichMode.status=0;
 				System.out.println(status);
-				RunningModeNew.databaseChooser=0;
+				databaseChooser=0;
 			}
 		});
 		
@@ -43,7 +44,7 @@ public class whichMode extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				whichMode.status=0;
 				System.out.println(status);
-				RunningModeNew.databaseChooser=1;
+				databaseChooser=1;
 			}
 		});
 		

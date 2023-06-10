@@ -3,6 +3,7 @@ package uipackage;
 import javax.sound.sampled.*;
 import javax.swing.*;
 
+import RiskPackage.GameControllerNew;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -60,6 +61,7 @@ public class MainMenu extends JFrame {
         loginButton.addActionListener(e -> {
 
         	isLoginClicked=true;
+            proceedToLogin();
             backgroundMusic.stop();
             //System.out.println("Opening login screen...");
            
@@ -138,6 +140,12 @@ public class MainMenu extends JFrame {
         // Show the main menu window and start the background music
         setVisible(true);
         backgroundMusic.start();
+    }
+
+    private void proceedToLogin() {
+        UIController uiController = UIController.getUiController();
+        this.dispose();
+        uiController.initLogin();
     }
 
     public static void main(String[] args) {
