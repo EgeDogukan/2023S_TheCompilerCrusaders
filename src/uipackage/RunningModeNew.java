@@ -150,7 +150,7 @@ public class RunningModeNew extends JFrame {
 		
 		
 		JButton saveButtonMongo = new JButton("SAVE MONGO");
-		saveButtonMongo.setBounds(1300, 800, 100, 50);
+		saveButtonMongo.setBounds(1500, 500, 100, 50);
 		saveButtonMongo.addActionListener(new ActionListener() {
 			
 			@Override
@@ -171,7 +171,7 @@ public class RunningModeNew extends JFrame {
 		
 		
 		JButton saveButtonJSON = new JButton("SAVE JSON");
-		saveButtonJSON.setBounds(1400, 800, 100, 50);
+		saveButtonJSON.setBounds(1500, 600, 100, 50);
 		saveButtonJSON.addActionListener(new ActionListener() {
 			
 			@Override
@@ -193,7 +193,7 @@ public class RunningModeNew extends JFrame {
 		panel.add(saveButtonJSON);
 
 		JButton pickArmyCard = new JButton("trade army card");
-		pickArmyCard.setBounds(1300, 900, 100, 50);
+		pickArmyCard.setBounds(1350, 750, 100, 50);
 		pickArmyCard.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -292,7 +292,7 @@ public class RunningModeNew extends JFrame {
 		
 		
 		JButton pickChanceCard = new JButton("pick chance card");
-		pickChanceCard.setBounds(200, 750, 100, 50);
+		pickChanceCard.setBounds(700, 750, 100, 50);
 		pickChanceCard.addActionListener(new ActionListener() {
 			
 			@Override
@@ -311,14 +311,14 @@ public class RunningModeNew extends JFrame {
 		panel.add(pickChanceCard);
 		
 		JLabel turn = new JLabel("Turn: Player "+ players.get(turnCounter).getId());
-		turn.setBounds(300, 850, 100, 100);
+		turn.setBounds(500, 680, 100, 100);
 		
 		panel.add(turn);
 		
 		JPanel turnPanel = new JPanel();
-		turnPanel.setBounds(600,900,100,100);
+		turnPanel.setBounds(500,800,100,50);
 		
-		stage.setBounds(380, 820, 100, 100);
+		stage.setBounds(350, 765, 100, 100);
 		whichStage="Deploy";
 
 		JButton nextStage = new JButton("Next Stage");
@@ -384,7 +384,7 @@ public class RunningModeNew extends JFrame {
 		
         
 		JButton useCardButton = new JButton("use card");
-		useCardButton.setBounds(700, 750, 100, 50);
+		useCardButton.setBounds(1100, 750, 100, 50);
 		useCardButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -587,7 +587,7 @@ public class RunningModeNew extends JFrame {
 		
 		
 		JButton exitButton = new JButton("Exit!");
-		exitButton.setBounds(1200, 900, 100, 50);
+		exitButton.setBounds(1600, 900, 100, 50);
 		exitButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -599,7 +599,7 @@ public class RunningModeNew extends JFrame {
 		panel.add(exitButton);
 		
 		JButton pauseButton = new JButton("Pause");
-		pauseButton.setBounds(1200, 800, 100, 50);
+		pauseButton.setBounds(1500, 300, 100, 50);
 		pauseButton.addActionListener(new ActionListener() {
 			
 			@Override
