@@ -269,6 +269,95 @@ public class RunningModeNew extends JFrame {
 		this.add(pickArmyCard);
 
 		
+		JButton useArmyCard = new JButton("use army card");
+		useArmyCard.setBounds(1300, 700, 100, 100);
+		useArmyCard.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame useCardFrame = new JFrame("Use Army Card");
+				JPanel useCardPanel = new JPanel();
+
+				useCardFrame.setSize(500, 100);
+				useCardFrame.setLocationRelativeTo(null);
+				useCardFrame.setTitle("RunningModedeploy");
+
+				ArrayList<Integer> armyCardsInfo = BuildingModeNew.playerList.get(RunningModeNew.getTurn()).getArmyCardsInfo();
+
+				useCardPanel.add(new JLabel("Army Card"));
+
+				JComboBox<Integer> comboBox = new JComboBox<>(armyCardsInfo.toArray(new Integer[0]));
+				useCardPanel.add(comboBox);
+
+				PlayerNew currentPlayer = BuildingModeNew.playerList.get(RunningModeNew.getTurn());
+				
+				JComboBox<Integer> playerIndicies = new JComboBox<>(currentPlayer.getShapeIndices().toArray(new Integer[0]));
+				useCardPanel.add(playerIndicies);
+
+
+
+				useCardFrame.getContentPane().add(useCardPanel);
+				useCardFrame.setVisible(true);
+
+				JButton useButton = new JButton("Use");
+				useCardPanel.add(useButton);
+				useButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Integer selectedItem = (Integer) comboBox.getSelectedItem();
+						Integer selectedIndex = (Integer) playerIndicies.getSelectedItem();
+
+						// Get the current count of the selected army card
+						for(int i=0; i<armyCardsInfo.size();i++){
+							System.out.println("******************"+armyCardsInfo.get(i));
+						} 
+						int selectedCardCount = armyCardsInfo.get(2);
+
+						// Check if there are any cards of the selected type
+						if (selectedCardCount > 0) {
+
+							if (selectedItem == 3){
+								WorldMap.armyList[selectedIndex][2] = WorldMap.armyList[selectedIndex][2]+17;
+							}
+							if (selectedItem == 2){
+								WorldMap.armyList[selectedIndex][1] = WorldMap.armyList[selectedIndex][1]+13;
+							}
+							if (selectedItem == 1){
+								WorldMap.armyList[selectedIndex][0] = WorldMap.armyList[selectedIndex][0]+11;
+							}
+							else{
+								System.out.println("ınvalid selection for use army card");
+							}
+							// Perform the transformation and decrease the card count
+							// (Update this part according to your game logic)
+							
+							selectedCardCount--;
+							
+							
+							// Update armyCardsInfo
+							armyCardsInfo.set(selectedItem, selectedCardCount);
+
+							// Print the updated armyCardsInfo for testing
+							for (int i = 0; i < 3; i++) {
+								System.out.println(armyCardsInfo.get(i));
+							}
+
+							// Refresh the combo box
+							comboBox.setSelectedIndex(0);
+
+							// Refresh the armyCardsInfo on the UI, if needed
+						} else {
+							// No cards of the selected type available, handle as needed
+							System.out.println("No cards of the selected type available");
+						}
+					}
+				});
+
+				useCardFrame.pack();
+				useCardFrame.setVisible(true);
+			}
+		});
+		this.add(useArmyCard);
+
 		
 
 
