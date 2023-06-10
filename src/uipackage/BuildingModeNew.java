@@ -43,7 +43,7 @@ public class BuildingModeNew extends JFrame {
 	public ArrayList<ArrayList<Integer>> shapeList = new ArrayList<>();
 	private boolean isInBuildingMode = true;
 	public static ArrayList<ArrayList<Integer>> playerShapes = new ArrayList<ArrayList<Integer>>(100);
-	public static JPanel turnPanel;
+	public static JPanel turnPanel = new JPanel();
 	public static JButton nextButton;
 	
 	JComboBox<String> numberOfPlayerComboBox;
@@ -95,8 +95,8 @@ public class BuildingModeNew extends JFrame {
 		});
 		nextButton.setVisible(false);
 		this.add(nextButton);
-		if (turnPanel!=null)
-			this.add(turnPanel);
+
+		this.add(turnPanel);
 		
 		
 
@@ -176,9 +176,8 @@ public class BuildingModeNew extends JFrame {
 
 	public static void nextTurn(WorldMap worldMap) {
 		
-		turnPanel = new JPanel();
 		turnPanel.setBounds(1400, 300, 100, 100);
-		turnPanel.setVisible(false);
+		turnPanel.setVisible(true);
 		
 		
 		int clicked = WorldMap.clickedShapeIndex;

@@ -57,6 +57,7 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
             currentInformations.add(Integer.parseInt(document.get("index").toString()));
             currentInformations.add(Integer.parseInt(document.get("r").toString()));
             currentInformations.add(Integer.parseInt(document.get("g").toString()));
+            currentInformations.add(Integer.parseInt(document.get("b").toString()));
             currentInformations.add(Integer.parseInt(document.get("a").toString()));
             currentInformations.add(Integer.parseInt(document.get("c").toString()));
             currentInformations.add(Integer.parseInt(document.get("i").toString()));

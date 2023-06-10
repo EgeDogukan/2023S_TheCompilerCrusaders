@@ -200,7 +200,7 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    setShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    addShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
                                     System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyInfantry(clickedShapeIndex));    
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
@@ -215,7 +215,7 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    setShapeArmyCavalry(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    addShapeArmyCavalary(shape, Integer.parseInt(numberOfArmyonarea));   
                                     System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyCavalry(clickedShapeIndex));    
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
@@ -230,7 +230,7 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    setShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
+                                    addShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
                                     
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
@@ -295,7 +295,7 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    setShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    addShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
                                     System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyInfantry(clickedShapeIndex));    
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
@@ -310,7 +310,7 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    setShapeArmyCavalry(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    addShapeArmyCavalary(shape, Integer.parseInt(numberOfArmyonarea));   
                                     System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyCavalry(clickedShapeIndex));    
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
@@ -325,7 +325,7 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    setShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
+                                    addShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
                                     
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
@@ -353,6 +353,7 @@ public class WorldMap {
                         }
 
                         if(RunningModeNew.whichStage == "Attack") { 
+                        	System.out.println("ATTACAK GIRDI");
                             clickedShape = shape;
                             WorldMap.clickedShapeIndex=shapeList.indexOf(shape);
                         	Color curColor = colorList.get(getShapeIndex(shape));

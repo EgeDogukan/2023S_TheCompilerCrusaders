@@ -53,7 +53,7 @@ public class LoadMode extends JFrame {
     	
         ISaveLoadAdapter database;
         
-        if (databaseChooser==1) {
+        if (RunningModeNew.databaseChooser==1) {
         	System.out.println("db is chosen.");
         	database =  new TerritoryDBDatabase();
         }

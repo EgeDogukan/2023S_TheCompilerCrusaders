@@ -42,7 +42,7 @@ public class RunningModeNew extends JFrame {
     public ArrayList<Shape> shapelist = new ArrayList<>();
 	public static boolean isInBuildingMode = true;
 
-	//private int counter = 0;
+	private int counter = 0;
 	public static JLabel stage = new JLabel("Deploy");
 	public static String whichStage= new String();
 	
@@ -310,20 +310,20 @@ public class RunningModeNew extends JFrame {
 		nextStage.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 
-			turnCounter ++;
+			counter ++;
 
-			if(turnCounter == 1){
+			if(counter == 1){
 				stage.setText("Attack");
 				whichStage="Attack";
 
 			}
-			else if(turnCounter==2){
+			else if(counter==2){
 				stage.setText("Fortify");
 				whichStage="Fortify";
 			}
 			
-			else if(turnCounter>2){
-				turnCounter=0;
+			else if(counter>2){
+				counter=0;
 				stage.setText("Deploy");
 				whichStage="Deploy";
 			}

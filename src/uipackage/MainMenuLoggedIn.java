@@ -64,7 +64,7 @@ public class MainMenuLoggedIn extends JFrame {
 
             MainMenuLoggedIn.status=0;
 			System.out.println(status);
-			RunningModeNew.databaseChooser=0;
+			RunningModeNew.databaseChooser=1;
             backgroundMusic.stop();
    
             System.out.println("Loading saved game...");
