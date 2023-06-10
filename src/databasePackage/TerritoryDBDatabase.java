@@ -57,7 +57,9 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
             currentInformations.add(Integer.parseInt(document.get("index").toString()));
             currentInformations.add(Integer.parseInt(document.get("r").toString()));
             currentInformations.add(Integer.parseInt(document.get("g").toString()));
-            currentInformations.add(Integer.parseInt(document.get("b").toString()));
+            currentInformations.add(Integer.parseInt(document.get("a").toString()));
+            currentInformations.add(Integer.parseInt(document.get("c").toString()));
+            currentInformations.add(Integer.parseInt(document.get("i").toString()));
             informations.add(currentInformations);
             
         }
@@ -86,6 +88,9 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 			doc.append("r", worldMap.getColorList().get(index).getRed());
 			doc.append("g", worldMap.getColorList().get(index).getGreen());
 			doc.append("b", worldMap.getColorList().get(index).getBlue());
+			doc.append("a", worldMap.getShapeArmyArtillery(worldMap.getShapeIndex(shape)));
+			doc.append("c", worldMap.getShapeArmyCavalry(worldMap.getShapeIndex(shape)));
+			doc.append("i", worldMap.getShapeArmyInfantry(worldMap.getShapeIndex(shape)));
 			collection.insertOne(doc);
 		}
 	}
