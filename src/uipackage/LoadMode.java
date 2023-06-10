@@ -79,6 +79,9 @@ public class LoadMode extends JFrame {
         	Color curColor = new Color(arr.get(1), arr.get(2), arr.get(3));
         	worldMap.setIndexColor(arr.get(0), curColor);
         	//System.out.println(curColor);
+        	worldMap.setShapeArmyArtillery(worldMap.shapeList.get(arr.get(0)), arr.get(4));
+        	worldMap.setShapeArmyCavalry(worldMap.shapeList.get(arr.get(0)), arr.get(5));
+        	worldMap.setShapeArmyInfantry(worldMap.shapeList.get(arr.get(0)), arr.get(6));
         	
         	if (colors.size()==0) {
     			colors.add(curColor);

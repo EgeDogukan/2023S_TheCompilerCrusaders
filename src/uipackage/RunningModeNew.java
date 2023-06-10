@@ -602,6 +602,7 @@ public class RunningModeNew extends JFrame {
 					worldPanel.setVisible(false);
 					nextStage.setVisible(false);
 					pickArmyCard.setVisible(false);
+					stage.setVisible(false);
 					turn.setVisible(false);
 					for (JTextField curField : textLabels) 
 						curField.setVisible(false);
@@ -622,6 +623,7 @@ public class RunningModeNew extends JFrame {
 					turn.setVisible(true);
 					nextStage.setVisible(true);
 					pickArmyCard.setVisible(true);
+					stage.setVisible(false);
 					for (JTextField curField : textLabels) 
 						curField.setVisible(true);
 				}
