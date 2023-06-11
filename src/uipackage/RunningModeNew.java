@@ -55,7 +55,7 @@ public class RunningModeNew extends JFrame {
 	public static ArrayList<IArmyCard> armyCards = new ArrayList<>();
 	public ArmyCardFactory armyCardFactory = new ArmyCardFactory();
 	
-	public ArrayList<TerritoryCard> territoryCards = new ArrayList<>();
+	public static ArrayList<TerritoryCard> territoryCards = new ArrayList<>();
 	public static boolean isGameOver=false;
 	//JPanel panel = new JPanel();
 
@@ -728,7 +728,7 @@ public class RunningModeNew extends JFrame {
 					turn.setVisible(true);
 					nextStage.setVisible(true);
 					pickArmyCard.setVisible(true);
-					stage.setVisible(false);
+					stage.setVisible(true);
 					for (JTextField curField : textLabels) 
 						curField.setVisible(true);
 				}
