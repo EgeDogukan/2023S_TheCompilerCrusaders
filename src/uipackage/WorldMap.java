@@ -424,7 +424,7 @@ public class WorldMap {
                                                                     }
 
                                                                     Random random = new Random();
-                                                                    int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
+                                                                    int randomIndex = random.nextInt(3);
 
                                                                     int chance = random.nextInt(1)+1;
                                                                     if (chance==1){
@@ -531,7 +531,8 @@ public class WorldMap {
                                 
                                 JComboBox<Integer> neighbourCombo = new JComboBox<>();
                                 for( int i: neighborsList){
-                                    neighbourCombo.addItem(i);
+                                	if(i<shapeList.size())
+                                		neighbourCombo.addItem(i);
                                 }
                                 // Infantry label and text field
                                 JPanel infantryPanel = new JPanel();
@@ -612,7 +613,7 @@ public class WorldMap {
                                                     // Adding inputed amount of infantries and decreasing it from territory
                                                     addShapeArmyInfantry(destinationShape, fortifyAmountInfantry);
                                                     decreaseShapeArmyInfantry(clickedShape, fortifyAmountInfantry);
-                                                    JOptionPane.showMessageDialog(null, "Fortifiyed");
+                                                    JOptionPane.showMessageDialog(null, "Fortified");
 
 
                                                 } catch (Exception e1) {
@@ -1203,6 +1204,8 @@ public class WorldMap {
         int armyIndex = shapeList.indexOf(shape);
         armyList[armyIndex][2]= numberOfArmy;
     }
+    
+   
 
     public int getShapeArmyInfantry(int index){
         return armyList[index][0];

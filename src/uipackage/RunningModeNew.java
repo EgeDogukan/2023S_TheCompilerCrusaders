@@ -287,7 +287,7 @@ public class RunningModeNew extends JFrame {
 
 				JComboBox<Integer> comboBox = new JComboBox<>(armyCardsInfo.toArray(new Integer[0]));
 				useCardPanel.add(comboBox);
-
+				
 				PlayerNew currentPlayer = BuildingModeNew.playerList.get(RunningModeNew.getTurn());
 				
 				JComboBox<Integer> playerIndicies = new JComboBox<>(currentPlayer.getShapeIndices().toArray(new Integer[0]));
@@ -310,22 +310,31 @@ public class RunningModeNew extends JFrame {
 						for(int i=0; i<armyCardsInfo.size();i++){
 							System.out.println("******************"+armyCardsInfo.get(i));
 						} 
-						int selectedCardCount = armyCardsInfo.get(2);
-
+						
+						for (int i=0;i<3;i++) {
+						int selectedCardCount = armyCardsInfo.get(i);
 						// Check if there are any cards of the selected type
 						if (selectedCardCount > 0) {
 
 							if (selectedItem == 3){
-								WorldMap.armyList[selectedIndex][2] = WorldMap.armyList[selectedIndex][2]+17;
+								WorldMap.armyList[selectedIndex][2] = WorldMap.armyList[selectedIndex][2]+1;
+								
+								armyCardsInfo.set(2, armyCardsInfo.get(2)-1);
 							}
 							if (selectedItem == 2){
-								WorldMap.armyList[selectedIndex][1] = WorldMap.armyList[selectedIndex][1]+13;
+								WorldMap.armyList[selectedIndex][1] = WorldMap.armyList[selectedIndex][1]+1;
+								
+								armyCardsInfo.set(1, armyCardsInfo.get(1)-1);
 							}
 							if (selectedItem == 1){
-								WorldMap.armyList[selectedIndex][0] = WorldMap.armyList[selectedIndex][0]+11;
+								WorldMap.armyList[selectedIndex][0] = WorldMap.armyList[selectedIndex][0]+1;
+								
+								armyCardsInfo.set(0, armyCardsInfo.get(0)-1);
+								
+								
 							}
 							else{
-								System.out.println("ınvalid selection for use army card");
+								System.out.println("Invalid selection for use army card");
 							}
 							// Perform the transformation and decrease the card count
 							// (Update this part according to your game logic)
@@ -335,10 +344,10 @@ public class RunningModeNew extends JFrame {
 							
 							// Update armyCardsInfo
 							armyCardsInfo.set(selectedItem, selectedCardCount);
-
+							comboBox.setModel(new DefaultComboBoxModel<>(armyCardsInfo.toArray(new Integer[0])));
 							// Print the updated armyCardsInfo for testing
-							for (int i = 0; i < 3; i++) {
-								System.out.println(armyCardsInfo.get(i));
+							for (int k = 0; k < 3; k++) {
+								System.out.println(armyCardsInfo.get(k));
 							}
 
 							// Refresh the combo box
@@ -348,6 +357,7 @@ public class RunningModeNew extends JFrame {
 						} else {
 							// No cards of the selected type available, handle as needed
 							System.out.println("No cards of the selected type available");
+						}
 						}
 					}
 				});
@@ -693,6 +703,7 @@ public class RunningModeNew extends JFrame {
 					pickArmyCard.setVisible(false);
 					stage.setVisible(false);
 					turn.setVisible(false);
+					useArmyCard.setVisible(false);
 					for (JTextField curField : textLabels) 
 						curField.setVisible(false);
 					
@@ -713,6 +724,7 @@ public class RunningModeNew extends JFrame {
 					nextStage.setVisible(true);
 					pickArmyCard.setVisible(true);
 					stage.setVisible(false);
+					useArmyCard.setVisible(true);
 					for (JTextField curField : textLabels) 
 						curField.setVisible(true);
 				}

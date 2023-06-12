@@ -1,6 +1,7 @@
 package RiskPackage;
 
 import java.awt.Color;
+import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -90,7 +91,7 @@ public class PlayerNew {
 		if (this.cardUsable) {
 			Random random = new Random();
 			int randomNumber = random.nextInt(3) + 1;
-			RunningModeNew.worldMap.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(territoryIndex), randomNumber);
+			RunningModeNew.worldMap.addShapeArmyArtillery(RunningModeNew.worldMap.getShape(territoryIndex), randomNumber);
 			System.out.println("Succesfully "+randomNumber+" added to the territory with index: "+territoryIndex);
 		}
 	
@@ -123,6 +124,7 @@ public class PlayerNew {
 		
 		if (this.cardUsable) {
 			RunningModeNew.players.get(RunningModeNew.getTurn()).shapeIndices.add(territoryIndex);
+			WorldMap.setIndexColor(territoryIndex, RunningModeNew.players.get(RunningModeNew.getTurn()).getColor());
 			
 			RunningModeNew.worldMap.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(territoryIndex), 0);
 			RunningModeNew.worldMap.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(territoryIndex), 0);

@@ -33,7 +33,7 @@ public class PreBuildingMode extends JFrame {
 	    numberOfPlayerComboBox.setForeground(Color.black);
 	    numberOfPlayerComboBox.setBounds(1100, 25, 100, 100);
 
-		String[] options2 = {"1", "2"};
+		String[] options2 = {"0", "1", "2"};
 		numberOfCompComboBox = new JComboBox<>(options2);
 		numberOfCompComboBox.setForeground(Color.black);
 		numberOfCompComboBox.setBounds(1400, 25, 100, 100);
