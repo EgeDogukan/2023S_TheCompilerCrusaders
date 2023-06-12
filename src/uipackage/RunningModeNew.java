@@ -136,7 +136,7 @@ public class RunningModeNew extends JFrame {
 		shapelist=this.worldMap.getShapeList();
 		ArrayList<JTextField> textLabels = worldMap.getTextLabels();
 		for (JTextField curField : textLabels) {
-			panel.add(curField);
+			//panel.add(curField);
 		}
 
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
