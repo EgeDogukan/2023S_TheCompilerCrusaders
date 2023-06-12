@@ -388,7 +388,7 @@ public class WorldMap {
                                             int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
                                             Shape destinationShape = getShape(destinationIndex);
                                             System.out.println("destination power**********: " + powerOfShape(destinationShape));
-                                            System.out.println("destination power**********: " + powerOfShape(shape));
+                                            System.out.println("source power**********: " + powerOfShape(shape));
                                             String selectedItem = (String) neighbourCombo.getSelectedItem();
                                             Integer selected = Integer.parseInt(selectedItem);
 
@@ -422,7 +422,14 @@ public class WorldMap {
                                                                             decreasePowerOfShapeInfantry(destinationShape, 1);
                                                                         }
                                                                     }
+                                                                    if(powerOfShape(destinationShape) <= 0){
+                                                                        System.out.println("Destination shape is zero");
+                                                                        setIndexColor(shapeList.indexOf(destinationShape), colorList.get(clickedShapeIndex));
+                                                                        setShapeArmyInfantry(destinationShape, 1);
 
+                                                                        decreasePowerOfShapeInfantry(shape, 1);
+                                                                        decreaseShapeArmyInfantry(shape, 1);
+                                                                    }
                                                                     Random random = new Random();
                                                                     int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
 
@@ -438,13 +445,7 @@ public class WorldMap {
                                                                     }
                                                                     
                                                         
-                                                                    if(powerOfShape(destinationShape) <= 0){
-                                                                        setIndexColor(shapeList.indexOf(destinationShape), colorList.get(clickedShapeIndex));
-                                                                        setShapeArmyInfantry(destinationShape, 1);
-
-                                                                        decreasePowerOfShapeInfantry(shape, 1);
-                                                                        decreaseShapeArmyInfantry(shape, 1);
-                                                                    }
+                                                                    
                                                                     areAllColorsSame();
                                                                     if (isGameOver) {
                                                                     	System.out.println("Player"+BuildingModeNew.playerList.get(RunningModeNew.getTurn())+"win the game.");
