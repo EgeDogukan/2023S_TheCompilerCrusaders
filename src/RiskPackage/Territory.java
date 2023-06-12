@@ -38,8 +38,7 @@ public class Territory extends JPanel {
 	    private int yCoordinate;
 	    private int width;
 	    private int height;
-		//public static JButton attackButton;
-		
+		private boolean isFirst=true;
 	    private Color color;
 	 
 	    private ArrayList<Territory> neighbors;
@@ -49,8 +48,6 @@ public class Territory extends JPanel {
 		public int Inumber;
 		public Army armyOnTerritory;
 		private boolean isBuilding=false;
-		private Shape shape;
-		private int ShapeId;
 		private boolean winner = false;
 
 
@@ -76,6 +73,10 @@ public class Territory extends JPanel {
 	        this.name = name;
 	        this.neighbors = new ArrayList<Territory>();
 
+
+
+
+	        
 			JLabel nameLabel = new JLabel(this.getName());
 			System.out.println(this.getName());
         	nameLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -84,6 +85,105 @@ public class Territory extends JPanel {
 	        this.setFocusable(true);
 	        this.setEnabled(true);
 	        
+			this.addMouseListener(new MouseAdapter() {
+				private Color oldColor;
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					
+				
+					if (isBuilding) {
+						System.out.println("Panel clicked!");
+
+						
+						
+
+						
+						
+					if(GameController.isBuildingMode) {
+						if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
+							
+							
+							
+							System.out.println("sahip");
+							JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+						"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
+						
+								
+								AttackTerr at = new AttackTerr(Territory.this);
+								System.out.println("birinci tur");
+
+							
+					
+						}
+					}
+					else {
+						if(RunningMode.isItFirstTour) {
+							if(Territory.this.getOwnerID()+1 == GameController.getCurrentTurnPlayerID()) {
+								
+								
+								
+								System.out.println("sahip");
+								JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+							"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
+							
+									
+									AttackTerr at = new AttackTerr(Territory.this);
+									System.out.println("birinci tur");
+
+								
+						
+							}
+						}
+						else {
+							if(Territory.this.getOwnerID() == GameController.getCurrentTurnPlayerID()) {
+								
+								
+								
+								System.out.println("sahip");
+								JOptionPane.showMessageDialog(null, Territory.this.getName() + Territory.this.xCoordinate + 
+							"y"+Territory.this.yCoordinate + "--------" + Territory.this.getOwnerID() + GameController.getCurrentTurnPlayerID());
+							
+									
+									AttackTerr at = new AttackTerr(Territory.this);
+									System.out.println("birinci tur");
+
+								
+						
+							}
+						}
+					}
+					
+						
+						
+						
+						
+
+						
+					
+					
+					
+				}
+			}//Added after commanding the codes
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					/*if (isBuilding){
+						oldColor = getColor();
+						setColor(Color.RED);
+						repaint();
+					}*/
+					
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					/*if (isBuilding) {
+						setColor(oldColor);
+						repaint();
+					}*/
+					
+				}
+			});
 			
 			this.setFocusable(true);
 		}

@@ -823,57 +823,11 @@ public class WorldMap {
         return isInBuildingMode;
     }
 
-    public void setIsInBuildingMode(boolean bool) {
-        isInBuildingMode = bool;
-    }
-    
-    public void setClickedShapeIndex(int clickedShapeIndex) {
-    	this.clickedShapeIndex=clickedShapeIndex;
-    }
-    
-    public MouseListener getMouseListener() {
-    	return this.ml;
-    }
-    
-    public void setMouseListener(MouseListener ml) {
-    	this.ml=ml;
-    }
-    
-    public void checkIfAllSelected(int numClicked, int numTerr){
-		if(numClicked==numTerr){
-            isEveryTerritorySelected=true;
-            System.out.println("true olduuuuu");
-        }
-	}
-
-    public boolean getIsAllSelected() {
-        return isEveryTerritorySelected;
-    }
-    
-    public static int getShapeIndex(Shape shape) {
-    	return shapeList.indexOf(shape);
-    }
-    
-    public Shape getShape(int index) {
-    	return shapeList.get(index);
-    }
-
-    public static ArrayList<Color> getColorList() {
+    public ArrayList<Color> getColorList() {
         return colorList;
     }
-    
-    public ArrayList<Shape> getSelectedShapes(){
-    	return this.selectedShapeList;
-    }
 
-   
-
-    public ArrayList getNeighbour(int index) {
-        return neighbourList.get(index);
-    }
-   
-
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         Runnable r = () -> {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -911,4 +865,17 @@ public class WorldMap {
     	}
     	isGameOver=gameOver;
     }
+
+    public ArrayList<Color> getColorList() {
+        return colorList;
+    }
+
+    public boolean repOk() {
+        // Check if clickedShape is null or refers to a shape in shapeList
+        if (clickedShape != null && !shapeList.contains(clickedShape)) {
+            return false;
+        }
+
+        return true; // Representation invariant holds
+    }    
 }
