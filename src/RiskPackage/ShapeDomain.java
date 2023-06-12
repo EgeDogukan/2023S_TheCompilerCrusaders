@@ -129,7 +129,7 @@ public class ShapeDomain {
             decreaseShapeArmyInfantry(shape, 1);
         }
         Random random = new Random();
-        int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
+        int randomIndex = random.nextInt(3/*RunningModeNew.armyCards.size()*/);
         int chance = random.nextInt(1)+1;
         if (chance==1){
             RunningModeNew.armyCards.remove(randomIndex);

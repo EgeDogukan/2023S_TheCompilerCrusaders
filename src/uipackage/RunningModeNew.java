@@ -162,7 +162,6 @@ public class RunningModeNew extends JFrame {
 					System.out.println("MONGO IS SAVED");
 					RunningModeNew.this.dispose();
 				} catch (IOException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 			}
@@ -184,7 +183,6 @@ public class RunningModeNew extends JFrame {
 					System.out.println("JSON IS SAVED");
 					RunningModeNew.this.dispose();
 				} catch (IOException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 				

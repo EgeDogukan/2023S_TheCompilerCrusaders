@@ -51,7 +51,7 @@ public class PlayerNew {
 	public ArrayList<Integer> getArmyCardsInfo(){
 		ArrayList<Integer> info = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {
-            info.add(0);
+            info.add(i);
         }
 		for(IArmyCard cards: armyCards){
 			if(cards.getType()==0){
