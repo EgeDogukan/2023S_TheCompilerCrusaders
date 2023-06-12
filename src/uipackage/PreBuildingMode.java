@@ -22,24 +22,24 @@ public class PreBuildingMode extends JFrame {
 		this.setLayout(null);
 		
 		JLabel numberOfPlayerJLabel = new JLabel("Number of Human Player");
-		numberOfPlayerJLabel.setBounds(1050, 110, 200, 100);
+		numberOfPlayerJLabel.setBounds(500, 60, 200, 50);
 		
 		JLabel numberOfCompJLabel = new JLabel("Number of Computer Player");
-		numberOfCompJLabel.setBounds(1350, 110, 200, 100);
+		numberOfCompJLabel.setBounds(850, 60, 200, 50);
 		
 		
 		String[] options = {"1", "2", "3", "4", "5", "6"};
 	    numberOfPlayerComboBox = new JComboBox<>(options);
 	    numberOfPlayerComboBox.setForeground(Color.black);
-	    numberOfPlayerComboBox.setBounds(1100, 25, 100, 100);
+	    numberOfPlayerComboBox.setBounds(500, 100, 210, 70);
 
 		String[] options2 = {"1", "2"};
 		numberOfCompComboBox = new JComboBox<>(options2);
 		numberOfCompComboBox.setForeground(Color.black);
-		numberOfCompComboBox.setBounds(1400, 25, 100, 100);
+		numberOfCompComboBox.setBounds(850, 100, 210, 70);
 		
 		JButton nextButton = new JButton("Continue to the building mode");
-		nextButton.setBounds(100, 100, 200, 200);
+		nextButton.setBounds(630, 200, 300, 100);
 		
 		nextButton.addActionListener(new ActionListener() {
 			
