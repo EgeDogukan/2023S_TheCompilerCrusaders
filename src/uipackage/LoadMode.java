@@ -73,7 +73,7 @@ public class LoadMode {
         
         for (ArrayList<Integer> arr : this.informations){
         	Color curColor = new Color(arr.get(1), arr.get(2), arr.get(3));
-        	worldMap.setIndexColor(arr.get(0), curColor);
+        	worldMap.shapeDomain.setIndexColor(arr.get(0), curColor);
         	//System.out.println(curColor);
         	worldMap.shapeDomain.setShapeArmyArtillery(worldMap.shapeList.get(arr.get(0)), arr.get(4));
         	worldMap.shapeDomain.setShapeArmyCavalry(worldMap.shapeList.get(arr.get(0)), arr.get(5));

@@ -25,6 +25,7 @@ import javax.imageio.ImageIO;
 
 public class WorldMap {
 
+   
 
     private Image star;
     private Image cross;
@@ -180,7 +181,7 @@ public class WorldMap {
                             
                             currentField.setBounds((int) centerX, (int) centerY, 40, 40);
                             System.out.println(clickedShape);
-                            currentField.setText(Integer.toString(clickedShapeIndex)+ " "+Integer.toString(powerOfShape(shape)));
+                            currentField.setText(Integer.toString(clickedShapeIndex)+ " "+Integer.toString(shapeDomain.powerOfShape(shape)));
                             
                             getTextLabels().add(currentField);
                             
@@ -338,7 +339,7 @@ public class WorldMap {
                                 }
                             });
                             currentField.setBounds((int) centerX, (int) centerY, 40, 40);
-                            currentField.setText(Integer.toString(clickedShapeIndex)+ " "+Integer.toString(powerOfShape(shape)));
+                            currentField.setText(Integer.toString(clickedShapeIndex)+ " "+Integer.toString(shapeDomain.powerOfShape(shape)));
                             optionPanel.add(retrieveArtilleryButton);
                             optionPanel.add(retrieveCavalryButton);
                             optionPanel.add(retrieveInfantryButton);
@@ -384,11 +385,11 @@ public class WorldMap {
                                 attackButton.addMouseListener(new MouseAdapter() {
                                     @Override
                                     public void mouseClicked(MouseEvent e) {
-                                        if(powerOfShape(shape) >1){
+                                        if(shapeDomain.powerOfShape(shape) >1){
                                             int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
                                             Shape destinationShape = getShape(destinationIndex);
-                                            System.out.println("destination power**********: " + powerOfShape(destinationShape));
-                                            System.out.println("source power**********: " + powerOfShape(shape));
+                                            System.out.println("destination power**********: " + shapeDomain.powerOfShape(destinationShape));
+                                            System.out.println("source power**********: " + shapeDomain.powerOfShape(shape));
                                             String selectedItem = (String) neighbourCombo.getSelectedItem();
                                             Integer selected = Integer.parseInt(selectedItem);
 
@@ -401,49 +402,14 @@ public class WorldMap {
                                                     // This code will be run when the DiceRollingFrame is closed
                                                     try{
                                                         
-                                                            if (powerOfShape(shape) > powerOfShape(destinationShape) && DiceRollingFrame.defenderDiceResult < DiceRollingFrame.attackerDiceResult) {
+                                                            if (shapeDomain.powerOfShape(shape) > shapeDomain.powerOfShape(destinationShape) && DiceRollingFrame.defenderDiceResult < DiceRollingFrame.attackerDiceResult) {
                                                                 //**************** */
                                                                 
                                                                 int destinationIndex = Integer.parseInt(neighbourCombo.getSelectedItem().toString());
 
                                                                     animationFrame = new StarAnimationClass(0);
-                                                                    if(powerOfShape(destinationShape) != 0){
-                                                                        if(shapeDomain.getShapeArmyArtillery(destinationIndex) > 0){
-                                                                            shapeDomain.decreaseShapeArmyArtillery(destinationShape, 1);
-                                                                            decreasePowerOfShapeArtillery(destinationShape, 1);
-
-                                                                        }
-                                                                        if(shapeDomain.getShapeArmyCavalry(destinationIndex)>0){
-                                                                            shapeDomain.decreaseShapeArmyCavalary(destinationShape, 1);
-                                                                            decreasePowerOfShapeCavalary(destinationShape, 1);
-                                                                        }
-                                                                        if(shapeDomain.getShapeArmyInfantry(destinationIndex)>0){
-                                                                            shapeDomain.decreaseShapeArmyInfantry(destinationShape, 1);
-                                                                            decreasePowerOfShapeInfantry(destinationShape, 1);
-                                                                        }
-                                                                    }
-                                                                    if(powerOfShape(destinationShape) <= 0){
-                                                                        System.out.println("Destination shape is zero");
-                                                                        setIndexColor(shapeList.indexOf(destinationShape), colorList.get(clickedShapeIndex));
-                                                                        shapeDomain.setShapeArmyInfantry(destinationShape, 1);
-
-                                                                        decreasePowerOfShapeInfantry(shape, 1);
-                                                                        shapeDomain.decreaseShapeArmyInfantry(shape, 1);
-                                                                    }
-                                                                    Random random = new Random();
-                                                                    int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
-
-                                                                    int chance = random.nextInt(1)+1;
-                                                                    if (chance==1){
-                                                                    	RunningModeNew.armyCards.remove(randomIndex);
-                                                                        BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(randomIndex, 1);
-                                                                        System.out.println("Infantry army card is added to the list.");
-                                                					}
-                                                                    else {
-                                                                    	int randomIndex2 = random.nextInt(RunningModeNew.territoryCards.size());
-                                                                    	BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addTerritoryCard(randomIndex2);
-                                                                    }
                                                                     
+                                                                    shapeDomain.SuccesfullAttack(shape, destinationShape, destinationIndex);
                                                         
                                                                     
                                                                     areAllColorsSame();
@@ -458,21 +424,7 @@ public class WorldMap {
                                                             } 
                                                             else {
                                                                 animationFrame = new StarAnimationClass(1);
-                                                                if(powerOfShape(shape)!= 0){
-                                                                    if(shapeDomain.getShapeArmyArtillery(currTerr) > 0){
-                                                                        shapeDomain.decreaseShapeArmyArtillery(shape, 1);
-                                                                        decreasePowerOfShapeArtillery(shape, 1);
-
-                                                                    }    
-                                                                    else if(shapeDomain.getShapeArmyCavalry(currTerr)>0){
-                                                                        shapeDomain.decreaseShapeArmyCavalary(shape, 1);
-                                                                        decreasePowerOfShapeCavalary(shape, 1);
-                                                                    }
-                                                                    else if(shapeDomain.getShapeArmyInfantry(currTerr)>0){
-                                                                        shapeDomain.decreaseShapeArmyInfantry(shape, 1);
-                                                                        decreasePowerOfShapeInfantry(shape, 1);
-                                                                    }
-                                                                }
+                                                                shapeDomain.UnsuccesfullAttack(shape,currTerr);
                                                             }
                                                         
                                                     }
@@ -584,7 +536,7 @@ public class WorldMap {
 
                                         Integer selected = (Integer) neighbourCombo.getSelectedItem();
                                         Shape destinationShape = getShape(destinationIndex);
-                                        if(powerOfShape(shape)>1){
+                                        if(shapeDomain.powerOfShape(shape)>1){
                                             if(((Color) colorList.get(selected)).getRed() == playerColor.getRed()&& ((Color) colorList.get(selected)).getGreen() == playerColor.getGreen() && ((Color) colorList.get(selected)).getBlue() == playerColor.getBlue()){
                                                 
 
@@ -602,17 +554,7 @@ public class WorldMap {
                                                     }
 
 
-                                                    // Adding inputed amount of artilarries and decreasing it from territory
-                                                    shapeDomain.addShapeArmyArtillery(destinationShape, fortifyAmountArtilarry);
-                                                    shapeDomain.decreaseShapeArmyArtillery(clickedShape, fortifyAmountArtilarry);
-
-                                                    // Adding inputed amount of cavalaries and decreasing it from territory
-                                                    shapeDomain.addShapeArmyCavalary(destinationShape, fortifyAmountCavalary);
-                                                    shapeDomain.decreaseShapeArmyCavalary(clickedShape, fortifyAmountCavalary);
-
-                                                    // Adding inputed amount of infantries and decreasing it from territory
-                                                    shapeDomain.addShapeArmyInfantry(destinationShape, fortifyAmountInfantry);
-                                                    shapeDomain.decreaseShapeArmyInfantry(clickedShape, fortifyAmountInfantry);
+                                                    shapeDomain.Fortify(clickedShape,destinationShape,fortifyAmountArtilarry,fortifyAmountCavalary,fortifyAmountInfantry);
                                                     JOptionPane.showMessageDialog(null, "Fortifiyed");
 
 
@@ -639,7 +581,7 @@ public class WorldMap {
                                 JLabel currentField = new JLabel();
 
                                 
-                                currentField.setText("ID: "+Integer.toString(clickedShapeIndex)+ " Total power: "+Integer.toString(powerOfShape(shape)));
+                                currentField.setText("ID: "+Integer.toString(clickedShapeIndex)+ " Total power: "+Integer.toString(shapeDomain.powerOfShape(shape)));
 
                                 
                                 fortPanel.add(currentField);
@@ -678,7 +620,7 @@ public class WorldMap {
                                     isEveryTerritorySelected=true;
                                                         
                                 clickedShape = shape;
-                                setIndexColor(shapeList.indexOf(shape), Color.gray);
+                                shapeDomain.setIndexColor(shapeList.indexOf(shape), Color.gray);
                                 
         
                                 break;
@@ -797,7 +739,7 @@ public class WorldMap {
                 && (bP - tolerance <= bT) && (bT <= bP + tolerance));
     }
 
-    private static void refresh() {
+    public static void refresh() {
         output.setIcon(new ImageIcon(getImage()));
     }
 
@@ -1154,11 +1096,7 @@ public class WorldMap {
     }
 
     
-    public static void setIndexColor(int index, Color color) {
-    	System.out.println("set index color function is called");
-        colorList.set(index, color);
-        refresh();
-    }
+    
 
     
     
@@ -1249,36 +1187,7 @@ public class WorldMap {
 		this.textLabels = textLabels;
 	} 
 
-    public int powerOfShape(Shape shape){
-        int index = getShapeIndex(shape);
-        
-        //int power = Integer.parseInt(armArrayLists[index][0].toString()) + 5 * Integer.parseInt(armArrayLists[index][1].toString()) + 10 * Integer.parseInt(armArrayLists[index][2].toString());
        
-        int power = shapeDomain.getShapeArmyArtillery(index)*10+ 5 * shapeDomain.getShapeArmyCavalry(index) + shapeDomain.getShapeArmyInfantry(index) ;
-        System.out.println("result is  "+ power);
-        return power;
-    }
-
-    public int decreasePowerOfShapeArtillery(Shape shape, int amount){
-        int index = getShapeIndex(shape);
-        int power = shapeDomain.getShapeArmyArtillery(index)+ 5 * shapeDomain.getShapeArmyCavalry(index) + 10 * shapeDomain.getShapeArmyInfantry(index);
-        power -= amount;
-        return power;
-    }
-
-    public int decreasePowerOfShapeInfantry(Shape shape, int amount){
-        int index = getShapeIndex(shape);
-        int power = shapeDomain.getShapeArmyArtillery(index)+ 5 * shapeDomain.getShapeArmyCavalry(index) + 10 * shapeDomain.getShapeArmyInfantry(index);
-        power -= 10*amount;
-        return power;
-    }
-    public int decreasePowerOfShapeCavalary(Shape shape, int amount){
-        int index = getShapeIndex(shape);
-        int power = shapeDomain.getShapeArmyArtillery(index)+ 5 * shapeDomain.getShapeArmyCavalry(index) + 10 * shapeDomain.getShapeArmyInfantry(index);
-        power -= 5*amount;
-        return power;
-    }
-    
     public void areAllColorsSame() {
     	boolean gameOver=true;
     	for (int i=0;i<colorList.size()-1;i++) {

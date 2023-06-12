@@ -682,6 +682,7 @@ public class RunningModeNew extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				RunningModeNew.this.dispose();
+				System.exit(0);
 				
 			}
 		});

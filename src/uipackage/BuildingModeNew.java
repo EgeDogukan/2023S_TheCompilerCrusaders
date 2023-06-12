@@ -39,7 +39,7 @@ public class BuildingModeNew extends JFrame {
 	public static int turn;
 	public static WorldMap worldMap;
 	public MouseListener mouseListener;
-	static ArrayList<PlayerNew> playerList = new ArrayList<>();
+	public static ArrayList<PlayerNew> playerList = new ArrayList<>();
 	public ArrayList<ArrayList<Integer>> shapeList = new ArrayList<>();
 	private boolean isInBuildingMode = true;
 	public static ArrayList<ArrayList<Integer>> playerShapes = new ArrayList<ArrayList<Integer>>(100);
@@ -187,7 +187,7 @@ public class BuildingModeNew extends JFrame {
 		player.getShapeIndices().add(clicked);
 		
 		
-		worldMap.setIndexColor(clicked, playerList.get(turn-1).getColor());	
+		worldMap.shapeDomain.setIndexColor(clicked, playerList.get(turn-1).getColor());	
 		turn++;
 		
 		if(turn==numberOfPlayer+numberOfCompPlayer+1) {

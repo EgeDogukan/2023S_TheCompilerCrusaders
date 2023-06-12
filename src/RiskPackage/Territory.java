@@ -28,7 +28,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.plaf.synth.Region;
 
-import uipackage.AttackTerritoryUI;
+
 
 import uipackage.WorldMap;
 
