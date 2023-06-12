@@ -89,9 +89,9 @@ public class TerritoryDBDatabase implements ISaveLoadAdapter {
 			doc.append("r", worldMap.getColorList().get(index).getRed());
 			doc.append("g", worldMap.getColorList().get(index).getGreen());
 			doc.append("b", worldMap.getColorList().get(index).getBlue());
-			doc.append("a", worldMap.getShapeArmyArtillery(worldMap.getShapeIndex(shape)));
-			doc.append("c", worldMap.getShapeArmyCavalry(worldMap.getShapeIndex(shape)));
-			doc.append("i", worldMap.getShapeArmyInfantry(worldMap.getShapeIndex(shape)));
+			doc.append("a", worldMap.shapeDomain.getShapeArmyArtillery(worldMap.getShapeIndex(shape)));
+			doc.append("c", worldMap.shapeDomain.getShapeArmyCavalry(worldMap.getShapeIndex(shape)));
+			doc.append("i", worldMap.shapeDomain.getShapeArmyInfantry(worldMap.getShapeIndex(shape)));
 			collection.insertOne(doc);
 		}
 	}

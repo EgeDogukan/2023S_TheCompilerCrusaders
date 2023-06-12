@@ -69,9 +69,9 @@ public class TerritoryJSONDBDatabase implements ISaveLoadAdapter {
 		int r = worldMap.getColorList().get(index).getRed();
 		int g = worldMap.getColorList().get(index).getGreen();
 		int b = worldMap.getColorList().get(index).getBlue();
-		int a = worldMap.getShapeArmyArtillery(worldMap.getShapeIndex(shape));
-		int c = worldMap.getShapeArmyCavalry(worldMap.getShapeIndex(shape));
-		int i = worldMap.getShapeArmyInfantry(worldMap.getShapeIndex(shape));
+		int a = worldMap.shapeDomain.getShapeArmyArtillery(worldMap.getShapeIndex(shape));
+		int c = worldMap.shapeDomain.getShapeArmyCavalry(worldMap.getShapeIndex(shape));
+		int i = worldMap.shapeDomain.getShapeArmyInfantry(worldMap.getShapeIndex(shape));
 		
 		
 		int[] infos = {index, r, g, b, a, c, i};

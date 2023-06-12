@@ -23,7 +23,7 @@ public class PlayerNew {
 	ArrayList<IArmyCard> armyCards;
 	ArrayList<Integer> territoryCards;
 	ArmyCardFactory cardFactory = new ArmyCardFactory();
-
+	
 	
 	public PlayerNew(int id, Color color, ArrayList<Integer> shapeIndices) {
 		this.id=id;
@@ -90,7 +90,7 @@ public class PlayerNew {
 		if (this.cardUsable) {
 			Random random = new Random();
 			int randomNumber = random.nextInt(3) + 1;
-			RunningModeNew.worldMap.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(territoryIndex), randomNumber);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(territoryIndex), randomNumber);
 			System.out.println("Succesfully "+randomNumber+" added to the territory with index: "+territoryIndex);
 		}
 	
@@ -99,14 +99,14 @@ public class PlayerNew {
 	public void useNuclearStrikeCard(int sourceIndex, int targetIndex) {
 		
 		if (this.cardUsable) {
-			RunningModeNew.worldMap.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(sourceIndex), 0);
-			RunningModeNew.worldMap.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(targetIndex), 0);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(sourceIndex), 0);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(targetIndex), 0);
 			
-			RunningModeNew.worldMap.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(sourceIndex), 0);
-			RunningModeNew.worldMap.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(targetIndex), 0);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(sourceIndex), 0);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(targetIndex), 0);
 			
-			RunningModeNew.worldMap.setShapeArmyInfantry(RunningModeNew.worldMap.getShape(sourceIndex), 0);
-			RunningModeNew.worldMap.setShapeArmyInfantry(RunningModeNew.worldMap.getShape(targetIndex), 0);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyInfantry(RunningModeNew.worldMap.getShape(sourceIndex), 0);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyInfantry(RunningModeNew.worldMap.getShape(targetIndex), 0);
 		}
 	}
 	
@@ -114,7 +114,7 @@ public class PlayerNew {
 	public void useRevolutionCard(int territoryIndex) {
 		if (this.cardUsable){
 			RunningModeNew.players.get(RunningModeNew.getTurn()).shapeIndices.add(territoryIndex);
-			WorldMap.setShapeColor(WorldMap.shapeList.get(territoryIndex), RunningModeNew.players.get(RunningModeNew.getTurn()).getColor());
+			RunningModeNew.worldMap.shapeDomain.setShapeColor(WorldMap.shapeList.get(territoryIndex), RunningModeNew.players.get(RunningModeNew.getTurn()).getColor());
 
 		}
 	}
@@ -124,9 +124,9 @@ public class PlayerNew {
 		if (this.cardUsable) {
 			RunningModeNew.players.get(RunningModeNew.getTurn()).shapeIndices.add(territoryIndex);
 			
-			RunningModeNew.worldMap.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(territoryIndex), 0);
-			RunningModeNew.worldMap.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(territoryIndex), 0);
-			RunningModeNew.worldMap.setShapeArmyInfantry(RunningModeNew.worldMap.getShape(territoryIndex), 0);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(territoryIndex), 0);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(territoryIndex), 0);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyInfantry(RunningModeNew.worldMap.getShape(territoryIndex), 0);
 		}
 		
 	}
@@ -134,22 +134,22 @@ public class PlayerNew {
 	public void useRevoltCard(int sourceIndex, int targetIndex) {
 		
 		if (this.cardUsable) {
-			int artillery1 = RunningModeNew.worldMap.getShapeArmyArtillery(sourceIndex);
-			int cavalry1 = RunningModeNew.worldMap.getShapeArmyCavalry(sourceIndex);
-			int infantry1 = RunningModeNew.worldMap.getShapeArmyInfantry(sourceIndex);
+			int artillery1 = RunningModeNew.worldMap.shapeDomain.getShapeArmyArtillery(sourceIndex);
+			int cavalry1 = RunningModeNew.worldMap.shapeDomain.getShapeArmyCavalry(sourceIndex);
+			int infantry1 = RunningModeNew.worldMap.shapeDomain.getShapeArmyInfantry(sourceIndex);
 			
-			int artillery2 = RunningModeNew.worldMap.getShapeArmyArtillery(targetIndex);
-			int cavalry2 = RunningModeNew.worldMap.getShapeArmyCavalry(targetIndex);
-			int infantry2 = RunningModeNew.worldMap.getShapeArmyInfantry(targetIndex);
+			int artillery2 = RunningModeNew.worldMap.shapeDomain.getShapeArmyArtillery(targetIndex);
+			int cavalry2 = RunningModeNew.worldMap.shapeDomain.getShapeArmyCavalry(targetIndex);
+			int infantry2 = RunningModeNew.worldMap.shapeDomain.getShapeArmyInfantry(targetIndex);
 			
 			
-			RunningModeNew.worldMap.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(targetIndex), artillery1+artillery2);
-			RunningModeNew.worldMap.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(targetIndex), cavalry1+cavalry2);
-			RunningModeNew.worldMap.setShapeArmyInfantry(RunningModeNew.worldMap.getShape(targetIndex), infantry1+infantry2);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(targetIndex), artillery1+artillery2);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(targetIndex), cavalry1+cavalry2);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyInfantry(RunningModeNew.worldMap.getShape(targetIndex), infantry1+infantry2);
 			
-			RunningModeNew.worldMap.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(sourceIndex), 0);
-			RunningModeNew.worldMap.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(sourceIndex), 0);
-			RunningModeNew.worldMap.setShapeArmyInfantry(RunningModeNew.worldMap.getShape(sourceIndex), 0);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyArtillery(RunningModeNew.worldMap.getShape(sourceIndex), 0);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyCavalry(RunningModeNew.worldMap.getShape(sourceIndex), 0);
+			RunningModeNew.worldMap.shapeDomain.setShapeArmyInfantry(RunningModeNew.worldMap.getShape(sourceIndex), 0);
 		}	
 	}
 	

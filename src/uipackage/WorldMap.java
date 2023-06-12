@@ -13,9 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.OptionPaneUI;
 import javax.swing.text.html.Option;
 
-import RiskPackage.Cavalry;
-import RiskPackage.GameControllerNew;
-import RiskPackage.Territory;
+import RiskPackage.*;
 import animationPackage.DiceRollingFrame;
 import animationPackage.StarAnimationClass;
 import armyCardPackage.IArmyCard;
@@ -45,6 +43,8 @@ public class WorldMap {
     int defenderDiceResult;
     int attackerDiceResult;
 
+    public ShapeDomain shapeDomain = new ShapeDomain();
+
     private JComponent ui = null;
     static JLabel output = new JLabel();
     public static final int SIZE = 750;
@@ -53,12 +53,12 @@ public class WorldMap {
     ArrayList<Shape> shapeList2=null;
 
     int numberOfShape = 7;
-    public static ArrayList<Shape> shapeList = new ArrayList<>();
+    public static ArrayList<Shape>  shapeList = new ArrayList<>();
     //static ArrayList<ArrayList<Integer>> armyList = new ArrayList<ArrayList<Integer>>(200);
     //public static int[][] armArrayLists = new ArrayList[60][3];
     public static int[][] armyList = new int[60][3];
 
-    static ArrayList<Color> colorList = new ArrayList<>();
+    public static ArrayList<Color> colorList = new ArrayList<>();
     private Shape clickedShape;
     private MouseListener ml;
     private static BufferedImage bi;
@@ -200,8 +200,8 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    addShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
-                                    System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyInfantry(clickedShapeIndex));    
+                                    shapeDomain.addShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + shapeDomain.getShapeArmyInfantry(clickedShapeIndex));    
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
                                     }
@@ -215,8 +215,8 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    addShapeArmyCavalary(shape, Integer.parseInt(numberOfArmyonarea));   
-                                    System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyCavalry(clickedShapeIndex));    
+                                    shapeDomain.addShapeArmyCavalary(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + shapeDomain.getShapeArmyCavalry(clickedShapeIndex));    
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
                                     }
@@ -230,7 +230,7 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    addShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
+                                    shapeDomain.addShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
                                     
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
@@ -238,7 +238,7 @@ public class WorldMap {
                                     else{
                                         JOptionPane.showMessageDialog(null, "Enter the amount of Artillery you wish to deploy");
                                     }
-                                    System.out.println("Artillery at shape index " + clickedShapeIndex + ": " + getShapeArmyArtillery(clickedShapeIndex));
+                                    System.out.println("Artillery at shape index " + clickedShapeIndex + ": " + shapeDomain.getShapeArmyArtillery(clickedShapeIndex));
 
                                 }
                             });
@@ -295,8 +295,8 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    addShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
-                                    System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyInfantry(clickedShapeIndex));    
+                                    shapeDomain.addShapeArmyInfantry(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + shapeDomain.getShapeArmyInfantry(clickedShapeIndex));    
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
                                     }
@@ -310,8 +310,8 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    addShapeArmyCavalary(shape, Integer.parseInt(numberOfArmyonarea));   
-                                    System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + getShapeArmyCavalry(clickedShapeIndex));    
+                                    shapeDomain.addShapeArmyCavalary(shape, Integer.parseInt(numberOfArmyonarea));   
+                                    System.out.println("Infantry at shape index " + clickedShapeIndex + ": " + shapeDomain.getShapeArmyCavalry(clickedShapeIndex));    
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
                                     }
@@ -325,7 +325,7 @@ public class WorldMap {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     String numberOfArmyonarea = numberOfArmy.getText();
-                                    addShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
+                                    shapeDomain.addShapeArmyArtillery(shape, Integer.parseInt(numberOfArmyonarea)); 
                                     
                                     if(Integer.parseInt(numberOfArmyonarea) > 0){
                                         optionFrame.dispose();
@@ -333,7 +333,7 @@ public class WorldMap {
                                     else{
                                         JOptionPane.showMessageDialog(null, "Enter the amount of Artillery you wish to deploy");
                                     }
-                                    System.out.println("Artillery at shape index " + clickedShapeIndex + ": " + getShapeArmyArtillery(clickedShapeIndex));
+                                    System.out.println("Artillery at shape index " + clickedShapeIndex + ": " + shapeDomain.getShapeArmyArtillery(clickedShapeIndex));
 
                                 }
                             });
@@ -408,27 +408,27 @@ public class WorldMap {
 
                                                                     animationFrame = new StarAnimationClass(0);
                                                                     if(powerOfShape(destinationShape) != 0){
-                                                                        if(getShapeArmyArtillery(destinationIndex) > 0){
-                                                                            decreaseShapeArmyArtillery(destinationShape, 1);
+                                                                        if(shapeDomain.getShapeArmyArtillery(destinationIndex) > 0){
+                                                                            shapeDomain.decreaseShapeArmyArtillery(destinationShape, 1);
                                                                             decreasePowerOfShapeArtillery(destinationShape, 1);
 
                                                                         }
-                                                                        if(getShapeArmyCavalry(destinationIndex)>0){
-                                                                            decreaseShapeArmyCavalary(destinationShape, 1);
+                                                                        if(shapeDomain.getShapeArmyCavalry(destinationIndex)>0){
+                                                                            shapeDomain.decreaseShapeArmyCavalary(destinationShape, 1);
                                                                             decreasePowerOfShapeCavalary(destinationShape, 1);
                                                                         }
-                                                                        if(getShapeArmyInfantry(destinationIndex)>0){
-                                                                            decreaseShapeArmyInfantry(destinationShape, 1);
+                                                                        if(shapeDomain.getShapeArmyInfantry(destinationIndex)>0){
+                                                                            shapeDomain.decreaseShapeArmyInfantry(destinationShape, 1);
                                                                             decreasePowerOfShapeInfantry(destinationShape, 1);
                                                                         }
                                                                     }
                                                                     if(powerOfShape(destinationShape) <= 0){
                                                                         System.out.println("Destination shape is zero");
                                                                         setIndexColor(shapeList.indexOf(destinationShape), colorList.get(clickedShapeIndex));
-                                                                        setShapeArmyInfantry(destinationShape, 1);
+                                                                        shapeDomain.setShapeArmyInfantry(destinationShape, 1);
 
                                                                         decreasePowerOfShapeInfantry(shape, 1);
-                                                                        decreaseShapeArmyInfantry(shape, 1);
+                                                                        shapeDomain.decreaseShapeArmyInfantry(shape, 1);
                                                                     }
                                                                     Random random = new Random();
                                                                     int randomIndex = random.nextInt(RunningModeNew.armyCards.size());
@@ -459,17 +459,17 @@ public class WorldMap {
                                                             else {
                                                                 animationFrame = new StarAnimationClass(1);
                                                                 if(powerOfShape(shape)!= 0){
-                                                                    if(getShapeArmyArtillery(currTerr) > 0){
-                                                                        decreaseShapeArmyArtillery(shape, 1);
+                                                                    if(shapeDomain.getShapeArmyArtillery(currTerr) > 0){
+                                                                        shapeDomain.decreaseShapeArmyArtillery(shape, 1);
                                                                         decreasePowerOfShapeArtillery(shape, 1);
 
                                                                     }    
-                                                                    else if(getShapeArmyCavalry(currTerr)>0){
-                                                                        decreaseShapeArmyCavalary(shape, 1);
+                                                                    else if(shapeDomain.getShapeArmyCavalry(currTerr)>0){
+                                                                        shapeDomain.decreaseShapeArmyCavalary(shape, 1);
                                                                         decreasePowerOfShapeCavalary(shape, 1);
                                                                     }
-                                                                    else if(getShapeArmyInfantry(currTerr)>0){
-                                                                        decreaseShapeArmyInfantry(shape, 1);
+                                                                    else if(shapeDomain.getShapeArmyInfantry(currTerr)>0){
+                                                                        shapeDomain.decreaseShapeArmyInfantry(shape, 1);
                                                                         decreasePowerOfShapeInfantry(shape, 1);
                                                                     }
                                                                 }
@@ -589,30 +589,30 @@ public class WorldMap {
                                                 
 
                                                 try {
-                                                    if(fortifyAmountArtilarry >= getShapeArmyArtillery(currTerr)&&fortifyAmountArtilarry !=0) {
+                                                    if(fortifyAmountArtilarry >= shapeDomain.getShapeArmyArtillery(currTerr)&&fortifyAmountArtilarry !=0) {
                                                         throw new Exception("You do not have that amount of artilarries");
                                                     }
 
-                                                    if(fortifyAmountCavalary >= getShapeArmyCavalry(currTerr)&&fortifyAmountCavalary != 0) {
+                                                    if(fortifyAmountCavalary >= shapeDomain.getShapeArmyCavalry(currTerr)&&fortifyAmountCavalary != 0) {
                                                         throw new Exception("You do not have that amount of cavalaries");
                                                     }
 
-                                                    if(fortifyAmountInfantry >= getShapeArmyInfantry(currTerr)&& fortifyAmountInfantry != 0) {
+                                                    if(fortifyAmountInfantry >= shapeDomain.getShapeArmyInfantry(currTerr)&& fortifyAmountInfantry != 0) {
                                                         throw new Exception("You do not have that amount of infantries");
                                                     }
 
 
                                                     // Adding inputed amount of artilarries and decreasing it from territory
-                                                    addShapeArmyArtillery(destinationShape, fortifyAmountArtilarry);
-                                                    decreaseShapeArmyArtillery(clickedShape, fortifyAmountArtilarry);
+                                                    shapeDomain.addShapeArmyArtillery(destinationShape, fortifyAmountArtilarry);
+                                                    shapeDomain.decreaseShapeArmyArtillery(clickedShape, fortifyAmountArtilarry);
 
                                                     // Adding inputed amount of cavalaries and decreasing it from territory
-                                                    addShapeArmyCavalary(destinationShape, fortifyAmountCavalary);
-                                                    decreaseShapeArmyCavalary(clickedShape, fortifyAmountCavalary);
+                                                    shapeDomain.addShapeArmyCavalary(destinationShape, fortifyAmountCavalary);
+                                                    shapeDomain.decreaseShapeArmyCavalary(clickedShape, fortifyAmountCavalary);
 
                                                     // Adding inputed amount of infantries and decreasing it from territory
-                                                    addShapeArmyInfantry(destinationShape, fortifyAmountInfantry);
-                                                    decreaseShapeArmyInfantry(clickedShape, fortifyAmountInfantry);
+                                                    shapeDomain.addShapeArmyInfantry(destinationShape, fortifyAmountInfantry);
+                                                    shapeDomain.decreaseShapeArmyInfantry(clickedShape, fortifyAmountInfantry);
                                                     JOptionPane.showMessageDialog(null, "Fortifiyed");
 
 
@@ -1153,70 +1153,7 @@ public class WorldMap {
         return clickedShape;
     }
 
-    public static void setShapeColor(Shape shape, Color color) {
-        int colorIndex = shapeList.indexOf(shape);
-        colorList.set(colorIndex, color);
-    }
-
-    public void setShapeArmyInfantry(Shape shape, int numberOfArmy){
-        int armyIndex = shapeList.indexOf(shape);
-        armyList[armyIndex][0]= numberOfArmy;
-        
-
-    }
-
-
-    public void addShapeArmyInfantry(Shape shape, int numberOfArmy){
-        int armyIndex = shapeList.indexOf(shape);
-        armyList[armyIndex][0] += numberOfArmy;
-    }
-    public void addShapeArmyCavalary(Shape shape, int numberOfArmy){
-        int armyIndex = shapeList.indexOf(shape);
-        armyList[armyIndex][1] += numberOfArmy;
-    }
-    public void addShapeArmyArtillery(Shape shape, int numberOfArmy){
-        int armyIndex = shapeList.indexOf(shape);
-        armyList[armyIndex][2] += numberOfArmy;
-    }
-
-
-
-    public void decreaseShapeArmyInfantry(Shape shape, int numberOfArmy){
-        int armyIndex = shapeList.indexOf(shape);
-        armyList[armyIndex][0] -= numberOfArmy;
-    }
-    public void decreaseShapeArmyCavalary(Shape shape, int numberOfArmy){
-        int armyIndex = shapeList.indexOf(shape);
-        armyList[armyIndex][1] -= numberOfArmy;
-    }
-    public void decreaseShapeArmyArtillery(Shape shape, int numberOfArmy){
-        int armyIndex = shapeList.indexOf(shape);
-        armyList[armyIndex][2] -= numberOfArmy;
-    }
-
-
-    public void setShapeArmyCavalry(Shape shape, int numberOfArmy){
-        int armyIndex = shapeList.indexOf(shape);
-        armyList[armyIndex][1]= numberOfArmy;
-    }
     
-    public void setShapeArmyArtillery(Shape shape, int numberOfArmy){
-        int armyIndex = shapeList.indexOf(shape);
-        armyList[armyIndex][2]= numberOfArmy;
-    }
-
-    public int getShapeArmyInfantry(int index){
-        return armyList[index][0];
-    }
-
-    public int getShapeArmyCavalry(int index) {
-        return armyList[index][1];
-    }
-
-    public int getShapeArmyArtillery(int index) {
-        return armyList[index][2];
-    }
-
     public static void setIndexColor(int index, Color color) {
     	System.out.println("set index color function is called");
         colorList.set(index, color);
@@ -1317,27 +1254,27 @@ public class WorldMap {
         
         //int power = Integer.parseInt(armArrayLists[index][0].toString()) + 5 * Integer.parseInt(armArrayLists[index][1].toString()) + 10 * Integer.parseInt(armArrayLists[index][2].toString());
        
-        int power = getShapeArmyArtillery(index)*10+ 5 * getShapeArmyCavalry(index) + getShapeArmyInfantry(index) ;
+        int power = shapeDomain.getShapeArmyArtillery(index)*10+ 5 * shapeDomain.getShapeArmyCavalry(index) + shapeDomain.getShapeArmyInfantry(index) ;
         System.out.println("result is  "+ power);
         return power;
     }
 
     public int decreasePowerOfShapeArtillery(Shape shape, int amount){
         int index = getShapeIndex(shape);
-        int power = getShapeArmyArtillery(index)+ 5 * getShapeArmyCavalry(index) + 10 * getShapeArmyInfantry(index);
+        int power = shapeDomain.getShapeArmyArtillery(index)+ 5 * shapeDomain.getShapeArmyCavalry(index) + 10 * shapeDomain.getShapeArmyInfantry(index);
         power -= amount;
         return power;
     }
 
     public int decreasePowerOfShapeInfantry(Shape shape, int amount){
         int index = getShapeIndex(shape);
-        int power = getShapeArmyArtillery(index)+ 5 * getShapeArmyCavalry(index) + 10 * getShapeArmyInfantry(index);
+        int power = shapeDomain.getShapeArmyArtillery(index)+ 5 * shapeDomain.getShapeArmyCavalry(index) + 10 * shapeDomain.getShapeArmyInfantry(index);
         power -= 10*amount;
         return power;
     }
     public int decreasePowerOfShapeCavalary(Shape shape, int amount){
         int index = getShapeIndex(shape);
-        int power = getShapeArmyArtillery(index)+ 5 * getShapeArmyCavalry(index) + 10 * getShapeArmyInfantry(index);
+        int power = shapeDomain.getShapeArmyArtillery(index)+ 5 * shapeDomain.getShapeArmyCavalry(index) + 10 * shapeDomain.getShapeArmyInfantry(index);
         power -= 5*amount;
         return power;
     }
