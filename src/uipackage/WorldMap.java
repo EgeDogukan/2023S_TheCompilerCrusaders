@@ -52,7 +52,7 @@ public class WorldMap {
     static Area area;
     ArrayList<Shape> shapeList2=null;
 
-    int numberOfShape = 7;
+    int numberOfShape = 60;
     public static ArrayList<Shape> shapeList = new ArrayList<>();
     //static ArrayList<ArrayList<Integer>> armyList = new ArrayList<ArrayList<Integer>>(200);
     //public static int[][] armArrayLists = new ArrayList[60][3];

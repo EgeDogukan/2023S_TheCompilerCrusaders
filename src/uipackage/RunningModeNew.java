@@ -723,7 +723,7 @@ public class RunningModeNew extends JFrame {
 					turn.setVisible(true);
 					nextStage.setVisible(true);
 					pickArmyCard.setVisible(true);
-					stage.setVisible(false);
+					stage.setVisible(true);
 					useArmyCard.setVisible(true);
 					for (JTextField curField : textLabels) 
 						curField.setVisible(true);
