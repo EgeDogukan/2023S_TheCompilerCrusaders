@@ -47,12 +47,12 @@ public class WorldMap {
 
     private JComponent ui = null;
     static JLabel output = new JLabel();
-    public static final int SIZE = 750;
+    //public static final int SIZE = 1500;
     static BufferedImage image;
     static Area area;
     ArrayList<Shape> shapeList2=null;
 
-    int numberOfShape = 60;
+    int numberOfShape = 7;
     public static ArrayList<Shape> shapeList = new ArrayList<>();
     //static ArrayList<ArrayList<Integer>> armyList = new ArrayList<ArrayList<Integer>>(200);
     //public static int[][] armArrayLists = new ArrayList[60][3];

@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -72,8 +73,12 @@ public class BuildingModeNew extends JFrame {
 		this.add(worldPanel); // Add the map panel to the center of the JFrame
 	
 		
-		nextButton = new JButton("Next");
-		nextButton.setBounds(1200, 300, 100, 100); // Set preferred size for the button
+		ImageIcon icon = new ImageIcon("nextStageButton.png"); // A custom image for the button
+        nextButton = new JButton(icon);
+        nextButton.setBounds(1200, 300, 100, 100);
+        nextButton.setBorderPainted(false); 
+        nextButton.setContentAreaFilled(false); 
+		
 		nextButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

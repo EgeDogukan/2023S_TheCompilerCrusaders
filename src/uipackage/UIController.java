@@ -48,7 +48,7 @@ public class UIController {
         this.mainMenuLoggedIn.dispose();
     }
 
-    public void initNewMode() {
+    public void initNewMode() throws Exception {
         this.k = new IntermediaryBetweenPreBuildingAndBuilding();
         this.mainMenuLoggedIn.dispose();
     }

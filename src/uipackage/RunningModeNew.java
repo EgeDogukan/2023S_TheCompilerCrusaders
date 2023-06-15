@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.*;
+import javax.xml.namespace.QName;
+
 import java.awt.*;
 import uipackage.WorldMap;
 import javax.imageio.ImageIO;
@@ -55,10 +57,12 @@ public class RunningModeNew extends JFrame {
 	
 	public static ArrayList<TerritoryCard> territoryCards = new ArrayList<>();
 	public static boolean isGameOver=false;
+	//JPanel panel = new JPanel();
 
 
 
 	public RunningModeNew(ArrayList<PlayerNew> players, WorldMap worldMap, int numberOfCompPlayer) {
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.players=players;
 		numberOfHumanPlayer=players.size()-numberOfCompPlayer;
 		numberOfAIPlayer=numberOfCompPlayer;
@@ -116,6 +120,15 @@ public class RunningModeNew extends JFrame {
 
 	public void initGame(ArrayList<PlayerNew> players){
 		
+		JLayeredPane layeredPane = new JLayeredPane();
+
+		String cwd = System.getProperty("user.dir");
+		ImageIcon imageIcon = new ImageIcon(cwd + "/src/uipackage/runningMode.png");
+        JLabel panel = new JLabel(imageIcon);
+        panel.setBounds(-160, -90, 1920, 1080);
+		
+        //layeredPane.add(panel, 0);
+
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(new Dimension(1920, 1080));
 		this.setLayout(null); // Use BorderLayout for the JFrame
@@ -124,17 +137,21 @@ public class RunningModeNew extends JFrame {
 		shapelist=this.worldMap.getShapeList();
 		ArrayList<JTextField> textLabels = worldMap.getTextLabels();
 		for (JTextField curField : textLabels) {
-			this.add(curField);
+			//panel.add(curField);
 		}
-		
 
+		this.setExtendedState(Frame.MAXIMIZED_BOTH);
+        this.setUndecorated(true); 
+
+		//panel.setBounds(0, 0, 1920, 1080);
+		
 		JPanel worldPanel = (JPanel) worldMap.getUI();
-		worldPanel.setBounds(0, 0, worldPanel.getPreferredSize().width, worldPanel.getPreferredSize().height);
-		this.add(worldPanel); // Add the map panel to the center of the JFrame
+		worldPanel.setBounds(450, 200, worldPanel.getPreferredSize().width, worldPanel.getPreferredSize().height);
+		panel.add(worldPanel); // Add the map panel to the center of the JFrame
 		
 		
 		JButton saveButtonMongo = new JButton("SAVE MONGO");
-		saveButtonMongo.setBounds(1100, 300, 100, 100);
+		saveButtonMongo.setBounds(1500, 500, 150, 50);
 		saveButtonMongo.addActionListener(new ActionListener() {
 			
 			@Override
@@ -151,11 +168,11 @@ public class RunningModeNew extends JFrame {
 				}
 			}
 		});
-		this.add(saveButtonMongo);
+		panel.add(saveButtonMongo);
 		
 		
 		JButton saveButtonJSON = new JButton("SAVE JSON");
-		saveButtonJSON.setBounds(1300, 300, 100, 100);
+		saveButtonJSON.setBounds(1500, 600, 150, 50);
 		saveButtonJSON.addActionListener(new ActionListener() {
 			
 			@Override
@@ -174,10 +191,10 @@ public class RunningModeNew extends JFrame {
 				
 			}
 		});
-		this.add(saveButtonJSON);
+		panel.add(saveButtonJSON);
 
 		JButton pickArmyCard = new JButton("trade army card");
-		pickArmyCard.setBounds(1300, 600, 100, 100);
+		pickArmyCard.setBounds(1300, 750, 150, 50);
 		pickArmyCard.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -266,11 +283,11 @@ public class RunningModeNew extends JFrame {
         		attackFrame.setVisible(true);
 			}
 		});
-		this.add(pickArmyCard);
+		panel.add(pickArmyCard);
 
 		
 		JButton useArmyCard = new JButton("use army card");
-		useArmyCard.setBounds(1300, 700, 100, 100);
+		useArmyCard.setBounds(1500, 750, 150, 50);
 		useArmyCard.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -287,7 +304,7 @@ public class RunningModeNew extends JFrame {
 
 				JComboBox<Integer> comboBox = new JComboBox<>(armyCardsInfo.toArray(new Integer[0]));
 				useCardPanel.add(comboBox);
-				
+
 				PlayerNew currentPlayer = BuildingModeNew.playerList.get(RunningModeNew.getTurn());
 				
 				JComboBox<Integer> playerIndicies = new JComboBox<>(currentPlayer.getShapeIndices().toArray(new Integer[0]));
@@ -310,31 +327,22 @@ public class RunningModeNew extends JFrame {
 						for(int i=0; i<armyCardsInfo.size();i++){
 							System.out.println("******************"+armyCardsInfo.get(i));
 						} 
-						
-						for (int i=0;i<3;i++) {
-						int selectedCardCount = armyCardsInfo.get(i);
+						int selectedCardCount = armyCardsInfo.get(2);
+
 						// Check if there are any cards of the selected type
 						if (selectedCardCount > 0) {
 
 							if (selectedItem == 3){
-								WorldMap.armyList[selectedIndex][2] = WorldMap.armyList[selectedIndex][2]+1;
-								
-								armyCardsInfo.set(2, armyCardsInfo.get(2)-1);
+								WorldMap.armyList[selectedIndex][2] = WorldMap.armyList[selectedIndex][2]+17;
 							}
 							if (selectedItem == 2){
-								WorldMap.armyList[selectedIndex][1] = WorldMap.armyList[selectedIndex][1]+1;
-								
-								armyCardsInfo.set(1, armyCardsInfo.get(1)-1);
+								WorldMap.armyList[selectedIndex][1] = WorldMap.armyList[selectedIndex][1]+13;
 							}
 							if (selectedItem == 1){
-								WorldMap.armyList[selectedIndex][0] = WorldMap.armyList[selectedIndex][0]+1;
-								
-								armyCardsInfo.set(0, armyCardsInfo.get(0)-1);
-								
-								
+								WorldMap.armyList[selectedIndex][0] = WorldMap.armyList[selectedIndex][0]+11;
 							}
 							else{
-								System.out.println("Invalid selection for use army card");
+								System.out.println("ınvalid selection for use army card");
 							}
 							// Perform the transformation and decrease the card count
 							// (Update this part according to your game logic)
@@ -344,10 +352,10 @@ public class RunningModeNew extends JFrame {
 							
 							// Update armyCardsInfo
 							armyCardsInfo.set(selectedItem, selectedCardCount);
-							comboBox.setModel(new DefaultComboBoxModel<>(armyCardsInfo.toArray(new Integer[0])));
+
 							// Print the updated armyCardsInfo for testing
-							for (int k = 0; k < 3; k++) {
-								System.out.println(armyCardsInfo.get(k));
+							for (int i = 0; i < 3; i++) {
+								System.out.println(armyCardsInfo.get(i));
 							}
 
 							// Refresh the combo box
@@ -358,7 +366,6 @@ public class RunningModeNew extends JFrame {
 							// No cards of the selected type available, handle as needed
 							System.out.println("No cards of the selected type available");
 						}
-						}
 					}
 				});
 
@@ -366,7 +373,7 @@ public class RunningModeNew extends JFrame {
 				useCardFrame.setVisible(true);
 			}
 		});
-		this.add(useArmyCard);
+		panel.add(useArmyCard);
 
 		
 
@@ -375,7 +382,7 @@ public class RunningModeNew extends JFrame {
 		
 		
 		JButton pickChanceCard = new JButton("pick chance card");
-		pickChanceCard.setBounds(200, 550, 100, 100);
+		pickChanceCard.setBounds(700, 750, 150, 50);
 		pickChanceCard.addActionListener(new ActionListener() {
 			
 			@Override
@@ -391,21 +398,21 @@ public class RunningModeNew extends JFrame {
 				cardAnimationClass = new CardAnimationClass();
 			}
 		});
-		this.add(pickChanceCard);
+		panel.add(pickChanceCard);
 		
 		JLabel turn = new JLabel("Turn: Player "+ players.get(turnCounter).getId());
-		turn.setBounds(300, 650, 100, 100);
+		turn.setBounds(500, 680, 150, 100);
 		
-		this.add(turn);
+		panel.add(turn);
 		
 		JPanel turnPanel = new JPanel();
-		turnPanel.setBounds(600,700,100,100);
+		turnPanel.setBounds(500,820,150,50);
 		
-		stage.setBounds(380, 620, 100, 100);
+		stage.setBounds(350, 765, 150, 100);
 		whichStage="Deploy";
 
 		JButton nextStage = new JButton("Next Stage");
-		nextStage.setBounds(350, 550, 100, 100);
+		nextStage.setBounds(300, 750, 150, 50);
 		nextStage.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 
@@ -435,11 +442,11 @@ public class RunningModeNew extends JFrame {
 		//********************************************************************* */
 		
 		nextStage.setVisible(true);
-		this.add(stage);
-		this.add(nextStage);
+		panel.add(stage);
+		panel.add(nextStage);
 
 		JButton nextButton = new JButton("next turn");
-		nextButton.setBounds(500,550,100,100);
+		nextButton.setBounds(500,750,150,50);
 		nextButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -454,20 +461,20 @@ public class RunningModeNew extends JFrame {
 				
 			}
 		});
-		this.add(nextButton);
-		this.add(turnPanel);
+		panel.add(nextButton);
+		panel.add(turnPanel);
 
 
 		
 		String[] cardTypes = {"Revolt Card", "Reinforcement Card", "Coup Card", "Revolution Card", "Nuclear Strike Card"};
         JComboBox<String> cardComboBox = new JComboBox<String>(cardTypes);
-        cardComboBox.setBounds(900,550, 100, 100);
-        this.add(cardComboBox);
+        cardComboBox.setBounds(900,750, 150, 50);
+        panel.add(cardComboBox);
         
 		
         
 		JButton useCardButton = new JButton("use card");
-		useCardButton.setBounds(700, 550, 100, 100);
+		useCardButton.setBounds(1100, 750, 150, 50);
 		useCardButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -666,11 +673,11 @@ public class RunningModeNew extends JFrame {
 				
 			}
 		});
-		this.add(useCardButton);
+		panel.add(useCardButton);
 		
 		
 		JButton exitButton = new JButton("Exit!");
-		exitButton.setBounds(1200, 700, 100, 100);
+		exitButton.setBounds(1600, 900, 150, 50);
 		exitButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -679,17 +686,29 @@ public class RunningModeNew extends JFrame {
 				
 			}
 		});
-		this.add(exitButton);
+		panel.add(exitButton);
 		
 		JButton pauseButton = new JButton("Pause");
-		pauseButton.setBounds(1200, 600, 100, 100);
+		pauseButton.setBounds(1400, 900, 150, 50);
+		
+		pauseButton.setOpaque(false);
+        pauseButton.setContentAreaFilled(false);
+        pauseButton.setBorderPainted(false);
+        pauseButton.setText("");
+
+        ImageIcon backgroundImage9 = new ImageIcon(cwd+"/src/uipackage/pauseButton.png");
+        pauseButton.setIcon(backgroundImage9);
+
+		ImageIcon backgroundImage10 = new ImageIcon(cwd+"/src/uipackage/resumeButton.png");
+        
+
 		pauseButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				if (pauseButton.getText().equals("Pause")){
-					pauseButton.setText("Resume");
+				if (pauseButton.getIcon().equals(backgroundImage9)){
+					pauseButton.setIcon(backgroundImage10);
 					exitButton.setVisible(false);
 					useCardButton.setVisible(false);
 					cardComboBox.setVisible(false);
@@ -701,16 +720,16 @@ public class RunningModeNew extends JFrame {
 					worldPanel.setVisible(false);
 					nextStage.setVisible(false);
 					pickArmyCard.setVisible(false);
+					useArmyCard.setVisible(false);
 					stage.setVisible(false);
 					turn.setVisible(false);
-					useArmyCard.setVisible(false);
 					for (JTextField curField : textLabels) 
 						curField.setVisible(false);
 					
 					
 				}
 				else {
-					pauseButton.setText("Pause");
+					pauseButton.setIcon(backgroundImage9);
 					exitButton.setVisible(true);
 					useCardButton.setVisible(true);
 					cardComboBox.setVisible(true);
@@ -723,8 +742,8 @@ public class RunningModeNew extends JFrame {
 					turn.setVisible(true);
 					nextStage.setVisible(true);
 					pickArmyCard.setVisible(true);
-					stage.setVisible(true);
 					useArmyCard.setVisible(true);
+					stage.setVisible(true);
 					for (JTextField curField : textLabels) 
 						curField.setVisible(true);
 				}
@@ -732,8 +751,93 @@ public class RunningModeNew extends JFrame {
 				
 			}
 		});
-		this.add(pauseButton);
+		panel.add(pauseButton);
 		
+
+
+
+		pickChanceCard.setOpaque(false);
+        pickChanceCard.setContentAreaFilled(false);
+        pickChanceCard.setBorderPainted(false);
+        pickChanceCard.setText("");
+
+        ImageIcon backgroundImage = new ImageIcon(cwd+"/src/uipackage/chanceCardButton.png");
+        pickChanceCard.setIcon(backgroundImage);
+
+
+
+		nextStage.setOpaque(false);
+        nextStage.setContentAreaFilled(false);
+        nextStage.setBorderPainted(false);
+        nextStage.setText("");
+
+        ImageIcon backgroundImage1 = new ImageIcon(cwd+"/src/uipackage/nextStageButton.png");
+        nextStage.setIcon(backgroundImage1);
+
+
+		nextButton.setOpaque(false);
+        nextButton.setContentAreaFilled(false);
+        nextButton.setBorderPainted(false);
+        nextButton.setText("");
+
+        ImageIcon backgroundImage2 = new ImageIcon(cwd+"/src/uipackage/nextTurnButton.png");
+        nextButton.setIcon(backgroundImage2);
+		
+		useCardButton.setOpaque(false);
+        useCardButton.setContentAreaFilled(false);
+        useCardButton.setBorderPainted(false);
+        useCardButton.setText("");
+
+        ImageIcon backgroundImage3 = new ImageIcon(cwd+"/src/uipackage/useCardButton.png");
+        useCardButton.setIcon(backgroundImage3);
+		
+
+		saveButtonJSON.setOpaque(false);
+        saveButtonJSON.setContentAreaFilled(false);
+        saveButtonJSON.setBorderPainted(false);
+        saveButtonJSON.setText("");
+
+        ImageIcon backgroundImage4 = new ImageIcon(cwd+"/src/uipackage/saveJsonButton.png");
+        saveButtonJSON.setIcon(backgroundImage4);
+		
+		saveButtonMongo.setOpaque(false);
+        saveButtonMongo.setContentAreaFilled(false);
+        saveButtonMongo.setBorderPainted(false);
+        saveButtonMongo.setText("");
+
+        ImageIcon backgroundImage5 = new ImageIcon(cwd+"/src/uipackage/saveMongoButton.png");
+        saveButtonMongo.setIcon(backgroundImage5);
+		
+		exitButton.setOpaque(false);
+        exitButton.setContentAreaFilled(false);
+        exitButton.setBorderPainted(false);
+        exitButton.setText("");
+
+        ImageIcon backgroundImage6 = new ImageIcon(cwd+"/src/uipackage/exitButton.png");
+        exitButton.setIcon(backgroundImage6);
+
+
+		pickArmyCard.setOpaque(false);
+        pickArmyCard.setContentAreaFilled(false);
+        pickArmyCard.setBorderPainted(false);
+        pickArmyCard.setText("");
+
+        ImageIcon backgroundImage7 = new ImageIcon(cwd+"/src/uipackage/tradeArmyButton.png");
+        pickArmyCard.setIcon(backgroundImage7);
+
+		useArmyCard.setOpaque(false);
+        useArmyCard.setContentAreaFilled(false);
+        useArmyCard.setBorderPainted(false);
+        useArmyCard.setText("");
+
+        ImageIcon backgroundImage8 = new ImageIcon(cwd+"/src/uipackage/useArmyButton.png");
+        useArmyCard.setIcon(backgroundImage8);
+
+		Color color = new Color(171,70,48);
+		cardComboBox.setBackground(color);
+
+		panel.setVisible(true);
+		this.add(panel);
 	
 		pack();
 		setLocationRelativeTo(null); // Center the JFrame on the screen
@@ -744,4 +848,3 @@ public class RunningModeNew extends JFrame {
 	
 	
 }
-

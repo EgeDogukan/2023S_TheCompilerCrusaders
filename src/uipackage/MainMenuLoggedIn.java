@@ -55,7 +55,12 @@ public class MainMenuLoggedIn extends JFrame {
             backgroundMusic.stop();
 
             System.out.println("Starting new game...");
-            proceedNewGame();
+            try {
+				proceedNewGame();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
         });
 
         // Create the load button and add an action listener
@@ -173,7 +178,7 @@ public class MainMenuLoggedIn extends JFrame {
         uiController.initLoadMode();
     }
 
-    public void proceedNewGame() {
+    public void proceedNewGame() throws Exception {
         uiController.initNewMode();
     }
 

@@ -7,7 +7,7 @@ public class IntermediaryBetweenPreBuildingAndBuilding {
 	
 	BuildingModeNew buildingModeNew;
 
-	public IntermediaryBetweenPreBuildingAndBuilding() {
+	public IntermediaryBetweenPreBuildingAndBuilding() throws Exception {
 		
 		PreBuildingMode preBuildingMode = new PreBuildingMode();
 		
@@ -67,7 +67,7 @@ public class IntermediaryBetweenPreBuildingAndBuilding {
 		return this.buildingModeNew;
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		IntermediaryBetweenPreBuildingAndBuilding screen = new IntermediaryBetweenPreBuildingAndBuilding();
 		
 	}
