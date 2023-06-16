@@ -427,6 +427,7 @@ public class WorldMap {
                                                                     int randomIndex = random.nextInt(3);
 
                                                                     int chance = random.nextInt(1)+1;
+                                                                    chance = 1;
                                                                     if (chance==1){
                                                                     	RunningModeNew.armyCards.remove(randomIndex);
                                                                         BuildingModeNew.playerList.get(RunningModeNew.getTurn()).addArmyCard(randomIndex, 1);
